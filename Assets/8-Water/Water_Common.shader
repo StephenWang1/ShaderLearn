@@ -517,7 +517,6 @@
 
             fixed4 frag (v2f i) : SV_Target
             {
-
                 half degree = tex2D(_Foam,i.uv_Tex/_Foam_ST.xy).r;
                 half4 diffuse = lerp(_ShalowColor, _DeepColor, degree);
                 fixed4 col = fixed4(diffuse.rgb,1);
