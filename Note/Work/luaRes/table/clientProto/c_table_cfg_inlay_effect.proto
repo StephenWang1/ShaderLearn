@@ -1,0 +1,21 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_INLAY_EFFECT
+{
+	required int32 id = 1;//id#客户端  id
+	required int32 type = 2;//类型#客户端  类型 1仙装 
+	optional string title = 3;//标题#客户端  显示在tips中的标题
+	optional string title2 = 4;//标题2#客户端  未镶嵌时候标题
+	optional string title3 = 5;//标题3#客户端  镶嵌后未激活标题
+	required int32 extraMonEffect = 6;//额外属性#客户端  生效额外属性，索引到extra_mon_effect表
+	optional string effect = 7;//镶嵌特效#客户端  镶嵌特效，镶嵌后显示在icon上
+	optional string effectParam = 8;//特效处理#客户端  特效处理参数  1类型  类型id#r#g#b#a
+	optional string basePicture = 9;//镶嵌底纹#客户端  镶嵌底纹，镶嵌后显示在装备位底部
+	optional IntListJingHao buffers = 10;//buffid#客户端  填buffid关联到buff表
+}
+
+message CFG_INLAY_EFFECTARRAY
+{
+	repeated CFG_INLAY_EFFECT rows = 1;
+}

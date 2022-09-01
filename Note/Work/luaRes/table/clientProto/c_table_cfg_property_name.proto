@@ -1,0 +1,17 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_PROPERTY_NAME
+{
+	required int32 id = 1;//id#客户端#C  对应协议id,id目前并不连续，增删时注意避免重复
+	//optional string name = 2;//名称#客户端#C  正常显示用
+	//optional string param = 3;//参数#客户端#C  在不同界面可能会使用特殊名称展示，预留一参数列，具体显示、配置规则自行协定，记得备注。
+	//optional string remark = 4;//备注#策划  
+	//optional string remark2 = 5;//备注2#策划  定义名
+	optional string color = 6;//特殊颜色#客户端  tips内属性特殊颜色
+}
+
+message CFG_PROPERTY_NAMEARRAY
+{
+	repeated CFG_PROPERTY_NAME rows = 1;
+}

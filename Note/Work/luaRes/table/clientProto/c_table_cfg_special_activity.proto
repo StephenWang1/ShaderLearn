@@ -1,0 +1,43 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_SPECIAL_ACTIVITY
+{
+	required int32 id = 1;//id#C#客户端  第12位活动类型；第34位活动id；第567位编号
+	required int32 eventType = 2;//活动类型#客户端  1.开服活动；2.联服活动；3.合服活动；4.节日活动
+	required uint32 eventId = 3;//活动id#客户端  1塔罗牌上新 2怪物攻城 3限购礼包 4充值有礼 5集字狂欢 6boss重生 7狂欢任务 8狂欢商店 9消费排行 10占领皇宫 11合服攻沙 12狂欢密令 13经验狂欢 14塔罗暗殿 15登录有礼 16累充有礼
+	optional string eventName = 4;//活动名称#客户端  页签名显示
+	required uint32 order = 5;//活动排序#客户端  活动在活动面板里页签的排序
+	required int32 smallId = 6;//子类id#客户端  某一活动存在多条奖励目标时，每条奖励目标分属不同的子类，同时起到在同页签内的排序作用
+	optional string smallName = 7;//子类名称#客户端  条目内容描述
+	optional IntListJingHao goal = 8;//活动任务目标参数#客户端  根据eventId不同，读取不同数据。（1神装首发关联box表id；3限购礼包关联recharge表id；4充值有礼直接读取累计金额参数；5集字狂欢配任务道具组合；7热血狂欢关联cfg_special_activity_goals表id；8狂欢商店，所需货币id#价格数量；9消费排行直接读取排名参数；13经验狂欢读取buff表id），多目标用#分隔；14塔罗暗殿，翻牌次数#转换守护层数；15登录有礼配置登录几天可领取奖励；16累充有礼，充值档位#累充天数
+	optional IntListJingHao awardType = 9;//活动奖励限制类型#客户端  （类型：1.个人领取；2.服务器总领取；3.个人每天可领取；4.服务器每天可领取）格式：类型id#限制次数，不填则不限
+	optional IntListJingHao award = 10;//活动奖励数量限制#客户端  道具id或boxid#数量，数量按奖励类型来限制领取范围，塔罗暗殿di#职业#性别
+	optional IntListList chargeReward = 11;//付费解锁奖励#客户端  主要给狂欢密令使用，配置付费后才能解锁的奖励，道具id或boxid#数量&道具id或boxid#数量
+	optional IntListJingHao displayCondition = 12;//显示条件#客户端  前端显示用，conditionId#号分隔
+	optional string eventOpen = 13;//活动开启时间#客户端  根据eventType字段判断  1.开服活动，填开服天数；2.联服活动，填联服天数；3.合服活动，填合服天数；4.节日活动，填具体日期，年-月-日
+	required uint32 eventLast = 14;//活动持续时间#客户端  单位：天
+	optional string description = 15;//活动内容描述#客户端  用于活动介绍文本内容，可配置字色及换行、分段
+	required int32 isShow = 16;//提前展示时间#客户端  控制活动哪天（开服天数）开始提前展示
+	optional string icon = 17;//特殊图标#客户端  用于特惠礼包等活动的图片资源显示，填写icon在图集中的名字
+	optional string picture = 18;//背景图片#客户端  策划配置替换界面底图
+	optional string panel = 19;//对应打开界面#客户端  活动对应的界面
+	optional IntListJingHao openWay = 20;//功能跳转#客户端  类型1:1#cfg_deliverID（点击后直接传送到目标地图坐标）；类型2:2#map_npcID（点击关闭当前界面，寻路到对应npc，然后打开npc面板）类型3：3#npcid# 挑最近的寻路 类型4:4#jumpid
+	optional IntListJingHao supply = 21;//生效条件#客户端  根据具体活动类型配置，经验狂欢：生效condition
+	required int32 redPoint = 22;//红点类型#客户端  塔罗暗殿红点控制用的，不懂问杨康杰
+	//optional string remarks = 23;//策划备注#策划  备注
+	//optional IntListJingHao crossTimes = 24;//联服次数控制  代表联服第几次后开启的活动读取本行数据，#分隔的两个数据代表次数范围
+	//optional IntListJingHao combineTimes = 25;//合服次数控制  代表合服第几次后开启的活动读取本行数据，#分隔的两个数据代表次数范围
+	//required uint32 status = 26;//活动是否开放  控制该活动实际是否开启 1.开放；2.关闭
+	//required int32 dayControl = 27;//活动同时开启控制  用于控制开服活动和节日活动是否同时出现，单位：天，代表开服后的第几天内活动不会出现
+	//optional IntListJingHao dayBelong = 28;//活动所属日期  为特殊用途预留，格式等同eventOpen字段
+	//optional IntListJingHao dayCloseControl = 29;//活动开启截止日期  活动开启截止时间点控制，代表如果活动开启的那一天在开服后的第N天，那么活动不允许开启，填0代表无限制
+	//optional IntListJingHao vipControl = 30;//vip控制  特殊控制，代表vip等级，#分隔的两个数据代表等级范围
+	//optional IntListJingHao announceId = 31;//获得奖励时的公告  关联cfg_announce表id，多种公告用#分隔（比如可能同时出现聊天公告和二级公告）
+	//required uint32 getWay = 32;//获得奖励方式  1.点击领取；2.通过邮件发放
+}
+
+message CFG_SPECIAL_ACTIVITYARRAY
+{
+	repeated CFG_SPECIAL_ACTIVITY rows = 1;
+}

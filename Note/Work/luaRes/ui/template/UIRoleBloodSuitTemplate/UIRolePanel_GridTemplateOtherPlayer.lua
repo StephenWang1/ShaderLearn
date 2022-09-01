@@ -1,0 +1,5 @@
+local UIRolePanel_GridTemplateOtherPlayer = {}
+setmetatable(UIRolePanel_GridTemplateOtherPlayer, luaComponentTemplates.UIRoleBloodSuitTblTemplate)
+
+
+return UIRolePanel_GridTemplateOtherPlayer

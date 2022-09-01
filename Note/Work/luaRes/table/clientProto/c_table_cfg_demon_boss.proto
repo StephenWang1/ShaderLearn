@@ -1,0 +1,22 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_DEMON_BOSS
+{
+	required int32 id = 1;//怪物id#客户端  魔之BOSSid，索引到monster表
+	required int32 reFullTime = 2;//回满血时间#客户端  受到攻击后，回满血的时间  单位秒
+	required int32 hurtType = 3;//可造成伤害的限制#客户端  可造成伤害的限制类型  1  全身装备转生等级达到需求 2任一灵兽转生达到需求
+	optional string hurtParam = 4;//限制参数#客户端  type为1  转生等级#等级  2 灵兽转生等级
+	optional string des = 5;//是否达到标准#客户端  根据是否可对怪物造成伤害   可以#不可以
+	optional string hurtParamExtra = 6;//限制额外参数#客户端  type为1  人物装备位  id#id  2 灵兽位 id#id
+	required int32 dropType = 7;//怪物种类#客户端  怪物种类  1 装备 2 宝饰 3 技能 4灵兽
+	optional IntListList killReward = 8;//击杀专属奖励#客户端  道具id#道具数量#职业（1 战士 2法师 3道士 0通用）#是否显示概率  1显示 0不显示&道具id#道具数量#职业（1 战士 2法师 3道士）#是否显示概率  1显示 0不显示    纯显示字段
+	required int32 chooseCondition = 9;//定位条件#客户端  定位条件，配置的为condition表中条件
+	//required int32 helpCd = 10;//助战cd#服务器  助战cd 单位 秒
+	//optional IntListList randomReward = 11;//击杀专属奖励  道具id#道具数量#概率（万分数）
+}
+
+message CFG_DEMON_BOSSARRAY
+{
+	repeated CFG_DEMON_BOSS rows = 1;
+}

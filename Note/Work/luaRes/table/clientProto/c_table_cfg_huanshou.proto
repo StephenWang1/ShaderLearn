@@ -1,0 +1,61 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_HUANSHOU
+{
+	required uint32 id = 1;//id#客户端#C#不存在共同参与合并的字段  唯一ID
+	//required int32 mainType = 2;//主类型#客户端#C  1灵兽；2肉身装备；3魂继
+	//optional string quality = 3;//品质#客户端#C  共14阶（1白，2淡蓝，3黄，4嫩草绿，5紫红，6红，7天蓝，8浅蓝，9湖蓝，10淡紫，11次绛蓝，12绛蓝，13蓝）
+	//optional string name = 4;//名字#客户端#C  名字
+	//required int32 type = 5;//灵兽类型#客户端#C  1寒芒2落星3天成4通用
+	//required int32 monsterId = 6;//怪物id#客户端#C#不存在共同参与合并的字段  
+	//required int32 model = 7;//模型#客户端#C  灵兽模型
+	//required int32 weight = 8;//基础重量#客户端#C  属性值
+	//required int32 callAgainCd = 9;//死亡复活冷却时间#客户端#C  单位秒
+	//required int32 floatId = 10;//资质浮动id#客户端#C  资质浮动id，关联float表
+	//required int32 hsScale = 11;//灵兽模型比例#客户端#C  100为原始比例(和怪物相同)
+	//required int32 offsetX = 12;//灵兽模型左右位置偏移量#客户端#C  对模型旋转中心轴进行左右（同时反向调整模型的X坐标位置），偏移量为0时则显示原位置
+	//required int32 y = 13;//灵兽模型界面展示高度调整#客户端#C  对界面中模型展示的高度进行调整
+	//optional IntListJingHao entryParam = 14;//不同类型词条系数#客户端#C  不同类型词条系数（神圣攻伤#神圣魔伤#神圣道伤#神圣物免#神圣魔免），万分比
+	//required uint32 bloodY = 15;//血条位置#客户端#C  不填则默认为不使用该功能，且不会显示血条（脚向上的像素）
+	//required int32 hpQualifications = 16;//生命资质#客户端#C  属性（万分比）
+	//required int32 attackQualifications = 17;//攻击资质#客户端#C  属性（万分比）
+	//required int32 phyDefenceQualifications = 18;//物防资质#客户端#C  属性（万分比）
+	//required int32 magicDefenceQualifications = 19;//魔防资质#客户端#C  属性（万分比）
+	//required int32 holyAttackQualifications = 20;//神圣攻击资质#客户端#C  属性（万分比）
+	//required int32 holyDefenceQualifications = 21;//神圣防御资质#客户端#C  属性（万分比）
+    //@2#5 mainType#2 type#4
+	//required uint32 mainType2_type4 = 22;//合并字段#主类型_C#灵兽类型_C mainType#2 type#4
+    //@8#9#10 weight#4 callAgainCd#7 floatId#17
+	//required uint32 weight4_callAgainCd7_floatId17 = 23;//合并字段#基础重量_C#死亡复活冷却时间_C#资质浮动id_C weight#4 callAgainCd#7 floatId#17
+    //@11#15#16 hsScale#9 bloodY#8 hpQualifications#14
+	//required uint32 hsScale9_bloodY8_hpQualifications14 = 24;//合并字段#灵兽模型比例_C#血条位置_C#生命资质_C hsScale#9 bloodY#8 hpQualifications#14
+    //@17#18 attackQualifications#14 phyDefenceQualifications#14
+	//required uint32 attackQualifications14_phyDefenceQualifications14 = 25;//合并字段#攻击资质_C#物防资质_C attackQualifications#14 phyDefenceQualifications#14
+    //@19#20 magicDefenceQualifications#14 holyAttackQualifications#14
+	//required uint32 magicDefenceQualifications14_holyAttackQualifications14 = 26;//合并字段#魔防资质_C#神圣攻击资质_C magicDefenceQualifications#14 holyAttackQualifications#14
+	required int32 maxHp = 27;//生命#客户端  属性值
+	required int32 phyAttackMin = 28;//最小攻击#客户端  属性值
+	required int32 phyAttackMax = 29;//最大攻击#客户端  属性值
+	required int32 magicAttackMin = 30;//最小魔法攻击#客户端  属性
+	required int32 magicAttackMax = 31;//最大魔法攻击#客户端  属性
+	required int32 taoAttackMin = 32;//最小道术攻击#客户端  属性
+	required int32 taoAttackMax = 33;//最大道术攻击#客户端  属性
+	required int32 phyDefenceMin = 34;//最小物防#客户端  属性值
+	required int32 phyDefenceMax = 35;//最大物防#客户端  属性值
+	required int32 magicDefenceMin = 36;//最小魔防#客户端  属性值
+	required int32 magicDefenceMax = 37;//最大魔防#客户端  属性值
+	required int32 holyAttackMin = 38;//神圣攻击下限#客户端  属性值
+	required int32 holyAttackMax = 39;//神圣攻击上限#客户端  属性值
+	required int32 holyDefenceMin = 40;//神圣防御下限#客户端  属性值
+	required int32 holyDefenceMax = 41;//神圣防御上限#客户端  属性值
+	required int32 hpRecover = 42;//生命恢复#客户端  属性值(3秒回复1次)
+	required int32 dodge = 43;//闪避#客户端  属性值
+	required int32 accurate = 44;//准确#客户端  属性值
+	//required int32 entryAmount = 45;//词条数量#服务器  词条数量上限
+}
+
+message CFG_HUANSHOUARRAY
+{
+	repeated CFG_HUANSHOU rows = 1;
+}

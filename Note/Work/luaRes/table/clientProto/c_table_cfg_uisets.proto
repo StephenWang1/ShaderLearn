@@ -1,0 +1,16 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_UISETS
+{
+	required uint32 id = 1;//id#客户端  纯ID
+	optional StringList layerNameList = 2;//UI层级名列表#客户端  表示该UI面板集合包括哪些UI层级
+	optional StringList panelNameList = 3;//UI界面名列表#客户端  表示该UI面板集合中包含了哪些界面
+	optional IntListJingHao depth = 4;//UI层级深度#客户端  层级深度列表,仅仅用于代码中,策划不用填此列,填了也没用
+	//optional string beizhu = 5;//备注#策划  备注
+}
+
+message CFG_UISETSARRAY
+{
+	repeated CFG_UISETS rows = 1;
+}

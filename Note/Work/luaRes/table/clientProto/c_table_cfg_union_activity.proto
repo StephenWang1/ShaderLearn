@@ -1,0 +1,20 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_UNION_ACTIVITY
+{
+	required int32 id = 1;//活动id#客户端#C  活动id 索引daily表 0为敬请期待
+	//required int32 order = 2;//界面排序#客户端#C  界面排序，由低到高排序
+	//optional string title = 3;//标题名#客户端#C  标题所用图片名
+	//optional string backGround = 4;//底图#客户端#C  底图所用ab名
+	//optional string effect = 5;//特效#客户端#C  特效id#特效id
+	//optional string effectMove = 6;//特效节点#客户端#C  相应特效偏移量X#相应特效偏移量Y#相应特效偏移量z
+	//optional string buttonLabel = 7;//按钮文本#客户端#C  按钮文本
+	optional string des = 8;//常显文本#客户端  常显文本
+	optional string rule = 9;//规则文本#客户端  规则文本
+}
+
+message CFG_UNION_ACTIVITYARRAY
+{
+	repeated CFG_UNION_ACTIVITY rows = 1;
+}

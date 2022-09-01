@@ -1,0 +1,18 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_LEAGUE
+{
+	required uint32 id = 1;//id#客户端#C#不存在共同参与合并的字段  编号
+	optional string name = 2;//联盟名称#客户端  联盟名称
+	optional string des = 3;//联盟描述#客户端  联盟描述，\n换行
+	optional string icon = 4;//联盟图标#客户端  用在联盟npc面板中
+	optional string painting = 5;//联盟底图#客户端  用在预选面板中
+	required int32 order = 6;//排序#客户端  用在预选面板中
+	optional string towerIcon = 7;//封印塔icon#客户端  用在封印塔界面中
+}
+
+message CFG_LEAGUEARRAY
+{
+	repeated CFG_LEAGUE rows = 1;
+}

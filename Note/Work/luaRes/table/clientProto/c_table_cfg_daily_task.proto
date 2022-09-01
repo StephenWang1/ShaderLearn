@@ -1,0 +1,24 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_DAILY_TASK
+{
+	required uint32 id = 1;//id#客户端#C  
+	//required uint32 taskType = 2;//类型#客户端#C  日常任务子类型
+	//optional IntListJingHao level = 3;//等级#客户端#C  下限#上限
+	//optional IntListJingHao time = 4;//天数#客户端#C  开服天数（同一类型不可重复，需要连续）
+	//optional string remark = 5;//策划备注#客户端#C  
+	//optional IntListList items = 6;//目标道具#客户端#C  目标道具四选几&目标道具id&0
+	//optional IntListList count1 = 7;//道具数量1#客户端#C  与目标道具一一对应（#隔开）&隔开不同道具数量）
+	//optional IntListList weight = 8;//权重#客户端#C  一天目标道具随机的权重
+	//optional IntListList count3 = 9;//道具数量3#客户端#C  目标总数固定时需要填
+	//optional IntListList rewards = 10;//奖励#客户端#C  道具id#数量&
+	//optional IntListJingHao twice = 11;//双倍领取#客户端#C  货币id#数量
+	//optional IntListJingHao buy = 12;//购买任务#客户端#C  货币id#数量
+	optional IntListJingHao treble = 13;//三倍领取#客户端  货币id#数量
+}
+
+message CFG_DAILY_TASKARRAY
+{
+	repeated CFG_DAILY_TASK rows = 1;
+}

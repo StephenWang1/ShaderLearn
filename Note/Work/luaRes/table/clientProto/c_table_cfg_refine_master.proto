@@ -1,0 +1,21 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_REFINE_MASTER
+{
+	required int32 id = 1;//id#客户端#C  排序无意义
+	//required int32 type = 2;//类型#客户端#C  1经验炼修为 2经验池经验换灵力 3经验炼功勋
+	//required int32 limitLv = 3;//封印等级#客户端#C  炼制需求的最低等级，跟
+	//optional string costNum = 4;//花费#客户端#C  兑换时需要花费的货币数量，1倍#2倍#3倍
+	//optional IntListJingHao gainNum = 5;//基准获得#客户端#C  兑换后能获得的货币的基准数量，1倍#2倍#3倍
+	//optional IntListJingHao numFloat = 6;//数值浮动#客户端#C  数量浮动值区间，万分比#分隔
+	optional IntListJingHao ratio = 7;//兑换比例#客户端  炼制大师，经验和修为、灵力的兑换比例：XXXX点经验兑换1点修为/灵力；倍率#分割
+	optional IntListList cost = 8;//消耗道具#客户端  道具id#数量&道具id#数量，1倍&2倍&3倍
+	optional IntListList condtions = 9;//限制条件#客户端  读取cfg_condtions表，1倍&2倍&3倍
+	optional IntListJingHao costRate = 10;//消耗道具兑换系数#客户端  消耗道具的系数，灵兽经验不足时计算消耗公式：（经验/比例*兑换系数）*1000000
+}
+
+message CFG_REFINE_MASTERARRAY
+{
+	repeated CFG_REFINE_MASTER rows = 1;
+}

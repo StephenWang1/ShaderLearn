@@ -1,0 +1,28 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_COLLECTION
+{
+	required uint32 itemId = 1;//道具id#客户端#C  对应item表id
+	optional string name = 2;//名字#客户端  藏品名字
+	optional string bindingId = 3;//摆放道具id#客户端  摆放在藏品界面里的道具id，对应道具的id
+	required int32 xSize = 4;//横向大小#客户端  藏品占用格子的横向大小
+	required int32 ySize = 5;// 纵向大小#客户端  藏品占用格子的纵向大小
+	required int32 recover = 6;//生命恢复#客户端  生命恢复速度属性
+	optional IntListJingHao phyAttMin = 7;//最小物攻#客户端  物攻随机范围最小值，下限#上限
+	optional IntListJingHao phyAttMax = 8;//最大物攻#客户端  物攻随机范围最大值，下限#上限
+	optional IntListJingHao magicAttMin = 9;//最小魔法#客户端  魔法随机范围最小值，下限#上限
+	optional IntListJingHao magicAttMax = 10;//最大魔法#客户端  魔法随机范围最大值，下限#上限
+	optional IntListJingHao taoAttMin = 11;//最小道术#客户端  道术随机范围最小值，下限#上限
+	optional IntListJingHao taoAttMax = 12;//最大道术#客户端  道术随机范围最大值，下限#上限
+	optional IntListJingHao phyDefMin = 13;//最小物防#客户端  物防随机范围最小值，下限#上限
+	optional IntListJingHao phyDefMax = 14;//最大物防#客户端  物防随机范围最大值，下限#上限
+	optional IntListJingHao magicDefMin = 15;//最小魔防#客户端  魔防随机范围最小值，下限#上限
+	optional IntListJingHao magicDefMax = 16;//最大魔防#客户端  魔防随机范围最大值，下限#上限
+	optional IntListJingHao hp = 17;//生命值#客户端  生命随机范围值，最小值#最大值
+}
+
+message CFG_COLLECTIONARRAY
+{
+	repeated CFG_COLLECTION rows = 1;
+}

@@ -1,0 +1,16 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_MAPEFFECT
+{
+	required int32 id = 1;//编号#客户端#C  编号
+	//optional string name = 2;//名字#客户端#C  是哪个方向的特效
+	//optional string icon = 3;//图标#客户端#C  如果需要在编辑器中放入你喜欢的图标，可以在这里填写
+	//required int32 extra = 4;//特殊参数#客户端#C  特殊参数
+	//required int32 type = 5;//类型#客户端#C  type
+}
+
+message CFG_MAPEFFECTARRAY
+{
+	repeated CFG_MAPEFFECT rows = 1;
+}

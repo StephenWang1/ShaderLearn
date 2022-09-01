@@ -1,0 +1,17 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_BOSS_SKILL_DESCRIBE
+{
+	required uint32 id = 1;//技能id#客户端  
+	optional string name = 2;//技能名称#客户端  
+	optional string icon = 3;//图标#客户端  icon的id
+	optional string tips = 4;//技能描述#客户端  
+	optional string tips2 = 5;//补充说明#客户端  多条内容用&分隔
+	optional IntListList conditions = 6;//tips2显示颜色变化条件#客户端  关联condition表id（多条内容的条件用&分隔）
+}
+
+message CFG_BOSS_SKILL_DESCRIBEARRAY
+{
+	repeated CFG_BOSS_SKILL_DESCRIBE rows = 1;
+}

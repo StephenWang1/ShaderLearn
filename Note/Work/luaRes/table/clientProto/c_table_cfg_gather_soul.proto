@@ -1,0 +1,15 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_GATHER_SOUL
+{
+	required int32 vipLevel = 1;//充值等级#客户端  聚灵充值等级
+	required int32 needExp = 2;//升到下级所需总充值数#客户端  单位：角，对应需要升到下一级的总充值数
+	required int32 servantMana = 3;//聚灵数#客户端  对应等级每天能领取的灵力
+	optional string manaLevel = 4;//聚灵等级#客户端  对应聚灵不同等级的文字展示
+}
+
+message CFG_GATHER_SOULARRAY
+{
+	repeated CFG_GATHER_SOUL rows = 1;
+}

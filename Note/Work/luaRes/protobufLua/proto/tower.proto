@@ -1,0 +1,14 @@
+package towerV2;
+import "common.proto";
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "TowerProto";
+
+
+//发送通天塔面板信息
+message ResRoleTowerInfo {
+    optional int32 level = 1;//已经打过的层数.
+	repeated commonV2.IntIntStruct awardList = 2; //这轮的实际奖励 层数=下标+1
+	optional int32 count = 3; //已经打过的次数.
+	repeated commonV2.IntIntStruct showRewardList = 4; //打乱的后奖励,奇葩需求需要展示的时候随机显示.
+}

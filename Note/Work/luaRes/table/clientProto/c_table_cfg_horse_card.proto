@@ -1,0 +1,15 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_HORSE_CARD
+{
+	required uint32 id = 1;//id#客户端#C  编号
+	optional string name = 2;//马牌名称#客户端  对应的马牌名称
+	required int32 stage = 3;//马牌品级#客户端  马牌品级
+	required uint32 atkPer = 4;//攻击加成百分比#客户端  万分比
+}
+
+message CFG_HORSE_CARDARRAY
+{
+	repeated CFG_HORSE_CARD rows = 1;
+}

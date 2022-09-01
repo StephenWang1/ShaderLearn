@@ -1,0 +1,78 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_TASK
+{
+	required uint32 id = 1;//任务的id #客户端#C#不存在共同参与合并的字段  任务的id #客户端
+	//optional string name = 2;//任务名称#客户端#C  
+	//required int32 isend = 3;//任务组结束标识#客户端#C  是否是环任务的最后一环
+	//required int32 group = 4;//任务组#客户端#C  用于多个环任务标记，0代表其他任务
+	//optional string beizhu = 5;//策划备注#客户端#C  
+	//optional IntListJingHao next = 6;//后置任务#客户端#C  #隔开主线和分线任务，分线失效接#前面的任务id，分线未失效接取后面的任务id
+	//required uint32 changeLine = 7;//分线替换为主线ID#客户端#C  分线任务失效时替换为主线的id
+	//optional IntListJingHao jump = 8;//推荐跳转#客户端#C  条对应task.jump表
+	//optional IntListJingHao times = 9;//每日次数#客户端#C  每日免费次数#每日购买次数
+	//optional string condition = 10;//任务条件#客户端#C  （1等级达到 2等级低于 3转生达到 4转生低于 5开服天数达到 6开服天数低于 7指定日期）
+	//required uint32 type = 11;//任务类型#客户端#C  1主线  2循环任务 3雇佣兵 4日常任务 5支线任务 6怪物悬赏 7烟花 8圣域 9精英任务 10BOSS悬赏 11开服活动-怪物悬赏 13每日任务类型
+	//required uint32 subtype = 12;//任务子类型#客户端#C  日常任务1铁匠2屠夫3药店4书店5水果6钓鱼  怪物悬赏：不同子类代表不同组
+	//required uint32 taskGoalType = 13;//任务目标类型#客户端#C  1杀怪 2收集道具 3达到等级 4完成副本 5死亡次数 6pk 7时间限制 8对话 9地图杀怪 10装备等级 11挖矿 12 采集 13收集技能书 14收集随机材料 15合成装备 16击杀特定地图特定怪物 17学习技能书数量 18收集随机技能书 20 装备条件 21巢穴副本任务22灵兽合成23灵兽试炼24.达到转生等级（打开界面）25购买聚灵珠 26上架装备 27挖掘肉身 28拍卖行聚灵珠 29 功勋等级 30帮会任务31进入狼烟梦境32击杀圣域BOSS33提升宝石等级34行会捐献35击杀野外BOSS36铁匠任务37屠夫任务38药商任务39渔夫任务40流浪汉任务41天成任务42使用聚灵珠43交易行购买技能书44使用炼化 45打开战勋界面 46日常任务 47白日门圣物 48白日门封赏 49白日门猎魔 50白日门押镖 51参与行会首领 52个人BOSS 53 打开怪物悬赏界面  54 打开会员界面
+	//optional IntListJingHao taskGoalId = 14;//任务目标id#客户端#C  对应cfg_taskGoal，修改主线目标，对应分线任务的目标一定也需要修改
+	//required uint32 dialoguetype = 15;//任务对话类型#客户端#C  1.对话任务2.打怪任务
+	//optional IntListJingHao gatherId = 16;//采集目标#客户端#C  对应cfg_gather
+	//optional string rewards = 17;//任务奖励#客户端#C  丨后为环任务总奖励
+	//required uint32 mapid = 18;//地图#客户端#C  
+	//required int32 delivery = 19;//怪物是否传送#客户端#C  1为传送 不填为不传
+	//optional IntListList position = 20;//任务坐标#客户端#C  怪物悬赏类型此字段用于随机传送
+	//optional IntListList npcposition = 21;//NPC周围坐标#客户端#C  
+	//optional IntListList nearposition = 22;//近点坐标#客户端#C  
+	//optional IntListList farposition = 23;//远点客户端坐标#客户端#C  
+	//optional IntListJingHao randomRange = 24;//坐标浮动值#客户端#C  
+	//optional string serverType = 25;//服务器类型#客户端#C  判断该任务是否在跨服中显示  1普通服 3苍月岛 5神龙帝国
+	//optional IntListJingHao cnpc = 26;//传送用NPC#客户端#C  不在任务目标地图，某些任务在点击后需要点击npc进行中转操作（目前是传送）  这里配置的是目标npc的mapnpcid  配多个时根据距离优先寻路较近的 比奇#土城
+	//optional IntListJingHao fnpc = 27;//接取NPC#客户端#C  
+	//optional IntListList tnpc = 28;//提交NPC#客户端#C  提交任务的npc  mapnpcid
+	//optional string deviation = 29;//偏移量#客户端#C  
+	//required uint32 chuansong = 30;//是否直接传送#客户端#C  大于1直接传送
+	//required uint32 overchuan = 31;//完成任务传送#客户端#C  0不传1传送
+	//required uint32 getchuan = 32;//接取任务传送随机怪点#客户端#C  0不传1传送
+	//required uint32 addchuan = 33;//提交任务传送#客户端#C  0不传1传送
+	//required uint32 taskgroupid = 34;//任务子类型#客户端#C  日常任务1铁匠2屠夫3药店4书店5水果6渔夫；
+	//required uint32 limit = 35;//任务限制(1时间#毫秒2死亡#次数#客户端#C  暂时没用
+	//required uint32 state = 36;//自动接取任务#客户端#C  
+	//required uint32 autopathing = 37;//自动寻路#客户端#C  
+	//required uint32 autofight = 38;//自动战斗#客户端#C  itemid#花费
+	//optional string immediately = 39;//立即完成花费#客户端#C  itemid#花费
+	//optional string mutireward = 40;//多倍领取 #客户端#C  itemid#花费#倍数
+	//required uint32 autofinsh = 41;//自动提交任务 #客户端#C  暂时没用
+	//required uint32 item = 42;//任务消耗道具 #客户端#C#不存在共同参与合并的字段  暂时没用
+	//optional string taskInfo = 43;//任务栏任务信息1#客户端#C  未接收任务，任务栏中显示的目标信息
+	//optional string goinfo = 44;//任务栏任务信息2#客户端#C  接受任务后，任务栏中显示的目标信息
+	//optional string completeinfo = 45;//任务栏任务信息3#客户端#C  完成任务后，任务栏中显示的目标信息
+	//optional string tip3 = 46;//完成任务面板文字#客户端#C  
+	//optional string tips4 = 47;//接取任务时面板内容#客户端#C  主线任务里面 不显示右侧快速传送
+	//required uint32 nofly = 48;//小飞鞋（不填就是不能传送，1就是可以传送#客户端#C#不存在共同参与合并的字段  主线任务里面 不显示右侧快速传送
+	//required uint32 flyRemind = 49;//小飞鞋使用提醒#客户端#C#不存在共同参与合并的字段  1有提醒0不提醒
+	//required uint32 deliverid = 50;//传送ID#客户端#C  唯一ID
+	//required uint32 positiondeliverid = 51;//传送位置#客户端#C  唯一ID
+	//required uint32 flyingDeliverid = 52;//交任务传送#客户端#C  寻路传送id，关联deliver
+	//required int32 halfDeliverid = 53;//任务进行中传送#客户端#C  任务进行中传送，关联deliver表
+	//optional string submitShow = 54;//提交任务打开面板#客户端#C  提交任务时，点击NPC效果 不填或0 打开左侧任务提交面板  配置的话则打开功能面板并点击相应按钮提交任务（配置相应面板名）
+	//required int32 completeDeliver = 55;//完成任务后自动传送#客户端#C  完成任务后传送，配置后在完成任务的状态下  点击任务即可传送  这里实际使用的传送是flyingDeliverid中的配置 这里配置有值即可
+	//optional string cnpcPanel = 56;//传送NPC面板#客户端#C  组合cnpc字段使用   在寻路到npc附近后打开的面板名 若不配置 则会默认打开传送员面板
+    //@4#7#11 group#3 changeLine#20 type#6
+	//required uint32 group3_changeLine20_type6 = 57;//合并字段#任务组_C#分线替换为主线ID_C#任务类型_C group#3 changeLine#20 type#6
+    //@12#13 subtype#10 taskGoalType#10
+	//required uint32 subtype10_taskGoalType10 = 58;//合并字段#任务子类型_C#任务目标类型_C subtype#10 taskGoalType#10
+    //@15#30#32#35 dialoguetype#15 chuansong#3 getchuan#3 limit#10
+	//required uint32 dialoguetype15_chuansong3_getchuan3_limit10 = 59;//合并字段#任务对话类型_C#是否直接传送_C#接取任务传送随机怪点_C#任务限制(1时间_毫秒2死亡_次数_C dialoguetype#15 chuansong#3 getchuan#3 limit#10
+    //@36#37#38#41 state#10 autopathing#5 autofight#5 autofinsh#10
+	//required uint32 state10_autopathing5_autofight5_autofinsh10 = 60;//合并字段#自动接取任务_C#自动寻路_C#自动战斗_C#自动提交任务__C state#10 autopathing#5 autofight#5 autofinsh#10
+	required int32 order = 61;//任务排序#客户端  目前仅怪物悬赏用，任务在界面内的排序
+	required int32 autoPause = 62;//自动任务暂停#客户端  配1 则在完成此任务后，不继续自动提交的流程  需玩家自行操作
+	//required int32 autoBattle = 63;//落地后是否开启自动战斗#服务器  目前仅type11的任务用，传送落地后是否开启自动战斗，0否1是，不填默认0
+}
+
+message CFG_TASKARRAY
+{
+	repeated CFG_TASK rows = 1;
+}

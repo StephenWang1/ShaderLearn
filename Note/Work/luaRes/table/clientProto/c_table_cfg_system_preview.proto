@@ -1,0 +1,27 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_SYSTEM_PREVIEW
+{
+	required int32 id = 1;//唯一id#客户端  唯一id
+	optional string name = 2;//功能名称#客户端  功能名称
+	optional string iconName = 3;//显示图标#客户端  功能图标资源id
+	optional string img = 4;//预览图资源id#客户端  预览图资源id
+	optional string desc = 5;//显示文本#客户端  显示文本
+	optional string tips = 6;//短文本#客户端  
+	optional string openTips = 7;//开放条件文本#客户端  
+	optional IntListList reward = 8;//奖励id#客户端  道具id#数量&道具id#数量
+	required int32 jumpType = 9;//跳转类型#客户端  :1、为jumpid、2、为deliverid传送至npc并打开界面
+	optional string jump = 10;//跳转链接#客户端  跳转界面id
+	required int32 order = 11;//排序#客户端  排序
+	required int32 notice = 12;//跳转限制#客户端  跳转限制
+	required int32 promptframe = 13;//弹出气泡#客户端  气泡表id
+	//optional string open = 14;//领奖条件#服务器  conditionsId#conditionsId
+	//optional string show = 15;//显示条件#服务器  开服天数#等级#转生等级
+	//optional string close = 16;//消失条件#服务器  开服天数#等级#转生等级
+}
+
+message CFG_SYSTEM_PREVIEWARRAY
+{
+	repeated CFG_SYSTEM_PREVIEW rows = 1;
+}

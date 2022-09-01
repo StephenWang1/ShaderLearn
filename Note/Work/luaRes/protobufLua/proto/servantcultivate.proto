@@ -1,0 +1,57 @@
+package servantcultivateV2;
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "ServantcultivateProto";
+
+//灵兽修炼请求
+message reqCultivateInfo{
+	optional int32 type = 1;//灵兽类型  0：默认请求当前修炼
+	optional int32 hscultivationConfigId = 2; //请求进入的地图配置id
+//	optional int32 targetX = 3;  //坐标x
+//	optional int32 targetY = 4;  //坐标y
+}
+
+//请求灵兽飞地图
+message reqFlyInfo{
+	optional int32 mapId = 1;  //地图id
+	optional int32 toX = 2;   //坐标x
+	optional int32 toY = 3;   //坐标y
+}
+
+//灵兽修炼信息
+message resCultivateInfo{
+	optional int32 type = 1;//灵兽类型
+	optional int64 exp = 2; //灵兽经验
+	optional int32 timeBeinS = 3;  //修炼开始时间
+	optional int32 level = 4; //灵兽等级
+	optional int32 rein = 5; //灵兽转生等级
+	optional int32 configId = 6; //灵兽配置id
+	optional int32 status = 7; //1:修炼中 2停止修炼
+	optional int32 reasons = 8; //原因
+	optional int32 mapId = 9; //修炼中的地图id
+	optional int32 mapLine = 10; //修炼中地图线路
+	optional int32 x = 11;
+	optional int32 y = 12;
+	repeated dieTimeInfo dieTimeMap = 13; //死亡时间map(s)
+	optional int32 clearCD = 14;  //是否清楚了CD
+}
+
+message dieTimeInfo {
+	optional int32 type = 1;
+	optional int32 dieTimeS = 2; //死亡时间(s)
+}
+
+//灵兽提醒
+message cultivateRedInfo{
+	optional int32 mapId = 1; //修炼中的地图id
+	optional int32 mapLine = 2; //修炼中地图线路
+	optional int32 x = 3;
+	optional int32 y = 4;
+	optional int32 reasons = 5; //红点提示原因 1：受到攻击 2：死亡
+	optional string killName = 6; //被杀死的玩家名
+} 
+
+//修炼界面打开关闭
+message reqOpenDlg{
+	optional int32 type = 1; // 1: 打开， 2：关闭
+}

@@ -1,0 +1,10 @@
+---@class UIGuildInfoPanel_ChatPanel_BagPanel_Interaction:UIChatPanel_BagPanel_Interaction
+local UIGuildInfoPanel_ChatPanel_BagPanel_Interaction = {}
+
+setmetatable(UIGuildInfoPanel_ChatPanel_BagPanel_Interaction, luaComponentTemplates.UIChatPanel_BagPanel_Interaction)
+
+function UIGuildInfoPanel_ChatPanel_BagPanel_Interaction:DoSingleClick(grid, bagItemInfo, itemTbl)
+    luaEventManager.DoCallback(LuaCEvent.OnClickUnionChatBagItem, bagItemInfo)
+end
+
+return UIGuildInfoPanel_ChatPanel_BagPanel_Interaction

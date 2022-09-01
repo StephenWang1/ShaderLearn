@@ -1,0 +1,38 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_REINCARNATION
+{
+	required uint32 id = 1;//id#客户端#C  id不能动，动需要跟服务器说
+	//required uint32 reincarnation = 2;//转生等级#客户端#C  转生等级#客户端
+	//required uint32 needLevel = 3;//需求等级#客户端#C  升到下级转生等级所需角色等级
+	//required uint32 needEnergy = 4;//需要修为#客户端#C#不存在共同参与合并的字段  升到下级转生等级所需修为
+	//required uint32 att = 5;//最小攻击#客户端#C#不存在共同参与合并的字段  属性（战士加物理攻击，法师加魔法攻击，道士加道术攻击）；不填写数据，则不在面板中显示
+	//required uint32 attMax = 6;//最大攻击#客户端#C  属性（战士加物理攻击，法师加魔法攻击，道士加道术攻击）；不填写数据，则不在面板中显示
+	//optional IntListList def = 7;//最小物防#客户端#C  根据不同职业加成 职业#数值&职业#数值 1 战士 2 法师 3 道士；不填写数据，则不在面板中显示
+	//optional IntListList defMax = 8;//最大物防#客户端#C  根据不同职业加成 职业#数值&职业#数值 1 战士 2 法师 3 道士；不填写数据，则不在面板中显示
+	//optional IntListList defMagic = 9;//最小魔防#客户端#C  根据不同职业加成 职业#数值&职业#数值 1 战士 2 法师 3 道士；不填写数据，则不在面板中显示
+	//optional IntListList defMagicMax = 10;//最大魔防#客户端#C  根据不同职业加成 职业#数值&职业#数值 1 战士 2 法师 3 道士；不填写数据，则不在面板中显示
+	//optional IntListList hp = 11;//血量#客户端#C  职业#血量，用&分隔（职业：1战士2法师3道士）；不填写数据，则不在面板中显示
+	//required uint32 accurate = 12;//准确#客户端#C  属性；不填写数据，则不在面板中显示
+	//required uint32 dodge = 13;//闪避#客户端#C  属性；不填写数据，则不在面板中显示
+	//required uint32 mapId = 14;//转生神殿地图#客户端#C  做转生神殿时用（未用）
+	//required uint32 toLevel = 15;//进入副本最低等级#客户端#C#不存在共同参与合并的字段  做转生神殿时用（未用）
+	//optional IntListJingHao needItem = 16;//升到下级所需道具#客户端#C  所需道具和击杀BOSS只可填其1，另一个必须不填；conditionid#conditionid
+	//optional IntListJingHao openNeedItem = 17;//开八门需要道具#客户端#C  conditionid#conditionid
+	//optional IntListJingHao boss = 18;//升到下级所需击杀BOSS#客户端#C  所需道具和击杀BOSS只可填其1，另一个必须不填；conditionid#conditionid
+    //@2#3 reincarnation#5 needLevel#8
+	//required uint32 reincarnation5_needLevel8 = 19;//合并字段#转生等级_C#需求等级_C reincarnation#5 needLevel#8
+    //@6#12 attMax#18 accurate#8
+	//required uint32 attMax18_accurate8 = 20;//合并字段#最大攻击_C#准确_C attMax#18 accurate#8
+    //@13#14 dodge#8 mapId#18
+	//required uint32 dodge8_mapId18 = 21;//合并字段#闪避_C#转生神殿地图_C dodge#8 mapId#18
+	required uint32 eightDoor = 22;//转生八门#客户端  
+	optional IntListJingHao parameter = 23;//额外参数#客户端  对应转生突破时的击杀BOSS条目数量，不填没有跳转；格式：bossid（暂不支持2个BOSS的跳转，需要的话需要客户端处理）
+	//optional IntListJingHao hunZhu = 24;//魂珠#客户端未使用#C  未知用途（未用）
+}
+
+message CFG_REINCARNATIONARRAY
+{
+	repeated CFG_REINCARNATION rows = 1;
+}

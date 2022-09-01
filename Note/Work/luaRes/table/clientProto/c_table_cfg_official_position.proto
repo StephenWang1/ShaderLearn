@@ -1,0 +1,22 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_OFFICIAL_POSITION
+{
+	required uint32 id = 1;//id#客户端#C#不存在共同参与合并的字段  编号
+	optional string name = 2;//官职名称#客户端  对应的官品名称
+	optional string lastname = 3;//官阶名称#客户端  对应的官阶名称
+	required int32 stage = 4;//官品分类#客户端  官品分类
+	required int32 position = 5;//官阶分类#客户端  官阶分类
+	optional IntListJingHao conditions = 6;//可升级条件#客户端  可升级条件，关联cfg_conditions表
+	optional IntListJingHao cost = 7;//升级消耗#客户端  升级所需消耗，道具items#数量
+	required uint32 att = 8;//最小攻击#客户端  最小攻击
+	required uint32 attMax = 9;//最大攻击#客户端  最大攻击
+	required int32 dropItemRate = 10;//掉宝概率#客户端  掉宝概率（百分比）
+	required uint32 quality = 11;//官阶品阶颜色#客户端  颜色代码123456为道具品质颜色1白，2淡蓝，3黄，4嫩草绿，5紫红，6红
+}
+
+message CFG_OFFICIAL_POSITIONARRAY
+{
+	repeated CFG_OFFICIAL_POSITION rows = 1;
+}

@@ -1,0 +1,35 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_BAIRIMEN_ACTIVITY
+{
+	required int32 id = 1;//id#客户端  第1位活动类型；第2345位编号
+	//required int32 subtype = 2;//活动类型#客户端  活动类型1.白日门圣物2.白日门封赏3.白日门猎魔4.白日门货运5.白日门联服 7苍月岛
+	required int32 activityId = 3;//活动id#客户端  连接到cfg_daily_activity_time表id
+	optional string tabName = 4;//页签名字显示#客户端  页签
+	optional string prefabs = 5;//预设名字#客户端  每个界面预设名
+	required int32 monsterId = 6;//怪物id#客户端  各种获得怪物id，不需要的不用填
+	optional string eventParameters = 7;//按钮点击操作#客户端  满足条件类型#参数&不满足条件类型#参数  1如果为副本则寻找对应npc 2气泡 2#气泡id 3跳转界面 3#jumpid 4  直接传送 走deliverid 5 读取传送id  传送后打开面板选中某个页签添加特效6直接寻路到对应deliverid点
+	optional IntListJingHao openCondition = 8;//页签开放条件#客户端  读取conditions表 多条件用#分隔
+	optional IntListJingHao activityCondition = 9;//活动条件#客户端  读取conditions表 多条件用#分隔
+	//required int32 order = 10;//页签排序#客户端  排序显示
+	optional string background = 11;//底图显示#客户端  每个物品底图图片名
+	optional string title = 12;//标题显示#客户端  标题显示图片名
+	optional string modelPicture = 13;//图片显示#客户端  图片名字
+	//required uint32 modelScale = 14;//怪物模型大小#客户端  怪物模型大小根据怪物表内模型再乘以此百分比
+	required int32 offsetX = 15;//模型左右位置偏移量#客户端  对模型旋转中心轴进行左右（同时反向调整模型的X坐标位置），偏移量为0时则显示原位置
+	required int32 offsetY = 16;//模型界面展示高度调整#客户端  对界面中模型展示的高度进行调整
+	optional IntListJingHao advanceTime = 17;//联服预告时间#客户端  联服预告时间，连接condition表，按钮显隐，未满足显示倒计时
+	optional string describe = 18;//按钮事件描述#客户端  事件描述  #回车
+	optional IntListJingHao showCondition = 19;//页签显示条件#客户端  用于列表页签的显示，读取conditions表 多条件用#分隔
+	required int32 physicalstrength = 20;//消耗体力#客户端  挖掘、击杀扣除体力
+	optional IntListJingHao redPoint = 21;//红点显示条件#客户端  红点显示条件
+    //@2#10#14 subtype#5 order#10 modelScale#7
+	required uint32 subtype5_order10_modelScale7 = 22;//合并字段#活动类型#页签排序#怪物模型大小 subtype#5 order#10 modelScale#7
+	//optional string remarks = 23;//备注#策划  备注#策划
+}
+
+message CFG_BAIRIMEN_ACTIVITYARRAY
+{
+	repeated CFG_BAIRIMEN_ACTIVITY rows = 1;
+}

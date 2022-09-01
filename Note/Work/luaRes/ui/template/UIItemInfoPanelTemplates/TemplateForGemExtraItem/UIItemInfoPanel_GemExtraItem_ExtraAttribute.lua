@@ -1,0 +1,10 @@
+---@class UIItemInfoPanel_GemExtraItem_ExtraAttribute:UIItemInfoPanel_Info_ExtraAttribute
+local UIItemInfoPanel_GemExtraItem_ExtraAttribute = {}
+
+setmetatable(UIItemInfoPanel_GemExtraItem_ExtraAttribute,luaComponentTemplates.UIItemInfoPanel_Info_ExtraAttribute)
+
+function UIItemInfoPanel_GemExtraItem_ExtraAttribute:RefreshBuffAttribute()
+
+end
+
+return UIItemInfoPanel_GemExtraItem_ExtraAttribute

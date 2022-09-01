@@ -1,0 +1,377 @@
+package chatV2;
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "ChatProto";
+
+
+
+message OtherMsgInfo{
+    optional int64 targetUid = 1;//私聊的时候的目标，其他情况发0
+	optional int64 sendUid = 2;//发送者id
+	optional string sendName = 3;//发送者名字
+	optional int64 receivedUid = 4;//接收者id
+	optional string receivedName = 5;//接受者名字
+	optional int32 titleId = 6;//称号
+	optional int32 vipLevel = 7;//vip等级
+	optional bool isMonthCard = 8;//是否有月卡
+}
+
+message AttributeInfo{
+    repeated bytes attributeType = 1;//属性类型
+	repeated int32 attributeValue = 2;//属性值
+}
+
+message EquipItemInfo{
+    optional int32 itemId = 1;//道具id
+	optional BestAttInfo bestAttInfo = 2;
+	optional JiPinInfo jiPinInfo = 3;//极品属性
+	optional int32 niePanLv =4;//涅槃等级
+}
+
+message BestAttInfo{
+    optional int32 attId = 1;//属性id
+	optional int32 attType = 2;//属性类型
+	optional int32 attValue = 3;//值
+	optional int32 param = 4;//参数
+	optional int32 power = 5;//战力
+}
+
+message LingBaoInfo{
+    optional int32 index = 1;//装备位置
+    optional int64 uniqueId = 2;//唯一id
+    optional int32 itemId = 3;//道具id
+    optional int32 level = 4;//等级
+    optional int32 nowExp = 5;//当前经验
+    optional int32 totalExp = 6;//总经验
+    optional int32 refineLv = 7;//精炼阶数
+    optional int32 power = 8;//灵宝战力
+}
+
+message JiPinInfo{
+    optional int32 power = 1;//极品战力
+    repeated bytes attributeType = 2;//属性类型
+    repeated int32 attributeValue = 3;//属性值
+}
+
+message ScoreInfo{
+    optional int32 equipScore = 1;//装备评分
+    optional int32 xzScore = 2;//仙装评分
+    optional int32 szScore = 3;//神装评分
+    optional int32 lzScore = 4;//龙装评分
+}
+
+message RoleInfo{
+    optional int32 windId = 1;//翅膀id
+    optional int32 sex = 2;//性别
+    optional int32 career = 3;//职业
+    optional int32 rein = 4;//转生
+    optional int32 level = 5;//等级
+    optional string name = 6;//玩家名字
+    optional string unionName = 7;//行会
+    optional int32 fashionTitle = 8;//称号
+    optional int32 fashionCloth = 9;//衣服
+    optional int32 fashionWeapon = 10;//武器
+    optional int32 fashionWing = 11; //翅膀
+    optional int32 fightPower = 12;//战力
+    optional AttributeInfo playerAttribute = 13;//玩家基本属性
+    repeated EquipItemInfo equipItemBeanList = 14;//装备列表
+    repeated int32 strengthList = 15;//强化列表
+    repeated ShenZhuangInfo szList = 16;//神装列表
+    optional int32 szFightPower = 17;//神装战力
+    optional int32 szSuit = 18;//神装套装
+    optional int32 szCount = 19;//神装数量
+    repeated LingBaoInfo lbList = 20;//灵宝列表
+    repeated RingInfo ringList = 21;//特戒列表
+    optional TreasureInfo treasureInfo = 22;//神弓信息
+    optional GodAxInfo godAxInfo = 23;//神斧信息
+    optional LegacyEquipInfo legacyEquipInfo = 24;//仙装信息
+    optional RunesInfo runesInfo = 25;//符文信息
+    optional ScoreInfo scoreInfo = 26;//评分
+    optional LianHunEquipInfo lianHunEquipInfo = 27;//炼魂装备信息
+    repeated DragonEquipInfo dragonEquipList = 28;//龙装列表
+    optional int32 shouhuId = 29;//守护id
+    optional ZhuZaiInfo zhuZaiInfo = 30;//主宰列表
+    optional int32 godSwordLegendsLv = 31;//神兵传说等级
+    optional int32 godArmorLegendsLv = 32;//神甲传说等级
+    optional LeiShenInfo leiShenInfo = 33;//雷神装备信息
+}
+
+message LeiShenInfo{
+    repeated LeiShenEquipInfo leiShenEquipInfo = 1;//雷神装备信息
+    optional int32 fightPower = 2;//战力
+}
+
+message LeiShenEquipInfo{
+    optional int32 index = 1;//装备位置
+    optional int32 level = 2;
+}
+
+message ZhuZaiInfo{
+    repeated ZhuZaiEquipInfo zhuZaiEquipInfo = 1;//主宰装备信息
+    optional int32 fightPower = 2;//战力
+}
+
+message ZhuZaiEquipInfo{
+    optional int32 index = 1;//装备位置
+    optional int32 level = 2;
+}
+
+message LianHunEquipInfo{
+    repeated EquipInfo equips = 1;//装备信息
+    optional int32 fightPower = 2;
+}
+
+message EquipInfo{
+    optional int32 index = 1;//装备位置
+    optional int64 lid = 2;//唯一id
+    optional int32 itemId = 3;//道具id
+    optional int32 time = 4;//过期时间
+    optional bool bind = 5;//是否绑定
+   optional int32 improveLevel = 6;//该装备位置强化等级
+   repeated bytes extraType = 7;//额外属性key
+   repeated int32 extraValue = 8;//额外属性value
+   optional int32 soulUp = 9;//灵魂刻印的属性加成数
+   optional BestAttInfo bestAttInfo = 10;//极品属性
+   optional JiPinInfo JiPinInfo = 11;//极品属性
+   optional int32 fuLingLv = 12;//附灵等级
+   optional int32 fuLingValue = 13;//附灵值
+   optional int32 hongMengLv = 14;//鸿蒙等级
+   optional int32 niePanLv = 15;//涅槃等级
+}
+
+message TreasureEquipInfo{
+   optional int32 itemId = 1;//神弓道具id (0 表示无神弓)
+   optional int32 fightPower = 2;
+}
+
+message RunesInfos{
+   repeated RunesInfo runesList = 1;//符文列表
+   optional int32 fightPower = 2;
+}
+
+message RunesInfo{
+   optional int32 index = 1;
+   optional int32 itemId = 2;
+}
+
+message LegacyEquipInfos{
+   repeated LegacyEquipInfo legacyEquipInfo = 1;
+   optional int32 fightPower = 2;
+}
+
+message LegacyEquipInfo{
+   optional int32 index = 1;
+   optional int32 itemId = 2;//仙装道具id
+}
+
+message GodAxInfo{
+    optional int32 godAxId = 1;//神斧id (0 表示无神斧)
+	optional int32 fightValue = 2;
+}
+
+message ShenZhuangInfo{
+    optional int32 index = 1;
+    optional int32 level = 2;	
+}
+
+message RingInfo{
+    optional int32 type = 1;//特戒类型
+    optional int32 level = 2;//特戒等级
+}
+
+message HeroInfo{
+    optional int32 windId = 1;//翅膀id
+    optional int32 sex = 2;//性别
+    optional int32 career = 3;//职业
+    optional int32 level = 4;//等级
+    optional int32 fashionTitle = 5;//称号
+    optional int32 fashionCloth = 6;//衣服
+    optional int32 fashionWeapon = 7;//武器
+    optional int32 fashionWing = 8; //翅膀
+    optional int32 fightPower = 9;//战力
+    optional int32 number = 10;//index激活顺序
+    optional AttributeInfo playerAttribute = 11;//英雄基本属性
+    repeated EquipItemInfo equipItemBeanList = 12;//装备列表
+    repeated int32 strengthList = 13;//强化列表
+    repeated LingBaoInfo lbList = 14;//灵宝列表
+    repeated RingInfo ringList = 15;//特戒列表
+    repeated ShenZhuangInfo szList = 16;//神装列表
+    optional int32 szFightPower = 17;//神装战力
+    optional int32 szSuit = 18;//神装套装
+    optional int32 szCount = 19;//神装数量 
+    optional TreasureEquipInfo treasureEquipInfo = 20;//神弓信息
+    optional LegacyEquipInfo legacyEquipInfo = 21;//仙装信息
+    optional ScoreInfo scoreInfo = 22;//评分
+    optional LianHunEquipInfo lianHunEquipInfo = 23;//炼魂装备信息
+    repeated DragonEquipInfo dragonEquipList = 24;//龙装列表
+    optional ZhuZaiInfo zhuZaiInfo = 25;//主宰列表
+    optional int32 godSwordLegendsLv = 26;//神兵传说等级
+    optional int32 godArmorLegendsLv = 27;//神甲传说等级
+    optional LeiShenInfo leiShenInfo = 28;//雷神装备信息
+}
+
+message ChatItemInfo{
+    optional int64 uniqueId = 1;//道具唯一id
+    optional int32 itemId = 2;//道具id
+    optional int32 attType = 3;//属性类型
+    optional int32 attValue = 4;//值
+    optional int32 param = 5;//参数
+    optional int32 power = 6;//战力
+    optional int32 configId = 7;//配置表id
+    optional JiPinInfo jiPinInfo = 8;//极品属性
+}
+
+message TreasureInfo{
+    optional int32 index = 1;//装备位置
+    optional int32 itemId = 2;//宝物id
+    optional int32 type = 3;//宝物类型 1.神弓 2.神斧 3.神剑 4.法宝
+    optional int32 power = 4;//战斗力
+    optional int64 heroId = 5;//英雄id
+}
+
+message HistoryInfo{
+    optional string content = 1;//聊天内容
+    optional int32 type = 2;//聊天类型
+    optional OtherMsgInfo otherMsgInfo = 3;//其他杂七杂八的东西
+    repeated ChatItemInfo chatItemInfos = 4;//聊天道具信息
+}
+
+message DragonEquipInfo{
+    optional int32 index = 1;//装备位置
+    optional int64 lid = 2;//唯一id
+    optional int32 itemId = 3;//
+    optional int32 time = 4;//过期时间
+    optional bool bind = 5;//是否绑定
+    repeated bytes extraType = 6;//额外属性key
+    repeated int32 extraVlaue = 7;//额外属性value
+    optional BestAttInfo bestAttInfo = 8;//极品属性
+    optional JiPinInfo jiPinInfo = 9;//极品属性
+}
+
+//请求GM命令
+message ReqGM {
+	optional string command = 1;  //gm命令
+}
+
+//返回GM命令执行结果
+message ResGM {
+	optional string content = 1; //执行结果
+}
+
+//聊天请求
+message ReqChat {
+	optional int32 channel = 1;//频道 1世界 2私聊
+	optional string message = 2;
+	optional int64 privateRoleId = 3;  //私聊目标玩家id
+	optional bool sound = 4;  //是否语音
+	optional string sendToName = 5; //私聊目标玩家的名字
+	optional int32 quickChatId = 6;//快速语句Id
+}
+
+//聊天消息
+message ResChat {
+	optional int64 senderId = 1;  //发送者玩家id
+	optional string sendName = 2;  //发送者名字
+	optional int32 channel = 3;   //频道类别
+	optional string message = 4;  //
+	optional int64 privateRoleId = 5; //私聊目标玩家id
+	optional bool isVip = 6;
+	optional bool sound = 7;  //是否语音
+	optional int32 quickChatId = 8;//快速语句Id
+	optional string privateName = 9; //私聊目标玩家名字
+	optional int32 sendSex = 10;  //发送者的性别
+	optional int32 sendCarre = 11; //发送者的职业
+	optional int32 privateSex = 12; //私聊目标性别
+	optional int32 privateCarre = 13; //私聊目标性别
+	optional int64 time = 14;
+	optional int64 id = 15;//唯一id
+	optional string roleLettering = 16;//头上刻字
+    optional int32 isDelete = 17;// 1删除(暂时私聊用)
+    optional int32 btnsId = 18;//按钮表id
+    optional SenditemInfo sendItemInfo = 19;//送物品发聊天里的物品
+    optional int64 redBagId = 20;//红包id 0则不是红包
+    repeated ChatRedBagState state = 21;
+	optional int32 unionPosition = 22;//帮会职位
+    optional int32 onlySelfView = 23; //1-仅自己可见 0-否
+    optional int32 remoteHostId = 24; //远程主机id  serverId * 1000 + platId
+    optional int32 remote = 25; //发送人是否在跨服 1-是 0-否
+    optional int32 targetHostId = 26; //目标远程主机
+}
+
+message ChatRedBagState{
+    optional int64 roleid = 1;
+    optional int32 state = 2;
+}
+
+//送物品发聊天里的物品
+message SenditemInfo{
+    optional int32 itemId = 1;
+    optional int32 num = 2;
+}
+
+//查看他人信息
+message ReqLookOther{
+    optional int64 targetUid = 1;//查看的对象
+}
+
+//查看他人信息
+message ResLookOther{
+    optional RoleInfo roleInfo = 1;//玩家信息
+    repeated HeroInfo heroInfoList = 2;//英雄信息
+}
+
+//公告消息
+message ResAnnounce{
+	repeated string params = 1;//参数列表
+	optional string announce = 2; //显示公告
+	repeated int32 showType = 3;
+	optional string remarks = 4;
+	optional int32 frequency = 5; //重复次数
+	optional int32 cd = 6; //公告CD
+	optional int32 minLevel = 7;//等级下限
+	optional int32 timeType = 8;//聊天类型
+	optional string param = 9; //参数
+	optional int32 seenType = 10;//新手期公告
+	repeated int32 mapId = 11;//地图id（不需要对比地图就是0）
+	optional int32 minRein = 13;//人物最低转生等级
+    optional int32 maxRein = 14;//人物最大转生等级
+    optional int32 alwaysSeen = 15;//普通公告新手期可见,默认0不可见，1可见
+    optional int32 maxLevel = 16;   //等级上限
+    optional int32 monsterType = 17;//怪物类型
+    optional int32 monsterLevel = 18;//怪物等级
+}
+
+//拉取最近几条聊天历史
+message ReqPullChatHistory{
+    optional int32 type = 1;//聊天类型
+}
+
+//拉取聊天历史结果
+message ResPullChatHistory{
+    optional int32 type = 1;//聊天类型
+	repeated HistoryInfo pulledMsgs = 2;//同ResChatMessage的列表size《=10
+}
+
+//发送特殊广播信息
+message ReqSendSpecialAnnounce{
+    optional int32 announceId = 1;//公告id
+	optional int32 channelType = 2;//频道类别 1世界 2行会 4普通 5组队 100私聊
+	optional int64 targetId = 3;//目标对象，私聊的时候需要发
+}
+
+//聊天按钮回复
+message ReqBtnsReply {
+    optional int64 id = 1;//聊天记录唯一id
+    optional int64 senderId = 2;//发送者id
+    optional int64 toRid = 3;//收到的id
+}
+
+//塔罗神庙公告历史记录
+message ResHuntAnnounceHistory {
+    repeated string info = 1;
+}
+
+//塔罗神庙公告更新
+message ResHuntAnnounceUpdate {
+    optional string info = 1;
+}

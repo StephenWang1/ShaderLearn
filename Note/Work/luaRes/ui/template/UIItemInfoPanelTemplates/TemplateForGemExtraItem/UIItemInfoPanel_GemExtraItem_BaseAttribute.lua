@@ -1,0 +1,7 @@
+local UIItemInfoPanel_GemExtraItem_BaseAttribute = {}
+setmetatable(UIItemInfoPanel_GemExtraItem_BaseAttribute,luaComponentTemplates.UIItemInfoPanel_Info_BaseAttribute)
+
+function UIItemInfoPanel_GemExtraItem_BaseAttribute:RefreshAttributes(bagItemInfo, itemInfo, compareBagItemInfo, compareItemInfo, career)
+    self:AddAttribute("未装备")
+end
+return UIItemInfoPanel_GemExtraItem_BaseAttribute

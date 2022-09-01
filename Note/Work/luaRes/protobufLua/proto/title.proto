@@ -1,0 +1,40 @@
+package titleV2;
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "TitleProto";
+
+message TitleInfo {
+    required int32 titleId = 1;//称号id
+	optional int64 getTime = 3;//获得时间戳
+}
+
+//移除称号返回
+message ResRemoveTitle {
+	required int32 titleId = 1;
+}
+
+//发送称号列表信息
+message ResTitleList {
+   repeated TitleInfo titleList = 1;//称号列表
+}
+
+//请求佩戴称号
+message ReqPutOnTitle {
+   required int32 titleId = 1;
+}
+
+//返回佩戴称号
+message ResPutOnTitle {
+	required TitleInfo putOn = 1; //穿上的称号
+	optional TitleInfo putOff = 2; //被替换的称号
+}
+
+//请求脱下称号
+message ReqPutOffTitle {
+   required int32 titleId = 1;
+}
+
+//返回脱下称号
+message ResPutOffTitle {
+   required TitleInfo title = 1;
+}

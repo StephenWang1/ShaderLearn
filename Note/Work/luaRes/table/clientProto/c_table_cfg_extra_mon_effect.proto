@@ -1,0 +1,87 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_EXTRA_MON_EFFECT
+{
+	required int32 id = 1;//id#客户端  id
+	required int32 bossType = 2;//boss类型#客户端  boss类型，monster表中的怪物类型
+	required int32 extraDps = 3;//额外伤害#客户端  额外伤害结果
+	optional string extraDpsDes = 4;//额外伤害显示#客户端  额外伤害结果显示
+	required int32 extraDpsPer = 5;//额外比例伤害#客户端  额外比例伤害，万分数
+	optional string extraDpsPerDes = 6;//额外比例伤害描述#客户端  额外比例伤害描述
+	required int32 critical = 7;//暴击率#客户端  暴击率，万分数
+	optional string criticalDes = 8;//暴击显示#客户端  暴击显示
+	required int32 criticalDamage = 9;//暴击伤害#客户端  暴击伤害
+	optional string criticalDamageDes = 10;//暴击伤害显示#客户端  暴击伤害显示
+	required int32 hurtReduce = 11;//伤害减免#客户端  伤害减免
+	optional string hurtReduceDes = 12;//伤害减免显示#客户端  伤害减免显示
+	required int32 bloodSuck = 13;//吸血#客户端   额外吸血量  在概率触发时增加此吸血量
+	optional string bloodSuckDes = 14;//吸血显示#客户端  吸血显示
+	required int32 bloodSuckPro = 15;//吸血概率#客户端  攻击吸血概率  万分数
+	optional string bloodSuckProDes = 16;//吸血概率显示#客户端  吸血概率显示
+	required int32 bloodSuckExtra = 17;//攻击吸血量#客户端  吸血，攻击即回血
+	optional string bloodSuckExtraDes = 18;//额外吸血量显示#客户端  
+	required int32 petExtraDps = 19;//灵兽额外伤害#客户端  灵兽额外伤害
+	optional string petExtraDpsDes = 20;//灵兽额外伤害显示#客户端  灵兽额外伤害显示
+	required int32 petExtraDpsPer = 21;//灵兽额外比例伤害#客户端  灵兽额外比例伤害，万分数
+	optional string petExtraDpsPerDes = 22;//灵兽额外比例伤害描述#客户端  灵兽额外比例伤害描述
+	required int32 dropPro = 23;//掉率#客户端  掉率，十万分数
+	optional string dropProDes = 24;//掉率显示#客户端  掉率显示
+	required int32 extraDpsMax = 25;//额外伤害上限#客户端  额外伤害上限
+	required int32 extraDpsMin = 26;//额外伤害下限#客户端  额外伤害下限
+	optional string extraDpsMaxDes = 27;//额外伤害上下限描述#客户端  额外伤害上下限描述
+	required int32 hurtReduceMax = 28;//额外减伤上限#客户端  额外减伤上限
+	required int32 hurtReduceMin = 29;//额外减伤下限#客户端  额外减伤下限
+	optional string hurtReduceMinDes = 30;//额外减伤上下限描述#客户端  
+	required int32 phyAttackMax = 31;//最大物攻#客户端  最大物理攻击
+	optional string phyAttackMaxDes = 32;//最大物攻显示#客户端  最大物理攻击描述
+	required int32 phyAttackMin = 33;//最小物攻#客户端  最小物理攻击
+	optional string phyAttackMinDes = 34;//最小物攻显示#客户端  最小物理攻击描述
+	required int32 magicAttackMax = 35;//最大法攻#客户端  最大魔法攻击
+	optional string magicAttackMaxDes = 36;//最大魔法攻击显示#客户端  最大魔法攻击描述
+	required int32 magicAttackMin = 37;//最小法攻#客户端  最小魔法攻击
+	optional string magicAttackMinDes = 38;//最小法攻显示#客户端  最小魔法攻击描述
+	required int32 taoAttackMax = 39;//最大道术攻#客户端  最大道术攻击
+	optional string taoAttackMaxDes = 40;//最大道攻显示#客户端  最大道术攻击描述
+	required int32 taoAttackMin = 41;//最小道攻#客户端  最小道术攻击
+	optional string taoAttackMinDes = 42;//最小道攻#客户端  最小道术攻击描述
+	optional IntListList phyDefenceMaxByCareer = 43;//最大物防#客户端  最大物防  战#法#道
+	optional string phyDefenceMaxDes = 44;//最大物防显示#客户端  最大物防描述
+	optional IntListList phyDefenceMinByCareer = 45;//最小物防#客户端  最小物防
+	optional string phyDefenceMinDes = 46;//最小物防显示#客户端  最小物防描述
+	optional IntListList magicDefenceMaxByCareer = 47;//最大魔防#客户端  最大魔防
+	optional string magicDefenceMaxDes = 48;//最大魔防显示#客户端  最大魔防描述
+	optional IntListList magicDefenceMinByCareer = 49;//最小魔防#客户端  最小魔防
+	optional string magicDefenceMinDes = 50;//最小魔防显示#客户端  最小魔防描述
+	optional IntListList maxHp = 51;//生命值#客户端  生命值  战#法#道
+	optional string maxHpDes = 52;//生命值#客户端  生命值描述
+	required int32 phyDefMaxPercent = 53;//百分比最大物防#客户端  百分比最大物防，万分数
+	required int32 phyDefMinPercent = 54;//百分比最小物防#客户端  百分比最小物防，万分数
+	optional string phyDefPercentDes = 55;//百分比物防#客户端  百分比物防显示，取最大物防百分比显示即可  显示为百分数
+	required int32 magicDefMaxPercent = 56;//百分比最大魔防#客户端  百分比最大魔防，万分数
+	required int32 magicDefMinPercent = 57;//百分比最小魔防#客户端  百分比最小魔防，万分数
+	optional string magicDefPercentDes = 58;//百分比魔防#客户端  百分比魔防显示，取最大魔防百分比显示即可  显示为百分数
+	required int32 hpPercent = 59;//百分比血量#客户端  百分比血量 万分数
+	optional string hpPercentDes = 60;//百分比血量#客户端  百分比血量，显示为百分数
+	required int32 penetrationAttributes = 61;//穿透#客户端  穿透，万分数
+	optional string penetrationAttributesDes = 62;//穿透#客户端  穿透，显示为百分数
+	required int32 divineEquipHurtAdd = 63;//百分比伤害#客户端  百分比伤害，万分数
+	optional string divineEquipHurtAddDes = 64;//百分比伤害#客户端  百分比伤害，显示为百分数
+	required int32 resistanceCritical = 65;//暴击抵抗#客户端  暴击抵抗，万分数
+	optional string resistanceCriticalDes = 66;//暴击抵抗#客户端  暴击抵抗，显示为百分数
+	required int32 divineEquipSkillAdd = 67;//技能伤害百分比#客户端  技能伤害百分比 万分数
+	optional string divineEquipSkillAddDes = 68;//技能伤害百分比#客户端  技能伤害百分比，显示为百分数
+	required int32 commonCritical = 69;//暴击率#客户端  暴击，万分数 显示为百分比
+	optional string commonCriticalDes = 70;//暴击率#客户端  暴击，万分数 显示为百分比
+	required int32 luck = 71;//幸运#客户端  属性
+	optional string luckDes = 72;//幸运#客户端  显示
+	required int32 resistCriticalDamage = 73;//暴击伤害抵抗#客户端  暴击伤害抵抗 属性值
+	optional string resistCriticalDamageDes = 74;//暴击伤害抵抗#客户端  暴击伤害抵抗 
+	//optional string mark = 75;//备注，策划用  备注，策划用
+	//required int32 showCritical = 76;//显示暴击  显示暴击，万分数
+}
+
+message CFG_EXTRA_MON_EFFECTARRAY
+{
+	repeated CFG_EXTRA_MON_EFFECT rows = 1;
+}

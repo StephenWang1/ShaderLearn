@@ -1,0 +1,25 @@
+package ghostshipV2;
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "GhostShipProto";
+
+message GhostShipState{
+	required int32 state = 1;//0未开始 1开始
+	optional int32 first = 2;//是否第一次开启
+}
+
+message GhostShipRoleData{
+	required int32 killTimes = 1;//今天可击杀次数
+	required int32 assistTimes = 2;//今天可协助次数
+}
+
+message GhostShipTime{
+	required int64 surTime = 1;//剩余时间
+}
+
+message ReqAssist{
+	required int32 monsterId = 1;//目标id
+}
+
+
+

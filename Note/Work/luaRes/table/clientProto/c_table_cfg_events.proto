@@ -1,0 +1,35 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_EVENTS
+{
+	required uint32 id = 1;//服#客户端#C#不存在共同参与合并的字段  事件ID
+	//optional string name = 2;//事件名称#客户端#C  事件名称
+	//required uint32 type = 3;//事件类型#客户端#C  0无事件1传送，2进入副本 4 范围伤害（火药桶） 5 结义点 7幻境传送 6 传送回进入坐标 8联服地图传送9进入联服副本
+	//optional IntListXiaHuaXian param = 4;//地图参数#客户端#C  type=1：map表id_x_y type=2：副本id  type=4：扣血类型(0绝对值1百分比)_扣血量_影响范围_次数_技能id
+	//required uint32 eventRange = 5;//事件范围#客户端#C  格子半径0一格；1九宫格
+	//required uint32 triggertype = 6;//触发类型#客户端#C  触发条件0不触发 1无条件，2沙巴克触发，3携带任务触发5 结义7幻境传送 4使用火药桶道具
+	//optional string triggerparam = 7;//触发参数#客户端#C  根据triggertype配置不同的条件参数，triggertype=1不配置，triggertype=2任务id  type 4  爆炸倒计时，单位秒
+	//optional string model = 8;//事件模型#客户端#C  
+	//optional IntListJingHao conditionId = 9;//传送阵使用等级限制#客户端#C  关联cfg_conditions
+	//required uint32 unknowns = 10;//是否为秘密通道#客户端#C  1是，0或不填为否
+	//required uint32 rangeType = 11;//范围类型#客户端#C  0圆1长方形2不规则
+	//optional IntListList irregularList = 12;//不规则传送坐标#客户端#C  X轴#Y轴坐标
+	//required uint32 rectanglePtLeftUpX = 13;//长方型的左上顶点x#客户端#C  
+	//required uint32 rectanglePtLeftUpY = 14;//长方型的左上顶点y#客户端#C  
+	//required uint32 rectangleLong = 15;//长方型的长#客户端#C  
+	//required uint32 rectangleWidth = 16;//长方型的宽#客户端#C  
+	//required uint32 rectangleRange = 17;//长方型的范围#客户端#C  中线的粗细0一层1三层2五层，以此类推
+	//required uint32 lineType = 18;//对线#客户端#C  左上角对线1左下角对线2
+	//required int32 CountTimeDesc = 19;//事件倒计时描述#客户端#C  事件倒计时描述连接gloabl22349
+	//optional string subtitle = 20;//传送阵副标题#客户端#C  传送阵副标题
+    //@3#5#6#10 type#10 eventRange#3 triggertype#3 unknowns#2
+	//required uint32 type10_eventRange3_triggertype3_unknowns2 = 21;//合并字段#事件类型_C#事件范围_C#触发类型_C#是否为秘密通道_C type#10 eventRange#3 triggertype#3 unknowns#2
+	//required uint32 priority = 22;//优先#服务器  优先
+	//required int32 continueTime = 23;//特效存在的时间#服务端  毫秒，不填则无限制
+}
+
+message CFG_EVENTSARRAY
+{
+	repeated CFG_EVENTS rows = 1;
+}

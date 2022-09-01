@@ -1,0 +1,24 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_GROWTH_WEAPON_CLASS
+{
+	required int32 id = 1;//id#客户端  
+	required int32 type = 2;//类型#客户端  
+	required int32 itemid = 3;//突破后的道具id#客户端  
+	required int32 weaponClass = 4;//装备等级#客户端  
+	optional string cost = 5;//突破消耗#客户端  
+	optional string cost2 = 6;//突破消耗-元宝/钻石#客户端  
+	optional string needLevel = 7;//突破等级#客户端  
+	optional string remark = 8;//策划备注#客户端  
+	optional string attributeTip = 9;//突破属性文本#客户端  
+	optional IntListJingHao weaponLevel = 10;//升级表id#客户端  
+	//optional string attribute = 11;//突破增加属性#服务器  
+	//optional string buff = 12;//突破增加buff#服务器  
+	//optional string grid = 13;//突破增加格位#服务器  
+}
+
+message CFG_GROWTH_WEAPON_CLASSARRAY
+{
+	repeated CFG_GROWTH_WEAPON_CLASS rows = 1;
+}

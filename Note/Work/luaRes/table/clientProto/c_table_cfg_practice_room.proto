@@ -1,0 +1,23 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_PRACTICE_ROOM
+{
+	required int32 id = 1;//id#客户端  id
+	required int32 dupId = 2;//副本id#客户端  对应的副本id
+	optional string des = 3;//按钮文本#客户端  按钮文本
+	optional string des2 = 4;//描述2#客户端  按钮下消耗文本
+	required int32 deliver = 5;//传送id#客户端  点击进入对应的deliverid
+	optional IntListList expUpCost = 6;//经验获取消耗#客户端  经验获取消耗，每当获得经验时扣除，不足则不获得并踢出地图  道具id#道具数量&道具id#道具数量
+	optional IntListJingHao showCondition = 7;//显示条件#客户端  显示条件，玩家不满足此条件则不显示 不配置则无条件  conditionid#conditionid
+	//optional string mark = 8;//备注，策划用  备注，策划用
+	//optional IntListList expUp = 9;//经验获得  经验获取  每次增加的经验数量  根据玩家等级不同变动  等级#经验&等级#经验  
+	//required int32 expUpCd = 10;//经验获取cd  经验获取cd，即每隔多久获得一定经验  单位秒
+	//required int32 dayStayTime = 11;//每日时间  每日停留时间，时间不足踢出玩家  扣除资源失败则时间不扣除
+	//optional IntListList expCut = 12;//经验衰减  玩家在此练功房内停留一定时间后，获得的经验会减少   获得经验次数#衰减后经验获取比例（万分数）&获得经验次数#衰减后经验获取比例
+}
+
+message CFG_PRACTICE_ROOMARRAY
+{
+	repeated CFG_PRACTICE_ROOM rows = 1;
+}

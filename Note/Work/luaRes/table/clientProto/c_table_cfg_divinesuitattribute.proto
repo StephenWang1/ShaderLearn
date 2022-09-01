@@ -1,0 +1,43 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_DIVINESUITATTRIBUTE
+{
+	required int32 id = 1;//id#客户端  神力属性唯一id  前两位为神力装备类型（可在divinesuit中查看）\n         后两位为唯一id   虽然可能属性激活比例一致\n         最好还是每一套单独配
+	optional string des = 2;//描述#客户端  激活此条属性的描述
+	optional IntListJingHao skill = 3;//激活技能#客户端  激活的技能\n         索引到技能表  skillid#level
+	optional string skilldes = 4;//激活技能的描述#客户端  技能描述
+	//required int32 phyAttackMax = 5;//额外属性万分数  最大物理攻击 额外属性增加  本套装装备本身属性万分数
+	//required int32 phyAttackMin = 6;//额外属性万分数  最小物理攻击
+	//required int32 magicAttackMax = 7;//额外属性万分数  最大魔法攻击
+	//required int32 magicAttackMin = 8;//额外属性万分数  最小魔法攻击
+	//required int32 taoAttackMax = 9;//额外属性万分数  最大道术攻击
+	//required int32 taoAttackMin = 10;//额外属性万分数  最小道术攻击
+	//required int32 phyDefenceMax = 11;//额外属性万分数  最大物理防御
+	//required int32 phyDefenceMin = 12;//额外属性万分数  最小物理防御
+	//required int32 magicDefenceMax = 13;//额外属性万分数  最大魔法防御
+	//required int32 magicDefenceMin = 14;//额外属性万分数  最小魔法防御
+	//required int32 maxHp = 15;//额外属性万分数  最大生命
+	//required int32 critical = 16;//额外属性万分数  暴击率
+	//required int32 criticalDamage = 17;//额外属性万分数  暴击伤害
+	//optional IntListJingHao phyAttackMaxByCareer = 18;//额外属性固定值  最大物理攻击 额外属性增加固定数值  战士#法师#道士
+	//optional IntListJingHao phyAttackMinByCareer = 19;//额外属性固定值  最小物理攻击
+	//optional IntListJingHao magicAttackMaxByCareer = 20;//额外属性固定值  最大魔法攻击
+	//optional IntListJingHao magicAttackMinByCareer = 21;//额外属性固定值  最小魔法攻击
+	//optional IntListJingHao taoAttackMaxByCareer = 22;//额外属性固定值  最大道术攻击
+	//optional IntListJingHao taoAttackMinByCareer = 23;//额外属性固定值  最小道术攻击
+	//optional IntListJingHao phyDefenceMaxByCareer = 24;//额外属性固定值  最大物理防御
+	//optional IntListJingHao phyDefenceMinByCareer = 25;//额外属性固定值  最小物理防御
+	//optional IntListJingHao magicDefenceMaxByCareer = 26;//额外属性固定值  最大魔法防御
+	//optional IntListJingHao magicDefenceMinByCareer = 27;//额外属性固定值  最小魔法防御
+	//optional IntListJingHao maxHpByCareer = 28;//额外属性固定值  最大生命
+	//optional IntListJingHao criticalByCareer = 29;//额外属性固定值  暴击率
+	//optional IntListJingHao criticalDamageByCareer = 30;//额外属性固定值  暴击伤害
+	//optional IntListJingHao resistBackHurtByCareer = 31;//抗反伤属性#服务器  抗反伤属性
+	//optional string buff = 32;//触发的buff  格式：buffid#buffid
+}
+
+message CFG_DIVINESUITATTRIBUTEARRAY
+{
+	repeated CFG_DIVINESUITATTRIBUTE rows = 1;
+}

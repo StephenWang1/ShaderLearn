@@ -1,0 +1,24 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_JIANDING
+{
+	required int32 id = 1;//唯一id#客户端  唯一id
+	required int32 type = 2;//鉴定类型#客户端  1、普通鉴定，2、稀有鉴定，3、完美鉴定
+	optional IntListJingHao attribute1 = 3;//良品切割属性区间#客户端  良品：区间上限#区间下限
+	optional IntListJingHao attribute2 = 4;//精品切割属性区间#客户端  精品：区间上限#区间下限
+	optional IntListJingHao attribute3 = 5;//稀有切割属性区间#客户端  稀有：区间上限#区间下限
+	optional IntListJingHao attribute4 = 6;//罕见切割属性区间#客户端  罕见：区间上限#区间下限
+	optional IntListJingHao attribute5 = 7;//完美切割属性区间#客户端  完美：区间上限#区间下限
+	optional string normalConsume = 8;//普通鉴定价格#客户端  普通鉴定所需道具id#数量
+	optional string rareConsume = 9;//稀有鉴定价格#客户端  稀有鉴定所需道具id#数量
+	optional string perfectConsume = 10;//完美鉴定价格#客户端  完美鉴定所需道具id#数量
+	//required int32 itemId = 11;//道具id  itemid
+	//optional string tips = 12;//策划备注  备注文本
+	//optional IntListJingHao weight = 13;//品质权重  良品权重#精品权重#稀有权重#罕见权重#完美权重
+}
+
+message CFG_JIANDINGARRAY
+{
+	repeated CFG_JIANDING rows = 1;
+}

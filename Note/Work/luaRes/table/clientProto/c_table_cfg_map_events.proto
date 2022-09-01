@@ -1,0 +1,25 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_MAP_EVENTS
+{
+	required uint32 id = 1;//地图事件ID#客户端#C#不存在共同参与合并的字段  地图事件
+	//required uint32 eventids = 2;//事件id#客户端#C#不存在共同参与合并的字段  关联event表里id字段
+	//required uint32 mapid = 3;//地图ID#客户端#C#不存在共同参与合并的字段  地图ID
+	//required uint32 x = 4;//x坐标#客户端#C  x坐标
+	//required uint32 y = 5;//y坐标#客户端#C  y坐标
+	//required uint32 showcondition = 6;//传送阵生效条件#客户端#C  0不生效；1表示默认2表示传送到沙巴克3火药桶 5 结义点
+	//optional string showparam = 7;//客户端显示控制#客户端#C  0显示，不填不显示
+	//required uint32 conditionId = 8;//小地图传送阵显示限制#客户端#C#不存在共同参与合并的字段  关联cfg_conditions
+	//required uint32 effective = 9;//传送阵是否生效#客户端#C  
+	//required uint32 showIcon = 10;//是否显示小地图icon#客户端#C  
+    //@4#5#6#9#10 x#10 y#10 showcondition#3 effective#2 showIcon#2
+	//required uint32 x10_y10_showcondition3_effective2_showIcon2 = 11;//合并字段#x坐标_C#y坐标_C#传送阵生效条件_C#传送阵是否生效_C#是否显示小地图icon_C x#10 y#10 showcondition#3 effective#2 showIcon#2
+	required int32 guildType = 12;//联盟地宫下层传送阵标记#客户端  仅行会地宫使用：1第一行会2第二行会3其他行会及散人
+	//optional string name = 13;//传送点备注#策划  策划备注
+}
+
+message CFG_MAP_EVENTSARRAY
+{
+	repeated CFG_MAP_EVENTS rows = 1;
+}

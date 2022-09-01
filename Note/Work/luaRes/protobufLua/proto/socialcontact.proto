@@ -1,0 +1,59 @@
+package socialcontactV2;
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "SocialContactProto";
+
+//请求送花
+message ReqSendFlowers{
+	optional int64 targetRid = 1; //对象玩家Id
+	optional int32 flowerCount = 2; //鲜花数量
+	optional int32 itemId = 3; //鲜花ID
+}
+
+//请求花的数量
+message ReqGetTheFlowerCount{
+	optional int32 itemId = 1;//鲜花的ID
+}
+//返回花的数量
+message ResGetTheFlowerCount{
+	optional int32 flowerCount = 1;//数量
+}
+//返回送99或者999的item
+message ResTeXiao{
+	optional int32 itemId = 1;
+	optional int32 count = 2;//播放几次
+}
+
+//返回默认打开的鲜花ID
+message ResDefaultFlowerId{
+	optional int32 itemId = 1;
+}
+
+//赠送有缘人
+message FatePeople{
+	optional int64 lid = 1;
+	optional int32 count = 2;
+}
+
+//回赠
+message ReqRebateFlower{
+	optional int64 targetRid = 1;//赠送有缘人的ID
+	optional int32 itemId = 2;//收到的itemID
+	optional int32 count = 3;//数量
+}
+
+//回复感谢
+message ReqReplyToThank{
+	optional int32 itemId = 1;//收到的itemID
+	optional int64 targetRid = 2;//收到感谢的人id
+}
+
+//加为好友
+message ReqSendFlowerAddFriend{
+	optional int64 targetRid = 1;//ID
+}
+
+//同意
+message ReqAgreeSendFlowerAddFriend{
+	optional int64 targetRid = 1;//ID
+}

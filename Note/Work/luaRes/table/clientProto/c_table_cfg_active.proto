@@ -1,0 +1,39 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_ACTIVE
+{
+	required uint32 id = 1;//目标id#客户端#C  每日目标任务id
+	//optional string name = 2;//活动名称#客户端#C  
+	//optional string icon = 3;//图标id#客户端#C  
+	//required int32 type = 4;//目标类型#客户端#C  1击杀怪物 2任务类型 3精英悬赏 4BOSS悬赏  5日常挑战 6白日门 7行会首领 8个人boss
+	//required int32 goal = 5;//目标类型#客户端#C  1挖矿 2挖肉 3杀怪 4击杀野外boss 5击杀巢穴boss 6商城购买 7拍卖行交易 8背包回收 9锻造装备 10宝物升级 11学习技能 12升级技能 13领取闯天关奖励 14送花 15猜拳 16内功升级 17转生 18战勋升级 19完成日常任务 20完成铁匠任务 21完成屠夫任务 22完成药商任务  23完成雇佣兵任务 24进入圣域空间 25进入狼烟梦境 26完成流浪汉任务 27完成渔夫任务 28精英悬赏 29BOSS悬赏 30白日门圣物 31白日门封赏 32白日门猎魔 33白日门押镖 31行会首领 32个人BOSS
+	//required int32 count = 6;//目标数#客户端#C  一天内能够获得的活跃次数上限（目前配合功能，任务类型的全部改为99，约为无限制）
+	//required int32 bonus = 7;//增加活跃度#客户端#C  完成目标给的活跃度数值
+	//optional string desc = 8;//目标描述#客户端#C  
+	//required int32 secondStateTime = 9;//第二状态次数#客户端#C  某一条活跃度领取了x次之后，不管其是否还有次数，优先级都会放低，排序在正常之后
+	//required int32 level = 10;//任务开放等级#客户端#C  
+	//optional IntListJingHao time = 11;//每日开放时间#客户端#C  24小时制，开始时间#结束时间
+	//required uint32 deliverId = 12;//传送事件#客户端#C  对应cfg_deliver里的唯一id
+	//required uint32 npc = 13;//传送npc#客户端#C  左侧传送id对应的map_npc的id
+	//optional string paramter = 14;//使用参数#客户端#C  1.cfg_jump界面跳转id；2.任务类型 3 
+	//optional IntListJingHaoMeiYuan awards = 15;//奖励#客户端#C  道具id#数量
+	//optional string awardsTips = 16;//奖励说明#客户端#C  
+	//required int32 openTime = 17;//开启时间#客户端#C#不存在共同参与合并的字段  开服第n天开启（否则该任务不显示）
+	//required int32 isSort = 18;//是否参与随机排序#客户端#C  1是0不是；开服前3天，每位玩家会有各自的一套日活条目随机排序，3天以后全部统一表里默认排序，这里填0的，固定位置为id序号
+	//optional IntListList extraAward = 19;//额外奖励#客户端#C  领取活跃时额外附赠的奖励内容，道具#数量&道具#数量...
+	//required int32 order = 20;//排序#客户端#C  排序用
+    //@4#5#6#7 type#6 goal#6 count#10 bonus#5
+	//required uint32 type6_goal6_count10_bonus5 = 21;//合并字段#目标类型_C#目标类型_C#目标数_C#增加活跃度_C type#6 goal#6 count#10 bonus#5
+    //@10#12 level#8 deliverId#14
+	//required uint32 level8_deliverId14 = 22;//合并字段#任务开放等级_C#传送事件_C level#8 deliverId#14
+	optional IntListJingHao juanzhou = 23;//日常任务对应日常任务卷轴#客户端  任务对应道具，道具#道具
+	//optional string beizhu = 24;//备注#客户端未使用#C  
+	//optional string goalParam = 25;//开放时间#客户端未使用#C  周历用参数，1010101就表示，周一，周三，周五，周日
+	//optional string uiModel = 26;//模型#客户端未使用#C  
+}
+
+message CFG_ACTIVEARRAY
+{
+	repeated CFG_ACTIVE rows = 1;
+}

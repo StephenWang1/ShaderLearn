@@ -1,0 +1,17 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_PICK_UP
+{
+	required int32 id = 1;//id#客户端#C  id
+	//required int32 autoChoose = 2;//默认勾选#客户端#C  是否默认勾选，1勾选 0或不填不勾选
+	//required int32 effective = 3;//是否显示#客户端#C  1为显示，0或不填不显示；生效则按照排序字段排序，不生效后方项目向前排序
+	optional string des = 4;//类型文本#客户端  类型文本，本类型文本描述
+	required int32 order = 5;//排序#客户端  排序，根据排序排列所有拾取类型
+	//optional string mark = 6;//备注，策划用  备注，策划用
+}
+
+message CFG_PICK_UPARRAY
+{
+	repeated CFG_PICK_UP rows = 1;
+}

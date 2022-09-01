@@ -1,0 +1,53 @@
+package officialV2;
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "OfficialProto";
+
+message DailyTaskInfo{
+    optional int32 id = 1;//任务id
+	optional int32 completedNum = 2;//已完成数量
+	optional int32 hasDrawCount = 3;//已领取次数
+	optional int32 status = 4;//状态:1不可领 2可领取
+}
+
+//发送官职界面信息
+message ResOfficialInfo{
+    optional int32 uid = 1;//职级
+	optional int32 power = 2;//历练点
+	optional int32 attr = 3;//日活跃点
+	repeated int32 dailyRewardDrawList = 4;//每日活跃奖励已领列表
+	repeated DailyTaskInfo dailyTaskInfoList = 5;//每日活跃任务列表
+}
+
+//返回官职晋升结果
+message ResOfficialUp{
+	optional int32 officialGrade = 1;//职级
+	optional int32 officialPoint = 2;//历练点
+}
+
+//请求领取日活奖励
+message ReqDrawDailyActiveReward{ 
+	optional int32 rewardId = 1;//奖励id
+}
+
+//返回领取日活奖励结果
+message ResDrawDailyActiveReward{
+    repeated int32 rewardDrawList = 1;//已领取列表
+}
+
+//请求领取日常任务完成奖励
+message ReqDrawDailyTaskReward{
+    optional int32 taskId = 1;//任务id
+}
+
+
+//上线同步, 变化也同步此结构.
+message ResOfficialInfoV2 {
+	required int32 officialPosistionId = 1; //cfg_official_posistion id 0代表没有官职
+	required int32 emperorTokenId = 2;		//cfg_emperor_token id  0代表没有激活虎符 非0 还需看下面↓↓↓↓↓↓↓
+	required int32 emperorTokenValid = 3;   //当前使用的虎符是否有效(主要是为了显示已失效.)
+}
+
+message ReqOfficialEmperorTokenActivateV2 {
+	required int32 emperorTokenId = 1 ;   //激活虎符.
+}

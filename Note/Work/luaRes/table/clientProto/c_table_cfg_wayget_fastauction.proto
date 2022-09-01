@@ -1,0 +1,15 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_WAYGET_FASTAUCTION
+{
+	required int32 id = 1;//道具id#客户端  道具id
+	optional IntListJingHao items = 2;//道具id集合#客户端  道具id对应的需要检测的交易品id集合
+	required int32 chooseNumber = 3;//是否可选数量#客户端  不填则购买1个  填1弹出交易行选择数量面板
+	//optional string mark = 4;//备注  备注  策划用
+}
+
+message CFG_WAYGET_FASTAUCTIONARRAY
+{
+	repeated CFG_WAYGET_FASTAUCTION rows = 1;
+}

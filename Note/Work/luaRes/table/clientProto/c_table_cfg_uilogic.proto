@@ -1,0 +1,17 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_UILOGIC
+{
+	required uint32 id = 1;//id#客户端  纯ID
+	optional string panelName = 2;//UI界面名#客户端  UI界面名，每一行都与其他行不一致
+	optional IntListJingHao closeLogics = 3;//UI界面关闭逻辑#客户端  UI界面的关闭逻辑ID集合，关联到cfg_uilogic_close表
+	optional IntListJingHao cacheLogics = 4;//缓冲设定#客户端  若UI界面为tips界面等需要等其他界面关闭后再显示消息的界面，则根据缓冲设定决定哪些界面存在时该界面会进入缓冲队列，关联到cfg_uilogic_caches表
+	optional IntListJingHao hideLogics = 5;//UI界面隐藏逻辑#客户端  UI界面的隐藏逻辑ID集合，关联到cfg_uilogic_hide表
+	//optional string beizhu = 6;//备注#策划  备注
+}
+
+message CFG_UILOGICARRAY
+{
+	repeated CFG_UILOGIC rows = 1;
+}

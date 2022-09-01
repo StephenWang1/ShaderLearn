@@ -1,0 +1,23 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_WAY_GET
+{
+	required uint32 id = 1;//唯一id#客户端#C#不存在共同参与合并的字段  唯一id
+	//optional string name = 2;//按钮名称#客户端#C  界面中显示
+	//required uint32 openType = 3;//关联类型（点击效果）#客户端#C  1打开界面2传送坐标3快捷购买4.指定地点自动打怪5.秘籍 6推送 7打开秘籍对应页面 8礼包类型 9钻石兑换 10精英悬赏  11怪物悬赏 12尸王殿 13终极BOSS击杀卷轴  14今日可购买BOSS击杀次数
+	//optional string openPanel = 4;//关联参数#客户端#C  打开界面：1 jump id；2 传送：deliverID#conditionID#bubbleID&deliverID  3 快捷购买storeid#数量#购买后是否自动使用（1否2是）4.指定地点deliverid（没有怪就下一个点）#deliverid#deliverid&monsterID#monsterID... 5/6 对应cfg_cheatPush表 12npcid传送员#deliverid尸王殿
+	//required uint32 isRecommend = 5;//是否显示推荐角标#客户端#C  1显示推荐角标；0不显示
+	//optional IntListJingHao priority = 6;//替换优先级#客户端#C  存在此ID时被替换
+	//optional IntListJingHao conditions = 7;//条件#客户端#C  
+    //@3#5 openType#5 isRecommend#3
+	//required uint32 openType5_isRecommend3 = 8;//合并字段#关联类型（点击效果）_C#是否显示推荐角标_C openType#5 isRecommend#3
+	required uint32 order = 9;//order#客户端  仅openType实现功能，排列顺序由小到大
+	optional string parameter = 10;//额外参数#客户端  仅用于给客户端判断条件是否满足，按钮是否隐藏，填写格式：conditionID#文本  合成跳转1.材料判定  2结果判定
+	//optional string tips = 11;//备注#策划  仅备注用
+}
+
+message CFG_WAY_GETARRAY
+{
+	repeated CFG_WAY_GET rows = 1;
+}

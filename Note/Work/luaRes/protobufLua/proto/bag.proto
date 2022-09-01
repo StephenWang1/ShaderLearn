@@ -1,0 +1,562 @@
+package bagV2;
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "BagProto";
+
+message BestAttInfo{
+  required int32 attId = 1;//属性id
+  required int32 attType = 2;//属性类型
+  optional int32 attValue = 3;//值
+  optional int32 param = 4;//参数
+  optional int32 power = 5;//极品战力
+}
+
+message LingBaoInfo{
+  required int32 level = 1;//等级
+  optional int32 nowExp = 2;//当前经验
+  optional int32 totalExp = 3;//总经验
+  optional int32 refineLv = 4;//精炼阶数
+  optional int32 power = 5;//灵宝战力
+}
+
+message JiPinInfo{
+  optional int32 power = 1;//极品战力
+  repeated bytes attributeType = 2;//属性类型
+  repeated int32 attributeValue = 3;//属性值
+}
+
+message FromInfo{
+  required int32 type = 1;//来源类型 1 杀怪 2 NPC
+  repeated string params = 2;//来源参数列表
+}
+
+message BagItemInfo{
+  optional int64 lid = 1;//唯一id
+  optional int32 itemId = 2;//道具id
+  optional int32 count = 3;//道具数量
+  optional int64 time = 4;//过期时间
+  optional int32 bind = 5;//绑定状态
+  repeated ItemAttribute attribute = 6;//精炼属性
+  optional FromInfo fromInfo = 7;//道具来源
+  optional int32 intensify = 8; //强化等级
+  optional int32 maxStar = 9; //最大星数
+  optional int32 zhuling = 10; //注灵等级
+  optional int32 luck = 11; //幸运
+  optional int32 index = 12; //装备的位置，背包没用到
+  optional int32 currentLasting = 13;//当前耐久值 -1代表不可损坏
+  optional int32 curse = 15; //诅咒
+  repeated ItemAttribute rateAttribute = 16;//浮动属性
+  optional int32 imprint = 17;//印记浮动属性
+  optional int32 isWastageLasting = 18;//对应config同名字段(是否损耗)
+  optional int32 leftUseNum = 19; //剩余使用次数
+  optional int32 bagIndex = 20; //背包物品索引
+  repeated inlayInfo inlayInfoList = 21; //镶嵌信息
+  optional int32 tradeState = 22; //交易状态 0没有状态 1交易
+  optional int32 canTrade = 23;//面对面交易 0.不可交易 1.可交易
+  optional int32 redBagMoney = 24; //红包券剩余金额
+  repeated ItemAttribute rateAttribute1 = 25; // 装备炼制临时属性
+  repeated ItemAttribute rateAttribute2 = 26;
+  optional int32 bloodLevel = 27; // 血继等级
+  optional int64 exp = 28; // 经验
+  optional int32 limitedType = 29; // 限时类型
+  optional int64 limitedTime = 30; // 到期时间
+  optional int64 soulEffect = 31;//镶嵌魂装数据 低三十二位效果id，高三十二位浮动属性
+  optional int32 appraisalQuality = 32;//鉴定品质 1：良品 2：精品 3：稀有 4：罕见 5：完美
+  optional int32 appraisalAttr = 33;//鉴定属性
+  optional int32 isInsured = 34;//是否已经投保
+  optional int32 growthLevel = 35;//成长兵鉴的等级
+  optional int32 killMonsterCount = 36;//成长兵鉴的升级进度
+}
+
+//镶嵌信息
+message inlayInfo {
+  optional int32 pos = 1;  //位置
+  optional int32 itemId = 2; //配置ID
+  optional int32 currentLasting = 3; //耐久度
+  optional int64 id = 4; //镶嵌物品的唯一id
+}
+
+message ExtraEquip{
+  optional int32 type = 1; //14：灯芯 19：进攻之源 20：守护之源
+  optional int32 itemId = 2;//item配置id
+}
+
+message ItemAttribute {
+  required int32 type = 1; //属性类型 见AttributeType
+  required int32 num = 2; //属性值
+}
+
+message InstanceItemInfo{
+  optional int32 globalId = 1;//配置id
+  optional int32 useNum = 2;//已使用次数
+}
+
+message CoinInfo{
+  optional int32 itemId = 1;//货币ID
+  optional int64 count = 2;//货币数量
+}
+
+//返回请求背包
+message ResBagInfo{
+  optional int32 emptyGridCount = 1;//背包剩余空格的数量
+  optional int32 maxGridCount = 2;//背包总的格子的数量
+  optional int32 addGridCount = 3;//背包扩容的次数
+  repeated BagItemInfo itemList = 4;//道具列表
+  repeated CoinInfo coinList = 5;//货币列表
+  repeated int32 recycleData = 6;//回收设置
+  repeated ExtraEquip extraEquip = 7;//额外镶嵌的装备
+}
+
+//背包发生变化
+message ResBagChange{
+  optional int32 action = 1;//变化原因
+  repeated BagItemInfo itemList = 2;//道具列表
+  repeated CoinInfo coinList = 3;//货币列表
+  repeated int64 removedIdList = 4;//道具移除列表
+  repeated BagItemInfo removeItemList = 5; //删除的道具具体信息
+}
+
+//请求使用道具
+message UseItemRequest{
+  required int32 count = 1;//道具数量
+  required int64 itemId = 2;//物品唯一ID
+  optional int32 clientParam = 3;//使用参数 聚灵珠： 1：正常倍数 2：多倍
+  repeated int32 clientParams = 4;  //使用参数列表，主要是使用宝箱多选多
+  repeated string clientParamStrs = 5;//使用参数（string类型的）
+}
+
+//使用道具返回消息
+message ResUseItem{
+  required int32 itemId = 1;
+  optional int64 cdTime = 2;
+}
+
+//请求回收装备
+message RecycleEquipmentRequest{
+  repeated int64 recycleList = 1;//回收列表(唯一id)
+  optional int32 intensifyLv = 2; // 强化等级
+  repeated int32 recycleData = 3;// 回收设置
+}
+
+message RecycleSuccess {
+  repeated int64 idList = 1;//回收成功列表
+}
+
+message ResSmelt {
+  repeated int64 idList = 1;//熔炼成功列表
+  repeated ItemOutput rewards = 2; //获得物品, 高 32 位 id, 低 32 位数量
+}
+
+//扩容次数变化的消息
+message ResAddGridCountChange{
+  optional int32 addGridCount = 1;//背包扩容的次数
+  optional int32 emptyGridCount = 2;//背包剩余空格的数量
+  optional int32 maxGridCount = 3;//背包总的格子的数量
+}
+
+//使用攻击药水的返回
+message ResUseAttackDrag{
+  optional int32 rate = 1;//当前倍数
+  optional int32 instanceId = 2;//副本id
+  optional int32 useCount = 3;//使用次数
+}
+
+//请求使用副本道具
+message UseInstanceItemRequest{
+  optional int32 line = 1;//副本唯一id
+  optional int32 globalId = 2;//globalId(35/36)
+  optional int32 instanceId = 3;//副本id
+  optional int32 useTime = 4;//战报中时间 攻击药水使用要用
+}
+
+//返回次数
+message ResGetAttackDragBuyCount{
+   repeated InstanceItemInfo useInfo = 1;//道具使用信息
+}
+
+//请求vip回收装备
+message VipRecycleEquipmentRequest{
+   repeated int64 recycleList = 1;//回收列表(唯一id)
+}
+
+//请删除特殊道具
+message DeleteSpecialItemRequest{
+  required int64 uniqueId = 1;//道具唯一id
+}
+
+//充值宝箱装
+message ResRechargeBoxInfo{
+  required int32 itemId = 1;//道具id
+  optional int32 state = 2;//1.可领取
+}
+
+//出售活动道具
+message SellActivityItemRequest{
+  required int32 itemId = 1;//道具id
+  required int32 count = 2;//数量
+}
+
+//请求抽奖
+message StartZhuanPanRequest{
+  required int32 itemId = 1;
+}
+
+//返回转盘结果
+message ResZhuanPanResult{
+  required int32 index = 1;//指针位置
+  required int32 intemId = 2;//获得的道具
+  required int32 count = 3;//道具数量
+}
+
+//发送特殊道具激活情况
+message ResSpecialItemActivate{
+  repeated int32 itemIdList = 1;//已激活的特殊道具集合
+}
+
+//返回请求仓库
+message ResStorageInfo{
+  optional int32 emptyGridCount = 1;//仓库剩余空格的数量
+  optional int32 maxGridCount = 2;//仓库总的格子的数量
+  repeated BagItemInfo itemList = 3;//道具列表
+}
+
+//仓库更新变化
+message ResStorageUpdate{
+  optional BagItemInfo item = 1;//道具 如果是取出，只穿道具的唯一id
+  optional int32 operate = 2;//操作 1=加入 2=取出
+}
+
+//请求提取道具
+message StorageOutItemRequest{
+  required int64 objId = 1;//道具id
+}
+
+//请求存储道具
+message StorageInItemRequest{
+  required int64 objId = 1;//道具id
+}
+
+//返回增加格子上限消息
+message ResAddStorageMaxCount{
+  required int32 emptyGridCount = 1;//仓库剩余空格的数量
+  required int32 maxGridCount = 2;//仓库总的格子的数量
+}
+
+//添加交易物品
+message AddTradeItemRequest{
+  optional int64 lid = 1;//物品唯一ID
+  optional int32 itemId = 2;//物品ID
+  optional int32 count = 3;//物品数量
+}
+
+//返回交易物品添加
+message ResTradeItemChange{
+  required int64 uid = 1;//玩家ID
+  repeated BagItemInfo itemList = 2;//道具列表
+  repeated CoinInfo coinList = 3;//货币列表
+}
+
+//请求丢弃道具
+message DiscardItemRequest{
+  required int64 objId = 1;//道具唯一id
+  required int32 count = 2;//丢弃数量
+}
+
+//返回恢复药水效果
+message ResRecoveryDrug{
+  required int32 itemId = 1;//道具id
+  optional int32 cdTime = 2;//CD时间
+}
+
+message ItemApart {
+  required int64 itemId = 1;//道具唯一id
+  required int32 count = 2;
+}
+
+//强化请求
+message ReqIntensify {
+  required sint64 equipId = 1; //穿在身上的填负的位置, 在背包里的填唯一 ID
+  optional int32 itemId = 2; //itemConfigId
+}
+
+//转移强化请求
+message ReqIntensifyTrans {
+  required sint64 oldEquipId = 1; //源装备, 穿在身上的填负的位置, 在背包里的填唯一 ID
+  required sint64 newEquipId = 2; //目标装备, 同上
+}
+
+message ResIntensify {
+  required sint64 equipId = 1; //穿在身上的填负的位置, 在背包里的填唯一 ID
+  required BagItemInfo equipInfo = 2; //变化后的装备
+}
+
+message Destruction {
+  required int64 objId = 1;//道具唯一id
+}
+
+//神炉升级
+message GemUpgrade {
+  required int32 currentId = 1;//当前id
+}
+
+//神炉升级响应
+message GemUpgradeRes {
+  required int32 newId = 1;//升级后id
+  required int32 type = 2;//
+}
+
+//耐久值变化
+message LastingUpdate {
+  repeated int64 itemId = 1; //耐久值变化的装备
+}
+
+//一键使用所有聚灵珠
+message UseAllExpBox {
+  required int32 data = 1; //倍数 1：正常倍数 2：多倍
+  optional int32 useSpiritPoint = 2; //是否使用聚灵点 1.是 0.否
+}
+
+message UseExpBox {
+  optional int32 itemId = 1; //聚灵珠id
+  optional int32 count = 2;  //使用数量
+  optional int32 useSpiritPoint = 3; //是否使用聚灵点 1.是 0.否
+}
+
+//整理使用道具
+message TidyItem {
+  repeated int64 itemId = 1;//整理时顺便使用的道具的唯一id列表
+}
+
+//灯芯、进攻、守护之源升级
+message LampUpgrade {
+  required int32 currentId = 1;//当前灯或元灵configId
+  required int32 lampId = 2;//当前灯芯、进攻、守护之源configId
+  required int32 type = 3;//1:赤炎灯 2:进攻之源 3:守护之源
+}
+//升级响应
+message LampUpgradeRes {
+  required int32 type = 1;//1:赤炎灯 2:进攻之源 3:守护之源
+  required int32 id = 2;
+}
+
+//生命精魄升级
+message ReqUpgradeSoulJade{
+  required int32 soulJadeId = 1;//当前魂玉id
+  required int32 thisId = 2;//当前生命精魄id
+  required int32 type = 3;//生命精魄升级消耗材料的数量
+}
+
+//生命精魄升级返回
+message ResUpgradeSoulJade{
+  required int32 newId = 1;//升级后id
+}
+
+//掠宝袋的抽奖
+message RafflePreyTreasureBag{
+  optional int64 lid = 1;//宝箱的唯一id
+}
+
+//掠宝袋的领取响应
+message DrawPreyTreasureBagResponse{
+}
+
+//掠宝袋的领取
+message DrawPreyTreasureBag{
+  optional int64 lid = 1;//宝箱的唯一id
+}
+
+//打开掠宝袋的返回
+message PreyTreasureBagResponse{
+  repeated BagItemInfo jackpot = 1;//奖池
+  optional int32 rewardIndex = 2;//奖励在奖池的index
+  optional bool isRaffle = 3;//是否抽奖
+}
+
+//掠宝袋宝箱的抽奖
+message RafflePreyTreasureBox{
+  optional int64 lid = 1;//宝箱的唯一id
+}
+
+
+//掠宝袋宝箱的领取响应
+message DrawPreyTreasureBoxResponse{
+}
+
+
+//掠宝袋宝箱的领取
+message DrawPreyTreasureBox{
+  optional int64 lid = 1;//宝箱的唯一id
+  optional int32 dayCount = 2;
+}
+
+//打开掠宝袋宝箱的返回
+message PreyTreasureBoxResponse{
+  repeated BagItemInfo jackpot = 1;//奖池
+  optional int32 rewardIndex = 2;//奖励在奖池的index
+  optional bool isRaffle = 3;//是否抽奖
+}
+
+//领取多个掠宝袋宝箱
+message UsePreyTreasureBoxMulti{
+  optional int32 itemId = 1;//宝箱配置id
+  optional int32 count = 2;  //使用个数
+}
+
+//领取多个掠宝袋宝箱的物品信息
+message ResAwardPreyTreasureBoxMulti{ 
+  repeated BagItemInfo awardItems = 1;
+  repeated PreyTreasureBoxResponse package = 2;
+}
+
+//领取多个掠宝袋宝箱
+message AwardPreyTreasureBoxMulti{
+  optional int32 itemId = 1;//宝箱配置id
+  optional int32 count = 2;  //使用个数
+}
+
+
+
+//限时道具
+message RemoveTimeEnd {
+  repeated int64 itemIdList = 1;//到期道具的唯一id
+}
+
+//魂玉合成请求
+message ReqGetNextSoulJade{
+  optional int64 thisId = 1;//选择的魂玉ID
+}
+
+//魂玉合成返回
+message ResGetNextSoulJade{
+  optional int32 isSuccess = 1;//1表示成功 2表示失败
+}
+//请求进化
+message ReqEvolve{
+  optional int64 equipId = 1;//要进化的装备
+  repeated int64 sacrifices = 2;//被消耗的装备列表
+  optional int32 type = 3;//要进化的类型 1神2圣3至尊
+}
+//返回进化
+message ResEvolve{
+  required int64 equipId = 1; //穿在身上的填负的位置, 在背包里的填唯一 ID
+  required BagItemInfo equipInfo = 2; //变化后的装备
+}
+
+//返回打捆的商店列表
+message ResBundlitem{
+  repeated int32 itemId = 1;//商店商品对应（bind_items表）
+}
+
+//请求购买打捆的物品
+message ReqBuyResBundlitem{
+  optional int32 itemId = 1;
+  optional int32 count = 2;
+}
+
+//返回成功兑换打捆商品信息
+message ResSuccessBuyBindlitem{
+  repeated int64 lid = 1; //购买道具的唯一ID
+}
+
+//请求快捷购买物品
+message ReqBuyMaterialWay{
+  optional int32 itemId = 1; //购买的物品ID
+  optional int32 count = 2; //购买的物品数量
+  optional int32 materialId = 3;//要消耗的物品ID
+  optional int32 materialCount = 4; //要消耗的物品数量
+}
+
+//返回快捷购买成功消息
+message ResBuyMaterialWaySuccess{
+  optional int32 buyId = 1 ;//已经购买的ID
+  optional int32 buyCount = 2;//已经购买的count
+}
+
+//请求每日物品使用数量
+message ReqDayUseItemCount {
+  optional int32 itemId = 1;//物品cfgId
+}
+//返回每日物品使用数量
+message ResDayUseItemCount {
+  optional int32 itemId = 1;
+  optional int32 useCount = 2;
+  optional int32 totalCount = 3;
+}
+//请求能否使用聚灵珠
+message ReqCanUseGatherSpiritBead {
+  optional int32 itemId = 1;
+}
+//返回能否使用聚灵珠
+message ResCanUseGatherSpiritBead {
+  optional int32 itemId = 1;
+  optional int32 count = 2;
+  optional bool canUse = 3;
+}
+
+//物品产出结构
+message ItemOutput {
+  optional int32 itemId = 1;//物品的配置id（itemId）
+  optional int64 number = 2;//数量
+}
+
+//更新物品产出
+message UpdateItemOutput {
+  optional int32 maxOpenDayOfAll = 1;//跨着的服的开服天数中取的一个最大的一个开服天数
+  repeated ItemOutput itemOutputs = 2;//物品产出集合
+}
+
+message ReqUseCDKey {
+  required string cdKey = 1;
+}
+
+//请求使用间谍牌
+message ReqUseSpyBrand{
+	optional int64 itemLid =1;//物品的唯一ID
+	optional int64 roleLid =2;//变身成目标玩家的玩家ID
+}
+
+message ResItemTips {
+   repeated ItemTip tip = 1;
+}
+
+message ItemTip{
+  optional int32 itemId = 1;
+  optional int32 count  = 2;
+  optional int32 multi  = 3;//暴击 0 ，无暴击
+}
+
+message ReqBloodSmelt {
+  required int64 equipId = 1; // 血继 id， 身上发 -index
+  repeated int64 recycleList = 2; // 熔炼物品
+}
+
+message ResBloodSmelt {
+  required BagItemInfo item = 1;
+  optional int32 index = 2;
+}
+
+message ReqDivineSmelt {
+  required int64 equipId = 1; // 胜利装备 id， 身上发 -index
+  repeated int64 recycleList = 2; // 熔炼物品
+}
+
+message ResDivineSmelt {
+  required BagItemInfo item = 1;
+  optional int32 index = 2;
+}
+
+//盟重商会背包Size
+message ResBagSizeByMonthCard{
+  optional int32 emptyGridCount = 1;//背包剩余空格的数量
+  optional int32 maxGridCount = 2;//背包总的格子的数量
+}
+
+message UseMoneyBox {
+  optional int64 itemId = 1; //元宝宝箱唯一ID
+  optional int32 count = 2;  //使用数量
+}
+
+//同步自动挖掘数量
+message ResUpdateAutomaticCollect{
+	optional int32 count = 1;//玩家当前的自动挖掘数量
+}

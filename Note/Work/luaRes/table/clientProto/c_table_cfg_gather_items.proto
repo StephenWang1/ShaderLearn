@@ -1,0 +1,24 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_GATHER_ITEMS
+{
+	required uint32 id = 1;//id#客户端#C  本表唯一id
+	//required uint32 gatherId = 2;//gatherId#客户端#C#不存在共同参与合并的字段  对应cfg_gather表
+	//optional string name = 3;//名称#客户端#C  怪物名称
+	//required uint32 level = 4;//限制等级#客户端#C  采集限制等级
+	//required uint32 count = 5;//掉落数量#客户端#C  掉落道具的总数
+	//required int32 timeType = 6;//挖掘时间类型#客户端#C  1开服天数2合服天数3固定时间掉落4固定时间不掉落
+	//optional string startTime = 7;//挖掘时间参数#客户端#C  对应前面类型1.开始天数#结束天数2.开始天数#结束天数3.开始时间戳#结束时间戳4.开始时间戳#结束时间戳
+    //@4#5#6 level#18 count#5 timeType#3
+	//required uint32 level18_count5_timeType3 = 8;//合并字段#限制等级_C#掉落数量_C#挖掘时间类型_C level#18 count#5 timeType#3
+	//required uint32 mBoxId = 9;//mboxId#服务器  读取cfg_mbox
+	//optional string boxName = 10;//掉落盒名称#客户端未使用#C  
+	//required uint32 rate = 11;//掉落概率#服务器  权重-对应同一挖掘盒中mbox的比重
+	//required int32 prosperity = 12;//繁荣度加成#服务器  1则开启加成，0或不填则没有加成  连接global表
+}
+
+message CFG_GATHER_ITEMSARRAY
+{
+	repeated CFG_GATHER_ITEMS rows = 1;
+}

@@ -1,0 +1,147 @@
+package storeV2;
+
+import "bag.proto";
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "StoreProto";
+
+//商品信息(对应cfg_store表)
+message StoreInfo{
+	optional int32 storeId = 1;//商品唯一ID
+	optional int32 dayBuyNum = 2;//单人每日限购已购数量
+	optional int32 lifeBuyNum = 3;//单人终身限购已购数量
+	optional int32 refreshBuyNum = 4;//单人刷新限购已购数量
+	optional int32 serverDayBuyNum = 5;//全服每日限购数量已购数量
+	optional int32 serverLifeBuyNum = 6;//全服终身限购数量已购数量
+	optional int32 serverRefreshBuyNum = 7;//全服刷新限购已购数量
+	optional int32 buyState = 8;//0可购买 1已售完
+	optional int32 isDiscount = 9;//1 为打折
+	optional int32 price = 10;//价格(跟价格类型匹配)
+	optional int32 pointPrice = 11;//消耗积分数量
+	optional int32 limitNum = 12;//限购数量
+	optional bagV2.BagItemInfo bagItemInfo = 13; //物品详细信息
+	
+}
+
+//请求打开商店根据storeClassId(对应cfg_store_class表)
+message ReqOpenStoreById{
+    optional int32 storeClassId = 1;//商店唯一ID
+}
+//返回商店商品列表
+message ResOpenStoreById{
+	optional int32 storeClassId = 1;//商店类ID
+	optional int32 state = 2;//0不可刷新 1可刷新
+	optional int32 nextFreshTime = 3;//下次刷新时间
+    repeated StoreInfo storeInfo = 4;//商品列表信息
+    optional Cost cost = 5;//刷新商店消耗
+}
+//刷新消耗
+message Cost {
+	optional int32 itemId = 1;
+	optional int32 num = 2;
+}
+
+//发送商店单个商品变化信息
+message ResSendStoreInfoChange{
+    optional StoreInfo storeInfo = 1;//单个商品信息
+}
+
+//购买请求
+message ReqBuyItem{
+	optional int32 storeId = 1;//商品唯一ID
+	optional int32 count = 2;//商品数量
+	optional int32 itemId = 3;// 无用
+	optional int32 isUse = 4;// 1不使用，2使用
+	optional int32 replaceMoney = 5; //1:表示用这个字段的货币买
+}
+
+//购买回调
+message ResBuyItem {
+	optional int32 sellId = 1;//商店id
+	optional int32 storeId = 2;
+}
+
+//请求指定商品能购买的最大数量
+message ReqMaxBuyCount{
+    optional int32 storeId = 1;//store配置Id
+}
+
+//返回指定商品能购买的最大数量
+message ResMaxBuyCount{
+    optional int32 storeId = 1;//storeId
+	optional int32 maxCount = 2;//最大购买数量
+	optional int32 dayCount = 3;//当前购买次数
+}
+
+//请求手动刷新
+message ReqManualFresh{
+    optional int32 type = 1;//0不扣消耗 1扣消耗
+	optional int32 storeClassId = 2;
+}
+
+//请求一件商品信息
+message ReqStoreInfo{
+	optional int32 storeId = 1;
+}
+//返回一件商品信息
+message ResStoreInfo{
+	optional int32 storeClassId = 1;//商店ID
+    optional StoreInfo storeInfo = 2;//商品信息
+}
+
+//请求合成
+message ReqSynthesis{
+	optional int32 configId = 1;//要合成的装备对应的configId
+	optional int32 type = 2; //合成的type 1为需要辅材料提示合成率，0为不需要
+	optional int32 count = 3;//要合成的数量
+	repeated int64 mustItemIds = 4;//必须扣除的物品（唯一id）
+	repeated int64 itemIds = 5;//需要扣除的物品（唯一id）
+	repeated int32 resourceId = 6;//资源id
+}
+
+//返回合成
+message ResSynthesis{
+	optional bagV2.BagItemInfo item = 1;//合成的物品
+	optional int32 combineCount = 2;//合成产出数量
+}
+
+
+message ResycleItem{
+        optional int64 id = 1;
+	optional int32 configId = 2;
+	optional int32 count = 3;
+	optional int64 time = 4; //交易时间
+	optional int32 money = 5;//赎回价格
+}
+
+message ResMostResyclePanel{
+	repeated ResycleItem item = 1;
+}
+
+message ReqMostResycle{
+	repeated int64 id = 1; //背包里的唯一id
+}
+
+//赎回
+message ReqMostRedeem{
+	required int64 id = 1; //背包里的唯一id
+}
+
+message CombineRecord {
+   repeated int32 combineId = 1;
+   repeated CombineCount combineCount = 2;
+}
+
+message CombineCount{
+    optional int32 combineId = 1;
+	optional int32 count  =2;
+}
+
+message ReqCuiLian{
+	optional int32 configId = 1;//要淬炼的装备对应的configId
+	optional int64 itemUniqueId = 2;//要淬炼的装备唯一id
+}
+
+message ResCuiLian{
+	optional int32 state = 1;//淬炼状态 1为淬炼成功2为淬炼失败
+}

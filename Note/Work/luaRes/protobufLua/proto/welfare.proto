@@ -1,0 +1,108 @@
+package welfareV2;
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "WelfareProto";
+
+message ResSignInfo {
+  required int32 month = 1; //当前月份
+  required int32 days = 2; //本月已签到次数
+  required bool rewardGet = 3; // 今日是否已签到, true为已签
+  required int32 openServerDay = 4; //当前开服天数
+}
+
+//请求cdkey领奖
+message ReqCdkeyReward{
+  optional string cdkey = 1;
+}
+
+//返回cdkey领奖结果
+message ResCdkeyReward{
+  optional int32 result = 1;//lang表id
+}
+
+//请求领取累计签到天数奖励
+message ReqDrawSummaryDayReward{
+  optional int32 index = 1;//编号
+}
+
+//返回七日奖励信息
+message ResSevenDaysInfo{
+	optional int32 loginDay = 1;//累计登录天数
+	repeated bool sevenDay = 2;// 7天的是否领取奖励
+}
+//七日奖励请求
+message ReqDrawSevenDays{
+	required int32 days = 1;//领取的天数
+}
+
+//在线奖励信息
+message OnlineRewardMsg{
+	optional int64 time = 1;//在线时间
+	repeated int64 reward = 2 [packed = true];//高32位为ID，低32位为是否领取   0为未领取，1为领取
+	optional int32 lastLiquan = 3;//上周礼券
+	optional int32 theWeekLiquan = 4;//本周礼券
+	optional bool isDraw = 5;//是否领取
+}
+
+//在线奖励请求
+message OnlineRewardRequest{
+	repeated int32 index = 1 [packed = true];//奖励id 的List
+}
+
+//请求奖励大厅面板
+message GetRewardHall{
+
+}
+//奖励大厅面板
+message RewardHall{
+	repeated RewardHallInfo rewardHallInfo = 1;//奖励数据
+}
+
+//奖励大厅数据
+message RewardHallInfo{
+    optional int32 activityType = 1;//奖励类型 1七日奖励，2每日签到，3在线奖励，4定时奖励
+	optional int32 order = 2;//排序
+}
+
+//请求定时奖励
+message TimingRewardRequest{
+    optional int32 timingRewardType = 1;//奖励类型 1每天奖励  2每周奖励
+	repeated int32 index = 2 [packed = true];//奖励id的List
+}
+
+//定时奖励
+message TimingReward{
+	repeated int64 Dayreward = 1 [packed = true];//每天奖励数据 高32位为ID，低32位为是否领取   0为未领取，1为领取
+	optional bool isCanDrawDay = 2;//是否可以领取每天奖励数据
+	repeated int64 Weekreward = 3 [packed = true];//每周奖励数据 高32位为ID，低32位为是否领取   0为未领取，1为领取
+	optional bool isCanDrawWeek = 4;//是否可以领取每周奖励数据
+	optional int64 time = 5;//系统时间	
+}
+
+//请求定时奖励信息
+message TimmngRewardInfo{
+
+}
+
+//请求领取等级奖励
+message GetLevelPacks{
+
+}
+
+//等级奖励信息
+message LevelPacksInfo{
+	optional int32 LevelPacks = 1;//等级奖励id（cfg_lvpack表的id）
+	optional bool isDraw = 2;//是否领取
+}
+
+//请求等级奖励
+message GetLevelPacksInfo{
+
+}
+
+//请求领取最后一个灵兽格子
+message GetServantGrid{
+
+}
+
+

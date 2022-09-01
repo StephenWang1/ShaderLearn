@@ -1,0 +1,23 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_SIGNET
+{
+	required uint32 id = 1;//id唯一标识#客户端#C#不存在共同参与合并的字段  id
+	//required int32 itemId = 2;//道具id#客户端#C  道具id，连接到道具表
+	//required int32 skillId = 3;//技能id#客户端#C  技能id，连接到技能表
+	//optional string skillName = 4;//技能名字#客户端#C  技能名字，连接到技能表
+	//required uint32 addAttack = 5;//技能类型#客户端#C  1增加伤害
+	//optional IntListJingHao parameter = 6;//技能类型参数#客户端#C  1增加伤害固定值#出现浮动概率#浮动数值下限#浮动数值上限（固定值）
+	//optional string description = 7;//描述#客户端#C  描述#客户端，{0}表示服务器发数据
+    //@3#5 skillId#27 addAttack#4
+	//required uint32 skillId27_addAttack4 = 8;//合并字段#技能id_C#技能类型_C skillId#27 addAttack#4
+	required int32 type = 9;//类型#客户端  1印记使用 2魂装-黄金套使用
+	required int32 Lv = 10;//效果等级#客户端  区分效果等级，对应同等级装备
+	//required int32 career = 11;//所属职业  1战士 2法师 3道士
+}
+
+message CFG_SIGNETARRAY
+{
+	repeated CFG_SIGNET rows = 1;
+}

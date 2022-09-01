@@ -1,0 +1,177 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_MONSTERS
+{
+	required uint32 id = 1;//怪物id#客户端#C#不存在共同参与合并的字段  前3位对应地图id前三位，第四位区分1小怪/2精英怪/3boss，后2位对应怪物编号，四位数的为灵兽id
+	//required uint32 type = 2;//怪物类型#客户端#C  1是普通怪2是精英3是boss4静态怪5新手期精英怪9矿区拟人怪10守卫11行会镖车 13保卫国王-国王  14保卫国王-初级刺客 15保卫国王-高级刺客 16挖矿矿工 17个人镖车 18通用BOSS 19梦境小怪（野外boss） 20梦境大怪（巢穴boss） 21圣域小怪（野外boss） 22圣域大怪（巢穴boss）23生肖小怪 24暗之boss 25幻境BOSS 26魂继 27神庙boss 28 29神庙石化 30极品野外boss 31尸王殿 32转生神殿 33 魔之BOSS 34怪物攻城怪物 35闯天关BOSS 36神力BOSS 37神力侍者 38水晶 39白日门猎魔BOSS 40白日门封赏精英怪41白日门镖车 42抓马43仙级BOSS44暗殿BOSS45记忆BOSS46神器BOSS 47灵魂BOSS48封号BOSS49夺宝奇兵 50个人BOSS  51天魔降临活动boss 52剑甲BOSS 53私服小怪 54法阵BOSS 55金猪(逃跑) 56生肖BOSS 57远古BOSS 58失乐园怪物攻城 59苍月岛海岛入侵 60幽灵船副本
+	//optional string name = 3;//怪物名称#客户端#C  
+	//required uint32 level = 4;//怪物等级#客户端#C  怪物等级
+	//optional string showLevel = 5;//怪物等级显示#客户端#C  客户端显示等级
+	//required int32 reinLv = 6;//怪物转生等级#客户端#C  怪物转生等级
+	//required uint32 hpshow = 7;//怪物血条数量#客户端#C  血条数量
+	//required uint32 circle = 8;//脚底光圈#客户端#C  0不显示选中框 非0显示 默认非0
+	//required uint32 circleScale = 9;//#客户端#C  光圈尺寸（有bug，暂时没用）
+	//optional string nbvalue = 10;//怪物战斗力#客户端#C  战斗力（暂时没有用）
+	//required uint32 head = 11;//怪物头像#客户端#C#不存在共同参与合并的字段  怪物头像名称
+	//required uint32 model = 12;//怪物模型#客户端#C  怪物模型
+	//required uint32 headModel = 13;//怪物头盔模型#客户端#C  怪物头盔模型，不填不显示
+	//required uint32 weapModel = 14;//怪物武器模型#客户端#C  怪物武器模型，不填不显示
+	//required int32 deathmodel = 15;//怪物死亡模型引用#客户端#C  死亡模型
+	//required uint32 initDirection = 16;//怪物朝向#客户端#C  0上，1右上，2右，3右下，4下，5左下，6左，7左上，8随机
+	//required int64 maxHp = 17;//生命值#客户端#C  属性 生命
+	//required int32 phyAttackMax = 18;//最大物理攻击#客户端#C#不存在共同参与合并的字段  属性
+	//required int32 phyAttackMin = 19;//最小物理攻击#客户端#合并#C#不存在共同参与合并的字段  属性
+	//required int32 phyDefenceMax = 20;//最大物理防御#客户端#合并#C#不存在共同参与合并的字段  属性
+	//required int32 phyDefenceMin = 21;//最小物理防御#客户端#合并#C#不存在共同参与合并的字段  属性
+	//required int32 magicDefenceMax = 22;//最大魔法防御#客户端#合并#C#不存在共同参与合并的字段  属性
+	//required int32 magicDefenceMin = 23;//最小魔法防御#客户端#合并#C  属性
+	//required int32 accurate = 24;//准确#客户端#C  属性
+	//required int32 dodge = 25;//闪避#客户端#C  属性
+	//required int32 holyAttackMin = 26;//最小神圣攻击#客户端#C#不存在共同参与合并的字段  属性
+	//required int32 holyAttackMax = 27;//最大神圣攻击#客户端#C#不存在共同参与合并的字段  属性
+	//required int32 holyDefenceMin = 28;//最小神圣防御#客户端#C#不存在共同参与合并的字段  属性
+	//required int32 holyDefenceMax = 29;//最大神圣防御#客户端#C  属性
+	//required uint32 bloodY = 30;//血条位置#客户端#C  不填则默认100（脚向上的像素）
+	//optional IntListJingHao actorpos = 31;//头顶层级#客户端#C  不填默认系统层级，若填写，则按填写值来（默认-1000）
+	//required uint32 isrotate = 32;//怪物是否能转向#客户端#C  1不可转向，0可以转向
+	//required uint32 scale = 33;//模型百分比#客户端#C  100为原始大小
+	//required uint32 reliefPenetrate = 34;//免伤穿透#客户端#C  万分比
+	//required uint32 relief = 35;//免伤#客户端#C  万分比
+	//required uint32 zsHurtAdd = 36;//对战士伤害加成#客户端#C  万分比
+	//required uint32 fsHurtAdd = 37;//对法师伤害加成#客户端#C  万分比
+	//required uint32 dsHurtAdd = 38;//对道士伤害加成#客户端#C  万分比
+	//required uint32 zsHurtedRelief = 39;//受战士伤害减免#客户端#C  万分比
+	//required uint32 fsHurtedRelief = 40;//受法师伤害减免#客户端#C  万分比
+	//required uint32 dsHurtedRelief = 41;//受道士伤害减免#客户端#C  万分比
+	//required uint32 attackSpeed = 42;//攻速#客户端#C  毫秒
+	//required uint32 moveAction = 43;//移动动作#客户端#C  0 不能移动，1 一个（步行），2 两个（跑动），3 三个（骑马）
+	//required uint32 moveInterval = 44;//每次移动的时间间隔#客户端#C  毫秒
+	//required uint32 canRepel = 45;//能否被击退#客户端#C  默认不能击退，1=可以被击退
+	//required uint32 aitype = 46;//AI类型#客户端#C  1主动怪 2被动 3有技能的主动怪 5定点处理回满血 6被动远程怪 7镖车策略 9大刀守卫AI 10弓箭守卫 12追击不归位AI  13保卫国王-大刀守卫AI   14 跪拜守卫 15  跪拜弓箭手 16矿工AI 17怪物攻城18白日门押镖 19不攻击不移动 20不攻击并逃跑
+	//required uint32 toattackarea = 47;//追击范围#客户端#C  11.玩家距离怪物出生点多远，超出则不会继续追12.玩家距离怪物多远，超出则不会继续追
+	//required uint32 bornDistance = 48;//巡逻范围#客户端#C  填可以离开出生点的距离怪离出生点小于这个距离开始不再回归, 而是随机行走
+	//required uint32 viewRange = 49;//警戒范围#客户端#C  怪物与玩家的距离。玩家与怪物小于此距离，会主动攻击追击玩家
+	//required uint32 heart = 50;//心跳#客户端#C  ai检查间隔，毫秒
+	//required uint32 dieDelay = 51;//尸体清除时间#客户端#C  毫秒
+	//required uint32 reliveType = 52;//复活类型#客户端#C  1 固定时间 2每隔X小时刷新 3刷新浮动时间 4 区域刷新 5每天定时间复活,按秒算6.某段时间刷新，并且间隔一定时间刷新
+	//required uint32 reliveDelay = 53;//复活时间间隔#客户端#C  类型1.毫秒 2.小时（必须把24整除）5.秒6.秒
+	//optional IntListList reliveDelayNew = 54;//刷新时间根据开服天数变化#客户端#C  天数#时间&天数#时间
+	//required int32 randomRefresh = 55;//是否全地图随机刷新#客户端#C  1是0否
+	//required int32 talkType = 56;//怪物说话类型#客户端#C  1.玩家靠近就会说话2.服务器特殊处理，特定条件下说话3天之boss离开倒计时
+	//optional string talk = 57;//怪物说话#客户端#C  怪物说话内容，不填表示没有
+	//required int32 talkTime = 58;//说话显示时间#客户端#C  说话显示时间
+	//required uint32 fightRec = 59;//战斗回血#客户端#C  每3秒回一次
+	//required uint32 dAtk = 60;//地元素攻击#客户端#C  固定值
+	//required uint32 fAtk = 61;//风元素攻击#客户端#C  固定值
+	//required uint32 sAtk = 62;//水元素攻击#客户端#C  固定值
+	//required uint32 hAtk = 63;//火元素攻击#客户端#C  固定值
+	//required uint32 dDef = 64;//地元素抵抗#客户端#C  固定值
+	//required uint32 fDef = 65;//风元素抵抗#客户端#C  固定值
+	//required uint32 sDef = 66;//水元素抵抗#客户端#C  固定值
+	//required uint32 hDef = 67;//火元素抵抗#客户端#C  固定值
+	//required int32 exp = 68;//经验#客户端#C  人物经验
+	//required int32 hsexp = 69;//元灵经验#客户端#C  元灵经验
+	//required int32 internalExp = 70;//内功经验#客户端#C#不存在共同参与合并的字段  内功经验
+	//required int32 dig = 71;//是否可采集#客户端#C  0不能>=1填写于cfg_gather对应的编号
+	//optional IntList deathstate = 72;//死亡特效#客户端#C  （死亡触发）第一位：0.没有，9.闪光，10.溶解，8.石化,12.呼吸光。第二位：附属类型（例如石化有效果1和效果2；溶解也有效果1和2）；第三-五位：RGBA。第六位：对应特效ID
+	//optional IntList collecteffect = 73;//尸体溶解#客户端#C  （移除视野触发，会导致延迟消失）第一位：0.没有，9.闪光，10.溶解，8.石化,12.呼吸光。第二位：时间；第三位：附属类型（例如石化有效果1和效果2；溶解也有效果1和2）；第四-七位：RGBA。第六位：对应特效ID
+	//required int32 animationDuration = 74;//出生动画播放时长#客户端#C  出生动画播放时长
+	//optional IntList sizeHeight = 75;//碰撞盒尺寸#客户端#C  没有指定碰撞盒使用默认碰撞盒宽高50, 140, 50 只有正常的碰撞x/y/z 3参数 死亡的时候碰撞盒大小不变，仅仅做偏差x/y/z/px/pz 5参数 死亡的时候碰撞大小改变没有偏差x/y/z/dx/dy/dz 6参数 死亡的时候碰撞大小改变也有偏差x/y/z/dx/dy/dz/px/pz 8参数 3参数5参数6参数8参数 
+	//required int32 deathD = 76;//怪物死亡倒地方向#客户端#C  0上 1右上 2右 3右下 4下 5左下 6左 7左上
+	//required int32 speed = 77;//怪物移动速度#客户端#C  单位毫秒
+	//required int32 MoveBaseMultiply = 78;//模型动作移动表现速度#客户端#C  模型动作移动表现速度
+	//optional string gatherShowId = 79;//是否挖肉#客户端#C  采集后显示骨头1
+	//optional IntListJingHao effectId = 80;//死亡特效#客户端#C  死亡特效id#播放特殊时是否隐藏模型（1隐藏，0不隐藏）
+	//optional IntListJingHao dropShow = 81;//掉落展示#客户端#C  跳转cfg_boss_drop_show
+	//required int32 movsd = 82;//移动音效#客户端#C  移动音效
+	//required int32 atksd = 83;//攻击音效#客户端#C  攻击音效
+	//required int32 beatksd = 84;//受击音效#客户端#C  受击音效
+	//required int32 deathsd = 85;//死亡音效#客户端#C  死亡音效
+	//required int32 coefficient = 86;//怪物血量系数类型#客户端#合并#C  填连接表的类型，连接cfg_monster_coefficient，根据开服天数怪物血量=基础血量*系数
+	//optional IntList bornState = 87;//出生特效#客户端#C  第一位：出生动画（0.没有，其他状态机的值）第二位：0没有，9.闪光，10.溶解，8.石化。第三-六位：RGBA。第7位：对应特效ID
+	//required int32 ifBorn = 88;//是否播放shader动画#客户端#C  若不填或者填0则不需要出生动画，若填1则需要
+	//required int32 bornTime = 89;//shader动画播放时长#客户端#C  记录为毫秒
+	//required int32 integral = 90;//Boss积分#客户端#C  作为归属者击杀后能获得的boss积分，不填默认为0
+	//required uint32 isAnnounce = 91;//是否作为boss刷新公告#客户端#C  
+	//required int32 sink = 92;//尸体消失是否下沉#客户端#C#不存在共同参与合并的字段  尸体消失是否下沉，填下沉需要的时间。默认不下沉
+	//optional IntListList percentageDamage = 93;//怪物百分比扣血#客户端#C  对怪造成伤害百分比扣血，人物对怪造成&灵兽对怪造成&神兽骷髅对怪造成 #分割上限下限伤害（万分比）#火墙毒持续伤害的上下限（万分比）
+	//required int32 functionType = 94;//功能类型#客户端#C  目前仅塔罗神庙用 0正常怪1塔罗神庙石化2塔罗神庙正常 3水晶类型 4抓马类型
+	//required int32 ascription = 95;//是否有归属#客户端#C  怪物是否有归属 0有归属，1无归属 默认有归属
+	//required int32 powerConsume = 96;//挖掘消耗腕力#客户端#C  不填代表挖掘时不消耗腕力且不计算耐久消耗
+	//required int32 energyConsume = 97;//击杀消耗精力#客户端#C  不填代表击杀时不消耗精力且不计算耐久消耗
+	//optional IntListJingHao reviveTimeClearCost = 98;//清除复活cd花费#客户端#C  目前仅塔罗神庙用，怪物死亡复活cd花费清除，itemID#num
+	//required int32 isGraveMapping = 99;//怪物死亡墓碑是否需要展示2D贴图#客户端#C  0否1是，默认0.目前仅塔罗神庙用，随机怪死亡后复活的墓碑需要展示2d贴图
+	//optional IntListJingHao deadAction = 100;//死亡动作#客户端#C  动作#释放为持续动作（3NPC暂时；10跑步；11走路；12挖矿；13死亡；14展示；15采集；16待机；31普通攻击；32斜砍；33冲撞）（0持续1不持续）
+	//required int32 collectionQuantity = 101;//触发可采集概率#客户端#C  配置触发采集的概率（万分比）
+    //@2#4 type#20 level#11
+	//required uint32 type20_level11 = 102;//合并字段#怪物类型_C#怪物等级_C type#20 level#11
+    //@6#7#9 reinLv#5 hpshow#2 circleScale#8
+	//required uint32 reinLv5_hpshow2_circleScale8 = 103;//合并字段#怪物转生等级_C#怪物血条数量_C#_C reinLv#5 hpshow#2 circleScale#8
+    //@15#16 deathmodel#24 initDirection#4
+	//required uint32 deathmodel24_initDirection4 = 104;//合并字段#怪物死亡模型引用_C#怪物朝向_C deathmodel#24 initDirection#4
+    //@23#24#25 magicDefenceMin#17 accurate#1 dodge#1
+	//required uint32 magicDefenceMin17_accurate1_dodge1 = 105;//合并字段#最小魔法防御_C#准确_C#闪避_C magicDefenceMin#17 accurate#1 dodge#1
+    //@29#30#32 holyDefenceMax#17 bloodY#8 isrotate#1
+	//required uint32 holyDefenceMax17_bloodY8_isrotate1 = 106;//合并字段#最大神圣防御_C#血条位置_C#怪物是否能转向_C holyDefenceMax#17 bloodY#8 isrotate#1
+    //@33#34#35#36#37#38#39#40#41#42#43 scale#8 reliefPenetrate#1 relief#1 zsHurtAdd#1 fsHurtAdd#1 dsHurtAdd#1 zsHurtedRelief#1 fsHurtedRelief#1 dsHurtedRelief#1 attackSpeed#12 moveAction#3
+	//required uint32 scale8_reliefPenetrate1_relief1_zsHurtAdd1_fsHurtAdd1_dsHurtAdd1_zsHurtedRelief1_fsHurtedRelief1_dsHurtedRelief1_attackSpeed12_moveAction3 = 107;//合并字段#模型百分比_C#免伤穿透_C#免伤_C#对战士伤害加成_C#对法师伤害加成_C#对道士伤害加成_C#受战士伤害减免_C#受法师伤害减免_C#受道士伤害减免_C#攻速_C#移动动作_C scale#8 reliefPenetrate#1 relief#1 zsHurtAdd#1 fsHurtAdd#1 dsHurtAdd#1 zsHurtedRelief#1 fsHurtedRelief#1 dsHurtedRelief#1 attackSpeed#12 moveAction#3
+    //@44#45 moveInterval#30 canRepel#1
+	//required uint32 moveInterval30_canRepel1 = 108;//合并字段#每次移动的时间间隔_C#能否被击退_C moveInterval#30 canRepel#1
+    //@46#47 aitype#5 toattackarea#20
+	//required uint32 aitype5_toattackarea20 = 109;//合并字段#AI类型_C#追击范围_C aitype#5 toattackarea#20
+    //@48#49#50 bornDistance#11 viewRange#11 heart#7
+	//required uint32 bornDistance11_viewRange11_heart7 = 110;//合并字段#巡逻范围_C#警戒范围_C#心跳_C bornDistance#11 viewRange#11 heart#7
+    //@51#52#55#56#58 dieDelay#19 reliveType#3 randomRefresh#1 talkType#2 talkTime#4
+	//required uint32 dieDelay19_reliveType3_randomRefresh1_talkType2_talkTime4 = 111;//合并字段#尸体清除时间_C#复活类型_C#是否全地图随机刷新_C#怪物说话类型_C#说话显示时间_C dieDelay#19 reliveType#3 randomRefresh#1 talkType#2 talkTime#4
+    //@59#60#61#62#63#64#65#66#67 fightRec#22 dAtk#1 fAtk#1 sAtk#1 hAtk#1 dDef#1 fDef#1 sDef#1 hDef#1
+	//required uint32 fightRec22_dAtk1_fAtk1_sAtk1_hAtk1_dDef1_fDef1_sDef1_hDef1 = 112;//合并字段#战斗回血_C#地元素攻击_C#风元素攻击_C#水元素攻击_C#火元素攻击_C#地元素抵抗_C#风元素抵抗_C#水元素抵抗_C#火元素抵抗_C fightRec#22 dAtk#1 fAtk#1 sAtk#1 hAtk#1 dDef#1 fDef#1 sDef#1 hDef#1
+    //@71#74#76 dig#21 animationDuration#2 deathD#3
+	//required uint32 dig21_animationDuration2_deathD3 = 113;//合并字段#是否可采集_C#出生动画播放时长_C#怪物死亡倒地方向_C dig#21 animationDuration#2 deathD#3
+    //@77#82 speed#13 movsd#12
+	//required uint32 speed13_movsd12 = 114;//合并字段#怪物移动速度_C#移动音效_C speed#13 movsd#12
+    //@83#84 atksd#12 beatksd#12
+	//required uint32 atksd12_beatksd12 = 115;//合并字段#攻击音效_C#受击音效_C atksd#12 beatksd#12
+    //@85#86#88 deathsd#12 coefficient#6 ifBorn#2
+	//required uint32 deathsd12_coefficient6_ifBorn2 = 116;//合并字段#死亡音效_C#怪物血量系数类型_C#是否播放shader动画_C deathsd#12 coefficient#6 ifBorn#2
+    //@89#90#91 bornTime#13 integral#13 isAnnounce#2
+	//required uint32 bornTime13_integral13_isAnnounce2 = 117;//合并字段#shader动画播放时长_C#Boss积分_C#是否作为boss刷新公告_C bornTime#13 integral#13 isAnnounce#2
+	optional IntListJingHao bossPosition = 118;//BOSS列表位置#客户端  对应怪物在boss列表里的位置，关联cfg_boss表的type#subtype
+	optional string halo = 119;//光环#客户端  脚底光环，配置的话出生脚底即显示光环
+	required int32 haloScale = 120;//光环缩放#客户端  光环缩放，配置缩放比例 不填默认为100
+	optional IntListJingHao bossSkill = 121;//boss技能显示#客户端  boss技能显示（关联boss_skill_describe表）
+	required int32 rageHurtTips = 122;//狂暴buff描述#客户端  狂暴buff描述中的伤害参数显示
+	optional IntListJingHao tame = 123;//怪物死亡是否出现马#客户端  填写怪物死亡后判定是否出现马匹，0不出现 1出现
+	//optional string tipsname = 124;//策划用内容#客户端未使用#C  配置怪物的详细信息
+	//optional string fixHurt = 125;//绝对生命值（每次受到伤害只扣除1点生命值）#客户端未使用#C  0不是 值填多少不管其他伤害，按填的伤害来
+	//required int32 backHurt = 126;//反击伤害#服务器  反伤属性
+	//optional IntListList reliveParam = 127;//复活参数#服务器  复活类型用的参数6.某段时间刷新，填距离0点的分钟#距离0点分钟
+	//optional IntListJingHao reliveRandom = 128;//复活随机时间参数#客户端未使用#C  复活时间=类型3时间+复活随机时间（毫秒）
+	//optional IntListList reliveTimeChange = 129;//每日刷新时间变化#服务器  开始的分钟数#结束的分钟数#倍数*100&其他时间
+	//required int64 maxdamage = 130;//单次伤害上限#客户端未使用#C  空值配0，long型不支持不配默认0
+	//optional IntListJingHao prestige = 131;//修为值#服务器  原声望值，改为修为值，概率#数值 万分比
+	//required uint32 weaponModel = 132;//武器model#服务端  仅针对矿区拟人怪，配置model名称
+	//required uint32 warning = 133;//尸体死亡重心偏移量绝对值#客户端未使用#C  是否为预警出生怪物（1是0否，不填默认否）
+	//required int32 hsNoDefenseProbability = 134;//灵兽无视防御比例#服务器  仅天成类型的灵兽有效（万分比）
+	//required int32 distance = 135;//远处怪安全距离#服务器  和目标少于该距离时，会往后退，如果后退冷却中，则攻击（冷却配global）
+	//required int32 yuanBaoDouble = 136;//元宝掉落翻倍#服务器  佩戴面纱元宝掉落翻倍配置  1为不会翻倍 不填为可翻倍
+	//optional IntListJingHao attackImmunity = 137;//攻击免疫#服务端  填写具体类型，则对该怪物攻击的类型伤害值为1点，#号分割；不填则不生效   类型（类型为服务端存储类型id）：1.玩家    2.怪物    3.宠物（召唤物）  4. 灵兽   5.NPC   7.道具   8.buff   9.事件    10.镖车    11.采集点    12.摊位
+	//required int32 dropTime = 138;//物品掉落时间#服务器  怪物对应的掉落所有物品时间，没填走正常掉落时间 单位：秒
+	//optional IntListList aoeReduce = 139;//群攻技能免伤#服务器  怪物对群攻技能的免伤系数，技能id#系数值（万分比）&技能id#系数值（万分比）
+	//required int32 xpEnergy = 140;//xp能量#服务器  击杀后获得的xp能量点
+	//optional IntListJingHao buffer = 141;//怪物出现携带buff#服务器  怪物出现携带buff
+	//required int32 reliveTimeReduce = 142;//复活时间缩减比例  目前主要针对boss重生活动使用，代表活动开启时，该怪物复活时间缩减的比例，单位：万分位
+	//required int32 isGrave = 143;//怪物死亡是否需要墓碑#服务器  怪物死亡是否需要墓碑0不用1要 默认不要
+	//optional IntListJingHao bonfire = 144;//怪物火堆#服务器  怪物火堆，连接cfg_bonfire表 火堆id#权重#……#出现火堆概率
+	//optional IntListJingHao tameQuantity = 145;//驯马出现的概率  配置出现马的概率（万分比）
+	//required int32 group = 146;//分类标记#服务器  作为分类用
+	//required uint32 bornPointRandom = 147;//开服出生点是否随机#服务器  怪物开服出生点是否随机 1随机0不随机
+	//optional IntListJingHao effectImmunity = 148;//效果免疫  根据该字段定义的效果id填写，可填写多个效果id（效果ID这里特殊写死，策划不能随意改动），用#分隔。填写了id的，表示该怪物对填写效果免疫。      效果包括：1、灵魂刻印：有概率对怪物造成额外最大血量百分比伤害
+	//required int32 pickhome = 149;//掉落物品始终归属自己#服务器  0或不填是正常拾取，1始终自己可捡（其他任何人拾取不了）
+	//optional IntListJingHao extraDeduct = 150;//受伤扣血#服务器  怪物受到玩家伤害扣除的万分比血量 #分割单体和群体
+}
+
+message CFG_MONSTERSARRAY
+{
+	repeated CFG_MONSTERS rows = 1;
+}

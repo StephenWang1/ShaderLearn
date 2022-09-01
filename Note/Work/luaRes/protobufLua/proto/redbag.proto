@@ -1,0 +1,44 @@
+package redbagV2;
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "RedBagProto";
+
+//捐献请求
+message RedBagDonateRequest{
+	required int32 money = 1;//金钱，如果是红包券，当前值为数量
+	optional bool isTicket = 2;//是否使用红包券
+}
+
+//红包信息
+message RedBagInfo{
+	optional int32 moneyPool = 1;//资金池
+	repeated string history = 2;//历史信息
+	repeated RedBagRankInfo ranks = 3;//排行榜
+	optional SelfRedBagInfo selfInfo = 4;//个人信息
+	optional int32 getMoney = 5;//上次抢的红包
+	optional SendRoleInfo sendRole= 6;//发送者
+	optional bool haveFirstGet = 7;//是否首次抢红包
+}
+
+//个人红包信息
+message SelfRedBagInfo{
+	optional int32 money = 1;//捐献的元宝
+	optional int32 rank = 2;//名次
+	required int32 getTimes = 3;//领取次数
+	required int64 lastTime = 4;//上次领取时间 
+}
+
+//排行榜信息
+message RedBagRankInfo{
+	optional int32 rank = 1;//名次
+	optional string name = 2;//姓名
+	optional int32 money = 3;//捐献的元宝
+}
+
+//发送者信息
+message SendRoleInfo{
+	optional int64 roleId = 1;//玩家id
+	optional string name = 2;//玩家名字
+	optional int32 career = 3;//玩家职业
+	optional int32 sex = 4;//性别
+}

@@ -1,0 +1,19 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_GROWTH_WEAPON_LEVEL
+{
+	required int32 id = 1;//id#客户端  
+	required int32 type = 2;//类型#客户端  
+	required int32 level = 3;//装备等级#客户端  
+	optional string cost = 4;//升级消耗#客户端  
+	optional string taskgoal = 5;//升级条件#客户端  
+	optional string remark = 6;//策划备注#客户端  
+	required int32 divineSuit = 7;//套装属性#客户端  
+	required int32 extra = 8;//升级属性#客户端  
+}
+
+message CFG_GROWTH_WEAPON_LEVELARRAY
+{
+	repeated CFG_GROWTH_WEAPON_LEVEL rows = 1;
+}

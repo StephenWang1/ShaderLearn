@@ -1,0 +1,7 @@
+---@class UIRolePanel_GridTemplateZhenFa:UIRolePanel_GridTemplateBase
+local UIRolePanel_GridTemplateZhenFa = {}
+
+setmetatable(UIRolePanel_GridTemplateZhenFa, luaComponentTemplates.UIRolePanel_GridTemplateBase)
+
+
+return UIRolePanel_GridTemplateZhenFa

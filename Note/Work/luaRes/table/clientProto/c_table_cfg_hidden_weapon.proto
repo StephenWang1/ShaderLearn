@@ -1,0 +1,17 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_HIDDEN_WEAPON
+{
+	required uint32 id = 1;//id#客户端#C  编号
+	optional string name = 2;//暗器名称#客户端  对应的暗器名称
+	required int32 stage = 3;//暗器品级#客户端  暗器品级
+	required uint32 fallHorse = 4;//击落马概率增加#客户端  万分比
+	required uint32 hit = 5;//是否必中#客户端  0否；1是 默认为1
+	required int32 realAtk = 6;//穿透伤害#客户端  直接填造成的伤害固定值
+}
+
+message CFG_HIDDEN_WEAPONARRAY
+{
+	repeated CFG_HIDDEN_WEAPON rows = 1;
+}

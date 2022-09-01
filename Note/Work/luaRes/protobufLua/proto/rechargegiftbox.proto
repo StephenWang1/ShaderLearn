@@ -1,0 +1,106 @@
+package rechargegiftboxV2;
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "RechargeGiftBoxProto";
+
+// 直充礼包已购买次
+message RechargeGiftTimes {
+  required int32 id = 1;
+  optional int32 totalBuyTimes = 2; // 总购买次数
+  optional int32 todayBuyTimes = 3; // 今天已购买次数
+  optional bool rebateRewardGet = 4; // 返利奖励是否已领
+  optional bool resetOpenServerDay = 5; //开服15天倍数重置
+}
+
+//充值礼盒信息
+message RechargeGiftBoxInfo {
+  optional OnlineGiftBoxInfo onlineGiftBoxInfo = 1;//在线礼包信息
+  optional TotalRechargeGiftBoxInfo totalRechargeGiftBoxInfo = 2;//累充礼包信息
+  optional ShareGiftBoxInfo shareGiftBoxInfo = 3;//分享礼包信息
+  repeated RechargeGiftTimes buyTimes = 4;
+  optional int32 totalRechargeDiamondCount = 5; // 累计充值钻石数
+  optional ContinuousGiftBoxInfo continuousGiftBoxInfo = 6;//连充礼包信息
+  optional DailyRechargeGiftBoxInfo dailyRechargeGiftBoxInfo = 7;//每日累充礼包信息
+}
+
+//在线礼包信息
+message OnlineGiftBoxInfo{
+  repeated OnlineGiftBoxRewardInfo rewardInfo = 1;//在线礼包奖励信息
+  optional int64 onlineTime = 2;//在线时间
+}
+
+//在线礼包奖励信息
+message OnlineGiftBoxRewardInfo{
+  optional int32 id = 1;//奖励id
+  optional int32 receive = 2;//是否领取 0 未领取 1领取
+}
+
+//累充礼包信息
+message TotalRechargeGiftBoxInfo{
+  repeated TotalRechargeDataInfo TotalRechargeDataInfo = 1;//累充礼包数据信息
+}
+
+//累充礼包数据信息
+message TotalRechargeDataInfo{
+  optional int32 id = 1;//配置id
+  optional int32 count = 2;//已经完成的数量
+  optional int32 totalCount = 3;//需要完成的数量
+  optional int32 state = 4;//是否领取  0 未领取 1可领取 2已领取
+}
+
+//奖励id
+message RewardId{
+  optional int32 id = 1;//配置id
+}
+
+//分享礼包信息
+message ShareGiftBoxInfo {
+  optional ShareGiftBoxRewardInfo rewardInfo = 1;//奖励id
+  optional int32 shareTime = 2;//分享次数
+}
+
+//分享礼包奖励信息
+message ShareGiftBoxRewardInfo{
+  optional int32 id = 1;//奖励id
+  optional int32 receive = 2;//是否领取 0 未领取 1领取
+}
+
+//连充连充礼包信息
+message ContinuousGiftBoxInfo {
+  repeated ContinuousGiftBoxRewardInfo rewardInfo = 1;//所有已完成的列表
+  optional int32 nowGroup = 2;//当前组别
+  optional int32 lastCompleteCfgId = 3;//上次完成的奖励的配置id
+  optional int64 lastCompleteTime = 4;//上次完成的时间
+  optional int32 totalDay = 5;//当前档位累充的天数
+}
+
+//连充礼包奖励信息
+message ContinuousGiftBoxRewardInfo{
+  optional int32 id = 1;//奖励id
+  optional int32 receive = 2;//是否领取 1待领取 2领取
+}
+
+//每日累充礼包信息
+message DailyRechargeGiftBoxInfo {
+  repeated DailyRechargeGiftBoxRewardInfo rewardInfo = 1;//奖励id
+}
+
+//每日累充礼包奖励信息
+message DailyRechargeGiftBoxRewardInfo{
+  optional int32 id = 1;//奖励id
+  optional int32 status = 2;//是否领取 0未完成 1未领取 2领取
+  optional int32 remainRecharge = 3;//还需充值X元
+}
+
+//开服循环礼包data
+message CycleGiftBox{
+  optional int32 id = 1;//rechargeId
+  optional int32 refreshType = 2;//是否是购买完刷新 0不是 1是
+}
+
+//开服循环礼包信息
+message ResRoleCycleGiftBoxInfo{
+	repeated CycleGiftBox giftBoxInfo = 1;//礼包ID
+	optional int64 nextRefreshTime = 2;//下次刷新时间（客户端不用可以不用管）
+	optional int32 lastBuyGroup = 3;//上次购买的最高档位（客户端不用可以不用管）
+}

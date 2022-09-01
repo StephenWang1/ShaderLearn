@@ -1,0 +1,40 @@
+package imprintV2;
+
+import "bag.proto";
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "ImprintProto";
+
+
+//返回印记信息
+message ResImprintInfo{
+   repeated ImprintInfo imprintInfoList = 1;//印记信息
+   optional int64 roleId = 2;
+}
+
+message ImprintInfo{
+	optional int32 index = 1;//位置
+	optional int32 id = 2;//itemId
+	optional bool isValid = 3;//是否有效
+	optional int64 lid = 4;//lid
+	optional int32 shuXing = 5;//基础属性
+	optional int32 fuDong = 6;//浮动属性
+	optional bagV2.BagItemInfo itemInfo = 7;
+}
+//请求镶嵌
+message ReqPutOnImprint{
+	optional int32 index = 1;//位置
+	optional int64 imprintId = 2;//物品ID
+}
+//请求取下
+message ReqTakeOffImprint{
+	optional int32 index = 1;//位置
+}
+//镶嵌成功返回
+message ResPutOnImprint{
+	optional int32 index = 1;//位置
+}
+//取下成功返回
+message ResTakeOffImprint{
+	optional int32 index = 1;//位置
+}

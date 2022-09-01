@@ -1,0 +1,22 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_BOSS_DROP_SHOW
+{
+	required uint32 id = 1;//ID#客户端#C#不存在共同参与合并的字段  ID#客户端，将此id填入怪物表内dropShow字段
+	//required uint32 monsterId = 2;//怪物id#客户端#C  cfg_monsters表id（仅仅备注用）
+	//optional IntListList dropShow = 3;//掉落物品展示#客户端#C  职业#性别#itemID#itemID&职业#性别#itemID#itemID(职业：1战士2法师3道士；性别1男2女)（无用）
+	//required uint32 displayConditionType = 4;//显示条件类型#客户端#C  1、开服天数2、限制时间：开始时间#结束时间3、指定活动开启：活动id4、角色创建天数5、角色等级
+	//optional IntListJingHao displayConditionParameter = 5;//显示条件参数#客户端#C  限制时间：开始时间#结束时间(时间戳)；指定活动开启：活动id
+	//optional IntListList dropGroup = 6;//掉落组Id#客户端#C  连接cfg_drop_show_group的groupId，#分割所有要显示的组 取到可用的组就返回，&特殊显示组，额外显示
+    //@2#4 monsterId#27 displayConditionType#3
+	//required uint32 monsterId27_displayConditionType3 = 7;//合并字段#怪物id_C#显示条件类型_C monsterId#27 displayConditionType#3
+	//optional string mame = 8;//怪物名#客户端未使用#C  
+	//optional string remarks = 9;//策划备注#策划  显示条件参数备注
+	//optional string group = 10;//策划备注#策划  
+}
+
+message CFG_BOSS_DROP_SHOWARRAY
+{
+	repeated CFG_BOSS_DROP_SHOW rows = 1;
+}

@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="9f04147a-49fb-4eef-ab37-663ed8545012" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ProjectId" id="1s9bjHIj9H97YcZaoqUb2GawJWA" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Client3d\wzcq3D\Client\Branch\ClientProject_SF\luaRes" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Emmy Debugger(NEW).Unnamed">
+    <configuration name="UIFurnacePanel.lua" type="lua.app" factoryName="Lua Application" temporary="true">
+      <option name="program" value="lua.exe" />
+      <option name="file" value="$PROJECT_DIR$/ui/panels/UIFurnacePanel.lua" />
+      <option name="workingDir" value="" />
+      <option name="debuggerType" value="2" />
+      <option name="params" value="" />
+      <option name="charset" value="UTF-8" />
+      <option name="showConsole" value="true" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unnamed" type="lua.emmy.debugger" factoryName="Emmy Debugger(NEW)" nameIsGenerated="true">
+      <module name="luaRes" />
+      <option name="TYPE" value="1" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="9966" />
+      <option name="PIPE" value="emmy" />
+      <option name="WIN_ARCH" value="1" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Emmy Debugger(NEW).Unnamed" />
+      <item itemvalue="Lua Application.UIFurnacePanel.lua" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Lua Application.UIFurnacePanel.lua" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9f04147a-49fb-4eef-ab37-663ed8545012" name="Default Changelist" comment="" />
+      <created>1620287885555</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1620287885555</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="604" y="215" key="#UIFurnacePanel.lua" timestamp="1620647722428">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="604" y="215" key="#UIFurnacePanel.lua/0.0.1920.1040@0.0.1920.1040" timestamp="1620647722428" />
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1620648248930">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1620648248930" />
+    <state x="711" y="320" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1620799718422">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="711" y="320" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1620799718422" />
+    <state width="776" height="466" key="DebuggerActiveHint" timestamp="1621317847943">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="776" height="466" key="DebuggerActiveHint/0.0.1920.1040@0.0.1920.1040" timestamp="1621317847943" />
+    <state x="740" y="260" key="FileChooserDialogImpl" timestamp="1620294891844">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="260" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1620294891844" />
+    <state width="1877" height="126" key="GridCell.Tab.0.bottom" timestamp="1621476511230">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="126" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1621476511230" />
+    <state width="1877" height="126" key="GridCell.Tab.0.center" timestamp="1621476511230">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="126" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1621476511230" />
+    <state width="1877" height="126" key="GridCell.Tab.0.left" timestamp="1621476511230">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="126" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1621476511230" />
+    <state width="1877" height="126" key="GridCell.Tab.0.right" timestamp="1621476511230">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="126" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1621476511230" />
+    <state width="1877" height="126" key="GridCell.Tab.1.bottom" timestamp="1621476511230">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="126" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1621476511230" />
+    <state width="1877" height="126" key="GridCell.Tab.1.center" timestamp="1621476511230">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="126" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1621476511230" />
+    <state width="1877" height="126" key="GridCell.Tab.1.left" timestamp="1621476511230">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="126" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1621476511230" />
+    <state width="1877" height="126" key="GridCell.Tab.1.right" timestamp="1621476511230">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="126" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1621476511230" />
+    <state x="461" y="164" width="1228" height="711" key="SettingsEditor" timestamp="1620811350156">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="461" y="164" width="1228" height="711" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1620811350156" />
+    <state x="753" y="130" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1620464104254">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="753" y="130" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1620464104254" />
+    <state x="825" y="297" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1621317730463">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="825" y="297" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1920.1040@0.0.1920.1040" timestamp="1621317730463" />
+    <state x="495" y="236" width="1425" height="677" key="find.popup" timestamp="1621478240387">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="495" y="236" width="1425" height="677" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1621478240387" />
+    <state x="616" y="240" key="run.anything.popup" timestamp="1620640518412">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1620640518412" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1621478204561">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1621478204561" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="lua-line">
+          <url>file://$PROJECT_DIR$/ui/template/UIBagPanelTemplates/Main/UIBagMain_Recycle.lua</url>
+          <line>169</line>
+          <option name="timeStamp" value="280" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="lua-line">
+          <url>file://$PROJECT_DIR$/ui/template/UIBagPanelTemplates/Main/UIBagMain_Recycle.lua</url>
+          <line>1430</line>
+          <option name="timeStamp" value="281" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="lua-line">
+          <url>file://$PROJECT_DIR$/table/clientTable/cfg_items.lua</url>
+          <line>1953</line>
+          <option name="timeStamp" value="282" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="lua-line">
+          <url>file://$PROJECT_DIR$/ui/UIManager.lua</url>
+          <line>201</line>
+          <option name="timeStamp" value="283" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="lua-line">
+          <url>file://$PROJECT_DIR$/ui/UIManager.lua</url>
+          <line>200</line>
+          <option name="timeStamp" value="284" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

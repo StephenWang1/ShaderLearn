@@ -1,0 +1,1112 @@
+package unionV2;
+
+import "bag.proto";
+import "chat.proto";
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "UnionProto";
+
+
+//请求日志
+message ReqGetUnionJournal {
+  optional int64 unionId = 1;//行会ID
+}
+
+//返回日志
+message ResGetUnionJournal {
+  repeated UnionJournal unionJournalInfo = 1; //日志信息
+}
+
+//日志信息
+message UnionJournal {
+  optional int64 roleId = 1; //操作人
+  optional int64 operationTime = 2; //时间
+  optional string operation = 3;//具体操作
+  optional int32 id = 4; //配置表 id
+}
+
+
+//请求查看行会属性
+message ReqGetUnionAttribute {
+  optional int64 unionId = 1; //行会ID
+}
+
+//返回行会属性
+message ResGetUnionAttribute {
+  optional int64 unionId = 1; //行会ID
+  // optional int32 level = 2;//等级
+  optional int32 thisAttribute = 3;//当前激活属性
+  optional int32 perfectPopulation = 4;//最佳人口数
+  optional int32 thisNum = 5;//当前人口数
+  optional int32 attackWarrior = 6;//增加攻击
+  optional int32 attackMagic = 7;//增加魔攻
+  optional int32 attackMonk = 8;//增加道法
+  optional int32 phyDefense = 9;//增加物防
+  optional int32 magDefense = 10;//增加模仿
+  optional int32 blood = 11;//增加血量
+  // optional int64 thisExperience = 12;//当前经验
+  // optional int32 experienceMax = 13;//升级所需经验
+  optional int32 unionBossRankNo = 12; //行会首领中的排行信息.
+}
+
+
+
+//请求所有会徽
+message ReqGetAllUnionIcon {
+  optional bool isReturnRare = 1; // 是否返回稀有图标（返回时true，不返回是false）
+}
+
+//返回所有会徽
+message ResGetAllUnionIcon {
+  repeated UnionIconInfo unionIconInfo = 1;// 图标信息
+}
+
+//图标信息
+message UnionIconInfo {
+  optional int32 unionIconId = 1;//图标ID
+  optional bool isHave = 2; //是否被占用 true 被占用 false 没有被占用
+  optional bool isXiyou = 3; // 是否稀有
+}
+
+//请求行会列表信息
+message ReqSendAllUnionInfo {
+}
+
+//发送行会列表信息
+message ResSendAllUnionInfo {
+  repeated UnionInfo unionInfo = 1;//行会列表信息
+  optional int64 exitUnionTime = 2; //退出行会的时间
+  optional int64 dissolutionTime = 3; //解散行会时间
+  optional bool canCreatUnion = 4; //是否可以创建
+}
+
+//行会信息
+message UnionInfo {
+  optional int64 unionId = 1;//行会id
+  optional string unionName = 2;//行会名字
+  optional string leaderName = 3;//行会会长名
+  optional string announcement = 4;//帮oo公告
+  // optional int32 unionLevel = 5;//等级
+  optional int32 unionNum = 6;//成员数
+  optional int32 applyState = 7;//行会申请状态 1可申请 2已申请
+  optional int64 createTime = 8;//行会创建时间
+  optional int64 nbValue = 9;//行会战力
+  optional int32 unionGold = 10;//行会资金
+  optional int32 autoEnter = 11;//1为自动进入
+  optional bool isImpeachment = 12;//是否在弹劾
+  optional int64 impeachmentTime = 13;//弹劾开始时间
+  optional bool  leaderOnline = 14;//会长是否在线
+  optional int32 unionIcon = 15;//行会图标ID
+  optional int64 leaderId = 16;//行会会长ID
+  optional int32 modifyCount = 20; //日志修改次数
+  optional int32 canUseUnionCallBackPosition = 24; //可以使用行会召唤令的职位
+  optional int64 sabacScore = 25; //上次沙巴克积分
+  optional bool crown = 26; //是否拥挤
+  optional bool isPayImeach = 27; //是否付费弹劾
+  optional int64 lastCombineTime = 28; //上次合并时间
+  optional int32 rank = 29; //排名
+  optional int32 seizeCityId = 30;//占领的城市的id
+  optional int64 unionTodayTax = 31;//行会今日税收
+  optional bool isPushUnion = 32; //是否推送行会
+  optional int32 unionAcvite = 33; //行会今日活跃
+  optional int32 unionActiveYesterday = 34; // 行会昨日活跃
+  optional int32 unionActiveRankYesterday = 35; // 行会昨日活跃排名
+  optional int64 lastCallBackTime = 36;//可以使用召唤令的时间
+  optional bool isAutoCreated = 37; //是否系统自建行会
+  optional int32 unionBossRankNo = 38; //行会首领的排名.
+}
+
+message UnionChatAnnounce {
+  optional chatV2.ResAnnounce announce = 1;
+  optional chatV2.ResChat chat = 2;
+  optional int64 time = 3;
+}
+
+message ResUnionChatAnnounce {
+  repeated UnionChatAnnounce announces = 1;
+}
+
+
+//加入行会申请或撤销加入行会申请
+message ReqJoinOrWithdrawUnion {
+  required int64 unionId = 1; //行会ID
+  required int32 joinOrWithdraw = 2;//加入申请或撤销申请 1是加入 2是撤销
+}
+
+//申请入会状态变化
+message ResApplyForUnionStateChange {
+  optional int32 state = 1;//行会申请状态   1申请成功  2撤回成功
+  optional int64 unionId = 2;//行会id
+}
+
+
+
+message UnionRedPackInfo {
+  optional int64 roleId = 1;//发送者id
+  optional string name = 2;//发送者名字
+  optional int32 senderCareer = 3;//发送者职业
+  optional int32 sendSex = 4;//发送者性别
+  optional int64 redPackId = 5;//红包id
+  optional int32 money = 6;//元宝
+  optional bool isGet = 7;//是否已领取
+  optional bool isNull = 8;//是否为空包(被领完)
+  optional string content = 9;//祝福语
+  optional int32 sendTime = 10;//发送时间
+}
+
+message UnionRedPackRecordInfo {
+  optional string sender = 1;//发送者名字
+  optional string robber = 2;//抢夺者
+  optional int32 robberCareer = 3;//抢夺者职业
+  optional int32 robberSex = 4;//抢夺者性别
+  optional int32 senderCareer = 5;//发送者职业
+  optional int32 sendSex = 6;//发送者性别
+  optional int32 robTime = 7;//抢红包的时间
+  optional int32 money = 8;//元宝
+  optional bool isBest = 9;//是否是最佳
+}
+
+message UnionSettingInfo {
+  optional int32 settingType = 1;//设置类型
+  optional int32 settingValue = 2;//值(如果是boolean 1为true,0为false)
+  optional int32 extraParam = 3;//额外参数 (万分比)
+}
+
+enum PositionInfo {
+  Master = 1;//会长
+  Master2 = 2;//副会长
+  NumberTree = 3;//长老
+  NumberFour = 4;//堂主
+  NumberFive = 5;//精英
+  NumberSix = 6;//普通成员
+}
+
+message UnionEventInfo {
+  optional int32 recordTime = 1;//记录时间
+  optional int32 announceId = 2;//日志id
+  optional string operate = 3;//操作者
+  optional string target = 4;//目标
+  optional int32 oldLevel = 5;//行会老的等级
+  optional int32 newLevel = 6;//行会新的等级
+  optional int32 redPackCount = 7;//发的红包数量
+  optional string oldPosition = 8;//老的职位
+  optional string newPosition = 9;//新的职位
+}
+message UnionMemberInfo {
+  optional int64 roleId = 1;
+  optional string memberName = 2;//成员名称
+  optional int32 position = 3;//成员职位 3会长 2副会长 0成员
+  optional int32 career = 4;//成员职业
+  optional int32 memberLevel = 5;//成员等级
+  optional int64 offlineTime = 6;//成员离线时间
+  optional int32 fightPower = 7;//战力
+  // optional int64 contributionHistory = 8;//历史贡献
+  optional int32 sex = 9;//性别
+  optional int32 cloth = 10;//衣服
+  optional int32 weapon = 11;//武器
+  optional int32 wing = 12;//翅膀
+  optional int32 fashionTitle = 13;//fashionTitle
+  optional int32 fashionCloth = 14;//fashionCloth
+  optional int32 fashionWing = 15; //fashionWing
+  optional int32 fashionWeapon = 16; //fashionWeapon
+  optional int32 vipLevel = 17;//vip等级
+  optional int32 activeMonthCard = 18; //是否有月卡
+  optional int32 treasure = 19; //穿戴的寶物id
+  optional int32 szSuitId = 20;//激活的神装套装id
+  optional bool online = 21;//是否在线
+  optional int64 joinTime = 23; //加入时间
+  optional int32 activeToday = 24; //今日活跃
+  optional int32 activeYesterday = 25; //昨日活跃
+  // optional int32 unionScore = 26; //行会积分
+  optional int32 active3Days = 27; //三天活跃
+  optional int32 active7Days = 28; //七天活跃
+  optional bool canSendVoice = 29; // 当前是否有语言权限
+  optional bool voiceOpen = 30; // 当前是否开启语音
+  optional bool speakerOpen = 31; // 喇叭是否课开启
+  optional int32 vipMemberLevel = 32; //会员等级.
+}
+
+message ApplyListInfo {
+  optional int64 roleId = 1;
+  optional string memberName = 2;//申请玩家角色名
+  optional int32 career = 3;
+  optional int32 memberLevel = 4;
+  optional int32 fightValue = 5;//申请者战斗力
+  optional int32 sex = 6;
+  optional int32 vipLevel = 7;//申请玩家vip等级
+  optional int32 monthCard = 8;//是否有月卡 0无 1有
+  optional int64 theTime = 9;//申请时间
+  optional bool hasRefuse = 10; //是否已拒绝
+}
+
+message UnionBossInfo {
+  optional int32 instanceUniqueId = 1;//副本唯一id
+  optional int32 instanceId = 2;//副本
+  optional int64 monsterHp = 3;//怪物当前血量
+  optional int64 ownerId = 4;//副本归属者id
+  optional string ownerName = 5;//副本归属者名字
+}
+
+message UnionChallengeRank {
+  optional string roleName = 1;
+  optional int32 fightValue = 2;
+  optional int32 floor = 3;//当前关卡
+}
+
+message UnionTotemInfo {
+  optional int32 group = 1;//图腾类型
+  optional int32 itemId = 2;//图腾id
+}
+
+message LingBaoInfo {
+  optional int64 level = 1;
+  optional string nowExp = 2;//当前经验
+  optional int32 totalExp = 3;//总经验
+  optional int32 refineLv = 4;//精炼阶数
+  optional int32 power = 5;//灵宝战力
+}
+
+message JiPinInfo {
+  optional int32 power = 1;//极品战力
+  repeated bytes attributeType = 2;//属性类型
+  repeated int32 attributeValue = 3;//属性值
+}
+
+message FromInfo {
+  optional int32 type = 1;//来源类型 1 杀怪 2 NPC
+  repeated string params = 2;//来源参数列表
+}
+
+message BestAttInfo {
+  optional int32 attId = 1;//属性id
+  optional int32 attType = 2;//属性类型
+  optional int32 attValue = 3;//值
+  optional int32 param = 4;//参数
+  optional int32 power = 5;//极品战力
+}
+
+
+
+message ItemAttribute {
+  required int32 type = 1; //属性类型 见AttributeType
+  required int32 num = 2; //属性值
+}
+
+message CoinInfo {
+  optional int32 itemId = 1;//货币ID
+  optional int64 count = 2;//货币数量
+}
+
+message UnionWarehouseUpdateRecordInfo {
+  optional string roleName = 1;//本次操作的玩家的名称
+  optional int32 operationTime = 2;//本次操作的时间
+  optional int32 operationType = 3;//操作的类型 {0=捐献装备 1=兑换装备 2=销毁装备}
+  optional int32 itemId = 4;//装备配置表id
+}
+
+//申请加入请求
+message ReqApplyForEnterUnion {
+  required int64 unionId = 1;
+}
+
+
+
+
+
+//申请创建行会 00
+message ReqCreateUnion {
+  required string name = 1; //行会名字
+  required int32 unionIcon = 2; // 行会图标
+}
+//返回成功创建行会信息
+message ResSendCreateUnionSuccess {
+  required string name = 1;
+  optional int64 rid = 2;
+}
+
+// 参选信息
+message ElectionInfo {
+  required UnionMemberInfo member = 1;
+  required int32 votes = 2; // 得票数
+}
+
+//发送玩家所在行会信息 00
+message ResSendPlayerUnionInfo {
+  optional UnionInfo unionInfo = 1;//行会信息
+  optional int64 unionScore = 2;//行会积分
+  // optional int64 contributionHistory = 3;//历史贡献
+  optional PositionInfo positionInfo = 4;//行会职位信息
+  repeated UnionMemberInfo memberInfo = 5;//行会成员信息
+  repeated UnionSettingInfo unionSetting = 6;//行会设置
+  repeated UnionEventInfo unionEventBean = 7;//行会时间记录
+  // required int64 nexLevel = 8;//下次升级所要的经验
+  //会长  20   ; 副会长   15;  长老  10 ;护法  5;  普通成员  0;
+  optional int32 myPositionInfo = 9;//我的职位信息
+  optional int64 leaderId = 10;//领导人ID
+  optional bool isInElection = 11; //是否在选举
+  optional int64 electionEndTime = 12; // 选举结束时间
+  repeated ElectionInfo election = 13; // 参选者和票数
+  optional int32 myYesterdayTax = 14;//昨日税收工资
+  optional int64 totalActiveToday = 15;
+  optional int64 totalActiveYesterday = 16;
+  optional bool myTaxSalaryGet = 17; //工资是否已领
+  repeated int64 activeGetCountToday = 18; // 活跃度获得计数, 高 32 位为 id, 低 32 位为 count
+  // repeated ActiveRewardGet activeRewardGet = 19; // 活跃度奖励是否已领, 已领的 id 集合
+  optional int32 realTimeTax = 20; // 明天的奖池当前数, 前二才不为 0
+  optional int32 todayKickOutCount = 21; // 今日已经踢出行会成员数
+  optional int32 activeRewardGet = 22; // 当前已领到的活跃度档位的活跃值  
+
+}
+
+message ActiveRewardGet {
+  optional int32 activeId = 1;
+  optional int32 count = 2;
+  optional int32 maxCount = 3;
+}
+
+//投票请求
+message ReqElectionVote {
+  required int64 roleId = 1; //投给谁
+  optional int32 count = 2 [default = 1]; //投几票
+}
+
+//申请修改公告
+message ReqChangeAnnouncement {
+  optional string announcement = 1;//新行会公告
+}
+
+//请求踢出玩家
+message ReqKickOutMember {
+  optional int64 memberId = 1;//选择的玩家ID
+}
+
+//请求调整职位
+message ReqChangePosition {
+  optional int64 memberId = 1;//调整的成员ID
+  optional int32 position = 2;//调整的职位对应的值
+}
+
+//发送申请入会列表信息
+message ResSendApplyListInfo {
+  repeated ApplyListInfo applyInfo = 1;//申请列表信息
+  required int32 automaticPassing = 2;//自动通过等级
+}
+
+//发送修改公告信息
+message ResSendChangeAnnounce {
+  optional string announce = 1;//调整后的公告
+}
+
+//发送调整职位信息
+message ResSendChangePosition {
+  optional UnionMemberInfo changePosition = 1;//玩家职位信息
+  optional UnionMemberInfo leaderChange = 2;//会长职位信息
+  optional PositionInfo position = 3;//职位信息
+}
+
+//请求处理申请列表信息
+message ReqCheckApplyList {
+  required int64 roleId = 1;//当前操作申请的玩家
+  required int64 applyRoleId = 2;//要处理的玩家ID
+  optional int32 checkState = 3;//处理方式 1拒绝2同意
+}
+
+//发送行会活跃信息
+message ResSendUnionActiveInfo {
+  optional int32 activePoint = 1;//今日活跃点
+  repeated int32 activeId = 2;//已领取的活跃奖励
+}
+
+//获取行会活跃奖励信息
+message ReqGetUnionActiveReward {
+  optional int32 activeId = 1;//要领取的活跃id
+}
+
+//请求设置行会按钮
+message ReqUnionSetUp {
+  optional int32 type = 1;//设置类型  1是自动加入  2是兑换装备
+  optional int32 setValue = 2;//设置值 0是关闭 填转生等级  或者等级
+  optional int32 extraParam = 3;//设置的参数
+}
+
+//发送行会设置信息
+message ResSendUnionSetUp {
+  optional UnionSettingInfo settingState = 1;
+}
+
+//是否有奖励角标
+message ResHasRewardInfo {
+  optional int32 reward = 1;//有奖励的提示
+}
+
+//是否有申请角标
+message ResHasApplyInfo {
+  optional int32 apply = 1;//申请提示
+}
+
+//发送行会BOSS信息
+message ResSendUnionBossInfo {
+  repeated UnionBossInfo bossInfo = 1;//boss信息
+  optional int32 callNum = 2;//已召唤boss次数
+  optional int32 aidNum = 3;//协助剩余次数
+}
+
+//发送行会个人挑战信息
+message ResSendUnionPersonChallengetInfo {
+  optional int32 currentMonsterWeaken = 1;//本关怪物消减
+  optional int32 currentFloor = 2;//自已当前的关卡
+  optional int32 instanceId = 3;//副本Id
+  optional string firstSuccess = 4;//空为没人通关 其余为通关玩家的名字
+  optional int32 lifeMaxInstanceId = 5;//达到的最大关数的副本id
+  optional int32 firstRewardInstanceId = 6;//当前可领取首通奖励副本id
+  optional int32 resetCount = 7;//今日重置次數
+  optional int32 challengeBarrier = 8;//今日已成功挑战关卡数
+}
+
+//发送行会挑战下一关卡信息
+message ResUnionChallengeNextInstance {
+  optional int32 nextInstanceId = 1;//下一关卡副本id
+}
+
+//发送行会挑战排行信息
+message ResSendUnionChallengetRank {
+  repeated UnionChallengeRank rankInfo = 1;//排行信息
+  optional int32 myRank = 2;//本人的排行
+}
+
+//返回行会BOSS副本归属信息
+message ResUnionInstanceOwner {
+  optional int64 ownerId = 1;//归属者id
+}
+
+//发红包
+message ReqSendUnionRedPack {
+  optional int32 money = 1;//元宝数
+  optional string content = 2;//文字内容
+  optional int32 count = 3;//个数
+}
+
+//抢红包
+message ReqRobRedPack {
+  optional int64 redPackId = 1;//红包id
+}
+
+//抢红包返回
+message ResRobRedPack {
+  optional string sender = 1;
+  optional int32 senderCareer = 2;
+  optional int32 sendSex = 3;
+  optional int32 money = 4;
+  optional int32 getCount = 5;//已领取个数
+  optional int32 maxCount = 6;//总数
+  optional int32 getMoney = 7;//已领取的红包
+  optional int32 maxMoney = 8;//红包的总金额
+  optional string content = 9;//祝福语
+  optional UnionRedPackRecordInfo yuanbao = 10;//红包记录列表
+}
+
+//红包面板数据
+message ResOpenRedPackPanel {
+  optional int32 todayCount = 1;
+  optional int32 todayMoney = 2;
+  repeated UnionRedPackInfo redPackList = 3;
+  repeated UnionRedPackRecordInfo redPackRecordList = 4;
+}
+
+//查看红包详情
+message ReqRedPackDetail {
+  optional int64 redPackId = 1;//红包id
+}
+
+//发送可领取行会挑战通关奖励
+message ResCanGetCrossReward {
+  optional int32 floorId = 1;//当前可领取的关卡
+  optional int32 state = 2;//0不可领取 1可领取 2已领取
+}
+
+//请求召唤行会boss（进入副本）
+message ReqCallUnionBoss {
+  optional int32 itemId = 1;//boss召唤令
+}
+
+//请求挑战行会boss（进入副本）
+message ReqEnterUnionBoss {
+  optional int32 line = 1;//副本唯一id
+}
+
+//请求重置行會挑戰
+message ResUnionRedPackInfo {
+  optional UnionRedPackInfo redPackInfo = 1;  //对应上面的请求
+}
+
+//请求弹劾会长
+message ReqImpeachLeader {
+  required int64 leaderId = 1;//会长id
+}
+
+//请求修改行会名字
+message ReqChangeUnionName {
+  optional string newUnionName = 1;
+}
+
+//发送召唤公告
+message ResSendUnionAnnounceResult {
+  optional string callName = 1;//召唤者姓名
+  optional int32 mapId = 2;//地图id
+  optional int32 line = 3;//副本line
+}
+
+//发送图腾信息
+message ResTotemInfo {
+  repeated UnionTotemInfo roleTotemList = 1;//角色图腾列表
+}
+
+//请求升级行会图腾
+message ReqLevelUpUnionTotem {
+  optional int32 group = 1;//图腾类型
+}
+
+//返回升级行会图腾信息
+message ResLevelUpUnionTotem {
+  optional UnionTotemInfo totem = 1;//图腾
+}
+
+//请求内推玩家加入行会
+message ReqInviteForEnterUnion {
+  optional int64 roleId = 1;//被邀请者
+}
+
+//发送内推信息至被邀请者
+message ResInviteForEnterUnion {
+  optional int64 unionId = 1;
+  optional string unionName = 2;
+  optional string inviterName = 3; //邀请者name
+}
+
+//同意内推加入行会
+message ReqAgreeUnionInvite {
+  optional int64 unionId = 1; //行会id
+}
+
+//返回请求行会仓库
+message ResUnionWarehouseInfo {
+  optional int32 maxEquipGridCount = 1; //当前仓库总的格子的数量
+  repeated OneItemAllInfo itemAllInfo = 2; //道具列表
+  optional int32 equipLimit = 3;//公会仓库精英以上成员可兑换装备的装备转生等级设置
+  optional int64 unionScore = 4;
+}
+
+//返回行会仓库一个格子的所有信息
+message OneItemAllInfo {
+  optional int32 itemId = 1; //装备的itemId
+  optional int32 itemCount = 2 ;//数量
+  optional int32 needMoney = 3 ;//所需元宝数
+}
+
+//请求仓库一个格子的所有数据
+message ReqGetBagItemInfo {
+  optional int32 itemId = 1;//装备的itemId
+}
+
+//返回行会仓库一个格子的所有数据
+message ResGetBagItemInfo {
+  repeated bagV2.BagItemInfo itemList = 1; //道具列表
+}
+
+//请求捐献装备
+message ReqDonateEquip {
+  optional int64 EquipmentId = 1;//捐献装备(唯一id)
+  optional int32 count = 2 [default = 1];
+}
+
+
+
+//请求兑换装备
+message ReqConversionEquip {
+  optional int32 itemId = 1; //itemId
+  optional int32 count = 2;//数量
+  repeated int64 EquipLid = 3;//兑换装备唯一id
+}
+
+
+
+//行会领导请求销毁装备
+message ReqDestoryEquip {
+  optional int64 EquipLid = 1; //兑换装备(唯一id)
+}
+
+
+
+//返回行会仓库日志记录
+message ResIntegral {
+  repeated UnionWarehouseUpdateRecordInfo integralInfo = 1; //仓库日志记录
+}
+
+
+//请求玩家行会信息  00
+message ReqGetPlayerUnionInfo {
+  repeated int64 roleId = 1;//玩家ID
+
+}
+//请求获取申请入会列表信息
+message ReqGetApplyListInfo {
+  repeated int64 roleId = 1;//玩家ID
+}
+//捐赠金币返回
+message ResDonateMoney {
+  required int64 contributionHistory = 1;
+}
+//捐赠金币请求
+message ReqDonateMoney {
+  required int32 money = 1;
+}
+//行会升级
+message ResUnionUpGrade {
+  required int32 leve = 1;
+  required int32 unionGold = 2;
+}
+
+//请求退出或者解散行会
+message ReqQuitOrDissolveUnion {
+  required int64 roleId = 1;
+  optional int32 quitType = 2;//1是退出行会   2是解散行会
+}
+
+//发送退出行会成功信息
+message ResSendQuitUnionSuccess {
+  required int64 roleId = 1;
+  required int64 unionId = 2;
+  required string unionName = 3;
+  required int32 contributionHistory = 4;
+  required int64 quitUnionTime = 5;
+}
+
+
+//返回解散行会
+message ResDissolveUnion {
+  required int64 roleId = 1;
+  required int64 unionId = 2;
+  required string unionName = 3;
+  required int32 contributionHistory = 4;
+  required int64 quitUnionTime = 5;
+}
+
+//请求在线会长的行会列表
+message ReqGetAssistantOnlineUnionInfo {
+  required int64 roleId = 1;
+}
+//请求行会成员列表
+message ReqUnionMemberInfo {
+  optional int64 unionId = 1;
+}
+//返回行会成员列表
+message ResUnionMemberInfo {
+  repeated UnionMemberInfo memberInfo = 1;//行会成员信息
+}
+
+//一键忽略玩家入会申请
+message ReqIgnoreAllRole {
+  required int64 unionId = 1;//工会ID
+}
+
+//一键同意玩家入会申请
+message ReqAgreeAllRoleJoinUnion {
+  required int64 unionId = 1;//工会ID
+}
+//拉黑的玩家信息
+message blackApplyInfo {
+  optional int64 roleId = 1;//拉黑的玩家ID
+  optional string roleName = 2;//拉黑的玩家name
+  optional int32 career = 3; //职业
+  optional int32 level = 4 ; //等级
+  optional int32 sex = 5;
+}
+//请求拉黑的玩家列表
+message ReqGetBlackApplyRole {
+  optional int64 roleId = 1;//拉黑的玩家ID
+  optional int64 unionId = 2;//工会ID
+}
+//返回拉黑的玩家列表
+message ResGetBlackApplyRole {
+  repeated blackApplyInfo blackApplyRole = 1;//拉黑的玩家信息
+}
+//移除行会黑名单
+message ReqRemoveBlackApplyRole {
+  required int64 removeRoleId = 1;//要移除的玩家ID
+}
+//仅显示在线成员
+message ReqGetOnlineMember {
+  required int64 roleId = 1;
+}
+//会长踢人
+message ReqKickOutGuild {
+  required int64 kickRoleId = 1;//要T出的成员ID
+}
+//返回被T的人的公会ID和名字
+message ResKickOutGuild {
+  required int64 unionId = 1;
+  required string unionName = 2;
+}
+//进行投票
+message ReqImpeachmentInfo {
+  required bool isAgree = 2;//玩家是否同意  true为同意
+}
+//查看弹劾票行
+message ReqImpeachmentVote {
+  required bool isAgree = 2;//玩家是否同意  true为同意
+}
+
+//返回投票票型
+message ResImpeachmentVote {
+  required int32 agreeSum = 1;//同意人数
+  required int32 disagreeSum = 2;//反对人数
+  required int32  myVote = 3;// 0 未投票, 1 同意, 2 反对
+}
+
+//请求获取仓库列表
+message ReqGetUnionItems {
+  required int64 unionId = 1;//id
+}
+//请求设置自动加入
+message ReqAutomaticPassing {
+  optional int64 unionId = 1;//id
+  required int32 automaticPassing = 2;//修改的值
+}
+//行会改变消息
+message ResTheUnionChange {
+  optional int64 unionId = 1;
+  optional string unionName = 2;
+}
+
+//行会改变向周围玩家发送消息
+message ResUnionNameChange {
+  optional int64 rid = 1;
+  optional int64 unionId = 2;
+  optional string unionName = 3;
+  optional int32 unionIconId = 4;
+  optional int32 unionPos = 5;
+  optional int32 unionRank = 6;//帮会排名
+}
+
+//请求转让会长 KFF
+message ReqAssignmentMonster {
+  optional int64 newMonsterId = 1;//转让给此人的ID
+  optional int32 position = 2;//职位
+}
+
+//收到了请求转让会长消息 ffk
+message GetAssignment {
+  optional int64 oldMonsterId = 1; //原会长ID
+  optional int32 position = 2;//职位
+  optional string oldMonsterName = 3; //原会长名字
+}
+
+//发送消息处理确认转让会长 kff
+message YesGetUnionMonster {
+  optional int64 oldMonsterId = 1; //原会长ID
+  optional int32 position = 2;//职位
+  optional int64 newMonsterId = 3;//转让给此人的ID
+  optional int32 isAgree = 4; //1是同意当会长  2是不同意
+
+}
+
+//发给双方的消息
+message HandlingSuccess {
+  optional int32 isAgree = 1; //1是同意当会长  2是不同意
+}
+
+//请求行会改变等级
+message ReqUnionUpgrade {
+  optional int32 toLevel = 1;//要升到几级（或者说要降到几级）
+}
+
+//请求改变行会图腾
+message ReqUnionBadgeReplace {
+  optional int32 unionIcon = 1;//要升到几级（或者说要降到几级）
+}
+
+//请求改变行会升级的红点提示
+message ReqUpdateUnionUpgradeRedPoint {
+  optional int64 unionId = 1;//行会ID
+}
+
+//请求改变行会召唤令的使用职位
+message ReqUpdateUnionCallBackUsePosition {
+  optional int32 position = 1;//职位
+}
+
+// 合并申请
+message ReqCombineUnion {
+  required int64 unionId = 1; //目标行会 id
+}
+
+// 合并申请响应, 目标会长收到
+message ResApplyCombineUnion {
+  required int64 unionId = 1;
+  optional string unionName = 2;
+  optional int64 leaderId = 3;
+  optional string leaderName = 4;
+}
+
+message ReqConfirmCombineUnion {
+  required int64 unionId = 1; //申请行会 id
+  required int32 agree = 2;
+}
+
+
+//返回战利品仓库
+message ResSpoilsHouse {
+  repeated bagV2.BagItemInfo spoils = 1;//战利品
+}
+//战利品仓库更新消息
+message ResSpoilsHouseUpdate {
+  repeated bagV2.BagItemInfo newList = 1;//添加或更新
+  repeated int64 removeList = 2;//删除
+  optional int32 operate = 3;//1:活动增加 2:会长发放
+}
+//请求发放战利品
+message ReqGiveSpoils {
+  optional int64 SpoilsId = 1;//唯一id
+  optional int32 num = 2;//每个人数量
+  repeated int64 memberList = 3;//成员列表
+}
+//可发放战利品的成员列表
+message ResCanGetSpoilsMembers {
+  repeated SpoilsMemberInfo members = 1;
+}
+message SpoilsMemberInfo {
+  optional int64 rid = 1;
+  optional string name = 2;
+  optional int32 career = 3;
+  optional int32 sex = 4;
+  optional int32 level = 5;
+  optional int32 remain = 6;//剩余次数
+}
+
+//更新行会今天的税收
+message updateTodayCityTax {
+  optional int64 unionTodayTax = 1;//行会今天的税收
+}
+
+// 更新语音状态
+message UnionVoiceStatus {
+    repeated int64 canSendVoiceMembers = 1; // 当前有语音权限的玩家
+    repeated int64 voiceOpenMembers = 2; // 当前开启语音的玩家
+}
+
+// 会长切换语音权限
+message ReqToggleSendVoice {
+  required int64 roleId = 1;
+  required int32 canSend = 2; //非 0 有权限
+}
+
+// 切换语音开启关闭
+message ReqToggleVoiceOpen {
+  required int32 open = 1; // 非 0 开启
+}
+
+message ResMagicCircleStart {
+  required int32 mid = 1; //怪物id
+}
+
+message ResMagicCircleInfo {
+  optional int32 mid = 1; //0,没有 怪物id
+  optional int32 curCount = 2;
+  optional int32 maxCount = 3;
+}
+
+message ReqUnionRedBagInfo{
+  optional int64 id = 1;
+}
+
+message ResUnionRedBagInfo{
+  optional int64 id = 1;
+  repeated RedBagRoleInfo info = 2;
+  optional int32 subMoney = 3; //剩余金额
+  optional int32 state = 4; //状态，0.未领取，1已领取 2.已领完
+  optional string roleName = 5;
+  optional int32 career = 6;
+  optional int32 sex = 7;
+  optional int64 rid = 8; //发的人的roleid
+  optional int32 moneyId = 9;
+  optional int32 type = 10;//1=红包券发送 2=扣除自身货币发送
+}
+
+message RedBagRoleInfo{
+  optional int64 rid = 1;
+  optional string name = 2;
+  optional int32 money = 3;
+  optional int64 time = 4;
+}
+
+message ReqSendRedBag{
+  optional int64 id = 1; //战利品id
+  optional int32 money = 2;
+  optional int32 count = 3; // 可领人数
+  optional int32 type = 4;//id == 0时，1=钻石类型  2=元宝类型
+}
+
+
+message ReqRecieveUnionRedBag{
+  optional int64 id = 1;
+}
+
+message ResUnionSpeakerStatus {
+  repeated int64 speakerCloseMembers = 1; // 已关闭喇叭的成员 id, 不在里面的就是开着的
+}
+
+//帮会召唤令
+message ResUnionCallBackInfo{
+	optional int64 cdTime = 1;//cd时间戳
+	optional int64 durationTime = 2;//持续时间
+}
+
+
+//魔法阵boss积分排行
+message ResUnionMagicBossRank{
+	repeated UnionMagicBossRankInfo info = 1;
+}
+
+message UnionMagicBossRankInfo{
+        optional int32 rank = 1; //排名
+	optional int64 rid  = 2; //玩家id
+	optional string name = 3; //人名
+	optional int32 score = 4; //积分
+}
+
+//更新代理会长职位
+message ResUpdateAgencyChairman{
+	optional int64 unionId = 1;//帮会Id
+	optional int64 chairmanId = 2;//代理会长Id
+	optional string chairmanName = 3;//代理会长名称
+}
+
+//返回查看行会复仇
+message ResToViewUnionRevenge{
+	repeated UnionRevenge info = 1;
+}
+
+message UnionRevenge{
+	optional int64 id = 1;
+	optional int64 createTime = 2;//创建时间
+	optional int64 killedRoleId = 3;//被杀的玩家ID(本行会成员)
+	optional int64 revengeRoleId = 4;//仇人玩家ID
+	optional int64 completeRoleId = 5;//完成复仇的玩家ID
+	optional int32 revengeType = 6;//复仇type 0为未完成复仇 1为完成复仇
+	optional int32 canReward = 7;//领奖状态 0不可领 1可领取
+	optional string revengeRoleName = 8;//仇人玩家姓名
+	optional int64 revengeRoleUnionId = 9;//仇人玩家帮会ID
+	optional string revengeRoleUnionName = 10;//仇人玩家帮会名称
+	optional int32 revengeRoleCareer = 11;//仇人玩家职业
+	optional int32 revengeRoleLevel = 12;//仇人玩家等级
+	optional int32 revengeRoleSex = 13;//仇人玩家性别
+	optional string killedRoleName = 14;//被杀的玩家姓名(本行会成员)
+}
+
+//请求领奖
+message ReqRewardUnionRevenge{
+	optional int64 id = 1;
+}
+
+//返回领奖状态
+message ResRewardUnionRevenge{
+	optional int64 id = 1;
+	optional int32 canReward = 2;//领奖状态 0不可领 1可领取
+}
+
+//刷新一个行会仇人
+message ResAddUnionRevenge{
+	optional UnionRevenge unionRevenge = 1;//新添加的行会仇人
+	optional int32 type = 2;//0添加 1刷新
+}
+
+//消耗元宝请求定位仇人位置
+message ReqGetRevengePoint{
+	optional int64 id = 1;
+}
+
+//返回仇人位置
+message ResGetRevengePoint{
+	optional int64 targetId = 1;//目标玩家ID
+	optional string targetName = 2;//目标玩家名字
+	optional int32 mapId = 3;
+	optional int32 x = 4;
+	optional int32 y = 5;
+	optional int32 line = 6;
+}
+
+//请求联服同盟投票
+message ReqWillJoinUniteUnionInfo {
+	optional int32 uniteUnionType = 1; //同盟类型
+}
+
+//联服同盟投票
+message WillJoinUniteUnionInfo {
+	optional int32 uniteUnionType = 1; //同盟类型
+	optional int32 uniteUnionCount = 2; //投票个数
+}
+
+//所有联服同盟投票
+message AllWillJoinUniteUnion {
+	repeated WillJoinUniteUnionInfo allJoin = 1; //所有的
+}
+
+//别的服一个联盟投票信息(包括自己服)
+message OtherUnionVoteInfo {
+    optional int32 hostId = 1;
+    optional int64 unionId = 2;
+	optional string unionName = 3;
+    optional int32 activeCount = 4; //行会活跃度
+    optional int32 num = 5; //行会人数
+	repeated WillJoinUniteUnionInfo  WillJoinUniteUnionInfo = 6; //联服同盟投票
+}
+
+//一个服所有帮会联盟投票信息(包括自己服)
+message OtherServerUnionVoteAllInfo {
+	repeated OtherUnionVoteInfo otherUnionVoteInfo = 1;
+}
+
+//所有服联服的投票信息(包括自己服)
+message OtherAllUniteUnionVoteInfo {
+	repeated OtherServerUnionVoteAllInfo otherServerUnionVoteAllInfo = 1;
+}
+
+
+//个人的排行
+message UnionBossPlayerRankInfo {
+	repeated UnionBossPlayerRankStrcut playerRanks = 1; //玩家排行榜.
+	optional UnionBossPlayerRankStrcut selfRank = 2; //自己的排名.
+}
+
+//排行榜结构.
+message UnionBossPlayerRankStrcut {
+	required int32 rankNo = 1; //排名
+	required int64 score = 2; //分数.
+	required string playerName = 3; //玩家的姓名.
+}
+
+//公会的排行
+message UnionBossUnionRankInfo {
+	repeated UnionBossUnionRankStrcut unionRanks = 1; //玩家排行榜.
+	optional UnionBossUnionRankStrcut selfUnioRank = 2; //自己的排名.
+}
+//公会结构,看起来和个人一样,但是不知道会不会改,所以没有复用结构.
+message UnionBossUnionRankStrcut {
+	required int32 rankNo = 1; //排名
+	required int64 score = 2; //分数.
+	required string unionName = 3; //公会的名字.
+}
+
+//这个在副本里面才能请求
+message UnionBossAddBuff {
+	required int32 type = 1; // 1为个人,2为行会. 
+}
+
+
+//返回鼓舞信息,因为涉及到公会有其他人所以这个协议每次打开面板之后请求.
+message UnionBossBuffInfo {
+	required int32 remainUnionNum = 1; //这里是字符串解析的规则不自然,就服务器解析之后发过去吧, 公会的次数.
+	required int32 remainPersonalNum = 2;//个人剩余次数.
+  required int32 unionNum = 3; //公会已经使用的次数
+  required int32 personalNum = 4; //玩家已经使用的次数.
+}

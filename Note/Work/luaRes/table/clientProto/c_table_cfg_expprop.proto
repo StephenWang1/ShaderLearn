@@ -1,0 +1,16 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_EXPPROP
+{
+	required uint32 id = 1;//唯一id#客户端  唯一标识id
+	required int32 itemId = 2;//使用道具id#客户端  
+	required int32 multiple  = 3;//倍数#客户端  
+	optional string goal = 4;//消耗道具id#客户端  道具id#数量，不填或为0时需显示为免费兑换
+	optional string condition = 5;//限制条件#客户端  不填或为0时一直显示
+}
+
+message CFG_EXPPROPARRAY
+{
+	repeated CFG_EXPPROP rows = 1;
+}

@@ -1,0 +1,40 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_RECHARGE
+{
+	required uint32 id = 1;// id#客户端#C   id#客户端
+	//required uint32 type = 2;//充值类型#客户端#C  1常规档次2首充档次6直购7活动充值8投资充值9零元购10猎魔人11限购礼包钻石购买3元宝礼包4新增钻石礼包13循环礼包14狂欢密令15新首充
+	//optional string name = 3;//充值说明#客户端#C  
+	//optional string desc = 4;//充值描述#客户端#C  
+	//required uint32 index = 5;//排序#客户端#C  
+	//required int32 reward = 6;//实发奖励包#客户端#C  boxID，展示效果
+	//optional string title = 7;//标题#客户端#C  前端显示用,资源名（背景#标题#礼包图片）
+	//optional string effectId = 8;//使用的特效#客户端#C  特效id，仅充值档位用
+	//required uint32 rmb = 9;//充值金额#客户端#C  价格除2之外不可重复，单位是分不是元
+	//required int32 storeIndex = 10;//商店索引#客户端#C  有些不需要在这里实际购买的，转为买商店的物品，填写cfg_store表id
+	//required int32 clientPrice = 11;//商店价格#客户端#C  客户端用，storeIndex有填的字段这里填写价格用于展示
+	//required int32 diamond = 12;//获得钻石数量#客户端#C  实际获得的（获得的不是钻石的，一律配在reward里）
+	//optional IntListList bind = 13;//获得返利钻石数量#客户端#C  每日第一次额外赠送的返利钻石数，vip下限#vip上限#数量&vip下限#vip上限#数量...
+	//required int32 limitType = 14;//限购类型#客户端#C  1每日限购2终身限购
+	//required int32 limitCount = 15;//限购次数#客户端#C  
+	//optional string conditions = 16;//购买限制#客户端#C  conditionId,&与 |或 
+	//required int32 goodsGroup = 17;//商品组#客户端#C  不同组互不影响
+	//required int32 goodsId = 18;//商品id#客户端#C  一键直购的总和包id为0买了之后同组的就不可以买了，其余商品id不可相同(不同组的也不可以）
+	//optional IntListJingHao effectiveTime = 19;//生效时间#客户端#C  开服第几天开始#开服第几天结束，9999默认不结束
+	//required uint32 isTimeLimit = 20;//礼包类型#客户端#C  1是领奖-领奖页签下的限时礼包，2是领奖-终身限购页签下的礼包，不填或填0默认否
+	required int32 rebatePeriod = 21;//首次充值返利道具间隔天数#客户端  开服第1天起，每x天作为一个时间段，在此时间段内的首次档位充值可领取奖励
+	optional IntListList rebateBox = 22;//首次充值返利道具#客户端  开服天数开始#开服天数结束#返利box&开服天数开始#开服天数结束#返利box.....（代表领取返利时所处的开服天数，不同天数给对应的box）
+	optional IntListList rebateBoxClient = 23;//首次充值返利道具-展示用#客户端  rebateBox字段客户端特殊展示使用，不参与投放
+	optional IntListList rewardBox = 24;//首次充值返利道具#客户端  当前在用，开服天数开始#开服天数结束#返利box&开服天数开始#开服天数结束#返利box.....（代表领取返利时所处的开服天数，不同天数给对应的box）
+	//required int32 showReward = 25;//奖励展示包#客户端未使用#C  
+	//required uint32 firstDouble = 26;//是否初次购买双倍#客户端未使用#C  
+	//required uint32 preId = 27;//前置需求#客户端未使用#C  需要先充值指定档次才会显示出来
+	//optional string rechargePoint = 28;//充值所增加的充值额度#客户端未使用#C  充值统计用，没有实际发放钻石
+	//required int32 timeCount = 29;//礼包循环购买  12小时后预备刷新
+}
+
+message CFG_RECHARGEARRAY
+{
+	repeated CFG_RECHARGE rows = 1;
+}

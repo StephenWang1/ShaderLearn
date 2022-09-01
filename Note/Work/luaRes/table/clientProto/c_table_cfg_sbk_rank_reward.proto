@@ -1,0 +1,14 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_SBK_RANK_REWARD
+{
+	required uint32 id = 1;//编号#客户端  编号
+	optional IntListJingHao rank = 2;//所需个人积分#客户端  个人总积分
+	optional string reward = 3;//奖励#客户端  奖励
+}
+
+message CFG_SBK_RANK_REWARDARRAY
+{
+	repeated CFG_SBK_RANK_REWARD rows = 1;
+}

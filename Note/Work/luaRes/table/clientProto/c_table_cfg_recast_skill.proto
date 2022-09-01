@@ -1,0 +1,16 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_RECAST_SKILL
+{
+	required uint32 id = 1;//id#客户端  重铸id
+	optional string remarks = 2;//配饰类型#客户端  配饰对应subtype类型items表关联（22灵魂刻印 24面纱 13灯座 15玉佩 21宝饰 18秘宝）
+	required int32 effect = 3;//特效显示#客户端  特殊效果的显示 格式1显示 0不显示
+	required uint32 buffTips = 4;//重铸技能tips#客户端  重铸技能tips 格式 buffid
+	optional string recastLevel = 5;//重铸特殊激活等级显示#客户端  特殊效果描述文本 为空就是不显示
+}
+
+message CFG_RECAST_SKILLARRAY
+{
+	repeated CFG_RECAST_SKILL rows = 1;
+}

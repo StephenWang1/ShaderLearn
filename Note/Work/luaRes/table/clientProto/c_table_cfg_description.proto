@@ -1,0 +1,16 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_DESCRIPTION
+{
+	required uint32 id = 1;//id#客户端#C#不存在共同参与合并的字段  编号
+	//required uint32 subType = 2;//系统划分#客户端#C#不存在共同参与合并的字段  根据系统划分（客户端写死，不可改）(第2345位划分系统，第67位为编号)
+	//required string value = 3;//描述内容#客户端#C  规则界面（#分段\n换行）活动面板（\n换行） 标题&内容&按钮
+	//optional string remarks = 4;//标题#客户端#C  说明标题栏（填入色值可自行换色）
+	optional IntListList valueChange = 5;//内容更换#客户端  内容更换，在玩家达到一定条件后，更换显示为相应描述id的内容   condition#id&conditionid#id
+}
+
+message CFG_DESCRIPTIONARRAY
+{
+	repeated CFG_DESCRIPTION rows = 1;
+}

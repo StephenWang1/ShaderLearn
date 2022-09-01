@@ -1,0 +1,22 @@
+package sabacV2;
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "SabacProto";
+
+
+//请求排行榜的信息.
+message ResSabacDonateRankInfo {
+	repeated  SabacDonateRankPlayer rankList = 1; //前五名的排行榜玩家.
+	optional SabacDonateRankPlayer self = 2;  //自己的排名.
+	required int32 totalDonate = 3; //总共的捐献排名.
+}
+
+//请求捐献,捐献成功返回请求排行榜信息的PB.
+message ReqSabacDonate {
+	required int32 donate = 1; //捐献的钻石.
+}
+
+message SabacDonateRankPlayer {
+	required string name = 1; //玩家的名字
+	required int32 donamte = 2; // 捐献的额度
+	required int32 rankNo = 3; //排名.
+}

@@ -1,0 +1,32 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_RANK
+{
+	required uint32 id = 1;//id#客户端#C  与cfg_ranking_reward表type字段对应，如果有发放排行榜奖励的，两边必须相同，否则排行榜奖励发放异常
+	//required uint32 index = 2;//排序#客户端#C#不存在共同参与合并的字段  榜单排序
+	//optional string top = 3;//上方页签名称#客户端#C  界面上方显示按钮
+	//optional string left = 4;//左侧页排序#客户端#C  界面左侧显示按钮，排序#名称
+	//required string type = 5;//分类页签#客户端#C  每个榜单里显示的条目类型，项#分隔
+	//optional string viewType = 6;//排行榜下方视图#客户端#C  下方信息栏类型：1.无奖励   2.有奖励
+	//required int32 description = 7;//说明#客户端#C  是否显示说明问号，显示填Cfg_Description id，不显就不填
+	//optional IntListList widget = 8;//排行榜数据widget#客户端#C  排行榜数据widget 排行榜数据ID（客户端定）#X坐标1名次 2名字 3职业 4等级 5灵兽 6划拳积分 7奖励宝箱 8魅力值 9夫妻信息 10亲密度 11性别 12送花数 13元宝交易额 14行会 15boss击杀 16人物击杀 17装备掉落 18详情 19战勋 20称号 21奖励预览
+	//optional IntListJingHao topWidget = 9;//排行榜数据topWidget#客户端#C  排行榜数据topWwidget X坐标
+	required uint32 lianfu = 10;//联服是否显示#客户端  联服是否显示此榜 1显示0不显示默认0
+	required uint32 reqId = 11;//请求id#客户端  对应原排行榜id
+	//optional string title = 12;//称号奖励#服务端  对应称号title表id，发称号奖励
+	//optional IntListList limit = 13;//上榜门槛#服务端  格式：type类型#下限#上限&type类型#下限#上限   type类型：1.等级 2.攻击力 3.魅力值 4.划拳积分 5夫妻亲密度 6三只灵兽攻击总值 7送花总数 8交易行卖出道具元宝总数 9击杀Boss数量总数  10击杀70级以上玩家总数（70杂项表）  11用掉落装备回收元宝数量 12战勋等级
+	//required int32 time = 14;//榜单刷新时间#服务端  排行榜刷新时间，挂钩left字段；不填或0为每1分钟刷新；填值为时间，单位：秒
+	//optional IntListJingHao cleanTime = 15;//排行榜数据清理#服务端  填0为不清除，填值按照时间清除，单位：天     1.按(时)   2.按(天)   格式：类型#时间（填了1天就是第2天0点截止，没有就不填）3.周几0点刷 0点不是24点
+	//required int32 titleAnnounce = 16;//更新公告#服务端  对应cfg_announce表id，只填刷新排行榜时名次变化发送的公告，比如获得战力第一
+	//optional IntListJingHao settleTime = 17;//结算奖励时间#服务端  类型：1.按(时)   2.按(天)   格式：类型#时间（填了1天就是第2天0点截止，没有就不填）3.周几0点结算
+	//required uint32 mailId = 18;//发送邮件id#服务端  奖励邮件id
+	//required uint32 firstRefreshTime = 19;//开服刷新节点#服务端  每次开服不立即刷新。需要间隔时间刷新（为了让其第一名变动称号的公告不在同一时间内全部发送）（单位：秒）
+	//required uint32 topAnnounce = 20;//第一名变动公告id#服务端  排行榜第一名变动公告id，不填则不发
+	//required uint32 mailOutId = 21;//出榜之后发送邮件id#服务端  在榜内可领奖励，今天出榜之后发送邮件id
+}
+
+message CFG_RANKARRAY
+{
+	repeated CFG_RANK rows = 1;
+}

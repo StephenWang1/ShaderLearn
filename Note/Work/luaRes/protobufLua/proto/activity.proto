@@ -1,0 +1,816 @@
+package activityV2;
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "ActivityProto";
+
+message ActivityInfo{
+	repeated GoalInfo goalInfo = 1;//目标数据
+}
+
+message GoalInfo{
+    optional int32 activityId = 1;
+	optional int32 goalType = 2;//目标类型
+	optional int32 goal = 3;//目标id
+	optional int32 rewardState = 4;//是否领取过:0未领取 1可领取 2已领取
+	optional int32 leftCount = 5;//剩余可领个数
+	optional int32 now = 6;//当前进度
+	optional int32 total = 7;//总进度
+}
+
+
+//返回活动面板数据
+message ResOpenPanel{
+	optional int32 activityType = 1;//组id
+	optional ActivityListInfo info = 2;//活动数据
+}
+
+
+//活动列表数据
+message ActivityListInfo{
+	repeated ActivityDataInfo activityDataInfo = 1;//目标数据
+	optional int32 registerNum = 2; //注册人数参数
+}
+
+//活动数据
+message ActivityDataInfo {
+    optional int32 activityId = 1;
+	optional int32 leftCount = 2;//剩余可领个数
+	optional RoleActivityInfo roleGoalInfo = 3; //个人活动数据
+	optional ServerActivityInfo serverGoalInfo = 4; //全服活动数据
+	optional int32 dataType = 5; //1:个人 2：全服 3： 先全服再个人
+}
+
+
+//个人目标数据
+message RoleGoalInfo {
+    optional int32 goalId = 1;  //活动目标ID
+	optional bool ok = 2; //是否已经完成
+    optional int32 count = 3; //当前进度
+}
+
+//个人活动数据
+message RoleActivityInfo {
+	optional int32 activityId = 1;
+	optional int32 rewardState = 2; //是否领取过:0未领取 1可领取 2已领取
+	optional int32 count = 3; //当前进度
+	optional int32 time = 4; //参与时间
+	repeated RoleGoalInfo roleGoalInfos = 5; //目标数据
+}
+
+//全服目标数据
+message ServerGoalInfo {
+	optional int32 goalId = 1;  //活动目标ID
+	optional bool ok = 2; //是否已经完成
+    optional int32 count = 3; //当前进度
+	optional int32 no = 4; //完成的名次
+    optional int64 finishRoleId = 5; //完成的角色,也是可以领取的角色
+	optional string finishName = 6; //完成的角色名
+    optional bool award = 7; //是否已经领奖
+	optional int32 finishSex = 8;      //完成的角色性别
+	optional int32 finishCarrer = 9;   //完成的角色职业
+}
+
+//全服活动数据
+message ServerActivityInfo {
+	optional int32 activityId = 1;
+	optional int32 rewardState = 2; //是否领取过:0未领取 1可领取 2已领取
+	optional int32 count = 3; //当前进度
+	optional int32 time = 4; //参与时间
+	repeated ServerGoalInfo serverGoalInfos = 5; //目标数据
+	repeated int32 roleCanRewardGoalId = 6; //角色可以领取的goal id
+}
+
+
+message RankInfo{
+	optional int32 rank = 1;//排名
+	optional string roleName = 2;//名字
+	optional int32 rein = 3;//转生
+	optional int32 level = 4;//等级
+	optional int32 param = 5;//参数，积分
+	optional int32 award = 6; //奖励
+	optional int32 career = 7; //职业
+	optional int64 id   = 8 ; //玩家id
+}
+
+message RoleSimpleInfo{
+	optional int32 sex = 1;//职业
+	optional int32 career = 2;//性别
+	optional int32 cloth = 3;//武器
+	optional int32 weapon = 4;//衣服
+	optional int32 wing = 5;//翅膀
+	optional int32 fashionCloth = 6;//时装衣服
+	optional int32 fashionWing = 7;//时装翅膀
+	optional int32 fashionWeapon = 8;//时装武器
+}
+
+message ActivityRankInfo{
+	optional int32 activityId = 1;
+	optional RoleSimpleInfo firstRoleBean = 2;//排名第一玩家的模型
+	optional RoleSimpleInfo secondRoleBean = 3;//排名第二玩家的模型
+	optional RoleSimpleInfo thirdRoleBean = 4;//排名第三玩家的模型
+	repeated RoleSimpleInfo rankInfoList = 5;//排行榜数据
+}
+
+message FirstKillInfo{
+	optional int32 instanceId = 1;//对应副本id
+	optional int32 state = 2;//击杀状态0未击杀1击杀
+}
+
+message FirstKillRewardInfo{
+	repeated FirstKillInfo KillInfos = 1;//击杀信息
+	optional int32 reward = 2;//是否已领奖 0不可领奖1可领奖2已领奖
+	optional int32 num = 3;//全服剩余份数
+}
+
+message limitTimeTaskInfo{
+    optional int32 taskId = 1;//任务id
+	optional int32 taskValue = 2;//完成进度
+	optional int32 state = 3;//状态 1 未完成 2 已完成 3 已领奖
+	optional int32 endTime = 4;//结束时间(s)
+}
+
+message DayInfoOfHappySevenDay{
+    optional int32 day = 1;//天数
+	repeated GroupInfoOfDay groupInfo = 2;//组活动信息
+}
+
+message GroupInfoOfDay{
+	optional int32 group = 1;//组别
+	repeated IndexInfoOfDay indexInfo = 2;//序号信息
+}
+
+message IndexInfoOfDay{
+	optional int32 activityId = 1;//活动id
+	optional int32 day = 2;//天数
+	optional int32 group = 3;//组别
+	optional int32 index = 4;//顺序
+	optional int32 goal = 5;//目标
+	optional int32 completeCount = 6;//完成数量
+	optional int32 total = 7;//总进度
+	optional int32 rewardState = 8;//领取状态 0 不可领 1 可领取 2 已领取
+}
+
+message ActivityTimeInfo{
+	optional int32 activityId = 1;//活动id
+	optional int32 beginTime = 2;//开始时间(s)
+	optional int32 endTime = 3;//结束时间(s)
+}
+
+message RaffleItem{
+	optional int32 itemId = 1;//道具id
+	optional int32 count = 2;//道具数量
+}
+
+message CrazyHappyInfo{
+	optional int32 group = 1;//组别
+	optional int32 index = 2;//编号
+	optional int32 status = 3;//领取状态
+	optional int32 curCount = 4;//当前数量
+	optional int32 totalCount = 5;//总数量
+}
+
+message ShouHuLimitBuyInfo{
+	optional int32 activityId = 1;//活动id
+	optional int32 lifeCount = 2;//已经购买的次数
+	optional int32 leftCount = 3;//剩余可购买次数
+}
+
+message GrowTrailActivityInfo{
+	optional int32 dayNo = 1;//天数
+	optional int32 group = 2;//组
+	optional int32 index = 3;//编号
+	optional int32 curCount = 4;//当前数量
+	optional int32 rewardState = 5;//奖励状态0 不可领 1 可领取 2已领取
+}
+
+message GrowTrailFinalInfo{
+	optional int32 index = 1;//编号
+	optional int32 rewardState = 2;//奖励状态0 不可领 1 可领取 2已领取
+}
+
+//请求领取活动奖励
+message ReqGetActivityReward{
+    optional int32 activityId = 1;//活动id
+	optional int32 type = 2;//目标类型
+	optional int32 goal = 3;//目标参数
+	optional int32 multi = 4;//多倍领取倍数
+	optional int64 data64 = 5; //客户端传过来的64位，暂时表示回收选择的物品id
+}
+
+//返回领取活动奖励
+message ResGetActivityReward{
+    optional int32 activityId = 1;//活动id
+	optional int32 type = 2;//目标类型
+	optional int32 group = 3;//组id
+	optional int32 goal = 4;//目标参数
+	optional int32 state = 5;//状态
+	optional int32 leftCount = 6;//剩余数量
+}
+
+//请求打开活动面板
+message ReqOpenPanel{
+    optional int32 activityType = 1;
+}
+
+
+//返回排行榜类型活动数据
+message ResRankActivity{
+	optional int32 groupId = 1;//组id
+	repeated ActivityRankInfo rankInfoList = 2;//活动数据
+}
+
+//返回每周充值累计数量
+message ResWeekTotalRechargeNum{
+	optional int32 totalNum = 1;//累计数量
+	optional int32 activityId = 2;
+}
+
+//返回限时任务额外奖励
+message ResExtraReward{
+    optional int32 activityId = 1;//活动id
+	optional int32 time = 2;//剩余时间
+	optional int32 goalType = 3;//当前第几轮
+	optional int32 state = 4;//奖励领取状态
+}
+
+//请求领取限时任务额外奖励
+message ReqGetExtraReward{
+	optional int32 activityId = 1;//活动id
+	optional int32 goalType = 2;//当前第几轮
+}
+
+//请求打开炼制面板
+message ReqOpenLianZhi{
+	optional int32 activityId = 1;//活动id
+}
+
+//返回经验炼制面板
+message ResOpenLianZhi{
+	optional int32 activityId = 1;//活动id
+	optional int32 times = 2;//档次
+	optional int32 state = 3;//1表示炼制获得 0表示其他
+	repeated int32 completedList = 4;//已完成的档次
+}
+
+//请求炼制
+message ReqLianZhi{
+	optional int32 activityId = 1;//活动id
+	optional int32 times = 2;//档次
+}
+
+//发送带目标的活动数据改变
+message ResActivityDataChange{
+    optional int32 activityId = 1;//活动id
+	optional int32 type = 2;//目标类型
+	optional int32 group = 3;//组id
+	optional int32 goal = 4;//目标参数
+	optional int32 state = 5;//状态
+	optional int32 now = 6;//当前进度
+	optional int32 total = 7;//总进度
+}
+
+//发送累计充值天数
+message ResLeijiRechargeDays{
+	optional int32 days = 1;//累计充值天数
+	optional int32 activityId = 2;//活动Id
+}
+
+//发送活动boss信息
+message ResSendActivityBossInfo{
+	optional int32 remainNum = 1;//剩余次数
+	optional int32 hasBuyNum = 2;//已购买次数
+	optional int32 activityId = 3;//活动Id
+}
+
+//发送活动配置改变
+message ResActivityConfigChange{
+	repeated string changedActivityList = 1;
+	repeated string changedGoalList = 2;
+}
+
+//发送财富幸运儿信息
+message ResLuckTreasure{
+    optional int32 activityId = 1;//活动id
+	optional int32 day = 2;//第几天
+	optional int32 openState = 3;//开奖状态 0开奖前 1开奖后
+	optional string luckyName = 4;//获奖者
+	optional int32 luckyNum = 5;//幸运号码
+	repeated int32 luckNumberList = 6;//幸运数字
+}
+
+//发送寻宝送礼信息
+message ResHuntGiftNum{
+	optional int32 activityId = 1;
+	optional int32 num = 2;//活动期间寻宝次数
+}
+
+//发送消费信息
+message ResSpendInfo{
+	optional int32 activityId = 1;
+	optional int32 num = 2;//活动期间寻宝次数
+}
+
+//发送累计登录信息
+message ResSendTotalLoginDay{
+    optional int32 activityId = 1;
+	optional int32 num = 2;//累计登录天数
+}
+//发送全民boss积分
+message ResSendBossScore{
+	optional int32 activityId = 1;
+	optional int32 num = 2;//积分数
+}
+
+//发送首杀boss信息
+message ResSendFirstKillBoss{
+	repeated FirstKillRewardInfo rewardInfos = 1;
+	optional int32 activityId = 2;
+}
+
+//请求领取首杀boss奖励
+message ReqGetFirstKillBossReward{
+	optional int32 activityId = 1;
+	optional int32 cfgId = 2;//首杀表配置id
+}
+
+//发送限时任务信息
+message ResTimeLimitTaskAll{
+	repeated limitTimeTaskInfo taskList = 1;//任务列表
+}
+
+//更新限时任务进度
+message ResUpdateTimeLimitTaskProgress{
+	optional int32 taskId = 1;//任务id
+	optional int32 count = 2;//完成次数
+}
+
+//领取限时任务完成奖励
+message ReqDrawTimeLimitTaskReward{
+	optional int32 rate = 1;//倍数
+	optional int32 taskId = 2;//任务id
+}
+
+//返回领取限时任务奖励
+message ResDrawTimeLimitTaskReward{
+	optional int32 taskId = 1;
+}
+
+//请求玩家排行数据
+message ReqRoleActivityRankInfo{
+	optional int32 activityId = 1;
+}
+
+//返回玩家排行数据
+message ResRoleActivityRankInfo{
+	optional int32 activityId = 1;//活动id
+	optional int32 rankParam = 2;//排行参数值
+}
+
+//发送幸运转盘活动信息
+message ResSendLuckyWheelInfo{
+	optional int32 activityId = 1;//活动id
+	optional int32 count = 2;//已充值元宝
+	optional int32 wheelNum = 3;//剩余转盘次数
+	optional int32 totalNum = 4;//总转盘次数
+}
+
+//开始幸运转盘
+message ReqStartLuckyWheel{
+	optional int32 activityId = 1;
+}
+
+//发送幸运转盘结果信息
+message ResSendLuckyWheelResult{
+	optional int32 activityId = 1;
+	optional int32 index = 2;//奖励位置
+}
+
+//发送幸运转盘奖励
+message ReqGetLuckyWheelReward{
+	optional int32 activityId = 1;
+}
+
+//发送七日狂欢信息
+message ResHappySevenDayActivityInfo{
+	optional int32 activityId = 1;
+	repeated DayInfoOfHappySevenDay dayInfoList = 2;//日活动数据
+}
+
+//请求领取七日狂欢奖励
+message ReqDrawHappySevenDayActivityReward{
+	optional int32 activityId = 1;//活动id
+	optional int32 day = 2;//天数
+	optional int32 group = 3;//组别
+	optional int32 index = 4;//序号
+}
+
+//返回七日狂欢活动数据变动信息
+message ResHappySevenDayActivityDataChange{
+	optional int32 activityId = 1;//活动id
+	optional int32 day = 2;//天数
+	optional int32 group = 3;//组别
+	optional int32 index = 4;//序号
+	optional int32 completeCount = 5;//完成数量
+	optional int32 total = 6;//总进度
+	optional int32 rewardState = 7;//领取状态 0 不可领 1 可领取 2 已领取
+}
+
+//通知条件活动开启
+message ResOpenConditionActivity{
+    repeated ActivityTimeInfo activityList = 1;//活动列表
+}
+
+//请求抽奖
+message ReqRaffle{
+    optional int32 activityId = 1;
+	optional int32 count = 2;//抽奖次数
+	optional int32 costType = 3;//1.元宝 2.道具
+}
+
+//返回抽奖结果
+message ResRaffleResult{
+    optional int32 activityId = 1;
+	optional int32 index = 2;//转盘指针位置
+	repeated RaffleItem raffleItemList = 3;//抽奖获得道具
+}
+
+//通知活动boss状态
+message ResActivityBossState{
+    optional int32 duplicateId = 1;//副本id
+	optional int32 state = 2;//0.未开启1.开启 2.boss死亡
+}
+
+//发送合服沙巴克行会信息
+message ResCombineSbkUnion{
+    optional int32 activityId = 1;
+	repeated string unionNameList = 2;//行会名字
+}
+
+//发送活动期间魂石消费信息
+message ResSoulStoneCost{
+    optional int32 activityId = 1;
+	optional int32 costNum = 2;//消耗数量
+}
+
+//发送狂欢活动信息
+message ResCrazyHappy{
+    optional int32 activityId = 1;
+	repeated CrazyHappyInfo crazyHappyInfo = 2;//狂欢活动数据
+	optional int32 crazyHappyValue = 3;//狂欢值
+	repeated int32 hasDrawIndexList = 4;//已领取index列表
+}
+
+//请求领取狂欢活动奖励
+message ReqDrawCrazyHappyReward{
+    optional int32 activityId = 1;
+	optional int32 group = 2;//组别 总奖励组别为-1,狂欢转盘为-2
+	optional int32 index = 3;//编号
+}
+
+//狂欢活动数据变化信息
+message ResCrazyHappyChangeInfo{
+    optional int32 activityId = 1;
+	repeated CrazyHappyInfo crazyHappyInfo = 2;//组别 总奖励组别为-1,狂欢转盘为-2
+	optional int32 crazyHappyValue = 3;//编号
+}
+
+//领取总奖励返回信息
+message ResCrazyHappyReward{
+    optional int32 activityId = 1;
+	repeated int32 hasDrawIndexList = 2;//已领取index列表
+}
+
+//限时秒杀剩余数量
+message ResLimitBuyCount{
+	repeated ShouHuLimitBuyInfo ShouHuLimitBuyInfoList = 1;//守护秒杀活动列表
+}
+
+//发送神秘商城积分
+message ResMysticStorePoint{
+    optional int32 activityId = 1;
+	optional int32 point = 2;//积分
+}
+
+//发送幸运转盘抽奖次数
+message ResRaffCount{
+    optional int32 activityId = 1;
+	optional int32 totalCount = 2;//转盘总抽奖次数
+}
+
+//发送幸运转盘抽奖次数
+message ResInvestPlan{
+    optional int32 activityId = 1;
+	optional int32 beginTime = 2;
+	optional int32 endTime = 3;
+	optional bool hasAttend = 4;//是否已参与
+	repeated int32 hasDrawList = 5;//已领取的天数
+}
+
+//请求领取投资返利奖励
+message ReqDrawInvestPlanReward{
+    optional int32 activityId = 1;
+	optional int32 dayNo = 2;//第n天
+}
+
+//请求狂欢转盘抽奖
+message ReqCrazyRaffle{
+    optional int32 activityId = 1;
+}
+
+//返回狂欢转盘信息
+message ResCrazyRaffleInfo{
+    optional int32 activityId = 1;
+	repeated int32 hasIndexList = 2;//已经抽到的位置列表
+}
+
+//返回成长试炼信息
+message ResGrowTrailInfo{
+    repeated GrowTrailActivityInfo growTrailDailyInfos = 1;//成长试炼活动信息列表
+	repeated GrowTrailFinalInfo growTrailFinalInfos = 2;//终极大奖信息列表
+	optional int32 completeCount = 3;//完成数量
+	optional int32 activityId = 4;
+}
+
+//返回成长试炼活动数据变化信息
+message ResGrowTrailDataChange{
+    optional GrowTrailActivityInfo growTrailDataInfo = 1;//试炼变化数据
+	optional int32 completeCount = 2;//完成数量
+	optional int32 activityId = 3;
+}
+
+//请求领取成长试炼奖励
+message ReqDrawGrowTrailReward{
+    optional int32 activityId = 1;
+	optional int32 dayNo = 2;//天数
+	optional int32 group = 3;//组
+	optional int32 index = 4;//编号
+}
+
+//请求领取成长试炼终极奖励
+message ReqDrawGrowTrailFinalReward{
+    optional int32 activityId = 1;
+	optional int32 index = 2;//编号
+}
+
+//返回成长试炼大奖成功领取
+message ResGrowTrailFinalRewardDrawSuccess{
+    optional int32 activityId = 1;
+	optional int32 index = 2;//编号
+}
+
+//请求设置自选转盘
+message ReqSetChoseTurntable{
+    optional int32 activityId = 1;
+	repeated int32 cfgIdList = 2;//配置id集合
+}
+
+//返回自选转盘信息
+message ResChoseTurntable{
+    optional int32 activityId = 1;
+	repeated int32 cfgIdList = 2;//配置id集合
+}
+
+//限时特惠购买请求
+message BuyLimitedOfferRequest{
+    required int32 activityId = 1;
+}
+
+message ResSaleGiftInfo{
+   repeated BuyLimitInfo info = 1;
+}
+
+message BuyLimitInfo{
+    required int32 activityId = 1;
+	optional bool isGetReward = 2;
+}
+
+message ActivityOpenTable{
+   repeated int32 activityId = 1;
+   optional int32 group = 2;
+}
+
+message ActivityOpenMsgRequest{
+	optional int32 type = 1;
+}
+
+//怪物攻城排行榜
+message ResActivityMonsterRankScoreList{
+	repeated RankInfo info = 1;
+}
+
+//怪物攻城进攻信息下发
+message ResActivityMonsterAttackTimesInfo{
+	required int32 curTimes = 1; //当前波数
+	optional int64 subTime  = 2; //剩余时间
+	repeated int32 waveId   = 3; //波数id
+}
+
+//怪物攻城活动阶段
+message ResActivityMonsterStage{
+	required int32 stage = 1;
+}
+
+//怪物攻城BOSS击杀排行榜
+message ResActivityMonsterKillBossRank{
+	repeated RankInfo info = 1;
+}
+
+//怪物攻城采集宝箱
+message ReqGatherActivityMonsterBox{
+	required int64 box = 1;
+}
+
+//保卫国王活动面板
+message ResDefendKingActivityInfo {
+	repeated DefendUnionInfo list = 1;//行会排行(已排序)
+	optional int32 myScore = 2;
+	optional int32 spyScore = 3;//间谍积分
+	optional int64 endTime = 4;//结束时间戳(秒)
+	optional int32 kingHpPer = 5;//国王血量比例
+	optional int64 unionId = 6;//拥有国王守护权的帮会ID
+	optional string unionName = 7;//拥有国王守护权的帮会名称
+}
+//保卫国王帮派积分信息
+message DefendUnionInfo {
+	optional string unionName = 1;
+	optional int32 unionScore = 2;
+	optional int32 totalScore = 3;//总积分
+	optional int64 unionId = 4;
+}
+//保卫国王增加扣除积分包
+message ResDefendUpdateScore {
+	optional int32 type = 1;//1:杀刺客加积分2:打国王扣积分3:变成间谍打国王
+	optional int32 score = 2;//(都为正)
+	optional int64 kingId = 3;//国王Id，有的时候代表国王头上显示扣分
+}
+//保卫排行
+message DefendRank {
+	repeated DefendRankPlayerInfo selfInfos = 1;//自己帮会
+	repeated DefendRankPlayerInfo otherInfos = 2;
+	optional DefendRankCommon common = 3;
+}
+//保卫排行玩家信息
+message DefendRankPlayerInfo {
+	optional int64 rid = 1;
+	optional string name = 2;
+	optional int32 career = 3;
+	optional int32 sex = 4;
+	optional int32 level = 5;
+	optional int32 killSmall = 6;//击杀小刺客
+	optional int32 killBig = 7;//击杀大刺客
+	optional int32 killNum = 8;//杀敌
+	optional int32 diedNum = 9;//阵亡
+	optional int32 grade = 10;//评分
+	optional int64 unionId = 11;
+	optional string unionName = 12;
+	optional int32 titleType = 13;//称号 
+	repeated int64 like = 14;//点赞的人
+}
+//保卫排行公共信息
+message DefendRankCommon {
+	optional int32 totalKillSmall = 1;
+	optional int32 totalKillBig = 2;
+	optional int32 totalKill = 3;
+	optional int32 totalDied = 4;
+	optional int32 rankSmall = 5;
+	optional int32 rankBig = 6;
+	optional int32 rankKill = 7;
+	optional int32 rankDied = 8;
+	optional int32 rankGrade = 9;
+	optional int32 kingDied = 10;//1 国王死 0
+	optional string lastFirstUnionName = 11;
+}
+
+//活动结束消息
+message ResDefendOver {
+	optional DefendRank rank = 1;
+	optional int64 showTime = 2;//展示时间
+}
+//返回上次排行数据
+message ResDefendLastRank {
+	optional DefendRank rank = 1;
+}
+
+// 日常活动状态改变
+message ResDailyActivityStatusChanged {
+	required int32 activityId = 1;
+	required int32 status = 2;//1.开启 2.正常结束 3.提前结束 4.暂停 5.重启
+	optional int64 zeroTime = 3;
+}
+
+// 所有玩家可以领取的任务
+message ResAllActivityCommonStatus {
+	repeated ActivityCommonStatus statusList = 1;
+}
+
+// 活动状态改变
+message ActivityCommonStatus{
+	optional int32 activityId = 1; //活动Id
+	optional int32 status = 2; //0:不可领 1：可领，2：已领
+}
+
+
+//boss积分奖励状况
+message BossScoreRewards{
+	required int32 id = 1;
+	required int32 state = 2; //状态 0.未完成 1.可领取 2.已领取
+	optional int32 killCount = 3; //击杀数量
+}
+
+//boss积分相应
+message BossScoreRes{
+	optional int32 score = 1; //积分数
+	optional int32 day = 2; //剩余天数
+	repeated BossScoreRewards rewards = 3;//奖励
+	optional bool isCard = 4; //是否存在猎魔人
+}
+
+//领取boss积分奖励
+message GetBossScoreReward{
+	required int32 id = 1;
+}
+
+//领取到的物品提示面板
+message TheActivityHasRewarded{
+	repeated ActivityRewards rewards = 1;//能领到的奖励	
+	optional int32 	     fromModule = 2 ; //  6狼烟梦境.  0是通用的
+	optional bool		success = 3;// 默认都是成功.
+}
+
+//领取的物品
+message ActivityRewards{
+	optional int32 itemId = 1;//物品的itemId
+	optional int32 count = 2;//获取到的数量	
+}
+
+//先全服再个人开红包
+message ServerRoleReward{
+	repeated ItemCountInfo randomRewards = 1;  //随机奖励
+	//optional ServerRoleFinish finishRole = 2;  //完成人信息
+	repeated ServerRoleRed rewardHistorys = 3; //领取历史
+		
+}
+
+//先全服后个人的完成人信息
+message ServerRoleFinish{
+	optional int64 roleId = 1;   //角色id
+	optional string name = 2;    //姓名
+	optional int32 sex = 3;      //性别
+	optional int32 carrer = 4;   //职业
+}
+
+//先全服后个人红包信息
+message ServerRoleRed{
+	optional int64 roleId = 1;
+	optional string name = 2;
+	repeated ItemCountInfo rewards = 3;
+}
+
+//物品和个数
+message ItemCountInfo{
+	optional int32 itemId = 1; //物品Id
+	optional int32 count = 2;  //物品个数
+}
+
+message ResDefendRankList{
+	repeated int64 time = 1; //时间戳
+}
+
+message ReqDefendLastRank{
+	required int64 time = 1;
+}
+
+//玩家上线发送今日已结束的活动type（每日0点清空）
+message ResTodayClosedActivities{
+	repeated int32 activityType = 1;
+}
+
+message ResBlackIronCost {
+	optional int32 blackIronCost = 1; //活动期间黑铁矿消耗
+}
+
+//需要打开图标的历法活动
+message ResTodayOpenActivities{
+	repeated int32 activityType = 1;
+}
+
+message ReqReceiveGift {
+    optional int32 id = 1;//小礼包id
+}
+
+message ResReceivedGiftState{
+    repeated int32 id = 1;//已经领取的活动id
+}
+
+message LuckTurntableInfo{
+	optional int32 rechargeRmb = 1;//活动时间内  充值的人民币
+	optional int32 lotteryTimes = 2;//已抽奖次数
+	repeated int32 obtains = 3;//已获取了奖励的格子
+	required int32 leftTime = 4;
+	optional int32 rewardIndex = 5;//下次抽中的格子
+}
+
+message LotteryReward{
+	repeated ItemCountInfo rewards = 1;//抽奖奖励
+}
+

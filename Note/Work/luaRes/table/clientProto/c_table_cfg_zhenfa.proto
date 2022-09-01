@@ -1,0 +1,26 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_ZHENFA
+{
+	required uint32 id = 1;//id#客户端  阵法id
+	required uint32 level = 2;//阵法等级#客户端  当前阵法等级
+	required uint32 expOnce = 3;//单次升级经验值#客户端  点击按钮，单次升级的经验值
+	required uint32 expSum = 4;//升级总经验#客户端  升级总经验
+	optional IntListList costMaterial = 5;//消耗材料#客户端  单次升级消耗的材料 itemid#数量&itemid#数量 要配绑定的id
+	optional IntListList costCurrency = 6;//消耗货币#客户端  单次升级消耗的货币 itemid#数量
+	required uint32 attribute = 7;//增加属性#客户端  法阵增加的属性，填cfg_extra_mon_effect的id
+	optional string sequenceId = 8;//序列帧名#客户端  阵法序列帧id
+	optional string name = 9;//阵法名字#客户端  阵法名字
+	optional IntListJingHao subtype = 10;//解锁配件类型#客户端  配件装备子类型
+	required uint32 effectName = 11;//阵法特效名#客户端  阵法特效名
+	required uint32 itemId = 12;//阵法道具id#客户端  itemid，显示用
+	optional IntListJingHao effect1 = 13;//阵法效果1#客户端  阵法的界面效果 X坐标#Y左边#X大小缩放*100#Y大小缩放*100
+	optional IntListJingHao effect2 = 14;//阵法效果2#客户端  阵法的界面效果 X坐标#Y左边#X大小缩放*100#Y大小缩放*100
+	//required uint32 buffId = 15;//阵法效果#服务器  阵法效果
+}
+
+message CFG_ZHENFAARRAY
+{
+	repeated CFG_ZHENFA rows = 1;
+}

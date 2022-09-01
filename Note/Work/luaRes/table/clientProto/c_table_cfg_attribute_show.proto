@@ -1,0 +1,18 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_ATTRIBUTE_SHOW
+{
+	required int32 id = 1;//id#客户端  id
+	required int32 type = 2;//属性类型#客户端  属性类型，程序定
+	optional string show = 3;//显示#客户端  显示文本
+	required int32 valueType = 4;//显示类型#客户端  1 直接显示数值 2 万分数 3 百分数
+	optional IntListJingHao relationAttribute = 5;//关联属性#客户端  关联的属性  跟此属性组合的属性类型  type#type
+	required int32 relationType = 6;//关联显示类型#客户端  关联属性的显示类型  未配置则直接显示数值即可 1 属性间以-间隔
+	//optional string mark = 7;//策划用  策划备注用
+}
+
+message CFG_ATTRIBUTE_SHOWARRAY
+{
+	repeated CFG_ATTRIBUTE_SHOW rows = 1;
+}

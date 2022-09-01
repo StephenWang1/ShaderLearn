@@ -1,0 +1,22 @@
+package fcmV2;
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "FcmProto";
+
+//认证状态
+message ResAuthorityState{
+   optional int32 state = 1;//认证状态 <= 0 是没认证, > 0 是已认证的玩家年龄
+}
+
+//请求认证
+message ReqAuthority{
+   optional string name = 1;//名字
+   optional string idNumber = 2;//身份证号
+}
+
+//防沉迷状态 1-5对应小时
+message ResFcmState{
+   optional int32 fcmState = 1;//防沉迷状态
+   optional int32 onlineSeconds = 2; //在线秒数
+}
+

@@ -1,0 +1,102 @@
+package boothV2;
+import "auction.proto";
+import "bag.proto";
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "BoothProto";
+
+//摊位地图响应
+message BoothMapsResponse{
+	repeated int32 MapIds = 1;//地图id
+	optional int64 lastRemoveBoothTime = 2;//上次移除摊位的时间（有可能为0，为0就是没有创建过摊位的意思）
+}
+
+//创建摊位请求
+message CreateBoothRequest{
+	repeated int32 label = 1;//摊位名字标签
+	optional int32 boothConfigId = 2;//摊位配置id(苍月摆摊该参数无用)
+	optional int32 boothCoordinateId = 3;//摊位地图坐标数据
+}
+
+//更改摊位名字请求
+message ChangeBoothNameRequest{
+	repeated int32 label = 1;//摊位名字标签
+	optional int32 type = 2;//0 ：原来的摊位 1：苍月摊位
+}
+
+//摊位的唯一id消息
+message BoothIdMsg{
+	optional int64 BoothId = 1;//摊位的唯一id
+}
+
+//摊位列表信息
+message BoothItemList {
+	repeated auctionV2.AuctionItemInfo items = 2;
+}
+
+message ResBoothInfo {
+    optional BoothInfo info = 1;
+	optional bool hasBooth = 2;
+	optional int32 moonBoothEndTime = 3;
+}
+
+//摊位信息
+message BoothInfo{
+	optional int64 boothId = 1;//摊位的唯一id
+	optional int32 boothCoordinateId = 2;//摊位的坐标id --->StallConfig的id
+	optional int32 boothTypeId = 3;//摊位类型的id --->StallCostConfig的id
+	optional int32 boothMapId = 4;//摊位地图的id
+	optional int32 boothLine = 5;//摊位的地图的线
+	optional int64 rid = 6;//摊位的主人的id
+	optional int32 sex = 7;//摊位的主人的性别
+	optional int32 career = 8;//摊位的主人的职业
+	optional string name = 9;//摊位的主人的姓名
+	optional bool isRemote = 10;//是否跨服 true 跨服 false 不跨服
+	repeated int32 label = 11;//标签索引
+	optional int64 overdueTime = 12;//结束时间
+}
+
+//摊位购买
+message BoothBuy{
+	optional int64 boothId = 1;//摊位的唯一id
+	optional int64 lid = 2; //物品id（唯一id）
+	optional int32 count = 3; //物品数量
+	optional int32 type = 4; //0 ：原来的摊位 1：苍月摊位
+}
+
+//摊位的坐标id消息
+message BoothCoordinateIdMsg{
+	optional int32 boothCoordinateId = 1;//摊位坐标id
+	optional int32 type = 2;//0 ：原来的摊位 1：苍月摊位
+}
+
+//请求摊位坐标
+message BoothPointRequest{
+	optional int32 mapId = 1;//地图id
+}
+
+//改变摊位坐标响应包
+message UpdateBoothPointResponse{
+	optional int64 boothId = 1;//摊位的唯一id
+	optional int32 success = 2;// 1成功 2 失败
+}
+
+message GetShelfBoothInfo {
+    optional int32 type = 1;//0 ：原来的摊位 1：苍月摊位
+}
+
+message CancelBooth {
+   optional int32 type = 1;//0 ：原来的摊位 1：苍月摊位
+}
+
+message BoothMaps {
+   optional int32 type = 1;//0 ：原来的摊位 1：苍月摊位
+}  
+
+//联服
+message ReqUniteServerItemRadio{
+	optional int32 boothCoordinateId = 1;//摊位坐标
+	optional int64 boothId = 2;//摊位的唯一id
+	optional bagV2.BagItemInfo itemInfo = 3;//物品属性
+}
+

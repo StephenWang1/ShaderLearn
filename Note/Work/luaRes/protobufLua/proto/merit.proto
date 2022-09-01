@@ -1,0 +1,114 @@
+package meritV2;
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "Meritproto";
+
+
+
+//请求霸业活动数据
+message ReqGetMeritData{
+	optional int32 type = 1; //活动类型
+}
+
+//返回行会之争
+message ResUnionBattle{
+	repeated UinonBattle unionBattle = 1;//帮会信息
+}
+
+//行会之争的帮会数据
+message UinonBattle{
+	optional int64 unionId = 1;//帮会Id
+	optional string unionName = 2;//帮会名称
+	optional int32 activeValue = 3;//帮会活动值
+	repeated UnionMeritReward rewardList = 4;//奖励信息
+	optional int32 receiveType = 5;//0不可领，1是可领取，2是已领取
+	optional int32 subtype = 6;//对应的subtype
+	optional int32 id = 7;//表ID id = subtype
+}
+
+//奖励信息
+message UnionMeritReward{
+	optional int32 rewardId = 1;//奖励Id
+	optional int32 count = 2;//奖励数量
+}
+
+//返回领袖之路
+message ResLeaderGlory{
+	optional int64 unionId = 1;//玩家的帮会ID
+	repeated LeaderPosition leader = 2;//领袖之路数据
+}
+
+//领袖之路数据
+message LeaderGlory{
+	repeated LeaderPosition leader = 2;//领袖数据
+}
+
+//单个玩家数据
+message LeaderPosition{
+	optional int64 rid = 1;//玩家ID
+	optional string name = 2;
+	optional int32 meritValue = 3;
+	repeated UnionMeritReward rewardList = 4;//奖励信息
+	optional int32 receiveType = 5;//0不可领，1是可领取，2是已领取
+	optional int32 id = 6;//对应表ID
+	optional int32 subtype = 7;//对应的subtype
+	optional int32 sex = 8; //2女 1男
+}
+
+//返回建功立业
+message ResUnionAchievement{
+	repeated SubtypeMerit stm = 3;//
+}
+
+//返回列表数据
+message SubtypeMerit{
+	optional int32 subtype = 1;//每个小类型
+	repeated Merit merit = 2;//
+}
+
+message Merit{
+	optional int64 lid = 1;// 唯一ID可能是帮会，可能是人
+	optional string name = 2;//对应的名称
+	optional int32 thisType = 3;//这条消息的类型 0默认人，1为帮会
+	optional int32 theTitle = 4;//有称号就给称号
+	repeated UnionMeritReward rewardList = 5;//奖励信息
+	optional int32 receiveType = 6;//0不可领，1是可领取，2是已领取
+	optional int32 id = 7;//服务器表ID
+}
+
+//请求领袖之路小面板
+message ReqPositionInfo{
+	optional int32 subtype = 1;//对应的subtype
+}
+
+//返回领袖之路小面板
+message ResPositionInfo{
+	repeated LeaderPosition leader = 1;//领袖数据 
+}
+
+//领奖返回
+message ResReturnRewardState{
+	optional int32 type = 1;
+	optional int32 subtype = 2;//领袖之路时放overlord_reward_two的ID
+	optional int32 rewardState = 3;//1是可领取，2是已领取
+}
+
+//请求领奖行会之争
+message ReqRewardUinonBattle{
+	optional int64 unionId = 1;
+}
+
+//请求领奖领袖之路
+message ReqRewardLeaderGlory{
+	optional int32 id = 1;//领袖之路放overlord_reward_two的ID
+}
+
+//请求领奖建功立业
+message ReqRewardUnionAchievement{
+	optional int32 id = 1;
+}
+
+//霸业红点
+message ResMeritRedPoint{
+	repeated int32 idList = 1;//列表idList
+}

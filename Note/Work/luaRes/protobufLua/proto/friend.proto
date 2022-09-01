@@ -1,0 +1,409 @@
+package friendV2;
+
+import "chat.proto";
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "FriendProto";
+
+message FriendInfo {
+  optional int64 rid = 1;//玩家id
+  optional string name = 2;
+  optional int32 career = 3;
+  optional int32 sex = 4;
+  optional int32 level = 5;
+  optional int32 relation = 6; //所属关系
+  optional int32 friendLove = 7; //好感度、仇恨值
+  optional int64 groupId = 8;//队伍id
+  optional bool isOnline = 9; //是否在线
+  optional bool isReceive = 10;//是否已接受(申请列表用)
+  optional int32 unreadNum = 11;//未读条数（聊天列表用）
+  optional chatV2.ResChat latelyChat = 12;//最新一条（聊天列表用）
+  optional string roleLettering = 13;//头上刻字
+  optional string remark = 14;//备注
+  optional int32 hostId = 15; //目标的远程ID
+}
+
+//返回好友信息
+message ResFriendInfo {
+  repeated FriendInfo friends = 1;
+  optional int32 type = 2;
+  optional int32 unreadTotalNum = 3;//未读总数
+  repeated MayKnowFriend mayKnowList = 4;//可能认识的朋友列表
+}
+//可能认识的朋友
+message ResMayKnowFriend {
+  repeated MayKnowFriend list = 4;//可能认识的朋友列表
+}
+message MayKnowFriend {
+  optional int32 type = 1;//1:最近私聊2：共同行会3：最近组队4：最近送花
+  optional int64 num = 2;//自定义值
+  optional FriendInfo info = 3;
+}
+//请求打开好友面板
+message ReqOpenFriendPanel {
+  optional int32 type = 1;//1好友，2仇敌，3黑名单 4申请列表 7：私聊列表
+}
+
+//请求好友查询
+message ReqSearchFriend {
+  optional string idOrName = 1;//参数，玩家ID或玩家名
+}
+
+//请求添加好友
+message ReqAddFriend {
+  optional int32 type = 1;//1好友，3黑名单
+  optional int64 uid = 2;
+}
+
+//返回好友变化信息
+message ResFriendChange {
+  optional int64 type = 1;//1好友，2仇敌，3黑名单, 7最近私聊
+  optional int64 addOrRemove = 2;//1添加，2移除
+  repeated FriendInfo friend = 3;//好友
+}
+
+//请求删除好友
+message ReqDeleteFriend {
+  optional int32 type = 1;//1好友，2仇敌，3黑名单, 7最近私聊
+  optional int64 targetList = 2;
+}
+
+message checkApply {
+  repeated int64 listId = 1;
+  required bool flag = 2;//true:同意 false:拒绝
+}
+
+message SummonFriend {
+  required int64 roleId = 1;
+  optional int32 type = 2;//1:召唤 2:追踪
+}
+
+message SummonNotice {
+  required int64 roleId = 1;
+  required string name = 2;
+  optional int32 x = 3;
+  optional int32 y = 4;
+  optional int32 mapId = 5;
+}
+
+message ConfirmSummon {
+  required int64 roleId = 1;
+  required bool isAgreed = 2;
+  optional int32 x = 3;
+  optional int32 y = 4;
+  optional int32 mapId = 5;
+}
+
+message AscertainPoint {
+  required string mapName = 1;
+  required int32 x = 2;
+  required int32 y = 3;
+  required int32 mapId = 4;
+  required int32 line = 5;
+}
+
+//拜师、收徒请求
+message TeacherDisciple {
+  required int64 targetId = 1;
+  optional int32 type = 2;//5拜师 6收徒
+}
+
+//拜师收徒通知
+message TeacherDiscipleNotice {
+  required int64 roleId = 1;
+  required string name = 2;
+  optional int32 type = 3;
+}
+
+message SearchFriend {
+  repeated FriendInfo list = 1;
+}
+
+//编辑个人信息
+message ReqEditInfo {
+  optional string brief = 1;//简介
+  optional string address = 2;//地址
+  optional string contactWay = 3;//联系方式
+  repeated int32 openList = 4;//公开给哪些类人看联系(所属关系)
+}
+//个人信息
+message ResPersonalInfo {
+  optional int64 rid = 1;//玩家id
+  optional string name = 2;
+  optional int32 career = 3;
+  optional int32 sex = 4;
+  optional int32 relation = 5; //所属关系
+  optional int32 friendLove = 6; //好感度、仇恨值
+  optional string brief = 7;//简介
+  optional string address = 8;//地址
+  optional string contactWay = 9;//联系方式
+  optional string remark = 10;//备注
+  repeated int32 openList = 11;
+  optional string roleLettering = 12;//头上刻字
+  optional int32 level = 13;
+}
+//修改备注
+message ReqEditRemark {
+  optional int64 rid = 1;//玩家id
+  optional string remark = 2;
+}
+//请求查看好友信息
+message ReqLookFriendInfo {
+  optional int64 rid = 1;
+}
+//聊天对象
+message ChatTarget {
+  optional int64 targetId = 1;//对方id
+}
+//聊天记录
+message ResChatLog {
+  optional int64 targetId = 1;
+  repeated chatV2.ResChat chatList = 2;
+}
+//请求聊天记录
+message ReqChatLog {
+  optional int64 targetId = 1;
+  optional int64 chatId = 2;//记录唯一id
+  optional int32 count = 3;//id往上条数
+}
+//请求删除记录
+message ReqDeleteChatLog {
+  optional int64 targetId = 1;
+  repeated int64 ids = 2;//要删除的记录ids
+}
+//返回聊天记录更新
+message ResUpdateChatLog {
+  optional int64 targetId = 1;
+  repeated chatV2.ResChat chatList = 2;
+}
+
+message GetFriendCircleInfo {
+  required int64 beforeTime = 1; //之前看到的时间戳, 获取最新发 0
+  required int64 roleId = 2; // 请求别人的朋友圈, 填角色 id, 自己的填 0 或者自己的 id
+  required int32 type = 3 [default = 0]; // 朋友圈 0, 我的动态 1, 消息列表 2
+}
+
+//朋友圈回复
+message FriendCircleReplyInfo {
+  required int64 id = 1;
+  required FriendInfo roleInfo = 2;
+  optional string message = 3;
+  optional int64 time = 4;
+  optional int64 replyTo = 5; //回复的 reply id
+  repeated FriendInfo likedRoles = 6; //点赞的人
+}
+
+message FriendCirclePostInfo {
+  optional FriendCircleReplyInfo post = 1; //主条目, 根据 type 判断是否显示
+	repeated FriendCircleReplyInfo replies = 2; //回复, type=0 时包含好友回复, type!=0 时只包含与自己有关的 (自己发的, 回复自己的, 自己喜欢的)
+  optional int32 systemType = 3; // 系统消息类型, 仅系统代发的消息为非 0
+}
+
+message ResFriendCircle {
+  repeated FriendCirclePostInfo posts = 1;
+  optional FriendInfo onwer = 2; //主人 信息, 如果是自己的, 为 null
+  optional int32 type = 3; // GetFriendCircleInfo#type
+}
+
+//发朋友圈
+message ReqFriendCirclePost {
+  required string message = 1;
+}
+
+//回复或评论
+message ReqFriendCircleReply {
+  required int64 postId = 1; //回复的 post 的主 replayId
+  required int64 replyId = 2; //回复的 reply id
+  required string message = 3;
+}
+
+//点赞请求
+message ReqFriendCircleLike {
+  required int64 postId = 1;
+  required int64 replyId = 2;
+}
+
+//悬赏
+message OfferReward {
+  optional int64 id = 1;//唯一id
+  optional int64 prisoner = 2;//被悬赏者
+  optional string prisonerName = 3;
+  optional int64 offerTime = 4;//发起时间
+  optional int32 reward = 5;//赏金
+  optional int32 state = 6;//悬赏状态1:正在进行 2:已完成 3:已过期\
+  optional int64 finisher = 7;//完成人
+  optional string finisherName = 8;
+  optional int64 finishTime = 9;//完成时间
+  optional int32 prisonerCareer = 10;
+  optional int32 prisonerSex = 11;
+  optional int32 prisonerLevel = 12;
+  optional int32 offerType = 13;//1:普通 2:系统悬赏
+}
+
+//怪物悬赏
+message MonsterOfferReward {
+  optional int64 id = 1;//唯一id
+  optional int32 cfgId = 2;//怪物表id
+  optional int32 head = 3;//怪物头像
+  optional string monsterName = 4;
+  optional int32 goalCount = 5;//目标数量
+  optional string mapName = 6;//地图名字
+  optional int32 completeNum = 7;//已完成人数
+  optional int64 startTime = 8;//发布时间
+  optional int64 endTime = 9;//结束时间
+  optional int32 state = 10;//状态 1:进行中 3:过期
+  optional int32 offerType = 11;//
+  optional int32 mapId = 12;
+  optional int32 deliverId = 13;
+}
+//怪物悬赏信息
+message MonsterOfferInfo {
+  optional MonsterOfferReward monsterOffer = 1;
+  optional int32 state = 2;//状态 1:正在进行 2:已完成 3:已过期4：可接 5:可提交
+  optional int32 myKillCount = 3;//个人击杀数量
+}
+
+//请求悬赏列表
+message ReqOfferList {
+  optional int32 type = 1;//0:全服 1:个人
+  optional int32 npcId = 2;//请求的npcId
+}
+//返回悬赏列表
+message ResOfferList {
+  repeated PlayerOfferList playerOfferLists = 1;
+  repeated MonsterOfferList monsterOfferLists = 2;
+}
+//玩家悬赏列表
+message PlayerOfferList {
+  optional int32 type = 1;
+  repeated OfferReward list = 2;
+}
+//怪物悬赏列表
+message MonsterOfferList {
+  optional int32 type = 1;
+  repeated MonsterOfferInfo list = 2;
+  optional int32 remainNum = 3;//剩余可接悬赏次数
+}
+
+//更新怪物悬赏列表
+message ResUpdateOfferList {
+  repeated MonsterOfferReward addMonsters = 1;//添加或更新怪物悬赏
+  repeated int64 removeMonsters = 2;//删除怪物悬赏
+}
+//更新完成人数
+message ResUpdateCompleteNum {
+  optional int64 lid = 1;//悬赏id
+  optional int32 num = 2;
+}
+
+//发布悬赏
+message ReqPublishOffer {
+  optional int64 targetId = 1;//对象
+  optional int32 reward = 2;//赏金
+  optional string targetName = 3;//对象名字
+  optional int32 npcId = 4;
+}
+//目标id
+message TargetId {
+  optional int64 targetId = 1;
+}
+//返回仇人坐标
+message ResEnemyPosition {
+  optional int64 targetId = 1;
+  optional int32 mapId = 2;
+  optional int32 line = 3;
+  optional string mapName = 4;
+  optional int32 x = 5;
+  optional int32 y = 6;
+  optional string targetName = 7;
+}
+//撤回悬赏
+message ReqWithdrawOffer {
+  optional int64 targetId = 1;
+  optional int32 npcId = 2;
+}
+//提前出狱
+message ReqEarlyLeavePrison {
+  optional int32 type = 1;//1:花费元宝 2:召唤boss 3:找替罪羊
+  optional int64 prisoner = 2;//想要顶替的犯人
+}
+//悬赏错误提示
+message OfferMatterCode {
+  //1:悬赏成功10:发布悬赏玩家不存在11:钱不够12:悬赏自己13:已经悬赏
+  //2:追踪成功20:追踪玩家不存在21:追踪玩家不在线22:追踪玩家在副本中23:钱不够
+  optional int32 code = 1;
+}
+
+//悬赏唯一id
+message OfferId {
+  optional int64 id = 1;
+}
+//更新怪物悬赏左侧栏
+message UpdateMonsterOfferPanel {
+  repeated MonsterOfferPanel infos = 1;
+}
+//怪物悬赏左侧栏信息
+message MonsterOfferPanel {
+  optional int64 id =  1;
+  optional int32 state = 2;//状态 0:未接 1:进行中 2:可交付 3:已完成 4:过期
+  optional int32 myKillCount = 3;//个人击杀数量
+}
+//悬赏模糊查询玩家
+message ResOfferSearch {
+  repeated OfferSearchPlayer players = 1;
+}
+message OfferSearchPlayer {
+  optional int64 rid = 1;//玩家id
+  optional string name = 2;
+  optional int32 career = 3;
+  optional int32 sex = 4;
+  optional int32 level = 5;
+}
+
+//好感度变化
+message ResFriendLoveChange {
+  optional int64 targetId = 1;
+  optional int32 friendLove = 2;
+}
+
+//朋友圈有更新
+message ResFriendCircleUpdated {
+  required int64 updateTime = 1; //更新时间
+  optional int64 lastReadTime = 2; //上次阅读时间
+  optional int64 updateRoleId = 3;
+  optional int32 unreadCount = 4; //未读计数
+  repeated int32 systemMsgDisabled = 5; // 取消勾选的系统朋友圈消息类型, 里面没有的就是勾选的
+  optional FriendInfo updateRoleInfo = 6;
+}
+
+message ReqFriendCircleSysMsgConfig {
+  repeated int32 systemMsgDisabled = 5; // 取消勾选的系统朋友圈消息类型, 里面没有的就是勾选的
+}
+
+//未查看的申请人
+message UnLookApplicant {
+  repeated int64 applicantList = 1;//玩家列表
+}
+
+//结婚刷新好友列表
+message UpdateLettering {
+  optional int64 updateRoleId = 1;
+  optional string lettering = 2;
+}
+
+// 删除动态
+message ReqFriendCircleDelete {
+  required int64 postId = 1;
+  required int64 replyId = 2;
+}
+
+//好友上下线通知
+message ResFriendLogin {
+  optional int64 targetId = 1;
+  optional int32 isLogin = 2;//1上线 0下线
+}
+
+//聊天框精确搜索
+message ResAccurateSearch {
+  repeated FriendInfo info = 1;
+}

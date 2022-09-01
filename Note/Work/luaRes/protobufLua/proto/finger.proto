@@ -1,0 +1,89 @@
+package fingerV2;
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "FingerProto";
+
+//划拳玩家info
+message PlayerInfo{
+  optional int64 lid = 1;
+  optional int32 career = 2;
+  optional int32 sex = 3;
+  optional string name = 4;
+  optional int32 rank = 5;//拳排行榜名次
+  optional int32 level = 6;
+}
+
+//发送最近划拳挑战对象
+message LatelyFingerPlayers{
+  repeated GamePlayer players = 1;
+}
+message GamePlayer{
+  optional int64 lid = 1;//玩家唯一id
+  optional string name = 2;//名字
+}
+//邀请划拳
+message ReqInviteFinger{
+  optional int64 playerId = 1;//被挑战者
+  optional string playerName = 2;//name
+}
+//被挑战者收到邀请
+message ResInviteFinger{
+  optional int64 dealerId = 1;
+  optional string dealerName = 2;
+  optional int32 isDeliver = 3;// 0附近，1需要传送
+  optional int64 limitTime = 4;//剩余时间
+}
+//请求回应邀请
+message ReqEchoInvite{
+  optional int64 dealerId = 1;
+  optional int32 isPlay = 2;//0拒绝 1接收
+}
+//返回邀请结果,游戏开始
+message ResEchoInvite{
+  optional PlayerInfo dealer = 1;
+  optional PlayerInfo player = 2;
+  optional ResRewardInfo rewardInfo = 3;
+}
+//请求使用筹码
+message ReqUseChip{
+  optional int32 chipNum  = 1;//筹码数量
+}
+//玩家奖励信息
+message RewardInfo{
+  optional int64 lid = 1;
+  optional int32 score = 2;//积分
+  optional int32 chip = 3;//筹码
+  optional int32 winScore = 4;//能赢得的积分
+  optional int32 winChip = 5;//能赢得的筹码
+}
+//返回赢得奖励
+message ResRewardInfo{
+  optional RewardInfo dealerReward = 1;
+  optional RewardInfo playerReward = 2;
+}
+//请求出拳
+message ReqChoseFinger{
+  optional int32 type = 1;//1石头 2剪刀 3布
+}
+//返回都已出完拳
+message ResAllChosed{
+  optional int64 dealerId = 1;
+  optional int32 dealerChose = 2;
+  optional int64 playerId = 3;
+  optional int32 playerChose = 4;
+}
+//返回出拳结果
+message ResFingerReason{
+  optional PlayerInfo winner = 1;
+  optional PlayerInfo loser = 2;
+  optional int32 type = 3;//1:平局
+}
+//请求剩余响应时间
+message ReqEchoInviteTime{
+  optional int64 dealer = 1;
+}
+//返回终止猜拳
+message ResTerminate{
+  optional int64 dealer = 1;
+  optional int64 player = 2;
+}

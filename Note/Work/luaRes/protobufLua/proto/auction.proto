@@ -1,0 +1,398 @@
+package auctionV2;
+import "bag.proto";
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "AuctionProto";
+
+//拍卖行物品的类型
+enum AuctionItemType{
+  THADED_PRODUCTS = 1;//交易品
+  SALF_PRODUCTS = 2;//拍卖品
+  BUY_PRODUCTS = 3;//求购品
+  SMELT = 4; // 熔炼物品
+  UNION_PRODUCTS = 5;//行会拍卖品
+  MOON_BOOTH = 6;//苍月摆摊上架
+}
+
+//请求价格区间类型
+enum MarketPriceSectionType{
+  ADD = 1;//上架
+  RE_ADD = 2;//重新上架
+}
+
+//拍卖品排序类型
+enum SalfProductsSortType{
+  OVERDUETIME = 1;//结束时间
+  BIDPRICE = 2;//竞价价格
+  FIXEDPRICE = 3;//一口价
+  PRICE = 4;//价格
+  BUYPRODUCTSPRICE = 5;//求购价格
+  PUTONTIME  = 6;//上架时间
+}
+
+//搜索类型
+enum SelectType{
+  ALL=1;//所有的物品
+  AUCTION= 2;//竞价的物品
+  SALEDIAMOND=3;//直购钻石的物品
+  JOINAUCTION=4;//参与竞价的物品
+}
+
+
+//拍卖类型
+enum AuctionType{
+  BID = 1;//竞价
+  ONEPRICE = 2;//一口价
+}
+
+//推送类型
+enum PushType{
+  PUTONPUSH = 1;//上架推送
+  BUYPUSH = 2;//购买推送
+}
+
+//交易记录类型
+enum RecordType{
+  ENTIRE = 0;//小于等于0的都是全部
+  BUY = 1;//购买
+  SELL = 2;//出售
+  MOON_SELL = 3;//苍月摆摊出售
+  MOON_BUY = 4;
+}
+
+//交易记录状态
+enum RecordState{
+  CAN_RECEIVE = 1;//可领
+  NOT_AVAILABLE = 2;//不可领
+  HAVE_RECEIVE = 3;//已领
+}
+
+message AuctionItemInfo {
+  optional int64 roleId = 1;
+  optional int32 itemType = 2;//物品类型（当前物品的类型，比如说拍卖品，具体上面有枚举）
+  optional bagV2.BagItemInfo item = 3;
+  optional bagV2.CoinInfo price = 4;//价格 包括货币的itemid和数量
+  optional int64 addTime = 5;//上架时间
+  optional int32 serverId = 6;//物品的服务器id
+  optional int64 overdueTime = 7;//到期时间
+  optional int64 itemCount = 8;//拍卖品上架的数量
+  optional AuctionItemLotInfo auctionItemLotInfo = 9;//拍卖信息
+  optional AuctionItemBuyProductsInfo auctionItemBuyProductsInfo = 10;//求购信息
+  optional int64 delayTime = 11;//延时时间
+  optional int32 bidState = 12;//竞价状态 0: 未被竞价 1：火热竞价中 2：本人出价最高 3：出价被超过
+}
+
+//拍卖信息
+message AuctionItemLotInfo{
+  optional int64 bidderRid = 1;//竞价者id
+  optional int64 bidPrice = 2;//竞价价格
+  optional bool isPublicity = 3;//是否公示(true 公示 false 不公示,目前只有拍卖品有)
+  optional int64 publicityTime = 4;//公示时间
+  optional int32 fixedPrice = 5;//一口价
+}
+
+//求购信息
+message AuctionItemBuyProductsInfo{
+  optional int32 count = 1;//求购的数量
+  optional int64 minLevel = 2;//求购的物品的最低等级限制
+  optional int64 maxLevel = 3;//求购的物品的最高等级限制
+  optional int32 sex = 4;//求购的物品的性别限制
+  optional int32 carreer = 5;//求购的物品的职业限制
+  repeated int32 screenCondition = 6;//求购的物品的条件限制
+  optional string name = 7;//求购的名字
+  optional int32 propertyTendency = 8;//职业偏向（不选填-1）
+}
+
+message AuctionItemList {
+  repeated AuctionItemInfo items = 1;
+  optional int32 page = 2;//当前页
+  optional int32 toatlPageCount = 3;//总页数
+  optional bool isUnionSmelt = 4; //是否是行会熔炼
+}
+
+message AuctionItemShelfList {
+  optional int32 itemType = 1;//物品类型（当前物品的类型，比如说拍卖品，具体上面有枚举）
+  repeated AuctionItemInfo items = 2;
+}
+
+//不选填-1
+message GetAuctionItemsRequest {
+  optional int32 page = 1;
+  optional int32 minLevel = 2; //最低转生*1000 + 等级
+  optional int32 maxLevel = 3; //最高转生*1000 + 等级
+  optional int32 currency = 4; //筛选货币 货币itemId
+  optional int32 sex = 5;//性别 （不选填-1）
+  optional int32 career = 6;//职业 （不选填-1）
+  optional int32 toatlPageCount = 7;//总页数
+  repeated int32 screenCondition = 8;//筛选条件
+  optional int32 itemType = 9;//物品类型（当前搜索的物品的类型，比如说拍卖品，具体上面有枚举）
+  optional int32 sortBy = 10;//根据什么排序 具体上面有枚举
+  optional bool sort = 11;//排序 true 升序 false 降序
+  optional int32 propertyTendency = 12;//职业偏向（不选填-1）
+  optional int32 selectType = 13;//搜索类型
+}
+
+//上架请求
+message AddToShelfRequest {
+  optional int64 lid = 1; //物品id（唯一id）
+  optional int32 count = 2;//物品数量
+  optional bagV2.CoinInfo price = 3;//价格 包括货币的itemid和数量
+  optional int32 itemType = 4;//物品类型（当前搜索的物品的类型，比如说拍卖品，具体上面有枚举）
+  optional bool isPublicity = 5;//是否公示(true 公示 false 不公示,目前只有拍卖品有)
+  optional int64 fixedPrice = 6;//拍卖商品的一口价
+}
+//上架响应
+message AddToShelfResponse {
+  optional int64 lid = 1; //物品id（唯一id）
+  optional AuctionItemInfo item = 2;
+}
+
+//重新上架请求
+message ReAddToShelfRequest {
+  optional int64 id = 1;//物品id（唯一id）
+  optional bagV2.CoinInfo price = 2;//价格 包括货币的itemid和数量
+  optional bool isPublicity = 3;//是否公示(true 公示 false 不公示,目前只有拍卖品有)
+  optional int32 itemType = 4;//物品类型（当前搜索的物品的类型，比如说拍卖品，具体上面有枚举）
+  optional int64 fixedPrice = 5;//拍卖商品的一口价
+}
+
+message PutOffRequest{
+  optional int64 lid = 1;//物品id（唯一id）
+  optional int32 itemType = 2;//物品类型（当前搜索的物品的类型，比如说拍卖品，具体上面有枚举）
+}
+
+message ItemIdMsg {
+  optional int64 lid = 1; //物品id（唯一id）
+}
+
+message ItemMsg {
+  optional int32 itemType = 1;//物品类型（当前搜索的物品的类型，比如说拍卖品，具体上面有枚举）
+  optional bagV2.BagItemInfo item = 2;
+}
+
+//获取自己的上架商品列表请求
+message GetOneSelfItemList {
+  optional int32 itemType = 1;//物品类型（当前搜索的物品的类型，比如说拍卖品，具体上面有枚举）
+}
+
+//搜索请求
+message SearchAuctionItem{
+  optional string matchesString = 1;//匹配字符串
+  optional GetAuctionItemsRequest condition = 2;//搜索条件
+}
+
+//搜索响应
+message SearchAuctionItemResponse{
+  optional AuctionItemList list = 1;//物品集合
+  optional int32 totalCount = 2;//总共搜索到多少个
+}
+
+//失败
+message lose {
+}
+
+//发送失败原因
+message AuctionFailReason {
+  optional int32 failReason = 1; //失败原因 1,2,11,12,101:商品没有了 3, 13:网络原因 102:竞价不足
+}
+
+//请求价格区间
+message MarketPriceSectionRequest{
+  optional int64 lid = 1; //物品id（唯一id）
+  optional int32 MarketPriceSectionType = 2;//请求价格区间类型（具体上面有枚举）
+  optional int32 itemType = 3;//物品类型（当前搜索的物品的类型，比如说拍卖品，具体上面有枚举）
+  optional int32 priceItemId = 4;//价格ItemID
+}
+
+//市场价格区间
+message MarketPriceSection {
+  optional int64 lid = 1;//物品id（唯一id）
+  optional BaseMarketPriceSection marketPriceSection = 2;//默认价格区间
+  optional BaseMarketPriceSection otherMarketPriceSection = 3;//只有再有两个情况下发这个
+  optional int32 MarketPriceSectionType = 4;//请求价格区间类型（具体上面有枚举）
+  optional BuyProductsCondition condition = 5; //求购的条件
+  optional string name = 6;//求购的名字
+}
+
+message BaseMarketPriceSection{
+  optional int32 priceItemId = 1;//市场价格货币id
+  optional int64 lowPrice = 2;//市场底价
+  optional int64 topPrice = 3;//市场最高价
+  optional int32 itemType = 4;//物品类型（当前搜索的物品的类型，比如说拍卖品，具体上面有枚举）
+  optional int64 defaultPrice = 5;//默认价格
+  optional int32 ratio = 6;//一口价倍率 竞价物品
+}
+
+//购买
+message BuyAuction{
+  enum BuyType {
+    AUCTION = 1; // 拍卖行购买
+    BOOTH = 2; // 摆摊购买
+    SMELT= 4; // 熔炼购买
+  }
+  optional int64 lid = 1; //物品id（唯一id）
+  optional int32 count = 2; //物品数量
+  optional int32 buyType = 3; // BuyType
+}
+
+//求购的条件   如果求购物品id是0的话，说明求购的是某个范围的物品，意思也就是说，有了具体的求购物品就不可能有后面的限制，有限制就不可能有具体的求购物品
+message BuyProductsCondition{
+  optional int32 itemId = 1; //求购物品配置id
+  optional int32 count = 2; //求购物品数量
+  optional int32 minLevel = 3; //最低转生*1000 + 等级
+  optional int32 maxLevel = 4; //最高转生*1000 + 等级
+  optional int32 currency = 5; //筛选货币 货币itemId
+  optional int32 sex = 6;//性别 （不选填-1）
+  optional int32 career = 7;//职业 （不选填-1）
+  repeated int32 screenCondition = 8;//筛选条件
+  optional int32 propertyTendency = 9;//职业偏向（不选填-1）
+}
+
+message BuyProductsMarketPriceSectionRequest{
+  optional BuyProductsCondition condition = 1; //求购的条件
+  optional int32 MarketPriceSectionType = 2;//请求价格区间类型（具体上面有枚举）
+  optional int32 itemType = 3;//物品类型（当前搜索的物品的类型，比如说拍卖品，具体上面有枚举）
+  optional int64 lid = 4;//唯一id
+  optional string name = 5;//求购的名字
+}
+
+//发布求购
+message ReleaseBuyProductsRequest{
+  optional bagV2.CoinInfo price = 1;//求购价格
+  optional BuyProductsCondition condition = 2; //求购的条件
+  optional string name = 3;//求购的名字
+}
+
+//提交求购的物品
+message SubmitBuyProductsItemRequest{
+  optional int64 lid = 1;//求购品在拍卖行中的id
+  optional int64 priceId = 2; //提交的物品id
+  optional int32 count = 3; //提交的数量
+}
+
+//提交求购的响应
+message SubmitBuyProductsItemResponse{
+  optional int64 lid = 1;
+  optional AuctionItemInfo item = 2;//提交的求购品
+  optional int32 leftCount = 3;//还剩的数量
+}
+
+//拍卖请求
+message auctionRequest{
+  optional int64 lid = 1; //物品id（唯一id）
+  optional int32 AuctionType = 2;//拍卖类型(具体上面有枚举)
+}
+
+//推送
+message pushResponse{
+  optional int32 PushType = 1;//推送类型(具体上面有枚举)
+  optional bagV2.BagItemInfo item = 2;//推送物品
+  optional int32 priceItemId = 3;//市场价格货币id
+  optional int64 price = 4;//市场底价
+}
+
+//猜你喜欢请求
+message GuessYouLikeRequest{
+  optional int32 itemType = 1;//物品类型（当前搜索的物品的类型，比如说拍卖品，具体上面有枚举）
+  optional int32 page = 2; //页码（从多少页，就是玩家现在在哪一页）
+  optional int32 countPerPage = 3; //每页条数
+  optional int32 pageNumber = 4;//页数（总共要多少页）
+  optional int32 type = 5;//猜你喜欢类型 1随机 2旧的
+}
+
+//猜你喜欢响应
+message GuessYouLikeResponse {
+  optional int32 itemType = 1;//物品类型（当前搜索的物品的类型，比如说拍卖品，具体上面有枚举）
+  repeated AuctionItemInfo items = 2;
+  optional int32 totalPage = 3; //总页数
+  optional int32 page = 4; //页码
+  optional int32 countPerPage = 5; //每页条数
+  optional int32 pageNumber = 6;//页数
+}
+
+//打开交易行之前
+message OpenTradeBeforeResponse {
+  repeated BagItemState bagItemState = 1;//背包物品的状态
+}
+
+//背包物品的状态
+message BagItemState{
+  optional int64 lid = 1;//物品的唯一id
+  optional int32 saleMoney = 2;//能否元宝交易
+  optional int32 saleDiamond = 3;//能否钻石交易
+  optional int32 auctionDiamond = 4;//能否竞拍
+}
+
+//交易记录
+message TransactionRecord{
+  optional int64 id = 1;//记录的唯一id
+  optional int32 type = 2;//记录的类型
+  optional bagV2.BagItemInfo goods = 3;//商品
+  optional int32 tradeType = 4;//交易类型
+  optional int64 tradeTime = 5;//交易时间
+  optional int32 moneyId = 6;//货币id
+  optional int32 moneyCount = 7;//货币数量
+  optional int32 substractMoney = 8;//减去的货币
+  optional int32 state = 9;//状态
+}
+
+//请求交易记录
+message TeadeRecordReq{
+  optional int32 type = 1;//类型
+  optional int32 page = 2; //页码（从多少页）
+  optional int32 countPerPage = 3; //每页条数
+  optional int32 pageNumber = 4;//页数（总共要多少页）
+}
+
+//交易记录返回
+message TeadeRecordRes{
+  optional tradeRecordList records = 1;//记录
+  optional int32 toatlPageCount = 2;//总共多少页
+  optional int32 page = 3; //页码（从多少页）
+  optional int32 firstCanReceive = 4;//首个可领位置（下标）
+  optional int32 totalCount = 5;//总数
+}
+//交易记录集合
+message tradeRecordList{
+  repeated TransactionRecord record = 1;//记录
+}
+
+//领取交易记录请求
+message TradeRecordId{
+  optional int64 id = 1;//记录的唯一id
+}
+
+//交易记录红点
+message TradeRecordRedPoint{
+  optional int32 redPoint = 1;//1 显示红点
+}
+
+message UnionSmeltGoodsChange {
+  repeated AuctionItemInfo items = 1;
+  optional int32 changeType = 2;// 1增加 2移除
+}
+
+message BuyUnionSmeltItem {
+  optional int64 lid = 1; //物品id（唯一id）
+  optional int32 count = 2; //物品数量
+}
+
+message AuctionPush {
+    optional bagV2.BagItemInfo item = 1;//推送物品
+	optional int32 type = 2;//推送商品类型
+	optional int32 pushType = 3;// 1：行会竞拍推送  2 ：其他推送
+	optional int32 sign = 4;//纯打印字段  无意义 找问题用
+	optional int64 time = 5;//纯打印字段  无意义 找问题用
+}
+
+message CurLoginNoPush{
+    optional int32 type = 1;//关闭的推送类型
+}
+
+message ReqQuickAuctionItem{
+    repeated int32 itemIds = 1;
+}
+
+message ResQuickAuctionItem {
+   repeated AuctionItemInfo items = 1;
+}

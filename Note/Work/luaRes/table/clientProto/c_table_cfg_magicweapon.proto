@@ -1,0 +1,19 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_MAGICWEAPON
+{
+	required int32 id = 1;//id#客户端  唯一id  决定套装类型和等级  前两位为类型 后两位为等级
+	required int32 type = 2;//套装类型#客户端  套装类型  1 生肖 2神器  4 心灵
+	required int32 level = 3;//套装等级#客户端  套装等级，同类型套装不可一致
+	required int32 position = 4;//套装数量#客户端  当前套装的装备位最大上限
+	required int32 skill = 5;//激活技能#客户端  激活技能，索引skill表中技能id  5类型读取buffid
+	optional string skillDes = 6;//技能描述#客户端  技能描述 程序根据穿戴情况 显示相应穿戴的数量
+	required int32 nextId = 7;//下一级id#客户端  本id对应的下一级id  无下一级则不填
+	required int32 extraEffect = 8;//额外属性#客户端  索引到extra_mon_effect中
+}
+
+message CFG_MAGICWEAPONARRAY
+{
+	repeated CFG_MAGICWEAPON rows = 1;
+}

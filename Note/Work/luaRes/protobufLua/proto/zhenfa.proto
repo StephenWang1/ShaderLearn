@@ -1,0 +1,15 @@
+package zhenfaV2;
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "ZhenfaProto";
+
+message ZhenfaInfo{
+   optional int32 id = 1;//阵法id
+   optional int64 exp = 2;//当前等级已培养的经验
+}
+
+//发送阵法信息
+message ResZhenfaInfo{
+   optional ZhenfaInfo zhenfaInfo = 1;//阵法
+} 
+

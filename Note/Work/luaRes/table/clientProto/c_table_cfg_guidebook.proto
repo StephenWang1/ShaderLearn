@@ -1,0 +1,19 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_GUIDEBOOK
+{
+	required int32 id = 1;//唯一id#客户端  
+	optional string markName = 2;//页签名称#客户端  
+	optional string mainTitle = 3;//一级标题#客户端  显示在界面最上方（不填则不显示，下方文本自动上移），字号固定36号，字色ffff00
+	optional string text = 4;//文本正文#客户端  文本,需要显示道具icon的，用{0}代替占位，然后根据icon字段配置的道具id顺序对应显示
+	optional string icon = 5;//图标显示#客户端  根据type判断具体显示形式，itemId#career#sex#effectId#X坐标#Y坐标&itemId#career#sex#effectId#X坐标#Y坐标&itemId#career#sex#effectId#X坐标#Y坐标，1战2法3道，1男2女，通用道具职业、性别都填0，没有特效也填0
+	required int32 lineSpace = 6;//行间距#客户端  控制当前页签内所有文本的行间距，不填则按默认的16px行间距
+	required int32 order = 7;//排序#客户端  按大小来排序，小的往前排
+	optional IntListJingHao conditionId = 8;//显示条件#客户端  连condition表格显示条件
+}
+
+message CFG_GUIDEBOOKARRAY
+{
+	repeated CFG_GUIDEBOOK rows = 1;
+}

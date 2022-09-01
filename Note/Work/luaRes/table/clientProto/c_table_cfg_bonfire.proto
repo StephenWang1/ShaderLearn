@@ -1,0 +1,32 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_BONFIRE
+{
+	required uint32 id = 1;//火堆id#客户端#C#不存在共同参与合并的字段  篝火id
+	//required uint32 type = 2;//火堆类型#客户端#C  1.大火堆2 小火堆
+	//required uint32 time = 3;//存在时间#客户端#C  篝火存在时间，单位秒
+	//required uint32 range = 4;//火堆范围#客户端#C  火堆的范围，填格子数
+	//required uint32 effectRange = 5;//范围圈大小#客户端#C  火堆范围圈大小
+	//required uint32 basicExp = 6;//基础经验#客户端#C  基础经验 单位 经验值/s
+	//optional IntListList numberAdd = 7;//人数加成#客户端#C  人数加成基础经验，人数下限#人数上限#加成万分比   &分割不同人数的情况
+	//optional IntListJingHao floatingExp = 8;//经验浮动#客户端#C  结算之后的经验浮动 单位：万分比 填写浮动值下限#浮动值上限
+	//optional IntListJingHao prosperityAd = 9;//繁荣度加成#客户端#C  繁荣度加成(等级排行榜前五平均等级-玩家自身等级)*A%，上下限B~C%，增加百分比为基础经验的万分比  配置数据A#B#C 单位万分比
+	//optional string name = 10;//篝火名称#客户端#C  
+	//required uint32 model = 11;//NPC模型#客户端#C#不存在共同参与合并的字段  模型资源
+	//optional string effect = 12;//模型特效#客户端#C  模型特效
+	//required uint32 namey = 13;//npc名字垂直偏移#客户端#C  不填默认脚底往上135像素，上+下-
+	//optional string showInMinimap = 14;//小地图用名称#客户端#C  不填不显示 scenename 使用场景内名字
+	//required uint32 size = 15;//模型大小#客户端#C  调整模型的大小比例
+	//optional string openPanel = 16;//功能面板#客户端#C  其他为对应功能面板，预设名
+    //@2#4#5 type#5 range#6 effectRange#6
+	//required uint32 type5_range6_effectRange6 = 17;//合并字段#火堆类型_C#火堆范围_C#范围圈大小_C type#5 range#6 effectRange#6
+    //@13#15 namey#15 size#14
+	//required uint32 namey15_size14 = 18;//合并字段#npc名字垂直偏移_C#模型大小_C namey#15 size#14
+	//optional string remarks = 19;//备注#策划  策划备注用
+}
+
+message CFG_BONFIREARRAY
+{
+	repeated CFG_BONFIRE rows = 1;
+}

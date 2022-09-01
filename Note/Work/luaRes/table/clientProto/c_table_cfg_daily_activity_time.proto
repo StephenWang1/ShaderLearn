@@ -1,0 +1,49 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_DAILY_ACTIVITY_TIME
+{
+	required uint32 id = 1;//活动id#客户端#C#不存在共同参与合并的字段  活动id
+	//required int32 activityType = 2;//活动类型#客户端#C  1表示天梯赛 14洞窟试炼 15表示夜战比奇 16 表示沙巴克攻城 20表示暴君降临21陵墓古玩24神威狱25圣域空间26狼烟梦境 27行会押镖 28合服 29联服 30等级封印 31女神祈福  33保卫国王 34幻境迷宫 35武道会 36魔法结阵 37行会合并 38转生神殿 39BOSS之家 40上古战场 41怪物攻城 42行会地宫 43联盟预选 44神级BOSS 45行会秘境 46行会首领48双倍货运49白日门圣物50白日门封赏51白日门猎魔52白日门联服预告53单倍货运时间 54开服首次行会首领活动前的秘境 55闯天关 56 BOSS篝火（小礼包）57烟花之地 58挖掘BOSS 59白日门圣物（预告小礼包） 60神力boss 神力装备 61白日门货运（预告小礼包） 62血继 63熔炼专精 64精炼 65元素 66骑战 67隐藏地图副本 71收藏品 73怪物攻城 74海岛入侵
+	//required int32 deliverId = 3;//传送id#客户端#C  传送方法id，连到cfg_deliver
+	//optional string tips = 4;//活动简介#客户端#C  活动简介
+	//optional IntListJingHao serviceTime = 5;//开服时间#客户端#C  开服第几天开启
+	//optional IntListJingHao mergeTime = 6;//合服时间#客户端#C  合服第几天开启活动
+	//optional IntListJingHao weekday = 7;//周几开放#客户端#C  1234567表示星期一到星期天
+	//required uint32 timeCD = 8;//是否有冷却时间，每次活动结束后几天内不会再次举行#客户端#C#不存在共同参与合并的字段  是否有冷却时间，每次活动结束后几天内不会再次举行
+	//required uint32 startTime = 9;//开始时间距离0点的分钟#客户端#C#不存在共同参与合并的字段  开始时间距离0点的分钟
+	//required uint32 overTime = 10;//结束时间距离0点的分钟#客户端#C#不存在共同参与合并的字段  
+	//optional string name = 11;//活动名称#客户端#C  必要时显示
+	//required int32 param = 12;//目标参数#客户端#C  不同事件用到的参数不同，暂用：等级封印事件的等级上限配置
+	//required int32 isCalendarShow = 13;//是否在历法界面显示#客户端#C  是否在历法界面显示
+	//required int32 order = 14;//大事件排序#客户端#C  开启时间相同的按照顺序决定优先级（0：特殊事件，强制成为当前最高优先级）
+	//optional IntListJingHao calendarShowTime = 15;//事件显示限制#客户端#C  开服几天后显示#合服几天后显示#活动前几天显示
+	//optional string mainIcon = 16;//主界面icon#客户端#C  主界面icon
+	//optional string showIcon = 17;//icon#客户端#C  历法界面日期列表事件icon
+	//optional string backGround = 18;//背景图#客户端#C  背景图
+	//optional string buttonType = 19;//规则面板#客户端#C  配置需要打开的界面名
+	//required int32 condition = 20;//事件参与条件等级#客户端#C  事件参与条件等级（纯显示）
+	//optional string rewardShow = 21;//奖励展示#客户端#C  奖励展示（道具id#数量&道具id#数量）（沙巴克：奖励描述#1#文本内容&奖励描述2#道具id_数量#道具id_数量；文本可配置颜色；&分隔显示不同的奖励内容；配置道具id则显示道具icon和数量）
+	//optional string jumpButton = 22;//前往按钮点击效果#客户端#C  类型1:1#cfg_deliverID（点击后直接传送到目标地图坐标）；类型2:2#map_npcID（点击关闭历法界面，寻路到对应npc，然后打开npc面板）类型3：3#npcid 上次去过的主城的npcid 类型4:4#jumpid
+	//optional string countdownRemind = 23;//历法主界面图标倒计时提醒缩写#客户端#C  活动缩写，不配置则该活动不进行倒计时提醒
+	//optional string nameIcon = 24;//历法活动名字图标#客户端#C  历法活动名字图标
+	//optional IntListJingHao pattern = 25;//进入活动切换模式#客户端#C  0和平模式，1组队模式，2行会模式，3全体模式，#后面接进入哪张地图切换模式
+	//optional string panelNameAndParams = 26;//活动大使打开面板#客户端#C  活动大使打开面板名
+	//optional string bgName = 27;//活动大使背景图#客户端#C  活动大使背景图
+	//optional string loading = 28;//界面加载时，活动对应的加载图#客户端#C  界面加载时，活动对应的加载图
+	//optional string leftName = 29;//缩回左侧面板图标名#客户端#C  缩回左侧面板图标名
+	//optional IntListJingHao activityMapId = 30;//活动地图#客户端#C  配置的活动地图id，用于判断玩家是否在活动地图里，在活动地图里则不显示外部图标；格式：地图id#地图id
+	//required int32 isShare = 31;//是否联服后显示#客户端#C  1联服显示0正常显示
+    //@2#3 activityType#7 deliverId#24
+	//required uint32 activityType7_deliverId24 = 32;//合并字段#活动类型_C#传送id_C activityType#7 deliverId#24
+	optional string ruleBackGround = 33;//规则界面背景小图#客户端  规则界面背景小图
+	required int32 haveGift = 34;//是否可领取历法小礼包#客户端  默认0不可领取，1可领取
+	required int32 mergeTimeCD = 35;//合服冷却天数#客户端  合服活动冷却天数
+	required int32 mergeTimeProhibit = 36;//合服指定天数不开启#客户端  指定活动在合服前X天不开启活动
+	required int32 newSystem = 37;//新系统判定#客户端  判定是否为新系统预告并显示相关资源 0否 1是  默认为0
+}
+
+message CFG_DAILY_ACTIVITY_TIMEARRAY
+{
+	repeated CFG_DAILY_ACTIVITY_TIME rows = 1;
+}

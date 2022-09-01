@@ -1,0 +1,244 @@
+package equipV2;
+
+import "bag.proto";
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "EquipProto";
+
+message EquipsChange {
+  optional int32 equipIndex = 1;
+  optional bagV2.BagItemInfo changeEquip = 2;
+}
+
+//所有装备信息
+message ResAllEquip {
+  repeated EquipsChange equipList = 1;//所有的装备信息
+  repeated ResRecast infos = 2;//配饰重铸信息
+}
+
+//请求一键换装
+message ReqOneKeyPutOnEquip {
+  repeated int32 pos = 1;//位置
+  repeated int64 uniqueId = 2; //要换的装备列表
+}
+
+//装备信息更新
+message ResEquipChange {
+  repeated EquipsChange equipChange = 1;//更换的装备
+  optional int32 reason = 2; //1:炼制 2：其他, 3 血继开装备位
+}
+
+//返回装备信息
+message ResItemInfo {
+  optional bagV2.BagItemInfo changeEquip = 1;
+}
+
+//获取装备信息
+message ReqGetItemInfo {
+  optional int64 armId = 1;
+}
+
+//请求穿装备
+message ReqPutOnTheEquip {
+  optional int32 index = 1;//装备位置
+  optional int64 equipId = 2;//唯一id
+}
+
+//请求合成橙色装备
+message ReqCombineOrangeEquip {
+  optional int32 type = 1;//1主角 2英雄
+  optional int64 heroId = 2;//英雄id
+  optional int32 index = 3;//装备位置
+  optional int32 equipId = 4;//唯一id
+}
+
+message ReqPutOffEquip {
+  optional int32 index = 1;//位置
+}
+
+//改变穿戴的武器衣服样式
+message  ResChangeAppearance {
+  optional int64 roleId = 1;  //玩家的ID
+  optional int32 subtype = 2; //装备类别
+  optional int32 itemid = 3;//装备id
+  optional int32 index = 4;//装备位置
+}
+
+//请求修理装备
+message ReqRepairEquip {
+  repeated int64 itemId = 1;//要修理的装备
+}
+
+//返回修理装备
+message ResRepairEquip {
+  repeated bagV2.BagItemInfo bodyEquips = 1;
+  repeated bagV2.BagItemInfo bagEquips = 2;
+}
+
+//物品的使用次数
+message ItemUseCountInfo {
+  optional int32 itemTypeId = 1;  //个数
+  optional int32 useNum = 2;    //使用次数
+}
+
+//请求镶嵌勋章
+message ReqInlayMedal {
+  optional int64 equipOwnId = 1;
+  optional int64 inlayId = 2;
+  optional int32 pos = 3; //暂时只能镶嵌一个，只发0
+}
+
+//修理灵兽肉身装备
+message ResRepairServantEquip {
+  repeated bagV2.BagItemInfo bodyEquips = 1;
+  repeated bagV2.BagItemInfo bagEquips = 2;
+}
+
+//请求灵兽肉身装备
+message ReqRepairServantEquip {
+  repeated int64 itemId = 1;//要修理的装备
+}
+
+// 装备炼制
+message ReqEquipRefine {
+  required int64 equipId1 = 1;
+  required int64 equipId2 = 2;
+}
+
+// 保存装备炼制属性
+message ReqSaveEquipRefine {
+  required int64 equipId = 1; // 要保存的属性， rateAttribute 0, rateAttribute1 1 rateAttribute2 2
+  required int32 index = 2; // 要保存的属性， rateAttribute 0, rateAttribute1 1 rateAttribute2 2
+}
+
+//请求穿戴法宝
+message ReqWearMagicWeapon {
+   optional int64 lid = 1;//穿戴装备的唯一id
+}
+
+//请求卸下法宝
+message ReqTakeOffMagicWeapon {
+   optional int32 type = 1;//卸下装备的所属套装
+   optional int32 index = 2;//卸下装备在套装内的索引
+}
+
+message MagicWeapon {
+   optional int32 index = 1;
+   optional bagV2.BagItemInfo itemInfo = 2;
+   optional int32 action = 3;//变化行为 1：穿戴 2：卸下  刷新全部的时候可不传数据
+}
+
+//单个套装法宝信息
+message MagicWeaponInfo {
+   optional int32 suitType = 1;
+   repeated MagicWeapon magicWeapon = 2;
+   optional int32 skillId = 3;//激活的技能id
+}
+
+//所有法宝信息
+message AllMagicWeaponInfo {
+   repeated MagicWeaponInfo allInfo = 1;
+   optional UpdateGetedType typed = 2;
+}
+
+//玩家获得过法宝类型
+message UpdateGetedType{
+   repeated int32 typed = 1;
+}
+
+// 请求开启血继装备位 返回消息 ResEquipChangeMessage
+message ReqOpenBloodSuitGrid {
+  required int32 equipIndex = 1;
+  required int32 costIndex = 2; // 选择消耗的物品
+}
+
+//请求镶嵌魂装
+message ReqPutOnSoulEquip {
+  optional int32 index = 1;//装备位
+  optional int64 itemLid = 2;//镶嵌装备唯一id
+  optional int32 type = 3;//10001:魂装黄金套 10002：仙装 10003：神器
+  optional int32 subIndex = 4;//子索引，从做到右1-3
+}
+
+//请求卸下镶嵌的魂装
+message ReqPutOffSoulEquip {
+  optional int32 index =1;//装备位置
+  optional int32 type = 2;//10001:魂装黄金套 10002：仙装 10003：神器
+  optional int32 subIndex = 4;//子索引，从做到右1-3
+}
+
+//镶嵌的魂装信息
+message AllSoulEquipInfo {
+   repeated SoulEquip soulEquips = 1;//镶嵌的魂装
+   repeated int32 activeSuitId = 2;//激活的套装id
+   optional int32 type = 3;//10001:魂装黄金套 10002：仙装 10003：神器
+}
+
+//全部魂装信息  魂装、仙装、神器
+message WholeSoulEquips{
+   repeated AllSoulEquipInfo allSoulEquipInfo = 1;
+}
+
+message SoulEquip {
+   optional int32 index = 1;//装备位置
+   repeated SoulEquipInfo soulEquipInfo = 2;
+}
+
+message SoulEquipInfo{
+   optional int32 subIndex = 1;//子索引，从做到右1-3
+   optional bagV2.BagItemInfo itemInfo = 2;
+   optional bool active = 3;//是否激活
+}
+
+message UnlockSoulEquipIndex{
+   optional int32 subIndex = 1;//子索引，从做到右1-3
+   optional int32 index = 2;
+}
+
+
+//魂装洗炼
+message ReqSoulEquipRefin {
+   optional int64 itemLid = 1;//洗炼的目标装备
+   optional int32 type = 2;//1 :身上的 2：背包里的
+}
+
+//返回洗炼结果
+message ResRefinResult {
+    optional SoulEquip soulEquips = 1;
+}
+
+message ReqAppraisaEquip {
+   optional int64 lid = 1;//鉴定道具的唯一id
+   optional int32 type = 2;//鉴定类型 1：普通鉴定 2:稀有鉴定 3：完美鉴定
+   optional int32 souce = 3;//1 :身上的 2：背包里的 
+   optional int32 index = 4;
+}
+
+message ResAppraisaResult {
+   optional bagV2.BagItemInfo appraisaEquip = 1;
+}
+
+message ResAppraisaTip {
+   optional int32 toDayTip = 1;//1:勾选今日不在提醒 0：未勾选
+}
+//配饰重铸
+message ReqRecast{
+	optional int32 type =1;//配饰类型
+}
+//配饰重铸
+message ResRecast{
+	optional JewelryRecastInfo info = 1;
+}
+//配饰重铸信息
+message JewelryRecastInfo{
+	optional int32 type =1;//配饰类型
+	optional int32 level =2;//配饰重铸等级
+}
+
+
+message ReqGrowthEquip{
+    optional int32 type = 1;//1:升级 2:突破
+	optional int32 index = 2;
+}
+
+

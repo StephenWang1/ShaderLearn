@@ -1,0 +1,181 @@
+package rechargeV2;
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "RechargeProto";
+
+message DayPayInfo {
+  optional int32 sequence = 1;
+  optional int32 state = 2;//领取状态 0不可领取 1可领取 2已领取
+}
+
+message FistRewardInfo {
+  optional int32 rechargeId = 1;//充值id
+  optional int32 state = 2;//领取状态 0不可领取 1可领取 2已领取
+}
+
+message ThroughRechargeInfo {
+  optional int32 cfgId = 1;//配置表id
+  optional int32 state = 2;//奖励领取状态0未领取1可领取
+  optional int32 count = 3;//奖励领取次数
+}
+
+//发送充值界面信息
+message ResSendRechargeInfo {
+  required int32 totalRechargeRewardTaken = 1; // 已领累计充值奖励 id (包括首充)
+  required int32 dailyRechargeCount = 2; // 今日充值数
+  required int32 dailyRechargeRewardTakenCount = 3; // 今日充值奖励已领档位的充值数
+  required int32 totalRechargeCount = 4; //总充值数
+  optional int32 monthRechargeCount = 5; // 本月充值钻石数
+  optional int32 firstRechargeGetLevel = 6; // 首充奖励领到第几次， 0 可以领第 1 天的
+  optional int64 firstRechargeLastGetTime = 7; // 上次首充奖励领取时间， 不是今天可领下一次
+  optional int32 totalBonusRechargeCount = 8; //福利钻石总充值数
+  required int32 firstRechargeReward = 9; //对应二进制位111代表3个档位都领取了011钱俩挡都领取了
+  required int32 firstRechargeRmb = 10;//首充累充值
+}
+
+//请求领取首充奖励
+message ReqFirstRechargeReward {
+  required int32 index = 1; //首充奖励档位
+}
+
+//发送首充奖励信息
+message ResFirstRechargeInfo {
+  repeated FistRewardInfo rewardInfos = 1;//每日充值信息
+}
+
+//请求领取每日充值奖励
+message ReqGetDayRechargeReward {
+  optional int32 cfgId = 1;//配置表id
+}
+
+//发送每日充值信息
+message ResDayRechargeInfo {
+  repeated DayPayInfo infos = 1;//每日充值信息
+  optional int32 dayTotalRecharge = 2; //当日充值总数
+  optional int32 lifeTotalRecharge = 3; //总充值金钱（rmb）
+}
+
+//充值惊喜消息
+message ResSendRechargeSurprise {
+  optional int32 cfgId = 1;//配置表id
+  optional int32 state = 2;//奖励领取状态0未领取1可领取2已领取
+  optional int32 autoPopup = 3;//是否已自动弹出0已弹出1未弹出过
+}
+
+//请求领取限时直购奖励
+message ReqGetThroughRechargeReward {
+  optional int32 cfgId = 1;//配置表id
+}
+
+//限时直购消息
+message ResSendThroughRecharge {
+  repeated ThroughRechargeInfo throughInfo = 1;//直购信息
+}
+
+//请求领取返利充值奖励
+message ReqGetBackRechargeReward {
+  optional int32 activityId = 1;//活动id
+}
+
+//请求领取返利充值奖励
+message ResBackRechargeInfo {
+  optional int32 activityId = 1;//活动id
+  optional int32 state = 2;//领取状态 0 不可领 1 可领 2 已领取
+}
+
+// 充值入口
+message ReqRechargeEntrance {
+  required int32 entrance = 1;
+}
+
+message ResLimitGiftBox {
+  repeated int32 id = 1;
+  optional int32 isRemind = 2;
+}
+
+//完成首充的时间
+message ResCompleteFirstChargeTime{
+  optional int64 firstRechargeTime = 1;//首充时间
+  optional int64 clickRedPointTime = 2;//点击红点
+}
+//获取某期投资计划数据
+message ReqGetInvestPlanRequest{
+  optional int32 investPhase = 1;//投资计划期数
+}
+//购买投资
+message ReqBuyInvestPlanRequest{
+  optional int32 investPhase = 1;//投资计划期数
+}
+//领取投资奖励
+message ReqReceiveInvestRequest{
+  optional int32 id = 1;//invest 表 id
+}
+//投资计划等等 奖励
+message Reward{
+  optional int32 id = 1;// 配置表 id
+  optional int32 state= 2;//状态 1已领 0未达成 2可领
+}
+//是否有奖可领 红点
+message RewardState{
+  optional int32 state = 1;//0表示无红点 1表示有红点
+}
+//投资计划每期数据
+message ResInvestPlanInfo{
+  required int32 investPhase = 1;//投资期限
+  repeated Reward rewards = 2;//奖励
+  optional int32 isPurchased = 3;// 是否已购买 0非购买 1已购买
+  optional int64 endTime = 4;//  结束时间 0或者非0
+}
+//投资计划数据
+message ResInvestPlanData{
+  repeated ResInvestPlanInfo info = 1;//投资计划
+}
+
+message FirstRechargeGive {
+  repeated int32 recivedId = 1;//已经领取的档位ID
+}
+
+//获取某期累计充值数据
+message ReqGetCumRechargeRequest{
+  optional int32 rechargePhase = 1;//累计充值期数
+}
+//领取累充奖励
+message ReqReceiveCumRechargeRequest{
+  optional int32 id = 1;//cumCharge 表 id
+}
+
+//累充计划每期数据
+message ResCumChargeInfo{
+  required int32 rechargePhase = 1;//累计充值周期
+  required int32 amount = 2;//累计充值金额
+  repeated Reward rewards = 3;//奖励
+  optional int64 endTime = 4;//  结束时间 0或者非0
+}
+//累充计划数据
+message ResCumRechargeData{
+  repeated ResCumChargeInfo info = 1;//累计充值活动
+}
+//累计充值活动是否开启
+message CumChargeOpen{
+  optional int32 state = 1;//0表示关闭 1表示开启
+}
+
+//时装投资数据
+message ResFashionInvestInfo{
+  repeated ResFashionInvest invest = 1;//每类时装投资数据
+  optional int64 endTime = 2;//  结束时间 0或者非0
+}
+//时装投资具体数据
+message ResFashionInvest{
+  required int32 type = 1;//投资类型 50 100 200
+  repeated Reward rewards = 2;//奖励
+  optional int32 isOpen = 3;// 是否已激活 0未激活 1已激活
+}
+//激活时装投资
+message ReqActiveFashionInvest{
+  optional int32 investType = 1;//时装投资类型
+}
+//领取投资奖励
+message ReqReceiveFashionInvest{
+  optional int32 id = 1;//invest 表 id
+}

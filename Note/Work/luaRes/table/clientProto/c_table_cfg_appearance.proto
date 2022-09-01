@@ -1,0 +1,34 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_APPEARANCE
+{
+	required int32 id = 1;//id#客户端#C  id
+	//required int32 type = 2;//外观类型#客户端#C  外观类型：1 武器 2头盔 3 衣服 4 翅 膀 5 称号
+	//optional string name = 3;//外观名#客户端#C  外观名
+	//required int32 quality = 4;//品质#客户端#C  品质，与道具品质颜色一致 1白，2淡蓝，3黄，4嫩草绿，5紫红，6红，7天蓝，8浅蓝，9湖蓝，10淡紫，11次绛蓝，12绛蓝，13蓝
+	//required int32 icon = 5;//iconid#客户端#C  iconid
+	//optional IntListJingHao model = 6;//模型id#客户端#C  模型id  填2个时 男性#女性
+	//required int32 phyAttMin = 7;//属性加成#客户端#C  物攻下限
+	//required int32 phyAttMax = 8;//属性加成#客户端#C  物攻上限
+	//required int32 magicAttMin = 9;//属性加成#客户端#C  魔攻下限
+	//required int32 magicAttMax = 10;//属性加成#客户端#C  魔攻上限
+	//required int32 monkAttMin = 11;//属性加成#客户端#C  道术下限
+	//required int32 monkAttMax = 12;//属性加成#客户端#C  道术上限
+	//required int32 phyDenMin = 13;//属性加成#客户端#C  物防下限
+	//required int32 phyDenMax = 14;//属性加成#客户端#C  物防上限
+	//required int32 magicDenMin = 15;//属性加成#客户端#C  魔防下限
+	//required int32 magicDenMax = 16;//属性加成#客户端#C  魔防上限
+	//required int32 blood = 17;//属性加成#客户端#C  血量
+	//optional IntListJingHao timeLimit = 18;//时间限制#客户端#C  时间限制 时间限制类型#参数  1 小时 
+	//required int32 condition = 19;//conditionid#客户端#C  conditionid 不填则没有条件  填写的话 则使用外观道具时，及启用外观时需检测相应条件
+	required int32 monsterHurtAdd = 20;//对BOSS伤害#客户端  对BOSS伤害，万分数
+	required int32 addDropTreasure = 21;//掉宝率#客户端  掉宝率  十万分数
+	optional string txt = 22;//外观效果说明#客户端  描述
+	required uint32 changeId = 23;//转性对应时装id#客户端  转性后对应的时装id，填写需要转变的时装id
+}
+
+message CFG_APPEARANCEARRAY
+{
+	repeated CFG_APPEARANCE rows = 1;
+}

@@ -1,0 +1,26 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_DIVINESUIT
+{
+	required int32 id = 1;//id#客户端  唯一id  决定套装类型和等级  前两位为类型 后两位为等级
+	required int32 type = 2;//套装类型#客户端  套装类型  1 记忆套装 2 祈祷  3 神秘
+	required int32 subType = 3;//子类型#客户端  子类型
+	required int32 level = 4;//套装等级#客户端  套装等级，同类型套装不可一致
+	optional string suitIcon = 5;//套装icon#客户端  在角色面板显示的套装ICON
+	required int32 position = 6;//套装数量#客户端  当前套装的装备位最大上限
+	optional IntListJingHao equipId = 7;//套装道具id#客户端  当前套装下属的所有装备id集合
+	optional IntListList attribute = 8;//套装额外属性#客户端  穿戴本类型套相应等级装备达到数量后触发的额外属性或技能(索引到cfg_divineSuitAttribute表)   部位数量#额外属性id&部位数量#额外属性id （每次单独计算）
+	optional IntListJingHao activeNumber = 9;//套装激活数量#客户端  套装激活的数量
+	optional StringList activeIcon = 10;//套装激活icon#客户端  根据套装激活数量，显示在角色面板神力按钮上的icon   icon名/icon名
+	optional StringList activeEffect = 11;//套装激活特效#客户端  根据套装激活数量，显示在角色面板神力按钮icon上的特效  特效名/特效名
+	optional string suitName = 12;//套装名称#客户端  当前套装的名称  主要显示在tips中
+	optional string dressDes = 13;//穿戴需求文本#客户端  穿戴需求文本，显示在tips中
+	optional string subtypeShow = 14;//套装部件显示#客户端  套装部件显示
+	//optional string tips = 15;//策划备注  
+}
+
+message CFG_DIVINESUITARRAY
+{
+	repeated CFG_DIVINESUIT rows = 1;
+}

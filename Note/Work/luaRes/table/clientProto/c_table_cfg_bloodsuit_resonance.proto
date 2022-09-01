@@ -1,0 +1,17 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_BLOODSUIT_RESONANCE
+{
+	required int32 id = 1;//编号#客户端  编号
+	required int32 group = 2;//共鸣组合#客户端  共鸣组合
+	optional string groupName = 3;//组合名称#客户端  组合名称
+	required int32 itemid = 4;//道具id#客户端  共鸣道具id
+	optional IntListJingHao skills = 5;//共鸣技能#客户端  共鸣技能
+	//optional string remarks = 6;//备注#策划  备注
+}
+
+message CFG_BLOODSUIT_RESONANCEARRAY
+{
+	repeated CFG_BLOODSUIT_RESONANCE rows = 1;
+}

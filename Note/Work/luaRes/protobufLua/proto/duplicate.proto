@@ -1,0 +1,820 @@
+package duplicateV2;
+
+import "union.proto";
+import "role.proto";
+import "common.proto";
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "DuplicateProto";
+
+message ItemInfo {
+    optional int32 itemId = 1;
+  optional int32 count = 2;
+}
+
+message MonsterHpInfo {
+    optional int64 monsterId = 1;//怪物id
+  optional int64 monsterHp = 2;//怪物剩余血量
+  optional int32 monsterCfgId = 3;//怪物配置id
+  optional int32 x = 4;
+  optional int32 y = 5;
+}
+
+message PlayerHpInfo {
+    optional int64 playerId = 1;//玩家id
+  optional int32 percent = 2;//血条百分比 0-100
+  optional int32 percentIp = 3;//内功百分比0-100
+}
+
+message PerformerEquipInfo {
+    optional int32 equipIndex = 1;//装备索引
+  optional int32 itemId = 2;//道具id
+}
+
+message PerformerBufferInfo {
+    optional int32 bid = 1;//buffer唯一id
+  optional int32 cfgId = 2;//buff配置表id
+}
+
+message PerformerFashionInfo {
+    optional int32 fashionType= 1;//时装类型
+  optional int32 fashionId = 2;//时装id
+}
+
+message RoundMonster {
+    optional int64 lid= 1;//怪物id
+  optional int32 x = 2;
+  optional int32 y= 3;
+  optional int32 dir = 4;//朝向
+  optional string name= 5;
+  optional int32 level = 6;
+  optional int32 career= 7;
+  optional int32 sex = 8;
+  optional int64 hp= 9;
+  optional int64 maxHp = 10;
+  optional int32 inner= 11;
+  optional int32 innerMax = 12;
+  optional int32 master= 13;//手动控制角色
+  repeated PerformerEquipInfo performerEquipInfo = 14;//装备信息(场景需要)
+  repeated PerformerBufferInfo performerBufferInfo= 15;//buffer信息(场景需要)
+  optional int32 wing = 16;
+  optional int64 rid= 17;//玩家id
+  optional int64 unionId = 18;
+  optional string unionName= 19;
+  repeated PerformerFashionInfo fashionList = 20;//时装
+  optional int32 junxian= 21;//军衔
+  optional int32 group = 22;//阵营
+}
+
+message HurtRankInfo {
+    optional int64 roleId = 1;//角色id
+  optional string name = 2;//玩家名
+  optional int32 rank = 3;//玩家名次
+  optional int64 hurt = 4;//伤害
+}
+
+message ChallengeCountInfo {
+    optional int32 leftChallengeCount = 1;//剩余挑战次数
+  optional int32 groupId = 2;//组id
+  repeated int32 duplicateId = 3;//副本id
+}
+
+message CollectRewardBoxInfo {
+    optional int32 boxId = 1;//boxid
+  optional int32 count = 2;//box数量
+}
+
+//副本基本信息
+message ResDuplicateBasicInfo {
+  optional int32 cfgId = 1;//副本配置id
+  optional int32 line = 2;//
+  optional int64 createTime = 3;//创建时间
+}
+
+//请求进入副本
+message ReqEnterDuplicate {
+  optional int32 duplicateId = 1;//副本配置id  
+  optional int32 costType = 2; //0 default, 1 消耗1 ，2 消耗2.
+}
+
+//副本结束信息
+message ResDuplicateEnd {
+  optional bool sucess = 1;//副本是否完成
+  optional int32 waitingTime = 2;//等待多久自动退出
+  repeated commonV2.IntIntStruct showAwardList = 3;  //展示的奖励列表 只有在成功的时候才有用.
+}
+
+//同步player和monster血量
+message ResPerformTotalHp {
+  repeated MonsterHpInfo monsterList = 1;//monster列表
+  repeated PlayerHpInfo playerList = 2;//player列表
+}
+
+//发送天梯场景对象信息
+message ResUpdateTianTiMonsterInfo {
+  repeated RoundMonster monsters = 1;//怪物列表
+}
+
+//请求副本信息
+message ReqDuplicatePanelInfo {
+  optional int32 duplicateType = 1;//副本类型
+}
+
+
+//返回世界boss或轮回boss面板信息
+message ResDuplicatePanelInfo {
+    optional int32 duplicateId = 1;//副本id
+  optional string unionName = 2;//归属者行会名 没有行会发归属者名字
+  optional int64 hp = 3;
+  optional int32 state = 4;//活动状态 1开启
+}
+
+//发送伤害排行变化信息
+message ResSendHurtRankInfo {
+    repeated HurtRankInfo ranks = 1;//前端显示的排名
+  optional HurtRankInfo selfRank = 2;//自已的排名
+}
+
+//返回副本剩余挑战次数信息
+message ResDuplicateLeftChallengeCount {
+    repeated ChallengeCountInfo countInfoList = 1;//挑战次数信息
+}
+
+//返回副本结算消息
+message ResDuplicateReward {
+    optional bool sucess = 1;//是否成功
+  repeated ItemInfo itemInfo = 2;//奖励列表
+}
+
+//返回当前采集书页副本中的采集信息
+message ResTreasureMapCollectInitInfo {
+    repeated CollectRewardBoxInfo allRewards = 1;//所有采集信息
+  repeated int32 alreadyCollected = 2;//已经采了的
+  optional int64 overTime = 3;//结束时间戳
+  optional int32 itemId = 4;//本次副本使用的道具
+}
+
+//返回当前采集书页副本的改变信息
+message ResTreasureMapCollectChangeInfo {
+    optional int32 collectedIndex = 1;//被采集掉的采集书页信息下标
+}
+
+message ReqLeaveDuplicate {
+  required int32 option = 1;//0:Exit 1:Continue
+}
+
+message ReqDuplicateReward {
+  required int32 multi = 1 [default = 1]; //领取倍数
+}
+
+message SabacInfo {
+  optional string unionName = 1;
+  optional int64 unionId = 2; //占领行会
+  // optional int64 totalExp = 3;
+  optional int64 flagDieTime = 4; //雕像死亡时间, 为 0 表示未死
+  optional int32 yuanbao = 5; // 获得元宝
+  optional bool isOpen = 6;
+  optional int64 tacticsCoolDownTime = 7; // 法阵冷却时间, 0 或小于当前可激活, 只有密道里有
+  repeated int32 activeTacticsPoints = 8; // 当前已激活的法阵点, 高 16 位为 x, 低 16 为 为 y, 只有密道里有
+  optional int64 tacticsActiveTime = 9; // 法阵激活时间, 只有皇宫里有
+  optional int64 uniteId = 10; // 占领联盟
+  optional int32 uniteType = 11; // 占领联盟类型
+}
+
+message SabacScoreInfo {
+  optional int32 killScore = 1; // 自己的杀戮积分
+  optional int32 guardScore = 2; // 自己的守护积分
+  optional int64 loseScore = 3; // 自己的战损积分
+  optional int64 Score = 4; //个人总积分
+  repeated SabacReward rewards = 5;//奖励列表
+}
+
+//沙巴克面板数据
+message SabacPanelInfo {
+  optional roleV2.ResPlayerBasicInfo mayor = 1;//城主
+  optional unionV2.UnionInfo union = 2;//占城行会
+  optional string cityName = 3;
+  optional int64 occupyTime = 4;//占城时间
+  repeated roleV2.ResPlayerBasicInfo officers = 5;
+  optional bool mayorDayGift = 6;//沙城争霸会长每日奖励
+}
+
+
+//发送暴君降临 积分排名
+message TyrantDuplicateScore {
+  repeated ThisPlayerInfo thisPlayerInfo = 1;//玩家信息
+}
+
+//暴君降临 playerInfo
+message ThisPlayerInfo {
+  optional int64 playerId = 1;//玩家ID
+  optional string name = 2;//玩家名
+  optional int32 yuanBaoNum = 3;//元宝鼓舞次数
+  optional int32 bindGoldNum = 4;//绑金鼓舞次数
+  optional int32 bindYuanBaoNum = 5;//绑元鼓舞次数
+  optional int32 score = 6;//积分
+  optional int32 no = 7;//排名
+}
+
+//快速完成副本请求
+message ReqAutoFinshDuplicate {
+  required int32 cfgId = 1;
+  required int32 multi = 2 [default = 1]; //领取倍数
+}
+
+//快速完成副本相应
+message ResAutoFinshDuplicate {
+  optional int32 cfgId = 1;
+}
+//请求暴君鼓舞
+message ReqInspireBuff {
+  optional int32 inspireType = 1;//鼓舞的方式，是元宝还是绑金 1是绑元  2是元宝
+  optional int64 playerId = 2;//玩家ID
+}
+
+//返回暴君鼓舞
+message ResInspireBuff {
+  optional int32 thisPercentage = 1;//加了百分之多少
+}
+
+//暴君boss死亡发送消息
+message ResTyrantDeath {
+  optional int64 playerId = 1;//玩家ID
+}
+
+//发送副本道具（头顶显示数量）
+message ResDuplicateItem {
+  optional int64 playerId = 1;//当前所在玩家ID
+  optional int32 itemId = 2;//道具id
+  optional int32 count = 3;//道具数量
+  optional int32 param = 4;//根据不同的副本有不同的
+  optional int32 activityId = 5;//活动id
+  optional int32 specialParam = 6;//根据不同的副本有不同的
+}
+
+//陵墓发送玩家所在层数
+message ResDuplicateInfo {
+  optional int64 playerId = 1;//当前所在玩家ID
+  optional int32 duplicateId = 2;//所在地图的ID
+  optional int32 maxFloorId = 3;//最大层数ID
+}
+
+//洞窟试炼副本玩家信息
+message CavesPlayerInfo {
+  optional ResDuplicateItem duplicateItem = 1;//副本道具
+  optional int32 no = 2;//排名
+  optional string name = 3;//玩家姓名
+}
+
+//洞窟试炼副本排行
+message CavesDuplicateRankInfo {
+  repeated CavesPlayerInfo duplicateRank = 1;//副本中的召唤令碎片排行
+}
+
+//洞窟试炼开启时间
+message CavesDuplicateInitTime {
+  optional int64 initTime = 1;//初始化时间戳
+}
+
+//请求陵墓信息
+message ReqMausoleumDuplicate {
+  optional int64 playerId = 1;//玩家ID
+}
+//返回神威狱消息
+message ResGodPower {
+  optional int32 mapId = 1;//最高层数的ID
+  optional int64 startTime = 2;//活动开始时间
+  optional int64 entryTimeEnd = 3;//活动入口关闭时间
+  optional int64 endTime = 4;//副本关闭时间
+  optional int32 thisMapId = 5;//当前层数ID
+  optional bool bossSurvival = 6;//当前boss是否存活
+}
+
+//进入门票信息
+message ResEntryTokenItem {
+  optional int32 itemId = 1;//门票id
+  optional int32 count = 2;//门票数量
+}
+
+//狼烟梦境时间消息
+message ResWolfDreamTime {
+  optional int32 useTime = 1;//已使用时间
+  optional int32 remainTime = 2;//剩余时间
+}
+
+
+//发送圣域空间次数
+message ResSanctuarySpaceInfo {
+  optional int32 count = 1; //剩余击杀次数
+}
+
+//购买圣域空间次数
+message ReqButSanctuaryCount {
+  optional int32 buyCount = 1;//要购买几次
+}
+
+//返回副本boss信息
+message ResDuplicateBossInfo {
+  optional bool bossSurvival = 1;//当前boss是否存活
+}
+
+//监狱剩余坐牢时间
+message ResPrisonRemainTime {
+  optional int64 player = 1;//玩家
+  optional int64 remainTime = 2;//剩余坐牢时间
+  optional bool isPrisoner = 3;//是否犯人
+}
+
+message SabacRankInfo {
+  required int64 roleId = 1;
+  required string name = 2;
+  optional int64 unionId = 3;
+  optional string unionName = 4;
+  optional int32 career = 5;
+  optional int64 score = 6; //用于评分的积分
+  optional int32 killCount = 7; //击杀数
+  optional int32 dieCount = 8; //死亡次数
+  repeated int32 loseItems = 9; //掉落道具
+  optional int32 rank = 10;
+  optional int64 damage = 11; //造成伤害
+  optional int64 hurt = 12; // 承受伤害
+  optional int64 cure = 13; // 治疗
+  optional int64 sex = 14;
+  optional int32 level = 15;
+  repeated int64 likeSet = 16;//点赞的人
+  optional int32 hostId =17;//客户端标志
+  optional int64 uniteId =18;//联盟Id
+  optional int32 uniteType =19;//联盟类型
+  optional int64 newScore = 20; //用于个人积分排行榜
+}
+
+// 沙巴克排行类型
+enum SabacRankType {
+  Kill = 1; //杀戮
+  Guard = 2; //守护
+  Lose = 3; //战损
+}
+
+message ReqGetSabacRankInfo {
+  required int32 type = 1;
+  required int32 page = 2; //页码
+  required int32 countPerPage = 3; //每页条数
+}
+
+message ResSabacRankInfo {
+  required int32 type = 1;
+  required int32 totalCount = 2; //总条数
+  required int32 page = 3; //页码
+  repeated SabacRankInfo rankInfo = 4;
+  optional SabacRankInfo myRankInfo = 5; // 自己的信息
+  optional int32 hostId = 6; // 客户端标志
+}
+
+message ReqSabacRecord {
+  required int32 index = 1; // 1 表示上次, 2 上上次 ...
+}
+
+message ResSabacRecord {
+  required int64 index = 1;
+  optional int64 unionId = 2;
+  optional string unionName = 3;
+  repeated SabacRankInfo rankInfo = 4;
+  optional SabacRankInfo myRankInfo = 5; // 自己的信息
+  optional int32 hostId = 6; // 客户端标志
+  optional int64 uniteId= 7; //联盟Id
+  optional int32 uniteType= 8;//联盟类型 
+}
+
+
+//女神赐福副本信息
+message ResGoddessBlessingInfo {
+  optional int64 openTime = 1;//副本的开启时间
+  optional int32 totalTime = 2;//副本的持续时间
+}
+
+//幻境迷宫消息
+message ResDreamlandInfo {
+  optional int32 bossCount = 1;//当前boss数量
+  optional int32 exitIsOpen = 2;//出口是否打开。0是未打开，1是打开
+  optional int32 isMessenger = 3;//空间使者是否出现。0是未出现，1是出现
+  optional string name = 4;//玩家姓名
+  optional int64 endTime = 5;//返回结束时间
+}
+
+//返回幻境可传送层数
+message ResCanDelivery {
+  optional int32 layer = 1;//可传送层数
+}
+
+//请求幻境传送
+message ReqDeliveryDuplicate {
+  optional int32 duplicateId = 1;//传送的层数ID
+}
+
+//武道会下注
+message ReqDuboBet {
+  optional int64 targetPlayerId = 1; //目标玩家id
+  optional bool finalWar = 2; //是否争霸赛
+  optional int32 zhu = 3; //下的注
+}
+
+//查看玩家能下注的信息
+message ResBetPlayerInfo {
+  repeated BetPlayerInfo someSelectPlayers = 1; //晋级赛下注
+  repeated BetPlayerInfo finalPlayers = 2; //争霸赛下注
+}
+
+//能下注的玩家信息
+message BetPlayerInfo {
+  optional int64 playerId = 1; //玩家id
+  optional int32 killNum = 2; //击杀数
+  optional int32 onlineTime = 3; //在线时长(ms)
+  optional double odds = 4; //赔率
+  optional int32 no = 5;  //名称
+  optional int32 zhuNum = 6; //注数目
+  optional string playerName = 7;  //玩家名字
+  optional int32 sex = 8;  //性别
+  optional int32 career = 9; //职业
+}
+
+//武道会排行榜玩家数据
+message ResBudoRank {
+  repeated BudoRankPlayerInfo rankPlayer = 1;
+}
+
+//武道会排行榜玩家数据
+message BudoRankPlayerInfo {
+  optional int64 playerId = 1; //玩家id
+  optional string name = 2;
+  optional int32 career = 3;
+  optional int32 killNum = 4; //击杀数
+  optional int32 no = 5;
+  repeated BudoAwardItem awardItems = 6;
+  optional LikeList likes = 7;//点赞集合
+  optional int32 sex = 8; //性别
+  optional int32 level = 9; //等级
+  optional double selectBetRate = 10; //晋级赛赔率
+  optional int64 selectBetAmount = 11; //晋级赛押注金额
+  optional double finalBetRate = 12; //争霸赛赔率
+  optional int64 finalBetAmount = 13; //争霸赛押注金额
+  optional int32 hostId = 14;//所属服务器hostId
+  optional int32 serverType = 15;//产生数据的服务器类型
+}
+
+//武道会奖励物品
+message BudoAwardItem {
+  optional int32 ItemConfigId = 1; //物品id
+  optional int32 count = 2;
+}
+
+//武道会信息
+message BudoDuplicatePhaseInfo {
+  optional int32 phase = 1; //阶段
+  optional int64 overTimeS = 2;  //该阶段结束时间，晋级赛和争霸赛无时间，填0，别的是剩余秒数
+  repeated BudoPlayerInfo playerInfos = 3; //所有的玩家信息
+  optional int64 beginTimeMS = 4;  //该阶段开始时间
+}
+
+//武道会玩家信息
+message BudoPlayerInfo {
+  optional int64 playerId = 1;  //玩家id
+  optional string name = 2; //玩家名称
+  optional int32 no = 3; //玩家名次
+  optional bool war = 4;  //是否参战
+  optional int32 killNum = 5; //击杀数
+}
+
+//武道会更新自己信息
+message BudoDuplicateUpdateInfo {
+  optional int32 selfKillNum = 1; //我的击杀数
+  optional bool war = 2; //是否参战
+  optional int32 playerCount = 3; //存活人数
+  optional int32 no = 4; //名次
+}
+
+// 沙巴克法阵信息
+message SabacTacticsInfo {
+  required int64 roleId = 1;
+  optional string roleName = 2;
+  required int64 unionId = 3;
+  optional string unionName = 4;
+  optional bool active = 5; // 是否激活
+  required int64 uniteId = 6;//联盟Id
+  optional int32 uniteType = 7;//联盟类型
+}
+
+message ResSabacTactics {
+  repeated SabacTacticsInfo tactics = 1;
+  optional int64 tacticsEndTime = 2; //激活倒计时
+}
+
+message ResSabacTacticsActived {
+  optional int64 activeTime = 1; // 法阵生效时间
+}
+
+message SabacTacticsEffect {
+  required int64 id = 1;
+  optional int64 damage = 2;
+  optional int64 hp = 3; //剩余 hp
+}
+
+// 沙巴克法阵伤害消息
+message ResSabacTacticsEffect {
+  required SabacTacticsEffect hurt = 1; //自己受到的伤害
+  repeated SabacTacticsEffect combinedServantsHurt = 2; //合体灵兽伤害
+}
+
+//众筹面板信息
+message ResCrowdFundingPanel {
+  repeated int32 ids = 1;//众筹开启过的赛事
+  optional CrowdFundingInfo info = 2;//当前众筹信息(没有就空)
+}
+//众筹信息
+message CrowdFundingInfo {
+  optional int32 id =1;//众筹表id
+  optional int64 startTime = 2;//活动开始时间戳
+  optional int64 fundingEndTime = 3;//众筹结束时间戳
+  optional int32 nowMoney = 4;//当前金额
+  optional int32 state = 5;// 0:正在众筹 1：完成
+}
+//开启众筹
+message ReqOpenCrowdFunding {
+  optional int32 id = 1;//众筹表id
+  optional int32 startMins = 2;//开启时间(距离0的分钟)
+  optional int32 money = 3;//个人元宝
+  optional int32 unionMoney = 4;//帮会元宝
+}
+//捐献酬金
+message ReqDonateFunding {
+  optional int32 money = 1;
+  optional int32 unionMoney = 2;
+}
+//酬金变化
+message ResCrowdFundingChange {
+  optional int32 nowMoney = 1;
+}
+
+message SabacPlayerInfo {
+  required int64 roleId = 1;
+  optional string name = 2;
+  optional int32 unionPos = 3;
+  optional int32 sex = 4;
+  optional int32 career = 5;
+}
+
+// 沙巴克神秘掮客面板响应
+message ResBrokerPanel {
+  required int64 unionId = 1; // 没有占领时为0
+  optional string unionName = 2;
+  repeated SabacPlayerInfo players = 3;
+}
+
+// 掮客查询请求
+message ReqBrokerQuery {
+  required int64 roleId = 1;
+}
+
+//玩家活动数据
+message PlayerActivityData {
+  optional int64 roleId = 1;//玩家id
+  optional int32 sex = 2;//玩家性别
+  optional int32 career = 3;//玩家职业
+  optional int32 level = 4;//玩家等级
+  optional string roleName = 5;//玩家名字
+  optional int64 unionId = 6;//帮会Id;
+  optional int32 kill = 7;//杀人数量
+  optional int64 bossHurt = 8;//对boss伤害
+  optional int32 bossKill = 9;//对boss击杀
+  optional int64 score = 10;//得分
+  optional int32 getTitle = 11;//获得的称号
+  optional LikeList likes = 12;//点赞集合
+  optional int32 hostId = 13;//服务器Id
+}
+
+//返回玩家活动数据
+message ResPlayerActivityDataRank {
+  repeated PlayerActivityData playerData = 1;//自己方阵营玩家数据
+  repeated PlayerActivityData otherPlayerData = 2;//敌方阵营玩家数据
+  optional int64 allBossHurt = 3;//boss总伤害
+  optional int32 allBossKill = 4;//boss总击杀
+  optional int32 allKill = 5;//总杀敌
+}
+
+//弹出活动结算面板
+message ActivityEndRank {
+  repeated PlayerActivityData playerData = 1;//自己方阵营玩家数据
+  repeated PlayerActivityData otherPlayerData = 2;//敌方阵营玩家数据
+  optional int64 allBossHurt = 3;//boss总伤害
+  optional int32 allBossKill = 4;//boss总击杀
+  optional int32 allKill = 5;//总杀敌
+}
+
+message GetGoddessBlessingRank {
+  optional int32 rankType = 1;//排行类型 1现在的 2以前的
+}
+
+//女神赐福排行信息
+message GoddessBlessingRankInfo {
+  optional int32 activityId = 1;//活动id
+  repeated GoddessBlessingPlayerInfo players = 2;
+  optional int32 rankType = 3;//排行类型 1现在的 2以前的
+}
+
+// 女神赐福玩家信息
+message GoddessBlessingPlayerInfo {
+  required int64 roleId = 1;//玩家id
+  optional string roleName = 2;//玩家名字
+  optional int32 sex = 3;//性别
+  optional int32 career = 4;//职业
+  optional int32 level = 5;//等级
+  optional int32 convertedEarning = 6;//已经兑换过的收益
+  optional int32 killNumber = 7;//杀人数量
+  optional LikeList likes = 8;//点赞集合
+  optional double score = 9;//分数
+  optional int32 hostId = 10;
+  repeated BudoAwardItem awardItems = 11;//女神赐福排名奖励
+}
+
+message ReqGBPreviousPeriodTime {
+  required int32 activityType = 1;
+}
+
+//往期时间
+message ResGBPreviousPeriodTime {
+  repeated int64 times = 1;//往期时间
+  optional int32 activityType = 2;
+}
+
+//请求往期数据
+message ReqGBPreviousPeriodInfo {
+  optional int64 times = 1;//往期时间
+}
+
+//点赞请求
+message LikeRequest {
+  optional int32 activityId = 1;//活动id
+  optional int64 targetId = 2;//点赞的对象id
+  optional int64 periodParam = 3;//周期参数 0代表本期
+}
+
+//点赞返回信息
+message LikeResponseCommon {
+  optional int64 rid = 1;//目标的点赞数据
+  optional int32 activityId = 2;//活动id
+  optional int64 trigger = 3;//触发点赞的
+  optional int64 periodParam = 4;//周期参数
+}
+//点赞集合
+message LikeList {
+  repeated int64 likes = 1;//点赞的玩家id
+}
+
+//请求查看武道会排行
+message ReqLookBudoMeet {
+  optional int32 type = 1;//0:武道会排行榜 1：点赞
+  optional int32 history = 2; //0,1,2 0：上期， 1：上上期， 2： 上上上期
+}
+
+//今日是否使用烟花
+message ResTodayUseFirework {
+  optional int32 isUse = 1;//1是 0否
+}
+
+//查看往期内容（用于幻境）
+message ReqGetPreviousReview{
+	optional int32 activeType = 1;//活动Type
+}
+
+//返回往期内容时间
+message ResGetPreviousReview{
+	repeated int64 activeTime = 1;//举办的活动时间戳
+}
+
+//查看具体某个活动的往期内容（用于幻境）
+message ReqGetSpecificPreviousReview{
+	optional int32 activeType = 1;//活动Type
+	optional int64 activeTime = 2;//举办的活动时间戳
+}
+
+//返回幻境具体某一期的内容
+message ResDreamlandRankInfo{
+	repeated PlayerActivityData myUnionRank = 1; //我帮会的列表
+	repeated PlayerActivityData otherUnionRank = 2; //敌对帮会的列表
+	optional int64 allBossHurt = 3;//boss总伤害
+	optional int32 allBossKill = 4;//boss总击杀
+	optional int32 allKill = 5;//总杀敌
+}
+
+//记录打开往期数据面板的玩家
+message ReqSeePreviousData{
+	optional int32 id = 1;//客户端定义的ID
+}
+
+//记录关闭往期数据面板的玩家
+message ReqClosePreviousData{
+	optional int32 id = 1;//客户端定义的ID
+}
+
+message ResBudoMeetAround {
+  optional int32 phase = 1;//武道会阶段
+  repeated Point warPoint = 2;//武道会决赛擂台区坐标点集合
+  repeated Point wallPoint = 3;//武道会决赛擂台决赛坐标点集合
+}
+
+message Point {
+  optional int32 pointX = 1;
+  optional int32 pointY = 2;
+}
+
+//返回恶魔广场结束时间
+message ResDevilSquareEndTime{
+	optional int64 endTime = 1;//结束时间戳
+  optional int32 duplicateType = 2;//副本类型
+}
+
+//请求时间副本剩余时间
+message ReqDevilSquareEndTime {
+  optional int32 duplicateType = 1;//副本类型
+}
+
+//返回恶魔广场剩余时间
+message ResDevilSquareHasTime{
+	optional int64 hasTime = 1;//剩余时间
+  optional int32 duplicateType = 2;//副本类型
+}
+
+//使用恶魔卷轴后提示
+message ResUseDevilScrollPrompt{
+	optional int32 deliverId = 1;//deliver的id
+}
+
+message ReqReliveHuntMonster{
+  optional int64 NpcId = 1;
+}
+
+message BudoBetBeiInfo{
+	repeated PlayerBetBeiInfo info = 1;//下注信息
+}
+
+message PlayerBetBeiInfo{
+	optional int64 targetId = 1;//押注目标id
+	optional int32 someSelectBetInt = 2; //第一阶段倍率
+	optional int32 finalBetInt = 3;//第二阶段倍率
+  optional int32 state = 4;//阶段
+}
+
+message BudoBetSuccess{
+  optional int64 targetId = 1;//押注目标id
+  optional int32 canZhu = 2;//自身剩余可押注数
+  optional int32 targetZhu = 3;//目标已压住数
+  optional int32 state = 4;//阶段
+  optional int32 betInt = 5;//赔率
+}
+
+//狼烟梦境放XP技能更改加速系数
+message ResWolfDreamXpSkillChangeTime{
+	 optional int32 skillId = 1;//自身释放的技能Id
+}
+
+// 地下行宫副本信息
+message UndergroundDuplicateInfo {
+  optional int32 monsterLiveLeft = 1; // 剩余怪物数量
+}
+
+message UndergroundMyUnionRank {
+   optional int32 myUnionRank = 1;
+}
+
+//地下行宫推送气泡消息
+message PushBubble {
+   optional int32 mapId = 1;
+   optional int32 monsterId = 2;
+}
+//夺宝奇兵信息
+message RaiderInfo{
+	optional int32 wave = 1;//波数
+	optional int64 nextWaveTime = 2;//下一波尸王刷新的倒计时
+	optional int32 curMonsterNum = 3;//当前尸王数量
+	repeated RaiderSpecialItemInfo raiderSpecialItemInfos = 4;//夺宝奇兵特殊道具
+	optional int64 endTime = 5;//活动结束时间
+}
+//夺宝奇兵特殊道具信息
+message RaiderSpecialItemInfo{
+	optional int64 rid=1;//玩家id
+	optional int64 time=2;//结束时间
+	optional string name = 3;//玩家名称
+}
+message SabacReward{
+	optional int32 id=1;//奖励配置id
+	optional int32 state=2;//奖励状态 0不可领 1已领取 2可领取
+}
+
+//通天塔通关后获取到的奖励弹面板
+message ResTowerInstanceEndGetReward{
+	repeated TowerReward rewards = 1;//领取到的奖励
+}
+
+message TowerReward{
+	optional int32 itemId = 1;
+	optional int32 count = 2;
+}

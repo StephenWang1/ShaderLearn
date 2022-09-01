@@ -1,0 +1,18 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_DIVINELEVELUP
+{
+	required int32 id = 1;//道具id#客户端  道具id
+	required int32 nextId = 2;//下级道具id#客户端  下一级道具id  不填则说明已是最高级
+	required int32 needExp = 3;//需要经验#客户端  升到下一级道具需要的经验  不填则说明已是最高级
+	optional IntListJingHao costDivineId = 4;//神力id#客户端  可以消耗升级的神力套装id （divinesuitid）divineid#divineid
+	optional IntListList costType = 5;//道具类型#客户端  可以用来消耗的道具类型，type#subtype&type#subtype
+	//optional string des = 6;//备注  策划用
+	//optional string nextDes = 7;//备注  策划用
+}
+
+message CFG_DIVINELEVELUPARRAY
+{
+	repeated CFG_DIVINELEVELUP rows = 1;
+}

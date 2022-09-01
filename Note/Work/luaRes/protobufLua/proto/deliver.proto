@@ -1,0 +1,111 @@
+package deliverV2;
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "DeliverProto";
+
+//通过配置文件传送	
+message ReqDeliverByConfig {
+	optional int32 deliverId = 1;  //传送配置id
+	optional bool isStone = 2; //是否通过传送石
+}	
+
+//通过传送石传送
+message ReqDeliverByTransStone {
+	optional int32 deliverId = 1; //传送id
+}
+
+//小飞鞋请求
+message FlyToGoalRequest {
+	required int32 taskId = 1;
+	required int32 taskType = 2;//任务状态 1 可接、未接 2 接受 3 完成、提交 
+	optional int32 mapId = 3;//地图id
+	optional int32 x= 4;//坐标x
+	optional int32 y = 5;//坐标y
+	optional int32 npcId = 6;//NPCID
+	optional int32 itemId =7;//物品id
+}
+
+//小飞鞋飞镖车请求
+message ReqFlyToDynamicGoal {
+	optional int32 type = 1;//1:个人押镖 2:行会镖车
+	optional int64 cartId = 2;//个人镖车id
+	optional int32 x = 3;
+	optional int32 y = 4;
+}
+
+//直接传送随机远点请求（主线任务直接传送到远点）
+message DirectlyTransferRequest {
+	required int32 taskId = 1;
+	required int32 taskType = 2;//任务状态 1 可接、未接 2 接受 3 完成、提交 
+	optional int32 mapId = 3;//地图id
+	optional int32 x= 4;//坐标x
+	optional int32 y = 5;//坐标y
+}
+
+//直接传送响应
+message DirectlyTransferRes{
+	required int32 taskId = 1;
+}
+
+//通过npc和id传送(记录进入人数)
+message ReqEnterMapByNPC{
+	optional int64 npcId = 1;//npc唯一id
+	optional int32 deliverId = 2;
+}
+
+//直接传送随机点请求（直接传送到随机任务目标点）
+message DirectlyTransferRandomPointRequest {
+	required int32 taskId = 1;
+	required int32 taskType = 2;//任务状态 1 可接、未接 2 接受 3 完成、提交 
+	optional int32 mapId = 3;//地图id
+	optional int32 x= 4;//坐标x
+	optional int32 y = 5;//坐标y
+}
+
+//通过小地图传送	
+message ReqMinMapDeliver {
+	optional int32 deliverId = 1;  //传送配置id
+}
+
+//返回可传送任务ID
+message CanTransferTaskId{
+	optional int32 taskId = 1;//主线任务ID
+}
+
+//请求本地图传送
+message ReqThisMapTransfer{
+	optional int32 taskId = 1;//主线任务ID
+}
+
+//返回本地图传送是否成功
+message ResThisMapTransfer{
+	optional int32 isSuccess = 1;// 0未成功  1成功
+}
+
+//通用传送
+message ReqDeliverByReason {
+	required int32 deliverId = 1;
+	optional int32 reason = 2; //原因
+}
+
+//精英任务传送
+message TaskBossDeliverReq{
+	required int32 cfgId = 1;//cfg_taskboss.csv表id
+	optional int32 mapId = 2; //地图id
+}
+
+//恶魔广场任务随机传送
+message TaskRandomReq{
+	optional int32 targetMapId = 1; //目标地图id
+	optional int32 targetX = 2;  //目标坐标x
+	optional int32 targetY = 3;  //目标坐标y
+	optional int32 type = 4; //类型 1.取任务id2，取group
+	optional int32 group = 5; //组
+	optional int32 taskId = 6;
+}
+
+//随机传送到一个怪物身边
+message ReqRandomDeliverToMonster {
+	
+}
+

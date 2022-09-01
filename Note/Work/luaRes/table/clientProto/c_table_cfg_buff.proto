@@ -1,0 +1,134 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_BUFF
+{
+	required int32 id = 1;//buffid#客户端#C  1、角色技能buff：技能id+同技能分类+编号；2、怪物技能buff：技能id+同技能分类+编号；4、心法技能buff：技能id+同技能分类+编号；3、其他buff：一级分类+二级分类+编号；
+	//optional string name = 2;//buff名称#客户端#C  名称
+	//required int32 skills = 3;//buff对应的技能#客户端#C  buff对应的技能ID（用于技能自动释放判断）
+	//required uint32 trigger = 4;//触发类型#客户端#C  触发时机：1立即执行；2死亡后；3复活后；4时间周期；5受到伤害；6受到治疗；7固定延时执行；8造成伤害时；9造成伤害，受到伤害时候都会触发；10穿戴装备且对应持久不为0；11倒计时结束或获得同类型buff时触发；12被控制技能控制时触发13指定buff附加；13被玩家攻击并受伤伤害时触发
+	//required uint32 displayType = 5;//是否屏蔽buff#客户端#C  不填为不屏蔽 填了为屏蔽
+	//required uint32 dispelType = 6;//buff消失时机#客户端#C  1目标死亡后消除+buff结束后消除；2buff结束后消除；3离开战斗状态+buff结束后消除；4 卸下装备且持久为0；5触发后消除+buff结束后消除；6倒计时结束或获得新的同类型buff；7指定buff结束或buff时间结束
+	//required uint32 type = 7;//buff类型#客户端#C  1hp回复；2mp回复；3增加防御（神圣幽灵术）；4控制buff(麻痹定身，诱惑）；5持续治疗（治疗百分比视为攻击最大值的百分比）；6持续伤害（攻击百分比的伤害配在skill_condition表技能倍率，并读取skill_condition表神圣伤害配置）；7增加或减少属性；8使目标无法恢复生命（暂针对怪物）；9受到的伤害增加或减少；10受到的伤害增加或减少万分比；11经验加成；12造成的伤害增加或减少13隐身；14造成额外伤害；15套装效果；16施毒术;17烈火；99副本内BUFF；18猜拳定身buff；19攻速移速提升；20同时回血回蓝，气血石;21装备buff；36移动速度增加百分比（加速为负；减速为正）37 间谍伪装buff 38 油（地面buff） 39 滑到 40穿透 41:99朵送花特效 42增加或减少属性万分比 43 精力腕力相关buff，显示用无实际作 44 镖车减速 45爆裂火符（buff结束时造成伤害）46秘能爆发 47旋风斩 48暴风雪 49暴风雪定身 50麻痹 51切割伤害增加百分比 52玩家和神兽攻击增伤53人物的生肖boss伤害54控制豁免55嗜血56被攻击时触发给自己添加一个buff57守护58禁止奔跑59攻击时触发时给攻击目标添加一个buff60被控制时触发给自己添加一个buff 61指定技能造成的伤害增加或减少万分比 62指定技能攻击并造成伤害时触发给自己加buff 63受到的伤害按照攻击到的人数增加或减少 64控制技能判断等级降低 65使用指定技能杀人后百分比减少指定技能cd时间 66伤害反弹 67强化地面火墙buff 68火墙灼烧 69死亡时对周围造成固定伤害 71攻击造成伤害时触发随机给自己添加一个buff 72雷电强化辅助伤害buff 73额外恢复万分比血量 74共鸣组合属性提升万分比 75血继套装技能降低激活要求血继数 76共鸣数量倍数增加额外属性 77血继套装属性提升万分比（排外）78血继套装属性提升万分比 79显示用BUFF 80强化技能辅助buff 81强化火墙生效buff 82强化神兽生效buff83强化骷髅生效buff84强化施毒术生效buff85强化施毒术尸爆buff86鼓舞buff 87强化野蛮辅助buff 88狂暴药剂buff 89灵兽嗜血buff90酒气buff 91狂暴-石化免疫 92护盾 93狂暴抵抗buff 94怪物护盾破击 95被攻击时触发给自己添加一个buff（boss技能） 96经验狂欢 97 塔罗暗殿 98 飞升（击杀仙级BOSS增加属性）100 聚宝盆（自动拾取道具）101石化潜能 102诅咒潜能 103疾速潜能 104狂暴之力 105攻击吸血（针对攻击伤害吸血）106攻击临时加幸运 107药品恢复效果提升百分比 108hp恢复（区分药品） 109mp恢复（区分药品）110造成目标百分比血量额外伤害 111玩家死亡爆炸概率下降百分比 112潜能系统的诅咒buff 113魔法抵扣伤害 114死亡复活 115按比例回复生命 （回春、意志）  119抗反伤药剂 180元灵属性buff 190攻击提升万分比 200每秒扣除百分比总血量 201限时自动回收 202自动挖掘 1000降低治疗效果
+	//required uint32 subType = 8;//子类型#客户端#C  在buff类型的基础上再进行划分:(4类型:41代表眩晕状态受击，不播放受击动作，只播放受击白光，客户端用)  19类型：内容代表duplicate表id，对应相应副本给角色附加的buff；21:0双倍buff
+	//required int32 level = 9;//等级#客户端#C  元素等级、buff等级
+	//required uint32 isGood = 10;//是不是增益BUFF#客户端#C  0不是；1是
+	//required uint32 target = 11;//目标#客户端#C  1对自己；2对其他；3对友方包括自己
+	//required int32 parameterType = 12;//buff参数类型#客户端#C  1固定值；2万分比；3暴风雪神圣伤害   强化辅助buff：0 使用技能触发（给自己加效果并且用一次技能只触发一次），1 攻击触发（aoe 技能攻击到每个目标判断一次触发，或者是给目标加效果），2（给自己加 buff 触发），3 给别人加 buff 触发
+	//optional IntListJingHao parameter = 13;//buff参数#客户端#C  buff效果值（特殊配置：1、施毒术：减物魔防百分比；2元素套装：等级;3经验丹：经验加成倍数；3、回血回蓝：回血值4、暴风雪：技能神圣伤害5、群毒术增伤：增伤万分比6、嗜血：单体触发概率#嗜血群体触发概率7、禁锢：单体技能触发概率#群体技能触发概率）8、自由触发：控制技能globalId#控制buffglobalId 9、自由：自由buff限制的bufftype（位移效果服务器写死）10、type70：灵兽血量万分比 11、type73：额外恢复血量万分比 12、强化只有辅助buff：治愈buffid 13、治愈术：攻击加血系数#固定值加血值 57、辅印守护血量维持参数（万分位比例） 113、护身戒指魔法抵扣伤害的比例，战士#法师#道士（万分位比例，如填20000，表示2点魔法抵扣1点伤害;）
+	//optional string show = 14;//场景展示文字#客户端#C  
+	//required int32 replace = 15;//替代规则（即时战斗用)#客户端#C  不可叠加时使用：1高低替换(无效) ；2无条件替换
+	//optional IntListJingHao extraParam = 16;//额外参数配置（即时战斗用)#客户端#C  buff的特殊参数配置，每个buff单独定义效果（1、施毒术：附加神圣伤害值。2、持续治疗：立即回复攻击百分比的生命；3、回血回蓝：回蓝值；4、油：配置触发的buffid；5魔法盾：受击特效id）6.元素套装保护期 7.秘能爆发、爆裂火符：技能id#等级（取伤害用)8.暴风雪：减速buffid 9.暴风雪定身：暴风雪bufferType 10、旋风斩：伤害技能id 11、暴风雪减速：玩家减速万分比 12群毒术增伤：火墙、毒、XP群攻增伤万分比 13嗜血：目标血量万分比要求#伤害万分比14自由buff：延迟生效时间（毫秒）15雷电（紫电）：辅助伤害技能id 16强化召唤：召唤物附加buff 17强化火墙地面buff：对自己灼烧#对他人灼烧
+	//required int32 showPriority = 17;//特效显示优先级（即时战斗用)#客户端#C  0不显示；大于0，越大优先级越高
+	//required int64 totalTime = 18;//持续时间（即时战斗用)#客户端#C  毫秒（不填代表无时间限制）
+	//required int32 cdTime = 19;//间隔时间（即时战斗用）#客户端#C#不存在共同参与合并的字段  毫秒（触发效果的间隔时间，不填代表持续生效）
+	//optional string icon = 20;//bufficon#客户端#C  头像下方的buff图标显示
+	//optional string txt = 21;//buff说明#客户端#C  buff列表中显示用描述
+	//required int32 buffEffectType = 22;//buff效果类型#客户端#C  1buff存在时持续生效；2普通攻击施法附加效果
+	//optional IntListJingHao buffEffect = 23;//buff特效#客户端#C  配effect表ID
+	//required int32 phyAttackMin = 24;//最小物理攻击#客户端#C#不存在共同参与合并的字段  属性
+	//required int32 phyAttackMax = 25;//最大物理攻击#客户端#C#不存在共同参与合并的字段  属性
+	//required int32 magicAttackMin = 26;//最小魔法攻击#客户端#C#不存在共同参与合并的字段  属性
+	//required int32 magicAttackMax = 27;//最大魔法攻击#客户端#C#不存在共同参与合并的字段  属性
+	//required int32 taoAttackMin = 28;//最小道术攻击#客户端#C#不存在共同参与合并的字段  属性
+	//required int32 taoAttackMax = 29;//最大道术攻击#客户端#C#不存在共同参与合并的字段  属性
+	//required int32 phyDefenceMin = 30;//最小物理防御#客户端#C#不存在共同参与合并的字段  属性
+	//required int32 phyDefenceMax = 31;//最大物理防御#客户端#C#不存在共同参与合并的字段  属性
+	//required int32 magicDefenceMin = 32;//最小魔法防御#客户端#C#不存在共同参与合并的字段  属性
+	//required int32 magicDefenceMax = 33;//最大魔法防御#客户端#C#不存在共同参与合并的字段  属性
+	//required int32 pkAtt = 34;//pk伤害加成（万分比）#客户端#C  属性
+	//required int32 pkDef = 35;//pk防御加成（万分比）#客户端#C  属性
+	//required int32 criticalDamage = 36;//暴击伤害#客户端#C  属性
+	//required uint32 atkPer = 37;//攻击加成百分比#客户端#C  百分比
+	//required uint32 defPer = 38;//防御加成百分比#客户端#C  百分比
+	//required uint32 showDelay = 39;//延迟显示#客户端#C  buff显示延迟时间
+	//required int32 phantomHp = 40;//元灵生命上限#客户端#C  属性
+	//required int32 fireAttackMax = 41;//火攻击上限#客户端#C#不存在共同参与合并的字段  属性
+	//required int32 iceAttackMax = 42;//冰攻击上限#客户端#C#不存在共同参与合并的字段  属性
+	//required int32 electricAttackMax = 43;//电攻击上限#客户端#C#不存在共同参与合并的字段  属性
+	//required int32 darkAttackMax = 44;//黑暗攻击上限#客户端#C#不存在共同参与合并的字段  属性
+	//required int32 punctureAttackMax = 45;//穿刺攻击上限#客户端#C#不存在共同参与合并的字段  属性
+	//required int32 fireDefenceMax = 46;//火元素防御上限#客户端#C#不存在共同参与合并的字段  属性
+	//required int32 iceDefenceMax = 47;//冰元素防御上限#客户端#C#不存在共同参与合并的字段  属性
+	//required int32 electricDefenceMax = 48;//雷元素防御上限#客户端#C#不存在共同参与合并的字段  属性
+	//required int32 darkDefenceMax = 49;//暗元素防御上限#客户端#C#不存在共同参与合并的字段  属性
+	//required int32 punctureDefenceMax = 50;//穿刺元素防御上限#客户端#C  属性
+	//required int32 isBloodWord = 51;//是否飘血#客户端#C  伤害或回血时，其他人是否能看到飘血跳字（0不可以1可以）
+	//optional IntListList secretSkillAddHp = 52;//秘籍增加生命#客户端#C  属性（1战士#数值&2法师#数值&3道士#数值）
+	//required int32 iconType = 53;//icon显示分类#客户端#C#不存在共同参与合并的字段  同类型的buff，统一显示一个icon、描述、名称
+	//optional IntListJingHao hitEffect = 54;//buff存在时的受击特效#客户端#C  buff存在时的受击特效
+	//required int32 holyAttackMin = 55;//最小神圣攻击#客户端#C  属性
+	//required int32 holyAttackMax = 56;//最大神圣攻击#客户端#C  属性
+	//required int32 holyDefenceMin = 57;//最小神圣防御#客户端#C  属性
+	//required int32 holyDefenceMax = 58;//最大神圣防御#客户端#C  属性
+	//required int32 fightRec = 59;//战斗回血#客户端#C  属性
+	//required uint32 effectAction = 60;//buff存在期间的持续动作#客户端#C  0无动作31普通下劈攻击  32举手施法  33斜劈 34冲撞 35跳斩 36旋风斩 37秘能爆发38暴风雪 39爆裂火符 40召唤群兽
+	//optional IntListJingHao exitBuffHideEffect = 61;//存在buff时隐藏特效模型#客户端#C  关联特效的模型id
+	//optional IntListJingHao intensifyBuffEffect = 62;//特效互斥#客户端#C  拥有指定buffid时，不再添加此buff的特效
+	//required int32 originalSkill = 63;//原技能id#客户端#C  填对应原技能ID
+	//required int32 roleattackSpeed = 64;//人物攻速#客户端#C  (仅客户端用)
+	//required int32 movingSpeed = 65;//人物移速#客户端#C  (仅客户端用)
+	//required int32 monattackSpeed = 66;//怪物攻速#客户端#C  (仅客户端用)神兽骷髅灵兽怪物都用该字段
+	//required int32 monmovingSpeed = 67;//怪物移速#客户端#C  (仅客户端用)神兽骷髅灵兽怪物都用该字段
+	//optional IntListJingHao intensifyBuffEffect2 = 68;//特效互顶#客户端#C  添加此buff时，移除指定buffid的特效
+	//required uint32 avatarActionState = 69;//骑马#客户端#C  骑马buff填1   默认为0
+	//required int32 attackSpeedRatio = 70;//固定攻速加成#客户端#C  固定攻速类型，填写固定值，系数最高120
+    //@4#6#7 trigger#4 dispelType#3 type#10
+	//required uint32 trigger4_dispelType3_type10 = 71;//合并字段#触发类型_C#buff消失时机_C#buff类型_C trigger#4 dispelType#3 type#10
+    //@8#9#10#11 subType#20 level#8 isGood#1 target#2
+	//required uint32 subType20_level8_isGood1_target2 = 72;//合并字段#子类型_C#等级_C#是不是增益BUFF_C#目标_C subType#20 level#8 isGood#1 target#2
+    //@12#15#17 parameterType#2 replace#2 showPriority#14
+	//required uint32 parameterType2_replace2_showPriority14 = 73;//合并字段#buff参数类型_C#替代规则（即时战斗用)_C#特效显示优先级（即时战斗用)_C parameterType#2 replace#2 showPriority#14
+    //@34#35 pkAtt#14 pkDef#14
+	//required uint32 pkAtt14_pkDef14 = 74;//合并字段#pk伤害加成（万分比）_C#pk防御加成（万分比）_C pkAtt#14 pkDef#14
+    //@36#37 criticalDamage#20 atkPer#7
+	//required uint32 criticalDamage20_atkPer7 = 75;//合并字段#暴击伤害_C#攻击加成百分比_C criticalDamage#20 atkPer#7
+    //@38#39#40 defPer#7 showDelay#3 phantomHp#20
+	//required uint32 defPer7_showDelay3_phantomHp20 = 76;//合并字段#防御加成百分比_C#延迟显示_C#元灵生命上限_C defPer#7 showDelay#3 phantomHp#20
+    //@50#51 punctureDefenceMax#20 isBloodWord#1
+	//required uint32 punctureDefenceMax20_isBloodWord1 = 77;//合并字段#穿刺元素防御上限_C#是否飘血_C punctureDefenceMax#20 isBloodWord#1
+	optional string tipsTxt = 78;//tips中的buff说明#客户端  道具tips中需要显示的效果描述，分三职业显示时，用#分隔，默认顺序战士#法师#道士
+	optional IntListJingHao maxHp = 79;//血量#客户端  战士#法师#道士
+	required int32 dodge = 80;//闪避#客户端#不存在共同参与合并的字段  属性
+	required int32 accurate = 81;//准确#客户端#不存在共同参与合并的字段  属性
+	required int32 innerPowerMax = 82;//内力#客户端#不存在共同参与合并的字段  属性
+	required int32 critical = 83;//暴击率（万分比）#客户端#不存在共同参与合并的字段  属性
+	required int32 fireAttackMin = 84;//火攻击下限#客户端#不存在共同参与合并的字段  属性
+	required int32 iceAttackMin = 85;//冰攻击下限#客户端#不存在共同参与合并的字段  属性
+	required int32 electricAttackMin = 86;//电攻击下限#客户端#不存在共同参与合并的字段  属性
+	required int32 darkAttackMin = 87;//黑暗攻击下限#客户端#不存在共同参与合并的字段  属性
+	required int32 punctureAttackMin = 88;//穿刺攻击下限#客户端#不存在共同参与合并的字段  属性
+	required int32 fireDefenceMin = 89;//火元素防御下限#客户端#不存在共同参与合并的字段  属性
+	required int32 iceDefenceMin = 90;//冰元素防御下限#客户端#不存在共同参与合并的字段  属性
+	required int32 electricDefenceMin = 91;//雷元素防御下限#客户端#不存在共同参与合并的字段  属性
+	required int32 darkDefenceMin = 92;//暗元素防御下限#客户端#不存在共同参与合并的字段  属性
+	required int32 punctureDefenceMin = 93;//穿刺元素防御下限#客户端#不存在共同参与合并的字段  属性
+	required int32 addDropTreasure = 94;//掉宝概率#客户端  掉宝概率(十万分比)
+	//required uint32 bufferType = 95;//buff类型#客户端未使用#C  禁止修改-用于叠加buff时判定类型是否相同；固定id不可变动id的类型（服务端如果拿buffer做唯一类型标识的，id在后面记录下）：7002 梦境宠物属性  7003 梦境战士属性  7004 梦境法师属性  7005 梦境道士属性  7006 梦境召唤物属性  9001 99朵金兰花  9002 99朵玫瑰花  10001 元素-灼烧  10002 元素-减速  10003 元素-感电  10004 元素-致盲  10005 元素-穿透  13021 腕力不足  13022 武器耐久不足  13023 精力不足  13024 装备耐久不足 13025 精力严重不足 13026 精力耗尽 13028精力 13029腕力 1012暴风雪 13030人物对生肖伤害 5001回收元宝与绑元加成，只能用于打金卡
+	//required int32 probability = 96;//触发概率#客户端未使用#C  万分比
+	//required uint32 overLying = 97;//是否可叠加（即时战斗用)#客户端未使用#C  0不可叠加；1可叠加 ；2 永久的覆盖限时的  3时间叠加
+	//required int32 resistBackHurt = 98;//抗反伤属性#服务器  数值
+	//required int32 attackSpeed = 99;//攻击速度#服务器  攻击速度万分比（数值减少是加速）
+	//required int32 resistanceMabi = 100;//抗麻痹属性#服务器  万分比，可配负值
+	//required int32 luck = 101;//幸运#服务器  属性
+	//required int32 curse = 102;//诅咒#服务器  属性
+	//required int32 offlineStopRecord = 103;//离线记录#服务器  离线是否记录记时,默认0不记录，1记录
+	//required float showCritical = 104;//展示暴击#服务器  显示暴击数值（假数值万分比）
+	//optional IntListJingHao attributeWeight = 105;//随机属性权重  分组配置加成的属性权重 每组对应的具体属性字段需要程序处理  攻击（上下，三职业）#防御（上下）#魔防（上下）#生命#神圣攻击（上下）
+	//required int32 monsterHurtAdd = 106;//对怪物增伤#服务器  对怪物增伤（万分比）
+	//required int32 lampSuitHurtAdd = 107;//灯座套装攻击增伤#服务器  灯座套装攻击增伤（万分比）
+	//required int32 animalHurtAdd = 108;//生肖法宝攻击增伤#服务器  攻击增伤类型a（万分比）
+	//required int32 physicHurtReduce = 109;//物理伤害减伤#服务器  攻击减伤类型a（万分比）
+	//required int32 magicHurtReduce = 110;//魔法伤害减伤#服务器  攻击减伤类型a（万分比）
+	//required int32 pvpMbResist = 111;//pvp麻痹抵抗#服务器  pvp麻痹抵抗（万分比）
+	//required int32 pvpMb = 112;//pvp麻痹#服务器  pvp麻痹（万分比）
+	//required int32 shieldReduce = 113;//魔法盾减伤#服务器  魔法盾减伤（万分比）
+	//required int32 holyAttackMinPercent = 114;//最小神圣攻击倍率#服务器  属性
+	//required int32 holyAttackMaxPercent = 115;//最大神圣攻击倍率#服务器  属性
+	//required int32 hpPercent = 116;//生命万分比#服务器  属性 单位万分比
+}
+
+message CFG_BUFFARRAY
+{
+	repeated CFG_BUFF rows = 1;
+}

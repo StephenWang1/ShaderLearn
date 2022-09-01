@@ -1,0 +1,16 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_BLOODSUIT_LATTICE
+{
+	required int32 id = 1;//格子id#客户端  格子的id=300000+血继套装Type*100+pos（pos：1~8 是灵兽，9~12 是肉身装备）
+	required int32 type = 2;//类型#客户端  与cfg_bloodsuit_combination表对应
+	optional IntListJingHao condition = 3;//开启条件#客户端  开启条件
+	optional IntListList cost = 4;//开启消耗#客户端  itemid#数量&itemid#数量&
+	//optional string remarks = 5;//备注#策划  备注#策划
+}
+
+message CFG_BLOODSUIT_LATTICEARRAY
+{
+	repeated CFG_BLOODSUIT_LATTICE rows = 1;
+}

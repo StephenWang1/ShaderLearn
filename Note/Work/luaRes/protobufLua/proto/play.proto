@@ -1,0 +1,186 @@
+package playV2;
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "PlayProto";
+
+message BossStateInfo{
+    optional int32 mapId = 1;//boss地图id
+	optional int32 enterCount = 2;//剩余可用次数
+	optional int32 totalCount = 3;//总次数
+	optional int32 nextAddTime = 4;//下次刷新时间
+	optional int64 hp = 5;//当前Boss血量
+	optional int32 num = 6;//当前地图人数
+	optional string ownerName = 7;//归属玩家
+	optional int32 selectState = 8;//0未勾选 1勾选
+	optional int64 reliveTime = 9;//boss复活时间
+	optional int32 forgeryId = 10;//造假bossId
+	optional int32 ownerDropCount = 11;//归属者领奖剩余次数
+	optional int32 ownerDropNextAddTime = 12;//归属者领奖剩余次数增加时间
+	optional int32 helperDropCount = 13;//协助者剩余领奖次数
+	optional int32 helperDropNextAddTime = 14;//协助者领奖剩余次数增加时间
+	optional int32 leftOwnerDropBuyCount = 15;//剩余可购买归属领奖次数
+	optional int32 leftEnterBuyCount = 16;//剩余可购买进入次数
+}
+
+message BestAttInfo{
+    optional int32 attId = 1;//属性id
+	optional int32 attType = 2;//属性类型
+	optional int32 attValue = 3;//值
+	optional int32 param = 4;//参数
+	optional int32 power = 5;//极品战力
+}
+
+message ItemInfo{
+    optional int32 itemId = 1;
+	optional int32 count = 2;//数量
+	optional BestAttInfo bestAttInfo = 3;//极品属性
+}
+
+message ItmeUseInfo{
+    optional int32 globalId = 1;//配置id
+	optional int32 useNum = 2;//已使用次数
+}
+
+message RemindInfo{
+    optional int32 mapId = 1;//boss地图id
+	optional int32 state = 2;//状态 0未勾选 1勾选
+}
+
+//通知野外boss死亡准备领奖
+message ResWorldBossDie{
+    optional int32 mapId = 1;//boss地图Id
+	repeated ItemInfo itemInfo = 2;//奖励列表
+	optional bytes dropType = 3;//0参与者，1归属者
+}
+
+//请求领取野外boss掉落
+message ReqRewardWorldBoss{
+    optional int32 mapId = 1;//boss地图Id
+}
+
+//请求进入玩法地图
+message ReqEnterPlayMap{
+	optional int32 mapId = 1;//地图id
+}
+
+//护盾触发消息
+message ResHudunTrigger{ 
+	optional int32 triggerCount = 1;//触发次数
+}
+
+//护盾值变化消息
+message ResHudunChange{
+    optional int32 maxCount = 1;//最大护盾值
+	optional int32 dunCount = 2;//当前护盾值
+}
+
+//返回roll点结果
+message ResRollPoint{
+    optional int32 count = 1;//点数
+}
+
+
+//返回roll点结果
+message ResMaxRollPoint{
+    optional int32 maxCount = 1;//最大点数
+	optional string roleName = 2;//玩家名字
+}
+
+//请求对应类型boss的状态
+message ReqFetchWorldBossState{
+    optional int32 mapType = 1;//boss类型
+}
+
+//返回对应类型boss的状态
+message ResFetchWorldBossState{
+    optional int32 mapType = 1;//boss类型
+	repeated BossStateInfo stateList = 2;//状态列表
+}
+
+//请求使用战役道具
+message ReqUseFightItem{
+    optional int32 globalId = 1;//globalId(35/36)
+}
+
+//返回使用次数信息
+message ResFightItemBuyCount{
+    repeated ItmeUseInfo useInfos = 1;//道具使用信息
+}
+
+//请求设置Boss提醒
+message ReqSetBossRemind{
+    optional int32 mapId = 1;//boss地图id
+	optional int32 state = 2;//状态 0未勾选 1勾选
+}
+
+//返回设置Boss提醒
+message ResSetBossRemind{
+    repeated RemindInfo remindList = 1;//勾选结果列表
+}
+
+//发送boss重生提醒
+message ResBossRemindToRole{
+    optional int32 mapId = 1;//boss地图id
+}
+
+//玩家击杀信息
+message ResPlayerKillInfo{
+    optional int64 playerId = 1;//被击杀者id
+	optional string playerName = 2;//被击杀者名称
+	optional int64 killerId = 3;//杀手id
+	optional string killName = 4;//杀手名称
+}
+
+//发送boss死亡信息
+message ResMapBossDeath{
+    optional int32 mapId = 1;//boss地图id
+}
+
+//请求购买次数
+message ReqBuyCount{
+    optional int32 type = 1;//购买类型 1 挑战次数 2 归属者领奖次数 3 协助领奖次数
+	optional int32 mapId = 2;//地图id
+}
+
+//发送boss次数改变
+message ResBossCount{
+    optional int32 mapId = 1;//地图id
+	optional int32 group = 2;//组别
+	optional int32 enterCount = 3;//剩余可用次数
+	optional int32 totalCount = 4;//总次数
+	optional int32 nextAddTime = 5;//下次刷新时间
+	optional int32 ownerDropCount = 6;//归属者领奖剩余次数
+	optional int32 ownerDropNextAddTime = 7;//归属者领奖剩余次数增加时间
+	optional int32 helperDropCount = 8;//协助者剩余领奖次数
+	optional int32 helperDropNextAddTime = 9;//协助者领奖剩余次数增加时间
+	optional int32 leftOwnerDropBuyCount = 10;//剩余可购买归属领奖次数
+	optional int32 leftEnterBuyCount = 11;//剩余可购买进入次数
+}
+
+//通用消息
+message CommonInfo {
+    //s->c 
+    //c->s 
+    optional int32 type = 1;
+    optional int32 data = 2;
+    optional string str = 3;
+    optional int64 data64 = 4;
+}
+
+//挖掘没次数播放溶解特效消息
+message ResCorpseDissolution{
+	 optional int64 lid = 1;
+}
+
+//需要弹出攻击模式提示面板
+message NeedHasAttackModePanel{
+	optional int32 current = 1;//当前攻击模式
+    optional int32 need = 2;//需要的攻击模式
+	optional int32 activityType = 3;//当前活动类型
+	optional int32 activityId = 4; //活动Id
+}
+
+//今日不在提醒
+message TodayNoReminder{
+	optional int32 activityType = 1;//当前活动类型
+}

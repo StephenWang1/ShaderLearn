@@ -1,0 +1,20 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_CUM_RECHARGE
+{
+	required int32 id = 1;//id#客户端#C  12位组数+345位id
+	//required int32 period = 2;//本轮周期#客户端#C  这一轮的最长持续周期（天）
+	//required int32 interval = 3;//下一轮间隔时间#客户端#C  这一轮结束后下一轮开启的间隔天数
+	required int32 group = 4;//组id#客户端  从第1组开始，到最后一组结束
+	required int32 smallId = 5;//子id#客户端  每组内单独的排序id
+	required int32 rechargePoint = 6;//充值金额#客户端  活动期间累充多少钻石可领取奖励
+	optional IntListList reward = 7;//奖励#客户端  达成后可领的奖励,itemId#num&itemId#num....
+	optional IntListJingHao boxId = 8;//宝箱类型#客户端  是否展示宝箱内容
+	//required int32 num = 9;//显示条件  活动期累充多少钻石可见该项
+}
+
+message CFG_CUM_RECHARGEARRAY
+{
+	repeated CFG_CUM_RECHARGE rows = 1;
+}

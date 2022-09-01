@@ -1,0 +1,14 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_SBK_DONATE_REWARD
+{
+	required uint32 id = 1;//排名#客户端  排名：0代表保底奖励
+	optional IntListJingHao buffer = 2;//加成效果#客户端  加成效果
+	optional string tips = 3;//排名效果描述#客户端  排名效果描述
+}
+
+message CFG_SBK_DONATE_REWARDARRAY
+{
+	repeated CFG_SBK_DONATE_REWARD rows = 1;
+}

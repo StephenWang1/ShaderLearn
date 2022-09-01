@@ -1,0 +1,42 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_YABIAO
+{
+	required uint32 id = 1;//id#客户端#C#不存在共同参与合并的字段  镖车id
+	//required uint32 type = 2;//镖车类型#客户端#C  1.经验镖 2.元宝镖 3.灵兽经验镖4白日门镖车
+	//required int32 map = 3;//地图#客户端#C  押镖地图ID
+	//optional string picture = 4;//图标#客户端#C  发车界面右侧图片
+	//optional IntListJingHao npcId = 5;//NPC#客户端#C  对应发车#领取NPCID
+	//optional string dartHP = 6;//镖车血量#客户端#C  每次攻击强制1点
+	//required uint32 dartLv = 7;//镖车等级#客户端#C  白日门押镖作为界面排序用
+	//optional string dartLvPicture = 8;//等级显示#客户端#C  对应等级显示图片
+	//optional string typePicture = 9;//类型显示#客户端#C  对应类型图片
+	//required int32 mid = 10;//怪物id#客户端#C  对照怪物表
+	//optional string name = 11;//镖车名字#客户端#C  
+	//optional IntListJingHao consume = 12;//镖车消耗#客户端#C  道具ID#数量,（除个人押镖不用此字段）
+	//required int32 walkingTime = 13;//押镖时间#客户端#C  单位=分钟
+	//optional IntListJingHao reward = 14;//镖车奖励#客户端#C  数量#货币单位（除个人押镖不用此字段）
+	//optional IntListJingHao failReward = 15;//押镖失败奖励#客户端#C  飙车被劫后奖励 （除个人押镖不用此字段）
+	//optional IntListJingHao robbery = 16;//劫镖奖励#客户端#C  盟重（除个人押镖不用此字段）
+	//required int32 arrangement = 17;//掉落档次#客户端#C  每次少多少血掉落
+	//optional IntListJingHao drop = 18;//掉落数量#客户端#C  
+	//optional IntListJingHao pattern = 19;//掉落模式#客户端#C  1.随机掉落2.固定掉落
+	//optional IntListList route = 20;//镖车路径#客户端#C  
+    //@2#7 type#6 dartLv#8
+	//required uint32 type6_dartLv8 = 21;//合并字段#镖车类型_C#镖车等级_C type#6 dartLv#8
+	required int32 bairimenId = 22;//连接到活动页签表#客户端  仅白日门押镖用，连接到cfg_bairimen_activity di
+	optional IntListList rewardNew = 23;//白日门镖车奖励#客户端  白日门押镖正常奖励，新的都用此字段
+	optional IntListList failRewardNew = 24;//白日门押镖失败奖励#客户端  白日门镖车被劫后奖励，新的都用此字段
+	optional IntListList robberyNew = 25;//白日门劫镖奖励#客户端  白日门劫镖奖励，新的都用此字段
+	optional IntListList consumeNew = 26;//白日门镖车消耗#客户端  白日门镖车开启消耗，新的都用此字段
+	//optional string notice = 27;//公告#服务器  不需要公告填0 公告填1
+	//required int32 radius = 28;//镖车半径#服务器  镖车范围圈半径格数
+	//required int32 overtime = 29;//结束时间#服务器  如果镖车未完成，时间过了则消失，算失败奖励单位秒
+	//optional IntListList abandonRewardNew = 30;//白日门放弃押镖奖励#服务器  白日门放弃押镖的奖励，新的都用此字段
+}
+
+message CFG_YABIAOARRAY
+{
+	repeated CFG_YABIAO rows = 1;
+}

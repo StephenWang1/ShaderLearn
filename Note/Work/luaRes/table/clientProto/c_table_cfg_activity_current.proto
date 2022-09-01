@@ -1,0 +1,50 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_ACTIVITY_CURRENT
+{
+	required int32 id = 1;//id#客户端  程序唯一标识(最大不可超过20位）,第12位活动类型；第34位活动id；第567位编号
+	required uint32 clientType = 2;//页签id#客户端  同id的放在一个页签内，id从小到大排序
+	required int32 order = 3;//排序#客户端  页签在活动面板里的排序
+	required uint32 activityType = 4;//活动id#客户端  每个id程序单独写死（具体id多少由程序给）
+	required uint32 group = 5;//活动类型#客户端  类型可重复，代表对应活动所属的不同活动入口，关联cfg_notice表id 1联服活动2节日活动
+	optional string name = 6;//活动名称#客户端  必要时显示
+	required int32 smallGroup = 7;//活动页签#客户端  标记几条属于哪个页签
+	required uint32 smallid = 8;//smallid#客户端  某一活动存在多条奖励目标时，每条奖励目标分属不同的子类
+	optional string smallname = 9;//活动描述#客户端  
+	optional IntListList award = 10;//活动奖励#客户端  道具id#数量&道具id#数量（boxid与道具id相对应所以没关系）
+	required uint32 openDay = 11;//开服天数#客户端  开服多少天后对应的奖励没有不填
+	optional IntListList award2 = 12;//活动奖励2#客户端  开服至openDay之后对应的活动奖励变为此列
+	required int32 awardtype = 13;//奖励领取类型#客户端  1个人总领取2服务器总领取3个人每日领取4服务器每日领取5全服领取-服务器第1日注册数与固定值num对比动态取高值的奖励数量
+	required int32 num = 14;//数量限制#客户端  不填无限制
+	optional IntListJingHao numControl = 15;//奖励数量控制#客户端  awardType5的填此字段代表百分比
+	required int32 getway = 16;//领取方式#客户端  1点击领取后获得2邮件直接发送
+	optional IntListJingHao goalIds = 17;//需达到条件#客户端  关联activity_goals表id，多个id#分隔代表需要依照次序满足（全服首爆的1、2、3名）
+	required int32 secondGoal = 18;//第二目标#客户端  前面的条件完成后才开始这个目标，saveType3使用
+	optional string param = 19;//特殊参数#客户端  必要的参数
+	required int32 timeType = 20;//活动开启时间类型#客户端  1开服天数2联服天数3固定时间（时间戳）4固定时间内开服走开服天数否则走固定时间5走时间戳遇到开服和合服天数不开 6创角天数 7condition条件8走时间戳遇到开服天数不开 
+	required uint32 startTime = 21;//开服天数开启#客户端  
+	required uint32 overTime = 22;//开服天数持续时间结束#客户端  
+	required int32 lfTime = 23;//联服次数#客户端  联服第几次开启
+	required int32 lfStartTime = 24;//联服天数开启#客户端  联服多少天后开启
+	required int32 lfOverTime = 25;//联服天数持续时间结束#客户端  开启后活动持续时间
+	required int32 fixStartTime = 26;//固定时间持续开始#客户端  配置时间戳(秒)
+	required int32 fixOverTime = 27;//固定时间结束#客户端  配置时间戳(秒)
+	required int32 openConditions = 28;//开启条件#客户端  动态开启，条件一旦不满足就关闭
+	optional string link = 29;//跳转链接#客户端  点击按钮跳转到其他界面的功能，视情况关联cfg_jump表或其他
+	required uint32 remind = 30;//是否需要红点提醒#客户端  1需要红点提醒2不需要
+	optional string description = 31;//活动文本描述#客户端  
+	required uint32 repeats = 32;//结束清数据不填不清#客户端  填1代表活动结束相关数据立刻清除
+	optional IntListJingHao displayCondition = 33;//显示条件#客户端  前端显示用，conditionId#号分隔
+	optional IntListJingHao announce = 34;//目标达成后发送公告及显示条件#客户端  公告id#conditionId#conditionId#conditionId...（条件id可以是多个），此栏不填代表完成时不发公告
+	optional string picture = 35;//背景图片#客户端  策划配置替换界面底图
+	optional string icon = 36;//活动图标#客户端  前端显示用
+	optional string panel = 37;//对应打开界面#客户端  活动对应的界面
+	//required int32 dataSaveType = 38;//目标数据保存类型  1针对个人2针对全服3先全服后个人4回收
+	//optional string remarks = 39;//参数配置说明#策划  策划用
+}
+
+message CFG_ACTIVITY_CURRENTARRAY
+{
+	repeated CFG_ACTIVITY_CURRENT rows = 1;
+}

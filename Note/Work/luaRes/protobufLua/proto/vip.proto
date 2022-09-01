@@ -1,0 +1,124 @@
+package vipV2;
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "VipProto";
+
+//请求领取vip礼包
+message ReqBuyVipReward{
+  optional int32 vipLevel = 1;//vip等级
+}
+
+//通知玩家vip等级发生变化
+message ResRoleVipInfoChange{
+  optional int32 curExp = 1;//当前经验
+  optional int32 curLevel = 2;//当前等级
+  optional int32 changeExp = 3;//改变的经验
+}
+//通知玩家vip2等级发生变化
+message ResRoleVip2InfoChange{
+  optional int32 curExp = 1;//当前经验
+  optional int32 curLevel = 2;//当前等级
+  optional int32 changeExp = 3;//改变的经验
+}
+
+//vip数据
+message ResRoleVipInfo{
+  optional int32 level = 1;//vip等级
+  optional int32 exp = 2;//vip经验
+  optional int32 totalRechargeDiamond = 3; //累计充值钻石数
+  optional int32 monthRechargeDiamond = 4; // 本月充值钻石数
+  repeated int32 payBackRechargeIds = 5; // 当前有返利的充值档位
+}
+//vip2数据
+message ResRoleVip2Info{
+  optional int32 level = 1;//vip等级
+  optional int32 exp = 2;//vip经验
+}
+
+//vip领过的数据
+message ResBuyVipReward{
+  repeated int32 level = 1;//买过的storeId
+}
+
+//vip领过的数据
+message ResFreeVipReward{
+  repeated int32 level = 1;//已领过的vip等级
+}
+
+//个人月卡信息
+message CardInfo{
+  optional int32 kind = 1;//种类
+  optional int32 cardType = 2;//月卡类型
+  optional int64 endTime = 3;//月卡结束时间
+  optional bool isGot = 4;//当天福利是否领取 0否 1是
+  optional int32 renewNum = 5;//续费次数
+  optional int32 id = 6;
+  optional int32 activeType = 7;//激活类型 1：钻石 2：元宝
+}
+message CardId {
+  optional int32 id = 1;
+}
+//月卡种类(商会)
+message CardKind {
+  optional int32 kind = 1;
+}
+//月卡类型(比奇盟重)
+message CardType {
+  optional int32 cardType = 1;
+}
+//月卡
+message Card {
+  optional int32 kind = 1;//种类
+  optional int32 type = 2;//类型
+  optional int32 priceType = 3;//价格类型1:原价 2:开服特价 3:续费折扣价
+  optional int32 itemId = 4;
+  optional int32 price = 5;
+  optional int32 orignalPrice = 6;
+  optional int32 id = 7;
+}
+//返回月卡界面
+message ResCardPanel {
+  repeated Card list = 1;//商会列表
+  optional int32 kind = 2;//种类
+}
+//返回月卡信息
+message ResCardInfo {
+   repeated CardInfo cardList = 1;
+}
+//返回月卡改变
+message ResCardChange {
+  optional CardInfo cardInfo = 1;
+  optional int32 kind = 2;//月卡种类
+  optional int32 removeCardType = 3;//删除的cardType
+  optional int32 isActive = 4; //0.是不激活，1是激活
+}
+//返回月卡每日福利详情
+message ResCardDayRewardInfo {
+  repeated Welfare rewardList = 1;
+  optional int32 id = 2;
+}
+//福利物品
+message Welfare {
+  optional int32 type = 1;//福利种类
+  optional int32 itemId = 2;
+  optional int32 num = 3;
+}
+
+//这个任务的量很小,且此类操作并不频繁,所以变动之后推一个全量包.如果后面系统复杂,变动部分可单独提取结构更新。
+message VipMemberInfo {
+  required int32 level = 1; //会员的等级 = vip_member的主键ID
+  required int32 dailyReceivedCount = 2; //每天奖励已经领取了多少个,本来想用一个可领状态,但是感觉界面应该可能会需要显示已经领取多少个.
+  repeated int32 receivedLevelReward = 3; //已经领取的vip等级奖励 id 列表.
+  repeated VipMemberTask taskList = 4;   //任务列表
+}
+
+message VipMemberTask {
+  required int32 taskId = 1; //vip_member_task的主键ID.
+  required int32 process = 2; //进度. 类型为condition的任务没有进度.
+  required int32 state  = 3; //0未完成,1完成.
+}
+
+//领取等级奖励
+message VipMemberReveiveLevelReward {
+  required int32 level = 1; //会员的等级.
+}

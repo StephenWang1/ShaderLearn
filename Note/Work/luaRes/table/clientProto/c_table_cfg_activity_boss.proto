@@ -1,0 +1,30 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_ACTIVITY_BOSS
+{
+	required int32 group = 1;//group#客户端#C  关联cfg_task表type为11的任务的subtype,为小组，每个小组包含数个task
+	//required int32 batch = 2;//大组#客户端#C  批次，用于特殊判断
+	//required int32 level = 3;//等级段#客户端#C  等级段标识
+	//optional string remark = 4;//备注#客户端#C  策划用
+	//optional IntListList appear = 5;//出现条件#客户端#C  0.无条件 1.等级 2.任务id接取 3任务id完成 4.指定group任务全部完成（多个group#分隔）5.本组完成任意一个任务，多个条件&分隔(或逻辑）
+	//optional IntListList disappear = 6;//消失条件#客户端#C  1.等级 2.任务id接取 3任务id完成，多个条件&分隔
+	//required int32 type = 7;//击杀类型#客户端#C  1点击传送 2打开BOSS面板
+	//optional string title = 8;//界面标题#客户端#C  每个页签左上角图片展示，填图片名，不填代表不需要展示图片
+	//optional string tableName = 9;//页签名#客户端#C  对应页签的名字
+	//required int32 tableOrder = 10;//页签排序#客户端#C  
+	//optional string buttonName = 11;//按钮名#客户端#C  
+	//optional string buttonParam = 12;//按钮参数#客户端#C  点击按钮后对应操作所需参数，type为1  deliverid ；type为2的，BOSS面板的type和subtype
+	//optional IntListList position = 13;//坐标点#客户端#C  type1的按钮所需参数，x#y&x#y&…..
+	//required int32 rewardGroup = 14;//奖励组#客户端#C  同组的全部完成后额外发放奖励  弃用
+	optional IntListList onClick = 15;//点击条件#客户端  1.等级 2.转生等级 类型#数值
+	required int32 isClose = 16;//领取全部奖励后关闭页签#客户端  0关闭，1保留
+	optional IntListList completeReward = 17;//完成奖励#客户端  本组所有任务目标完成后奖励  itemid#数量&itemid#数量
+	optional IntListJingHao modelParam = 18;//模型参数#客户端  本组内各怪物对应的boss表id  根据id中的模型处理参数处理对应怪物的模型显示  boss表id#boss表id   一般数量与组内怪物种类数量一致 若配少了或没配 则显示头像
+	//optional IntListList accept = 19;//接受条件#服务器  1.等级 2.任务id接取 3任务id完成 4.指定group任务全部完成（多个group#分隔），多个条件&分隔（与逻辑）
+}
+
+message CFG_ACTIVITY_BOSSARRAY
+{
+	repeated CFG_ACTIVITY_BOSS rows = 1;
+}

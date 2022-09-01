@@ -1,0 +1,29 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_GUIDE_BUBBLE
+{
+	required uint32 id = 1;//id#客户端#C  唯一ID
+	//optional string content = 2;//内容#客户端#C  气泡框显示内容
+	//optional string atlas = 3;//使用图片名#客户端#C  使用图片名
+	//required int32 times = 4;//点击后消失次数#客户端#C  点击后消失次数
+	//optional IntListJingHao positionStart = 5;//初始位置#客户端#C  初始位置  X#Y
+	//optional IntListJingHao positionEnd = 6;//终点位置#客户端#C  终点位置  X#Y
+	//optional string dec = 7;//备注#策划  给策划备注什么功能用
+	//optional string hidePanel = 8;//隐藏参数#客户端#C  打开面板时，暂时隐藏  面板名字#面板名字
+	//optional IntListJingHao showCondition = 9;//显示条件#客户端#C  显示条件  条件id#条件id
+	//required int32 showCd = 10;//显示cd#客户端#C  显示cd 单位 秒
+	//required int32 canClick = 11;//是否可点击#客户端#C  不配置不可点击 1可点击
+	//required int32 lastTime = 12;//持续时间#客户端#C  不配置不自动消失 配置则相应时间后消失 单位 秒
+	//required int32 flip = 13;//翻转类型#客户端#C  资源翻转 1 横向翻转 2 纵向翻转 3 横纵都翻转
+	//optional IntListJingHao labelPosition = 14;//文本坐标位置#客户端#C  文本坐标位置（不填就默认）
+	optional IntListJingHao backGroundSize = 15;//X长度拉伸#客户端  X长度拉伸（（支持正负）
+	optional string frameLight = 16;//边缘特效#客户端  边缘特效图片
+	optional IntListJingHao frameLightPosition = 17;//边缘位移#客户端  边缘特效位移  X#Y
+	optional IntListJingHao frameLightSize = 18;//边缘特效尺寸#客户端  边缘特效尺寸 X#Y
+}
+
+message CFG_GUIDE_BUBBLEARRAY
+{
+	repeated CFG_GUIDE_BUBBLE rows = 1;
+}

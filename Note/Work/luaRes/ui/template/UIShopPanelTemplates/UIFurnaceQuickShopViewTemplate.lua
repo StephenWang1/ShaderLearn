@@ -1,0 +1,158 @@
+local UIFurnaceQuickShopViewTemplate = {};
+
+--UIFurnaceQuickShopViewTemplate.shopDataDic = {};
+--UIFurnaceQuickShopViewTemplate.shopViewUnitDic = {};
+--UIFurnaceQuickShopViewTemplate.shopType = nil;
+--
+----region Components
+--
+----region GameObject
+--function UIFurnaceQuickShopViewTemplate:GetQuickShopUnitTemplate_GameObject()
+--    if(self.mQuickShopUnitTemplate_GameObject == nil) then
+--        self.mQuickShopUnitTemplate_GameObject = self:Get("view/Scroll View/itemTemplate", "GameObject");
+--    end
+--    return self.mQuickShopUnitTemplate_GameObject;
+--end
+--
+--function UIFurnaceQuickShopViewTemplate:GetUICoinsShowView_GameObject()
+--    if(self.mUICoinsShowView_GameObject == nil) then
+--        self.mUICoinsShowView_GameObject = self:Get("CoinsShowView", "GameObject");
+--    end
+--    return self.mUICoinsShowView_GameObject;
+--end
+----endregion
+--
+--function UIFurnaceQuickShopViewTemplate:GetShopUnitGridContainer_UIGridContainer()
+--    if(self.mQuickShopUnitTemplate_GameObject == nil) then
+--        self.mQuickShopUnitTemplate_GameObject = self:Get("view/Scroll View/items", "UIGridContainer");
+--    end
+--    return self.mQuickShopUnitTemplate_GameObject;
+--end
+--
+--function UIFurnaceQuickShopViewTemplate:GetUICoinsShowView()
+--    if(self.mUICoinsShowView == nil) then
+--        self.mUICoinsShowView = templatemanager.GetNewTemplate(self:GetUICoinsShowView_GameObject(), luaComponentTemplates.UICoinsShowViewTemplate);
+--    end
+--    return self.mUICoinsShowView;
+--end
+--
+--function UIFurnaceQuickShopViewTemplate:GetClientEventHandler()
+--    if(self.mClientHandler == nil) then
+--        self.mClientHandler = CS.EventHandlerManager(CS.EventHandlerManager.DispatchType.Event)
+--    end
+--    return self.mClientHandler;
+--end
+----endregion
+--
+----region Method
+--
+----region CallFunc
+--function UIFurnaceQuickShopViewTemplate:OnResOpenStoreByIdMessage(id, tableData)
+--    local shopType = tableData.storeClassId;
+--    self.shopDataDic[shopType] = tableData;
+--    self:SetShopShow(shopType);
+--end
+--
+--function UIFurnaceQuickShopViewTemplate:OnResSendStoreInfoChangeMessage(id, serverData)
+--    local storeId = serverData.storeInfo.storeId;
+--    for k,v in pairs(self.shopDataDic[self.shopType].storeInfo) do
+--        if(v.storeId == storeId) then
+--            self.shopDataDic[self.shopType].storeInfo[k] = serverData.storeInfo;
+--            break;
+--        end
+--    end
+--    self.shopViewUnitDic[storeId]:SetViewUnit(serverData.storeInfo, true);
+--end
+----endregion
+--
+--function UIFurnaceQuickShopViewTemplate:UpdateCoinsText()
+--    local tableData = CS.Cfg_StoreClassTableManager.Instance:GetStoreClassWithStoreType(self.shopType);
+--    if(tableData ~= nil) then
+--        local showCoinsList = tableData.moneyShow == nil and {} or tableData.moneyShow.list;
+--        self:GetUICoinsShowView():SetShowCoinsWithList(showCoinsList);
+--    end
+--end
+--
+-----@param shopType 商店类型
+--function UIFurnaceQuickShopViewTemplate:SetShopShow(shopType)
+--    if(self.shopDataDic[shopType] == nil) then
+--        networkRequest.ReqOpenStoreById(shopType);
+--    else
+--        local shopData = self.shopDataDic[shopType];
+--        local ItemContainer = self:GetShopUnitGridContainer_UIGridContainer();
+--        ItemContainer.MaxCount = #shopData.storeInfo;
+--        local index = 0;
+--        for k,v in pairs(shopData.storeInfo) do
+--            if(self.shopViewUnitDic[shopData.storeInfo.storeId] == nil) then
+--                local unit = ItemContainer.controlList[index];
+--                self.shopViewUnitDic[v.storeId] = templatemanager.GetNewTemplate(unit, luaComponentTemplates.UIShopUnitTemplate);
+--            end
+--            self.shopViewUnitDic[v.storeId]:SetViewUnit(v, true);
+--            index = index + 1;
+--        end
+--        --self:UpdateCoinsText();
+--        self:GetClientEventHandler():SendEvent(CS.CEvent.UI_ShopSelectChanged, shopData)
+--    end
+--end
+--
+-----@param furnacePnaelOpenType LuaEnumFurnaceOpenType
+--function UIFurnaceQuickShopViewTemplate:SetShopWithSelectType(furnacePanelOpenType)
+--    self.shopType = nil;
+--    if(furnacePanelOpenType == LuaEnumFurnaceOpenType.Gem) then
+--        self.shopType = LuaEnumStoreType.GemQuickShop
+--    end
+--
+--    if(self.shopType ~= nil) then
+--        self:SetShopShow(self.shopType);
+--    end
+--end
+--
+--function UIFurnaceQuickShopViewTemplate:InitEvents()
+--    self.CallFuncResOpenStoreByIdMessage = function(id, tableData)
+--        self:OnResOpenStoreByIdMessage(id, tableData);
+--    end
+--
+--    self.CallFuncResSendStoreInfoChangeMessage = function(id, tableData)
+--        self:OnResSendStoreInfoChangeMessage(id, tableData);
+--    end
+--    --region NetEvents
+--    commonNetMsgDeal.BindCallback(LuaEnumNetDef.ResOpenStoreByIdMessage, self.CallFuncResOpenStoreByIdMessage);
+--    commonNetMsgDeal.BindCallback(LuaEnumNetDef.ResSendStoreInfoChangeMessage, self.CallFuncResSendStoreInfoChangeMessage);
+--    --endregion
+--end
+--
+--function UIFurnaceQuickShopViewTemplate:RemoveEvents()
+--    commonNetMsgDeal.RemoveCallback(LuaEnumNetDef.ResOpenStoreByIdMessage, self.CallFuncResOpenStoreByIdMessage);
+--    commonNetMsgDeal.RemoveCallback(LuaEnumNetDef.ResSendStoreInfoChangeMessage, self.CallFuncResSendStoreInfoChangeMessage);
+--end
+--
+--function UIFurnaceQuickShopViewTemplate:Clear()
+--    self.shopDataDic = nil;
+--    self.mQuickShopUnitTemplate_GameObject = nil;
+--    self.mUICoinsShowView_GameObject = nil;
+--    self.mQuickShopUnitTemplate_GameObject = nil;
+--    self.mUICoinsShowView = nil;
+--    self.mClientHandler = nil;
+--end
+--
+----endregion
+--
+--function UIFurnaceQuickShopViewTemplate:OnEnable()
+--    self:InitEvents();
+--end
+--
+--function UIFurnaceQuickShopViewTemplate:OnDisable()
+--    self:RemoveEvents();
+--end
+--
+--
+--function UIFurnaceQuickShopViewTemplate:Init()
+--    --self:InitEvents();
+--end
+--
+--function UIFurnaceQuickShopViewTemplate:OnDestroy()
+--    self:RemoveEvents();
+--    self:Clear();
+--end
+
+return UIFurnaceQuickShopViewTemplate;

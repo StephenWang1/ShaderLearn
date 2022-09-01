@@ -1,0 +1,202 @@
+package cartV2;
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "CartProto";
+
+//返回镖师面板
+message ResBodyGuardInfo {
+  optional int32 cartState = 1;//镖车状态0:无归属 1:争夺中 2:被占领
+  optional int32 mapId = 2;
+  optional string mapName = 3;
+  optional int32 x = 4;
+  optional int32 y = 5;
+}
+//返回活动面板
+message ResUnionCartInfo {
+  optional string unionName = 1;//行会名字
+  optional int32 joinNum = 2;//押送人数
+  optional int32 moveInterval = 3;//移动间隔
+  optional int32 distance = 4;//本帮押送距离
+  optional int32 totalDis = 5;//总距离
+  optional int32 myScore = 6;//我的贡献
+  optional int32 cartState = 7;//镖车状态
+  optional int32 mapId = 8;//镖车坐标
+  optional int32 x = 9;
+  optional int32 y = 10;
+  optional int64 endTime = 11;//结束时间戳(秒)
+  optional int32 isInRange = 12;//是否在范围1是
+  optional int32 opposeNum = 13;//敌对人数
+}
+
+//行会镖车排行
+message UnionCartRank {
+  repeated UnionCartRankPlayerInfo selfInfos = 1;//自己帮会
+  repeated UnionCartRankPlayerInfo otherInfos = 2;
+  optional UnionCartRankCommon common = 3;
+}
+//行会镖车排行玩家信息
+message UnionCartRankPlayerInfo {
+  optional int64 rid = 1;
+  optional string name = 2;
+  optional int32 career = 3;
+  optional int32 sex = 4;
+  optional int32 level = 5;
+  optional int32 selfDis = 6;//个人运镖距离
+  optional int32 killNum = 7;//杀敌
+  optional int32 diedNum = 8;//阵亡
+  optional float grade = 9;//评分
+  optional int64 unionId = 10;
+  optional string unionName = 11;
+  optional int32 titleType = 12;//称号
+  repeated int64 like = 13;//点赞的人
+}
+//行会镖车排行公共信息
+message UnionCartRankCommon {
+  optional int32 totalDis = 1;
+  optional int32 totalKill = 2;
+  optional int32 totalDied = 3;
+  optional int32 rankDis = 4;
+  optional int32 rankKill = 5;
+  optional int32 rankDied = 6;
+  optional int32 rankGrade = 7;
+  optional bool isArrive = 8;//是否到达 true到达
+  optional string unionName = 9;//到达行会名字
+}
+//行会镖车结束
+message ResUnionCartFinish {
+  optional UnionCartRank rank = 1;
+  optional int64 showTime = 2;//展示时间
+}
+
+message ReqUnionCartRankRecord {
+	required int32 index = 1; // 1 上次, 2 上上次, 以此类推
+}
+
+//返回上次排行数据
+message ResUnionCartRankRecord {
+	optional UnionCartRank rank = 1;
+	optional int32 index = 2;
+}
+
+
+//返回个人押镖列表
+message ResPersonalCartList {
+  repeated PersonalCartInfo cartList = 1;
+  optional int32 beRobbedCount = 2;//今日被劫镖次数
+  optional int32 robCount = 3;//今日劫镖次数
+}
+//个人押镖信息
+message PersonalCartInfo {
+  optional int64 id = 1;//唯一id
+  optional int32 cfgId = 2;//镖车表id
+  optional int64 startTime = 3;//雇佣时间
+  optional int64 endTime= 4;//结束时间
+  optional int32 canReward = 5;//是否可领取奖励 1可
+  optional int32 state = 6;//0:发车中 1:成功到达 2:失败
+  optional int32 hp = 7;
+  optional int64 unionId = 8; //行会ID
+}
+//个人镖车动态
+message ResPersonalCartSituation {
+  optional int32 type = 1;// 1:被攻击 2:被击杀 3:成功到达
+  optional int64 id = 2;//唯一id
+  optional int32 cfgId = 3;
+  optional string targetName = 4;
+  optional string targetUnionName = 5;
+  optional string mapName = 6;
+  optional int32 x = 7;
+  optional int32 y = 8;
+  optional int32 mapId = 9;
+}
+//请求押镖
+message ReqEscortCart {
+  optional int32 cfgId = 1;
+}
+//更新个人押镖列表
+message ResUpdatePersonalCart {
+  repeated PersonalCartInfo addList = 1;//添加或更新个人押镖
+  repeated int64 removeList = 2;//删除个人押镖
+}
+//领取个人押镖奖励
+message ReqReceiveReward {
+  optional int64 id = 1;//要领取的id
+  optional int32 bei = 2;//领取倍数
+}
+
+//个人镖车错误码
+message CartMatterCode {
+  //1:发车冷却中
+  optional int32 code = 1;
+  optional int64 time = 2;
+}
+//镖车血量
+message ResPersonalCartHpUpdate {
+  optional int64 id = 1;
+  optional int32 hp = 2;
+  optional int32 isRobbed = 3;//是否被劫镖 1被劫
+}
+//请求个人镖车坐标
+message ReqPersonalCartPosition {
+  optional int64 id = 1;
+}
+//返回个人镖车坐标
+message ResPersonalCartPosition {
+  optional int64 id = 1;
+  optional int32 mapId = 2;
+  optional int32 x = 3;
+  optional int32 y = 4;
+}
+//点赞集合
+message LikeList {
+  repeated int64 likes = 1;//点赞的玩家id
+}
+
+//运货押镖
+//请求开始运货押镖
+message ReqStartFreightCar{
+	optional int32 carConfigId = 1;//要创建车的表ID
+}
+
+//运货押镖车信息
+message ResFreightCarInfo{
+	optional int64 lid = 1;//车的唯一ID
+	optional int64 masterId = 2;//主人的Id
+	optional int32 hostId = 3;//服务器hostId
+	optional int64 masterUnionId = 4;//主人的帮会ID
+	optional int32 uniteUnionType = 5;//主人的联盟type
+	optional int32 state = 6;//运行状态，0运行，1正在行走
+	optional string masterName = 7;//主人姓名
+    optional int32 carConfigId = 8;//车的Monster表ID
+	optional int64 hp = 9;//hp血量
+	optional int32 yabiaoId = 10;//押镖表Id
+	optional int32 mapId = 11;//地图id
+	optional int32 x = 12;//x
+	optional int32 y = 13;//y
+	optional int32 line = 14;//线
+}
+
+//返回个人押镖信息
+message ResRoleFreightInfo{
+	optional int32 deliveryCount = 1;//已经押镖的次数
+	optional int32 plunderCount = 2;//已经劫镖的次数
+}
+
+//返会飙车血量
+message ResFreightCarHpChange{
+	optional int64 lid = 1;//唯一id
+	optional int64 hp = 2;//血量
+}
+
+//返回飙车XY变更
+message ResFreightCarPointChange{
+	optional int64 lid = 1;//唯一id
+	optional int32 mapId = 2;//地图id
+	optional int32 x = 3;//x
+	optional int32 y = 4;//y
+	optional int32 line = 5;//线
+}
+
+//送货押镖结束包
+message ResFinishFreightCar{
+	optional int64 lid = 1;//唯一id
+}

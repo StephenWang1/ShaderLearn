@@ -1,0 +1,39 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_DELIVER
+{
+	required uint32 id = 1;//传送id#客户端#C#不存在共同参与合并的字段  唯一ID
+	//required uint32 bindNpcId = 2;//绑定的NPCid#客户端#C#不存在共同参与合并的字段  map_npc表id
+	//required uint32 toMapId = 3;//传送到目标地图id#客户端#C#不存在共同参与合并的字段  
+	//required uint32 MapId = 4;//目标地图id#客户端#C#不存在共同参与合并的字段  
+	//required uint32 toNpcId = 5;//目标NPCid#客户端#C#不存在共同参与合并的字段  map_npc的id-无法直接取得mapnpcid时，才取用本字段配置
+	//required uint32 x = 6;//目标地图x#客户端#C  x坐标
+	//required uint32 y = 7;//目标地图y#客户端#C  y坐标
+	//optional string safe = 8;//是否为安全区#客户端#C  没用到
+	//optional string showName = 9;//传送链接名称显示#客户端#C  
+	//required uint32 range = 10;//随机传送范围#客户端#C  注意：传送目标地图点必须是NPC所在点，不然客户端和服务器不一致会导致小飞鞋传送打不开界面。未填不使用，半径范围
+	//optional string item = 11;//传送消耗的道具#客户端#C  itemid#数量&itemid#数量
+	//optional IntListList condition = 12;//传送条件限制#客户端#C  #表示并且 &符号表示或者 消耗道具的填在最后
+	//required uint32 display = 13;//显示条件#客户端#C  不填则不启用
+	//optional string timeLimit = 14;//时间限制#客户端#C  时间限制1020#1130
+	//required int32 buttonType = 15;//传送员传送按钮分类#客户端#C  1主城2盟重3失乐园4.城外传送5.城内传送6特殊传送
+	//required int32 special = 16;//特殊传送类型#客户端#C  1.沙城争霸
+	//required int32 order = 17;//排序#客户端#C  不填按照默认顺序  同类型只计算同类型
+	//optional string speciaItem = 18;//特殊传送消耗#客户端#C  货币类消耗  货币ID#数量
+	//optional string region = 19;//地域#客户端#C  地图类判断 biqi mengzhong
+    //@6#7#10#15 x#9 y#9 range#8 buttonType#3
+	//required uint32 x9_y9_range8_buttonType3 = 20;//合并字段#目标地图x_C#目标地图y_C#随机传送范围_C#传送员传送按钮分类_C x#9 y#9 range#8 buttonType#3
+	required int32 shareMap = 21;//对应联服地图#客户端  对应联服地图
+	required int32 lianfuMark  = 22;//联服标记#客户端  用于客户端显示联服标记，填1显示，不填不显示
+	optional IntListJingHao itemJump = 23;//消耗道具跳转#客户端  消耗道具不足时，客户端跳转路径，与item字段对应
+	//optional string fromMapId = 24;//前置地图id#客户端未使用#C  
+	//optional string random = 25;//是否目标地图随机传送#客户端未使用#C  未填不使用，1为使用
+	//optional string beizhu = 26;//备注#客户端未使用#C  1620#1733
+	//optional IntListList randomPoint = 27;//传送固定点随机#服务器  传送在此固定点内随机一个 X坐标#Y坐标&另一个
+}
+
+message CFG_DELIVERARRAY
+{
+	repeated CFG_DELIVER rows = 1;
+}

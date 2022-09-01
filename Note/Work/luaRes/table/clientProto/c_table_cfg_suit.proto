@@ -1,0 +1,28 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_SUIT
+{
+	required int32 id = 1;//id#客户端  唯一id，不能重复
+	required int32 suitId = 2;//套装id#客户端  item表中suitBelong字段会引用这里的id，相同id属于同一套装  10001 魂装 10002 仙装 10003 神器 20001宝物套装
+	optional string name = 3;//名字#客户端  套装的名字
+	required int32 suitLv = 4;//套装等级#客户端  套装等级划分，item表中的group字段可索引对应等级套装生效的等级
+	required int32 Lv = 5;//套装生效所需角色等级#客户端  不填不生效
+	required int32 reinLv = 6;//套装生效所需角色转生等级#客户端  不填不生效
+	required int32 career = 7;//套装职业#客户端  1战士 2法师 3道士
+	optional string attributeName = 8;//套装属性名字#客户端  套装属性标题
+	required int32 needNum = 9;//套装属性所需装备数量#客户端  激活套装属性所需要本套套装的件数
+	optional IntListJingHao attributeParam = 10;//套装效果参数#客户端  不同套装各自定义 【10001黄金套】：激活效果后，提升一定比例魂装附加的技能固定伤害数值，按万分位填写【20001宝物套】：buffid获得BUFF
+	optional IntListJingHao equips = 11;//套装包含装备#客户端  如果需要在tips中显示套装中包含哪些装备的名称，需要在这里填写装备道具id
+	optional string des = 12;//描述#客户端  激活此条属性的描述
+	optional IntListJingHao skill = 13;//激活技能#客户端  激活的技能\n         索引到技能表  skillid#level
+	optional string skilldes = 14;//激活技能的描述#客户端  技能描述
+	optional string inlayName = 15;//镶嵌名称#客户端  镶嵌后显示在主装备名称中的文本
+	required int32 inlayNameOrder = 16;//镶嵌名称位置#客户端  镶嵌后显示在主装备名称中的位置 1主装备前 2 主装备后
+	optional IntListList belongSuit = 17;//类型组合#客户端  由哪些类型组合而成，填对应的主类型#子类型#此部位无装备时tips上显示的道具id
+}
+
+message CFG_SUITARRAY
+{
+	repeated CFG_SUIT rows = 1;
+}

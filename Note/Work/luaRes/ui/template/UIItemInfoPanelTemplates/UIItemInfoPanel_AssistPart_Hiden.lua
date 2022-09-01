@@ -1,0 +1,5 @@
+local UIItemInfoPanel_AssistPart_Hiden = {}
+
+setmetatable(UIItemInfoPanel_AssistPart_Hiden, luaComponentTemplates.UIItemInfoPanel_AssistPart)
+
+return UIItemInfoPanel_AssistPart_Hiden

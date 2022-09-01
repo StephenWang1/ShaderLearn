@@ -1,0 +1,25 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_GODFURNACE
+{
+	required uint32 id = 1;//前一行的id#客户端#C  升级前的id
+	//required uint32 count = 2;//基数#客户端#C  基数
+	//optional IntListList assist = 3;//扩展基数物品#客户端#C  升级需要用到物品ID#数量
+	//required uint32 newid = 4;//升级后的物品id#客户端#C  升级后的物品id
+	//required uint32 subType = 5;//子类型#客户端#C  货币：0（0代表不进行子类型划分）。装备：1、武器；2、头盔；3、衣服；4、项链；5、手镯；6、戒指；7、腰带；8、鞋子；9、护肩；10、面甲；11、护膝；12、吊坠；13、赤焰灯；14、赤焰灯芯；15、魂玉；16、生命精魄；17、宝石；18、元灵秘宝；19、进攻之源；20、守护之源；。药品：1、瞬间回血回蓝；2、buff类型药剂（持续回血回蓝）；4、角色经验药。技能：0、技能书；技能ID、技能经验。宝箱：0。材料：0。辅助：1随机传送石；2回城传送石；99其他；
+	//required uint32 lv = 6;//道具等级#客户端#C  道具等级
+	//required uint32 uselv = 7;//使用等级#客户端#C  使用等级限制
+	//required uint32 openTime = 8;//开服时间#客户端#C  开服时间限制
+	//optional IntListJingHao cost = 9;//货币消耗#客户端#C  升级货币消耗
+	//required int32 conditionId = 10;//升级条件#客户端#C  升级条件，连conditionid
+    //@2#5 count#15 subType#11
+	//required uint32 count15_subType11 = 11;//合并字段#基数_C#子类型_C count#15 subType#11
+    //@6#7 lv#8 uselv#8
+	//required uint32 lv8_uselv8 = 12;//合并字段#道具等级_C#使用等级_C lv#8 uselv#8
+}
+
+message CFG_GODFURNACEARRAY
+{
+	repeated CFG_GODFURNACE rows = 1;
+}

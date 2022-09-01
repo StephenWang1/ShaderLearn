@@ -1,0 +1,38 @@
+package elementV2;
+
+import "bag.proto";
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "ElementProto";
+
+message ResElementSuitInfo{
+	optional int64 roleId = 1;
+	repeated ElementInfo elementInfos = 2;//全身元素
+	repeated ElementSuit suitInfos = 3;//激活的套装
+	optional bool isPutUp = 4;//是否镶嵌成功
+	optional bool isTakeOff = 5;//是否取下成功
+	optional int32 index = 6;
+}
+
+message ElementInfo{
+	optional int32 index = 1;//位置
+	optional int32 id = 2;//itemId
+	optional bagV2.BagItemInfo bagItemInfo = 3;//背包道具信息
+}
+
+message ReqPutUpElement{
+	optional int32 index = 1;//镶嵌的位置
+	optional int64 elementId = 2;//要镶嵌的元素唯一id
+}
+
+message ReqTakeOffElement{
+	optional int32 index = 1;//镶嵌的位置
+}
+
+message ElementSuit{
+	optional int32 subType = 1;//套装属性
+	optional int32 level = 2;//套装等级
+	optional int32 suitId = 3;//套装id
+	optional int32 suitValue = 4;//数值
+	optional int32 point = 5;//点数
+}

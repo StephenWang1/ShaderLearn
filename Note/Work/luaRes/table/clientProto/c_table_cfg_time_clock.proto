@@ -1,0 +1,15 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_TIME_CLOCK
+{
+	required uint32 id = 1;//id#客户端#不存在共同参与合并的字段  程序唯一标识，服务器说啥配啥
+	required uint32 type = 2;//type#客户端#不存在共同参与合并的字段  相同的图片与倒计时组合方式为同一类型 ;类型1，图片后跟倒计时
+	optional string parameter = 3;//参数#客户端  类型1，资源id
+	required int32 time = 4;//倒计时#客户端  倒计时时长，秒
+}
+
+message CFG_TIME_CLOCKARRAY
+{
+	repeated CFG_TIME_CLOCK rows = 1;
+}

@@ -1,0 +1,161 @@
+package servantV2;
+
+import "bag.proto";
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "ServantProto";
+
+//类型看role的AttributeType
+message ServantAttribute {
+  required int32 type = 1;
+  required int64 value = 2;
+}
+
+message ServantInfo {
+  required int32 cfgId = 1; //huanshou表配置id
+  required int32 mid = 2; //怪物 id
+  required int32 state = 3; //状态  0死亡, 1出战, 2合体, 3收回
+  optional int64 servantId = 4; // 唯一id
+  repeated ServantAttribute attributes = 5; //属性
+  optional int32 itemId = 6; //幻兽蛋 id
+  optional int32 level = 7;//等级
+  optional int32 type = 8;//类型 1.寒芒, 2.落星, 3.天成
+  repeated bagV2.BagItemInfo equips = 9; //装备
+  optional int64 callAgainTime = 10;//复活时间
+  optional int32 rein = 11;//羽化等级
+  optional int32 weight = 12;//幻兽重量
+  repeated ServantAttribute levelAttrs = 13; //当前等级基础属性
+  repeated ServantAttribute nextLevelAttrs = 14; //下级属性
+  optional int64 hp = 15;
+  optional bagV2.BagItemInfo servantEgg = 16; //灵兽蛋基本属性
+  optional int64 exp = 17;//经验
+  optional int32 combineHp = 18; //剩余合体血量
+  optional int32 combineMaxHp = 19; //合体最大血量
+  optional string name = 20;//灵兽名字
+  optional int64 battleTime = 21;//出战时间
+  optional int32 reviveState = 22;//死亡前的状态
+  repeated bagV2.BagItemInfo soulEquips = 23; // 魂继装备
+	optional int32 equippedSoul = 24; // 已通灵魂继位置
+  optional bool soulEquipOpen = 25; // 魂继是否开启
+  optional bool fabacGridOpen = 26; // 法宝装备位是否开启
+  optional int32 fightPower = 27; // 战斗力
+  optional int32 reinId = 28;//表ID
+}
+
+//他人灵兽信息
+message OtherServantInfo {
+  required int32 cfgId = 1; //huanshou表配置id
+  required int32 mid = 2; //怪物 id
+  optional int32 type = 3;//类型 1.寒芒, 2.落星, 3.天成
+  optional int32 level = 4;//等级
+  optional int32 rein = 5;//羽化等级
+  repeated bagV2.BagItemInfo equips = 6; //装备
+  optional int32 weight = 7;//幻兽重量
+  optional bagV2.BagItemInfo servantEgg = 8; //灵兽蛋基本属性
+  repeated bagV2.BagItemInfo soulEquips = 9; // 魂继装备
+  optional int32 equippedSoul = 10; // 已通灵魂继位置
+  optional int32 reinId = 11;//表ID
+}
+
+message ReqOtherServantInfo {
+  optional int64 targetId = 1;
+}
+message ResOtherServantInfo {
+  repeated OtherServantInfo infos = 1;
+}
+
+//返回仆从信息
+message ResServantInfo {
+  repeated ServantInfo serverts = 1;
+  optional int64 expPool = 2;//经验池
+  optional int64 reinPool = 3;//灵力池
+}
+
+message ReqReceiveMana {
+   required int32 receiveType = 1;//领取类型 1：普通领取 2 ：充值领取
+}
+
+message ServantMana {
+  optional bool receiveToday = 1;//今日是否已领取
+  optional int64 manaPoll = 2;//聚灵池灵力
+  optional bool rechargeToday = 3;//今日是否充值过
+  optional bool receiveRecharge = 4;//充值是否领取
+}
+
+//请求切换模型
+message ReqServantChangeState {
+  required int32 toState = 1;//切换状态
+  required int32 type = 2;
+}
+
+message ServantIdInfo {
+  required int32 type = 1;
+}
+//请求使用元灵蛋
+message ReqUseServantEgg{
+  optional int64 itemId = 1;
+  optional int32 targetType = 3; //新增第四种灵兽, 可以放任意位置, 此处填具体位置, 以前三种填自己位置
+}
+
+//请求注入经验
+message ReqInjectExp{
+  optional int32 type = 1;
+  optional int64 exp = 2;
+}
+
+//经验变化
+message ServantExpUpdate{
+  optional int32 type = 1;//元灵类型
+  optional int64 exp = 2;//经验
+  optional int64 pool = 3;//经验池
+  optional int32 level = 4;
+  optional int32 actId = 5;
+}
+//血量变化
+message ServantHpUpdate{
+  optional int32 type = 1;//元灵类型
+  optional int64 hp =2;//血量
+  optional int64 maxHp = 3;//最大血量
+  optional int32 state = 4;//状态
+  optional int32 combineHp = 5;
+  optional int32 combineMaxHp = 6;
+}
+
+//请求修改名字
+message ReqServantRename{
+  optional int32 type = 1;
+  optional string name = 2;
+}
+//返回灵兽名字
+message ResServantName{
+  optional string name = 1;
+}
+
+//升级包
+message ResServantLevelUp{
+  optional int32 type = 1;
+  optional int32 level = 2;
+  optional int64 exp = 3;
+  optional int64 lid = 4;
+}
+//转生包
+message ResServantReinUp{
+  optional int32 type = 1;
+  optional int32 rein = 2;
+  optional int32 reinId = 3;//表ID
+}
+
+// 灵兽合体, 出战属性变化飘字
+message ResServantStateChange {
+  required int64 servantId = 1;
+  required int64 newState = 2; //变化后的状态
+}
+
+// 请求通灵魂继
+message ReqServantEquipSoul {
+  required int32 position = 1; // 装备位置, servantType * 10000 + 格子号, 脱下发当前装备的位置, 发其他替换
+}
+
+message ReqPurchaseServantSite{
+  required int32 site = 1; //购买的位置
+  required int32 type = 2; //1.钻石购买 2.元宝购买
+}

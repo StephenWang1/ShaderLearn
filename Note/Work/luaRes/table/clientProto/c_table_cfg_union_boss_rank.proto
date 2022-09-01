@@ -1,0 +1,15 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_UNION_BOSS_RANK
+{
+	required uint32 id = 1;//id#客户端#C  id#客户端
+	required int32 type = 2;//排行类型#客户端  1、个人排行   2、行会排行
+	required uint32 rank = 3;//排名#客户端#不存在共同参与合并的字段  排名为0表示基础奖励
+	optional IntListList item = 4;//奖励#客户端  排名奖励
+}
+
+message CFG_UNION_BOSS_RANKARRAY
+{
+	repeated CFG_UNION_BOSS_RANK rows = 1;
+}

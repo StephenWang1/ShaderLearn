@@ -1,0 +1,18 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_VIP_ZUNXIANG
+{
+	required uint32 id = 1;//渠道id#客户端  渠道id
+	optional string picture = 2;//照片链接#客户端  照片链接
+	optional string code = 3;//二维码链接#客户端  二维码链接
+	optional IntListList itemShow = 4;//道具展示#客户端  礼包道具展示
+	optional string title = 5;//标题名#客户端  标题名#客户端
+	optional string content = 6;//内容#客户端  
+	optional string tips = 7;//温馨提示#客户端  
+}
+
+message CFG_VIP_ZUNXIANGARRAY
+{
+	repeated CFG_VIP_ZUNXIANG rows = 1;
+}

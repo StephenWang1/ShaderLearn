@@ -1,0 +1,36 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_BLOODSUIT
+{
+	required int32 itemid = 1;//道具id#客户端  道具id
+	required int32 qualityLevel = 2;//品级#客户端  品级
+	optional string qualityName = 3;//品级名称#客户端  品级名称
+	required int32 priority = 4;//同品级优先级#客户端  同品级优先级
+	optional IntListJingHao maxHp = 5;//血量#客户端  战士#法师#道士
+	required int32 phyAttackMax = 6;//最大物理攻击#客户端  最大物理攻击
+	required int32 phyAttackMin = 7;//最小物理攻击#客户端  最小物理攻击
+	required int32 magicAttackMax = 8;//最大魔法#客户端  最大魔法
+	required int32 magicAttackMin = 9;//最小魔法#客户端  最小魔法
+	required int32 taoAttackMax = 10;//最大道术#客户端  最大道术
+	required int32 taoAttackMin = 11;//最小道术#客户端  最小道术
+	optional IntListJingHao phyDefenceMaxByCareer = 12;//最大物理防御#客户端  战士#法师#道士
+	optional IntListJingHao phyDefenceMinByCareer = 13;//最小物理防御#客户端  战士#法师#道士
+	optional IntListJingHao magicDefenceMaxByCareer = 14;//最大魔法防御#客户端  战士#法师#道士
+	optional IntListJingHao magicDefenceMinByCareer = 15;//最小魔法防御#客户端  战士#法师#道士
+	required int32 holyAttackMax = 16;//最大神圣攻击#客户端  最大神圣攻击
+	required int32 holyAttackMin = 17;//最小神圣攻击#客户端  最小神圣攻击
+	required int32 holyDefenceMax = 18;//最大神圣防御#客户端#不存在共同参与合并的字段  属性
+	required int32 holyDefenceMin = 19;//最小神圣防御#客户端#不存在共同参与合并的字段  属性
+	required int32 criticalDamage = 20;//暴击伤害#客户端  暴击伤害
+	required int32 smeltExp = 21;//熔炼经验#客户端  熔炼经验
+	optional IntListJingHao smeltItem = 22;//可熔炼道具#客户端  可熔炼道具
+	required int32 isUse = 23;//是否可穿戴#客户端  0可穿1不可穿
+	required int32 type = 24;//血继类型#客户端  1灵兽2肉身
+	//optional string remarks = 25;//备注#策划  备注
+}
+
+message CFG_BLOODSUITARRAY
+{
+	repeated CFG_BLOODSUIT rows = 1;
+}

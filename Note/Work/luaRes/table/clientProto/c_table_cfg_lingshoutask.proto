@@ -1,0 +1,28 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_LINGSHOUTASK
+{
+	required uint32 ID = 1;//类型#客户端#C#不存在共同参与合并的字段  奖励ID
+	//required int32 section = 2;//章节#客户端#C  章节
+	//optional IntListJingHao taskGoalId = 3;//任务目标#客户端#C  对应cfg_taskGoal
+	//optional IntListList rewards = 4;//奖励#客户端#C  任务奖励
+	//required uint32 taskType = 5;//任务类型#客户端#C  1挖掘boss 2回收装备次数 3交易行买卖次数 4装备行兑换次数 5装备升星次数 6合成物品次数
+	//optional string taskInfo = 6;//任务描述#客户端#C  描述
+	//optional string uipanel = 7;//跳转界面#客户端#C  cfg_jump
+	//required int32 jumptype = 8;//跳转类型#客户端#C  1.跳转jump2.跳转气泡3跳转npc并打开界面
+	//required uint32 conditions = 9;//跳转条件#客户端#C  cfg_conditions
+	//optional string bubbleID = 10;//气泡ID#客户端#C  cfg_promptframe
+	//required int32 secret = 11;//秘籍#客户端#C#不存在共同参与合并的字段  跳转秘籍表
+	//optional string tips = 12;//进度tips#客户端#C  进度描述
+    //@2#8 section#15 jumptype#15
+	//required uint32 section15_jumptype15 = 13;//合并字段#章节_C#跳转类型_C section#15 jumptype#15
+	optional string remark = 14;//左侧描述#客户端  左侧描述
+	optional string unitParam = 15;//任务框位置#客户端  底图bg#x#y#底图翻转#底图偏移
+	optional IntListJingHao head = 16;//怪物头像#客户端  资源id
+}
+
+message CFG_LINGSHOUTASKARRAY
+{
+	repeated CFG_LINGSHOUTASK rows = 1;
+}

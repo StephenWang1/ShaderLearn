@@ -1,0 +1,75 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_SKILLS
+{
+	required uint32 id = 1;//技能id#客户端#C#不存在共同参与合并的字段  第1位：类别(1角色2怪物3装备4心法5魂继)。第3位：子类（角色：0通用1战士2法师3道士。怪物：0通用1暂无划分。装备：0通用1暂无划分。秘籍：1生命类2防御类3元素攻击4元素防御5抵御职业6抵御技能。魂继1魂继技能2通灵技能）。第456位：编号
+	//optional string name = 2;//技能名称#客户端#C  
+	//optional string icon = 3;//图标#客户端#C  icon的id
+	//required uint32 cls = 4;//类别#客户端#C  0：人物技能；1：怪物技能；2：装备技能；3：秘籍技能；4：XP技能；5xp神兽攻击技能；6人物法宝套装技能；7血继套装技能；8血继共鸣技能；9强化技能；10神力套装技能;;11骑术技能
+	//required uint32 isShow = 5;//技能界面是否显示#客户端#C  1显示；0不显示
+	//required int32 index = 6;//用于在界面中的排序#客户端#C  
+	//required int32 condition = 7;//技能学习条件#客户端#C#不存在共同参与合并的字段  关联sfg_conditions表中ID；&与 |或
+	//required uint32 handlerType = 8;//技能处理器类型（服务器端用）#客户端#C  技能类型：1通用伤害技能；2通用治疗技能；3通用buff技能；4通用地面buff技能；5.野蛮冲撞；6.召唤类技能；7.抗拒火环；8.瞬移；9.嗜血；10.攻杀；11.刺杀;12疾光电影；13心灵启示;14被动加属性技能；15伤害+被动加属性（小火球）;16狮子吼;17灭天火;18寒冰掌;19群毒术;20怪物特殊技能 21 拉人技能 22魂继技能 23永久被动buff技能 24通灵攻击技能 25怒焰斩 26召唤群兽27多段伤害28爆裂火符29秘能爆发30攻击触发buff31生命万分比回血技能32固定伤害技能33时间回退34血量上限万分比扣血（包括合体和出战灵兽）35攻击附加灵兽血量万分比（通灵专用）36 骑术 37地狱雷光
+	//required uint32 career = 9;//技能所属职业（计算伤害看物理还是魔法防御用）#客户端#C  0通用技能；1物理技能；2魔法技能；3道术技能(怪物只有物理攻击，神兽、灵兽除外)
+	//required uint32 maxTarget = 10;//最多作用目标#客户端#C  技能最大作用目标数
+	//required uint32 canUp = 11;//是否可以升级#客户端#C  1可以 ；0不可
+	//required uint32 targetTypeClient = 12;//buff目标类型#客户端#C  1:对敌；2:对己；3:对宠物；4:对友方；5:召唤；6.对玩家；7.对神兽骷髅；100.有选中的人就对目标，没有，就对自己
+	//required uint32 targetTypeExtend = 13;//目标模式拓展#客户端#C  1.前方点技能强制寻怪
+	//required uint32 action = 14;//技能释放动作（客户端）#客户端#C#不存在共同参与合并的字段  0无动作31普通下劈攻击  32举手施法  33斜劈 34冲撞 35跳斩 36旋风斩 37秘能爆发38暴风雪 39爆裂火符 40召唤群兽
+	//required int32 hurtDelay = 15;//伤害显示延迟（客户端）#客户端#C#不存在共同参与合并的字段  单位为毫秒（有受击按受击开始计时，无受击按攻击动作开始计时）
+	//required int32 releaseDis = 16;//技能释放距离#客户端#C  
+	//required uint32 commonCd = 17;//是否参与公共CD#客户端#C  0否；1是
+	//required uint32 releaseType = 18;//释放目标类型#客户端#C  给服务器发数据的类型1、对目标；2、对点（客户端发过来的点）；3、自己所在的点；4、前方点
+	//required uint32 releaseTypeClient = 19;//选怪目标类型#客户端#C  1、对目标；2、对点（客户端发过来的点）；3、自己所在的点；4、前方点；5、目标所在点；6、目标前方点
+	//required int32 areaDis = 20;//作用区域范围大小#客户端#C  
+	//required uint32 areaType = 21;//攻击类型#客户端#C  1.点；2. 方形 ；3. 前方十字 ；4. 竖型 ；5. 横线型 ；6. 前方半圆 ；7. 菱形（方形）；9.前方一列（不包括自己的点）11.目标十字
+	//optional IntListJingHao extraParam = 22;//技能参数#客户端#C  特殊技能有不同用处（疾光电影：每个格子的伤害增幅比例，万分比；召唤神兽/骷髅：职业1物理2魔法；秘能爆发：辅助技能id）
+	//required uint32 hit = 23;//是否必中#客户端#C  0否；1是
+	//required uint32 put = 24;//主界面快捷技能栏的位置#客户端#C  填快捷技能栏的编号
+	//optional IntListJingHao effects = 25;//特效ID#客户端#C  cfg_effects表对应
+	//optional IntListJingHao effects2 = 26;//受击者特效ID#客户端#C  配置cfg_effects表中的受击者特效
+	//required uint32 automaticRelease = 27;//释放可自动释放#客户端#C  0不可自动释放；1可自动释放
+	//required uint32 skillBook = 28;//对应技能书#客户端#C  任务用字段，方便程序查找对应技能书
+	//optional IntListJingHao skillLattice = 29;//技能自动设置键位#客户端#C  技能学习后自动设置的键位配置（键位编号#类型#优先级，类型：0非强制1强制）（强制时优先级高的会覆盖低的）
+	//optional IntListJingHao element = 30;//技能对应元素属性#客户端#C  1.电；2.火；3.冰；4.黑暗；5.穿刺
+	//required int32 secretSkillType = 31;//秘籍技能类型划分#客户端#C  1、生命秘籍2、元素攻击类3、防御秘籍4、元素防御类5、抵御职业类6、抵御技能类
+	//required int32 stayTime = 32;//技能释放后移动等待时间#客户端#C#不存在共同参与合并的字段  从施法动作开始播放时开始计时（毫秒）
+	//required int32 soundID = 33;//攻击音效#客户端#C  攻击音效
+	//required int32 goal = 34;//命中音效#客户端#C  命中音效
+	//required int32 delayForceMove = 35;//释放技能后强制位移的等待时间#客户端#C  单位毫秒
+	//required int32 AttackIsFnfluenceCD = 36;//技能CD施法受攻速影响#客户端#C  技能CD施法受攻速影响 默认值不填  为不受影响 填1   为受影响
+	//required int32 rongcuoCd = 37;//技能cd偏差值#客户端#C  技能cd和公共cd可允许的偏差值 单位 毫秒
+    //@4#5#6 cls#5 isShow#1 index#10
+	//required uint32 cls5_isShow1_index10 = 38;//合并字段#类别_C#技能界面是否显示_C#用于在界面中的排序_C cls#5 isShow#1 index#10
+    //@8#9#10#11 handlerType#20 career#3 maxTarget#7 canUp#1
+	//required uint32 handlerType20_career3_maxTarget7_canUp1 = 39;//合并字段#技能处理器类型（服务器端用）_C#技能所属职业（计算伤害看物理还是魔法防御用）_C#最多作用目标_C#是否可以升级_C handlerType#20 career#3 maxTarget#7 canUp#1
+    //@16#17#18#20 releaseDis#20 commonCd#1 releaseType#3 areaDis#4
+	//required uint32 releaseDis20_commonCd1_releaseType3_areaDis4 = 40;//合并字段#技能释放距离_C#是否参与公共CD_C#释放目标类型_C#作用区域范围大小_C releaseDis#20 commonCd#1 releaseType#3 areaDis#4
+    //@21#23#24#27 areaType#4 hit#1 put#8 automaticRelease#1
+	//required uint32 areaType4_hit1_put8_automaticRelease1 = 41;//合并字段#攻击类型_C#是否必中_C#主界面快捷技能栏的位置_C#释放可自动释放_C areaType#4 hit#1 put#8 automaticRelease#1
+    //@28#31 skillBook#24 secretSkillType#3
+	//required uint32 skillBook24_secretSkillType3 = 42;//合并字段#对应技能书_C#秘籍技能类型划分_C skillBook#24 secretSkillType#3
+    //@33#34 soundID#15 goal#15
+	//required uint32 soundID15_goal15 = 43;//合并字段#攻击音效_C#命中音效_C soundID#15 goal#15
+	optional string icon2 = 44;//图标2#客户端  icon的id
+	optional IntListJingHao intensifySkill = 45;//强化技能#客户端  强化技能id#强化技能id
+	required int32 videoId = 46;//视频展示#客户端  视频id，关联cfg_video的ID
+	//optional string conditionText = 47;//解锁条件说明#客户端未使用#C  说明文字
+	//required uint32 targetType = 48;//buff目标类型#服务器  1:对敌；2:对己；3:对宠物；4:对友方；5:召唤；6.对玩家；7.对神兽骷髅
+	//optional IntListJingHao hateP = 49;//仇恨值#服务器  仇恨具体数值（刺杀：第一格仇恨#第二格仇恨）
+	//required int32 critHateProbability = 50;//暴击仇恨触发概率#服务器  万分比
+	//optional IntListJingHao critHate = 51;//暴击仇恨值#服务器  暴击仇恨值（刺杀：第一格暴击仇恨#第二格暴击仇恨）
+	//optional string tips1 = 52;//技能描述说明#策划  
+	//required int32 CentralAreaDis = 53;//技能有效范围计算基准点#服务器  计算技能有效范围时，是否以自己为中心（1是；0不是）
+	//required int32 criterionLevel = 54;//基准等级#服务器  怪对人特殊伤害的计算基准等级
+	//required int32 percentageDifference = 55;//比例差#服务器  万分比（怪对人特殊伤害用）
+	//required int32 probability = 56;//触发概率#服务器  万分比（怪对人特殊伤害用）
+	//required int32 isHitTime = 57;//释放在指定时间内必中#服务器  攻击目标刚好离开攻击范围时，从离开开始计时，一定时间内必定造成伤害（1、必中；不配置则不必中；时间去global配置）
+	//optional string experience = 58;//技能熟练度获取#服务器  获得熟练度下限#获得熟练度上限#每攻击X次获得1点熟练度&获得熟练度下限#获得熟练度上限#每攻击X次获得1点熟练度
+}
+
+message CFG_SKILLSARRAY
+{
+	repeated CFG_SKILLS rows = 1;
+}

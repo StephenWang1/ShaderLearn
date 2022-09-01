@@ -1,0 +1,49 @@
+package bufferV2;
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "BufferProto";
+
+//通知移除buff
+message ResRemoveBuffer {
+  optional int64 roleId = 1; // performaer id
+  optional int32 bufferId = 2; //buffer 唯一 id
+  optional int32 bufferConfigId = 3;//移除的 buffer 的配置 id
+}
+
+//buffer造成的持续伤害或持续治疗(和蓝量)
+message BufferDeltaHP {
+  required int64 id = 1;
+  optional int64 deltaHP = 2; //正数为加血,负数为掉血
+  optional int64 hp = 3; //变化后的hp
+  optional int64 adder = 4;
+  optional int32 adderType = 5;//添加对象类型
+  optional int32 bufferId = 6;
+  optional int32 deltaMP = 7; //改变的蓝量值
+  optional int32 mp = 8; //变化后的mp
+  optional bool critical = 9; //是否暴击
+  optional int32 holyDamage = 10; // 神圣伤害
+  optional int32 deterHurt = 11;//官印威慑伤害
+  optional int64 breakShield = 12; // 破盾
+  optional int64 guardDamage = 13; // 守护抵消伤害
+  optional int32 servantReduceHurt = 14; // 合体灵兽抵消伤害
+  optional bool isShield = 15; //是否神盾护体
+}
+
+//通知添加buff
+// message ResAddBuffer {
+//  optional int32 bid = 1;
+//  optional int64 lid = 2; //玩家id
+//  optional int64 ownerId = 3;//释放者id
+//  optional int32 buffId = 4; //bufferid
+//  optional int32 totalTime = 5; //剩余时间
+// }
+
+// //通知更新buff
+// message ResUpdateBuffer {
+//  optional int32 bid = 1;
+//  optional int64 lid = 2; //玩家id
+//  optional int32 buffId = 3;//bufferid
+//  optional int32 totalTime = 4;//剩余时间
+// }
+
+

@@ -1,0 +1,238 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_ITEMS
+{
+	required uint32 id = 1;//id#客户端#C#不存在共同参与合并的字段  第1位：道具类型（后期可加到2位）；第23位：子类型(技能经验除外)；第4567位代表编号(衣服第4位为性别)
+	//required uint32 linkItemId = 2;//关联道具id#客户端#C  同个道具不同id互相关联字段
+	//required uint32 type = 3;//道具类型#客户端#C  1 货币/资源；2 装备；3 药品；4技能书；5宝箱；6材料；7技能经验；8辅助(道具)；9元素；10怪物攻城；11灵兽碎片；12印记；13 时装；14 月卡；15 魂继；16 高级技能熟练度；17藏品 99 特殊展示用类型 18掉落元宝
+	//required uint32 subType = 4;//子类型#客户端#C  货币：0（0代表不进行子类型划分以及充值钻石）；1补单钻石；2拍卖（交易）钻石；3福利钻石；4返利钻石 5商会积分6.聚灵点7元宝8金币 9 熔炼积分。装备：1、武器；2、头盔；3、衣服；4、项链；5、手镯；6、戒指；7、腰带；8、鞋子；9、护肩；10、面甲；11、护膝；12、吊坠；13、赤焰灯；14、赤焰灯芯；15、魂玉；16、玉魂；17、元石；18、元灵秘宝；19、进攻之源；20、守护之源；21、宝饰。22、勋章；24 面巾 ；25称号（展示 tips用）、26虎符、27官印、28马牌、29暗器；34-37阵法配件；121、寒芒脑；122、寒芒心；123、寒芒骨；124、寒芒血；131、落星脑；132、落星心；133、落星骨；134、落星血；141、天成脑；142、天成心；143、天成骨；144、天成血 151通用脑 152通用心 153通用骨 154通用血；81、寒芒项链；82、寒芒戒指；83、寒芒手镯；84寒芒腰带；85寒芒鞋子；91、落星项链；92、落星戒指、；93落星手镯；94落星腰带；95落星鞋子；101、天成项链；102天成戒指；103天成手镯；104天成腰带；105天成鞋子；520 婚戒；86寒芒法宝；96落星法宝；106天成法宝 160 人物法宝 （第五位可分辨法宝所属类型）301 神力武器 302 神力头盔 303 神力衣服 304 神力项链 305 神力法宝 306 神力勋章 307 神力手镯 308 神力戒指 ；药品：1、瞬间回血回蓝；2、buff类型药剂（持续回血回蓝）；3角色升级药；4、角色经验药；5、气血石  6.腕力药水 7精力药水8xp能量药水。技能：0、技能书；1、心法技能书；2、高级技能书；3、xp技能书；4、强化技能书一段5、强化技能书二三段。技能经验：技能ID。宝箱：0普通宝箱；1人物资源宝箱；2灵兽资源宝箱；3宝物资源宝箱；4金币堆；5自选宝箱；6灵兽经验丹；7灵兽修炼掠夺经验；8绑定宝箱；77掠宝袋 78装备宝箱。材料：6；1、矿石；2、肉类；3、药材；4、勇士之星；14、鱼类；15、水果5、陵墓信物；6、召唤令碎片；7、转生神石；8、升星矿石；9、地图凭证 10、狼烟梦境烟花 11、寻宝钥匙12、押镖令13、监狱钥匙;14鱼；15水果；16玫瑰；17金兰；18悬赏令。19 宝箱钥匙辅助20恶魔广场凭证 21创造宝石 22熔炼矿石 23炼化石 24书页 25灵兽法力残片 27闯天关3星令牌 35神秘果实36装备专精材料37白日门标令 38神力装备碎片：1随机传送石；2回城传送石；3召唤boss；4聚灵珠；32元宝宝箱；5召唤队伍；6召唤帮派；7红包卷；8幻兽蛋；9祝福油；10诅咒符；11神力值卷轴；12战神油；13好友召唤令和筹码；14定点传送石；15支援令（兄弟和夫妻）17  火药桶 18 油 19灵兽复活药 20押镖令 21沃玛号角 22死亡徽记 23直充道具 24魔法神石 25红包 26 称号 27魔力卷轴 28献祭之油 29日常道具33  35 随身仓库酒 39 封号直升卷 49BOSS击杀券 99其他。元素：1元素。；98怪物攻城。1魔王宝箱；外观  1 武器外观 2 头盔外观 3 衣服外观； 月卡：类型与cfg_commerce表type字段对应 魂继：0通用1寒芒2落星3天成； 藏品：1青铜器2陶器3瓷器4玉器5金银器6法器
+	//optional string name = 5;//道具名称#客户端#C  
+	//required uint32 useLv = 6;//使用等级#客户端#C  角色装备：角色等级；灵兽肉身装备：灵兽等级
+	//required uint32 reinLv = 7;//转生等级#客户端#C  角色装备：角色转生等级；灵兽肉身装备：灵兽羽化等级
+	//required int32 useCondition = 8;//道具使用限制#客户端#C  道具使用限制  0或不配置 转生等级和等级都需满足（先看转生再看等级）1 转生或等级任意满足即可
+	//required uint32 career = 9;//道具使用职业限制#客户端#C  0无限制；1战士；2法师；3道士
+	//required int32 sex = 10;//性别#客户端#C  男1女2不分男女0
+	//optional IntListJingHao model = 11;//道具模型#客户端#C  配置模型ID
+	//optional string icon = 12;//道具图标#客户端#C  配置Icon名称
+	//optional string wayGetRead = 13;//道具获取途径说明文本#客户端#C  用于配置道具tips上获取途径，索引read表id  id
+	//required uint32 group = 14;//组别#客户端#C  具体划分按实际需求改
+	//required uint32 quality = 15;//道具品质#客户端#C  装备品质颜色表1淡蓝，2-4 绿 5-8 蓝 9 紫 10 粉 11 黄 12 橙  13  红   14 钻石专用红 15  元宝专用黄  16  金币专用黄     普通道具一般为1   其余从低到高 使用 7,9 ，12，13
+	//optional string equal = 16;//道具固定转化#客户端#C  itemid#count&itemid#count回收固定受益  
+	//optional IntListJingHao extraEqual = 17;//道具概率转化#客户端#C  itemid#count#rate回收概率受益
+	//required uint32 bind = 18;//是否绑定#客户端#C  0.不绑定；1.绑定；2.不可交易，不可丢弃，能被爆，被爆后可拾取；3.装备后绑定；4..绑定不可丢弃，不可交易，不可被爆（字段无用）
+	//required int32 bindEqualItem = 19;//绑定道具对应非绑定道具#客户端#C#不存在共同参与合并的字段  填与绑定道具对应的非绑定道具的id
+	//optional IntListJingHao wayGet = 20;//获得途径#客户端#C  对应cfg_way_get表里的id（未知用途）
+	//required uint32 overlying = 21;//道具叠加数量#客户端#C#不存在共同参与合并的字段  
+	//required int32 leftOperate = 22;//左侧按钮#客户端#C  关联到cfg_items_operate表
+	//required int32 rightOperate = 23;//右侧按钮#客户端#C  关联到cfg_items_operate表
+	//optional IntListJingHao useParam = 24;//使用的参数，不同的道具不一样#客户端#C  1、经验药：增加经验数量。2、技能书：技能ID#经验数量。3、瞬间回血回蓝药：回血数#回蓝数（不回填0）4、传送石：1随机传送；2回城传送。5、召唤boss：monstersID(#分隔，随机选取)。6、角色升级药：等级限制#提升等级#经验。7、聚灵珠：经验获取倍数#经验获取上限#vip领取经验倍数（百分比）。8、红包卷：奖池增加红包金额。9、幻兽蛋：幻兽id；10、改名卡：1角色改名；2行会改名；11、神力值卷轴：#增加经验量；22勋章佩戴神力值限制 神力值id#数量 ； 12 碎片 ：合成物品id#碎片数量；23使用后加亲密度点数（魅力值#亲密度)；13、定点传送石：地图id#X坐标#Y坐标；15魂玉穿戴限制；21宝石手套穿戴限制；20防守之源等级；19进攻之源等级；18灵兽秘宝穿戴限制；17宝石等级；16玉魂等级；14灯芯等级；13赤焰灯穿戴限制  时装 道具及可以触发时装的道具  如神力：时装表id  限时外观 这里配置的是永久外观的道具id 22：烟花道具使用后增加的剩余梦境时间（秒） 婚戒：增加的亲密度上限    火药桶：mapeventid  红包： 元宝数量  面纱 ：物品掉落后返还几率  万分数  穿戴中/背包中   人物法宝：magicweapon id#装备位id  狂暴药剂：生效buffid#禁止使用buffid
+	//optional IntListJingHao compoundParam = 25;//使用的参数，不同的道具不一样#客户端#C  11-1碎片合成参数；11-2精魄合成参数；2-15魂玉合成参数；灯芯：灯座暴击伤害加成万分比；元石：宝饰攻击加成万分比；进攻之源：灵兽秘宝回血速度加成万分比
+	//required int32 resetTime = 26;//物品冷却#客户端#C  时间：S
+	//required uint32 useLimit = 27;//使用次数限制#客户端#C  不填无限制，填n表示玩家每天只能使用n个
+	//required uint32 isDelete = 28;//是否可以摧毁#客户端#C  0不可摧毁；1可摧毁
+	//required uint32 batchusage = 29;//是否批量使用#客户端#C  可使用的道具必填，如果没填可默认为不可批量使用：1：使用弹出批量使用界面；2：使用直接消耗当前格子所有物品；3：不可批量使用；
+	//required uint32 autouse = 30;//宝箱是否自动打开#客户端#C  0不打开，1打开
+	//required int32 index = 31;//排序#客户端#C  显示排序：倒叙
+	//required uint32 only = 32;//唯一性字段#客户端#C  开宝箱时使用，不填无限制，填n表示至多只能获得n次
+	//required int32 nbValue = 33;//战斗力/价值#客户端#C  
+	//required uint32 isDonate = 34;//是否可捐献#客户端#C  0不可捐献；1可捐献
+	//required int32 gongXian = 35;//公会捐装备获得元宝#客户端#C  
+	//optional string tips2 = 36;//道具描述2#客户端#C  道具描述可配置文字和颜色   根据是否配置 职业type#，决定是否针对不同职业显示不同tips
+	//required int32 activitySell = 37;//活动过期后可以出售活动的道具#客户端#C  itemid#count
+	//required int32 activityPast = 38;//活动配置，活动过期后可以出售#客户端#C  活动id#活动id#活动id
+	//optional IntListJingHao suckBlood = 39;//元石吸血#客户端#C  攻击概率将伤害万分比转化部分为自身血量 万分比#万分比血量
+	//optional IntListJingHao suckBloodFake = 40;//假元石吸血显示#客户端#C  假概率，假血量显示用，万分比
+	//required int32 phyAttackMax = 41;//最大物理攻击#客户端#C#不存在共同参与合并的字段  属性
+	//required int32 phyAttackMin = 42;//最小物理攻击#客户端#C#不存在共同参与合并的字段  属性
+	//required int32 magicAttackMax = 43;//最大魔法#客户端#C#不存在共同参与合并的字段  属性
+	//required int32 magicAttackMin = 44;//最小魔法#客户端#C#不存在共同参与合并的字段  属性
+	//required int32 taoAttackMax = 45;//最大道术#客户端#C#不存在共同参与合并的字段  属性
+	//required int32 taoAttackMin = 46;//最小道术#客户端#C#不存在共同参与合并的字段  属性
+	//required int32 phyDefenceMax = 47;//最大物理防御#客户端#C#不存在共同参与合并的字段  生成道具时
+	//required int32 phyDefenceMin = 48;//最小物理防御#客户端#C#不存在共同参与合并的字段  生成道具时
+	//required int32 magicDefenceMax = 49;//最大魔法防御#客户端#C#不存在共同参与合并的字段  生成道具时
+	//required int32 magicDefenceMin = 50;//最小魔法防御#客户端#C  生成道具时
+	//optional IntListList valueCareerClient = 51;//不同职业道具属性加成#客户端#C  职业#最大物理防御#最小物理防御#最大魔防#最小魔防#血量&职业#最大物理防御#最小物理防御#最大魔防#最小魔防#血量  （职业 1 战士 2法师 3 道士）
+	//required int32 accurate = 52;//精准#客户端#C  属性
+	//required int32 dodge = 53;//闪避#客户端#C  属性
+	//required float hpPercentage = 54;//血量继承千分比#客户端#C  元灵秘宝属性 血量继承千分比
+	//required float attackPercentage = 55;//攻击继承千分比#客户端#C  元灵秘宝属性 攻击继承 千分比
+	//required float defensePercentage = 56;//防御继承千分比#客户端#C  元灵秘宝属性 防御继承 千分比
+	//required int32 cutDamage = 57;//切割伤害继承万分比#客户端#C  元灵秘宝属性 切割伤害继承
+	//required int32 sacredDefense = 58;//神圣防御继承万分比#客户端#C  元灵秘宝属性 神圣防御继承万分比
+	//required int32 hsmaxHp = 59;//灵兽血量#客户端#C#不存在共同参与合并的字段  灵兽血量
+	//required int32 hsphyDefenceMax = 60;//灵兽最大物理防御#客户端#C#不存在共同参与合并的字段  灵兽最大物理防御
+	//required int32 hsphyDefenceMin = 61;//灵兽最小物理防御#客户端#C#不存在共同参与合并的字段  灵兽最小物理防御
+	//required int32 hsmagicDefenceMax = 62;//灵兽最大魔法防御#客户端#C#不存在共同参与合并的字段  灵兽最大魔法防御
+	//required int32 hsmagicDefenceMin = 63;//灵兽最小魔法防御#客户端#C  灵兽最小魔法防御
+	//required int32 hpRecover = 64;//hp恢复#客户端#C  属性
+	//optional IntListJingHao hsHpRecover = 65;//灵兽回血#客户端#C  灵兽回血属性出战回血/每3秒#合体护盾回血
+	//required int32 attackSpeed = 66;//攻击速度#客户端#C  属性
+	//required int32 mpRecover = 67;//魔法恢复#客户端#C  属性
+	//required int32 luck = 68;//幸运#客户端#C  属性
+	//required int32 criticalDamage = 69;//暴击伤害#客户端#C#不存在共同参与合并的字段  属性
+	//required int32 criticalHurtAdd = 70;//暴击倍率#客户端#C  属性
+	//required int32 innerPowerMax = 71;//内力#客户端#C  属性
+	//optional IntListList maxHp = 72;//血量#客户端#C  属性（1表示战士2表示法师3表示道士）1#100&2#200&3#300  &表示隔开 #代表对应职业血量
+	//required int32 maxMp = 73;//魔法值#客户端#C  属性
+	//required int32 critical = 74;//暴击率#客户端#C  万分比
+	//optional IntListJingHao seckill = 75;//灯芯秒杀属性#客户端#C  攻击玩家血量一定数量以下会有概率秒杀玩家，攻击玩家血量万分比以下#秒杀概率万分比
+	//required int32 holyAttackMin = 76;//最小神圣攻击#客户端#C#不存在共同参与合并的字段  属性
+	//required int32 holyAttackMax = 77;//最大神圣攻击#客户端#C#不存在共同参与合并的字段  属性
+	//required int32 holyDefenceMin = 78;//最小神圣防御#客户端#C#不存在共同参与合并的字段  属性
+	//required int32 holyDefenceMax = 79;//最大神圣防御#客户端#C  属性
+	//required int32 penetrationAttributes = 80;//穿透属性#客户端#C  属性
+	//required int32 resistanceCrit = 81;//抗暴百分比#客户端#C  属性
+	//required int32 pkAtt = 82;//pk伤害加成#客户端#C  百分比
+	//required int32 pkDef = 83;//pk伤害消减#客户端#C  百分比
+	//required int32 resistance = 84;//抗性#客户端#C  百分比
+	//required uint32 bagSign = 85;//红点#客户端#C  0无红点；1有红点
+	//required int32 skill = 86;//物品技能（装备）#客户端#C  SkillID与Skill表关联
+	//optional string extraSkillTips = 87;//技能说明#客户端#C  技能描述（文本+颜色）
+	//required float showCritical = 88;//展示暴击#客户端#C  显示暴击数值（假数值万分比）
+	//required uint32 star = 89;//强化星级#客户端#C  最大星级
+	//required int32 maxLasting = 90;//装备最大持久#客户端#C  不填则没有持久
+	//required int32 isWastageLasting = 91;//是否耗损持久#客户端#C  0不耗损1耗损-1不显示耐久
+	//optional string openPanel = 92;//使用后打开界面#客户端#C  按钮id#jumpid&按钮id#jumpid
+	//required uint32 arrangeUse = 93;//整理时自动使用#客户端#C  1使用0不使用
+	//required uint32 isModelPreview = 94;//是否有模型预览#客户端#C  1有模型预览0无预览
+	//optional IntListJingHao limitedType = 95;//是否限时道具#客户端#C  不是就不填1.获得道具一定时间后清除 2.获得装备后一定时间后清除 3.表示在每周星期几的0点清除 4.在指定日期清除 5.活动开启时：5#活动id
+	//required int64 limitedTime = 96;//限制时间道具#客户端#C  非限制时间道具填0对应limitedType 1/2.持续时间 3.1-7代表星期几 4.指定日期（填时间戳）5.
+	//optional IntListList repairCost = 97;//修理1点耐久需要的货币及数量#客户端#C  itemid#数值
+	//required int32 order = 98;//背包排序#客户端#C  按照数值从小到大排序，需基本物品类型确定之后一并整理顺序
+	//optional string tag = 99;//标签名#客户端#C  若不填，则根据道具type默认显示（1，资源 ；2 【装备tips格式特殊】 3， 药品 4 技能书 5  宝箱  6  材料  7 技能经验  8  辅助【灵兽tip格式特殊】9 元素 10 攻城 11【碎片格式特殊】  12  印记），填了的话，则显示相应名称
+	//optional IntListJingHao tradeType = 100;//可交易道具筛选条件#客户端#C  条件1#条件2 具体条件配置在item_tradetype表
+	//required int32 reuseAmount = 101;//道具重复使用次数#客户端#C  仅针对可使用的道具（可重复使用的道具不可叠加、不可批量使用）
+	//optional IntListJingHao reuseType = 102;//重复使用次数显示位置#客户端#C  1、显示在道具tips中；2、显示在背包icon上(显示位置#icon，icon为剩余使用次数为1时显示的icon)
+	//optional IntListList canDeal = 103;//是否能够交易#客户端#C  2个一组 开服天数#开服天数
+	//optional IntListJingHao dealPriceSection = 104;//物品交易初始价格控制#客户端#C  货币id#系统底价#市场上限初始价格
+	//optional IntListList topPrice = 105;//物品价格上限，随开服天数变动#客户端#C  4个一组  开服天数#开服天数#货币id#上限值
+	//required int32 canAuction = 106;//是否能够拍卖#客户端#C  0或不填不可拍卖，1可拍卖
+	//optional IntListJingHao bidPriceSection = 107;//拍卖价格区间#客户端#C  货币id#起拍最低价#起拍最高价#竞价比例（万分数）#一口价倍数
+	//required uint32 propertyTendency = 108;//属性加成职业偏向#客户端#C  0代表无偏向或非装备；1.战士偏向；2.法师偏向；3.道士偏向
+	//required int32 notChoosePrice = 109;//上架时，不可选择价格，直接以当前市场上限上架#客户端#C  不填或为0 则不处理，填1则相应处理
+	//required int32 save = 110;//是否可存入仓库#客户端#C  判定条件：0.不可存入，1.可以存入
+	//required int32 MonsterDieAddExpBei = 111;//双倍经验效果#客户端#C  1倍不填 填几就是几倍
+	//required int32 recoverShop = 112;//道具回收后放入哪些npc#客户端#C  索引到npc_shop中的商店类型字段 不填则回收后不会放入商店
+	//required int32 recoverShopRemove = 113;//回收到npc商店后多久消失#客户端#C  回收到npc商店后多久消失  单位 小时
+	//required int32 recoverShopOrder = 114;//回收后的道具放入npc商店内的排序 由低到高排序#客户端#C  回收后的道具放入npc商店内的排序
+	//optional IntListList repairCost2 = 115;//对应法宝满级后，修复一点耐久消耗资源#客户端#C  资源id#资源数量&资源id#资源量
+	//optional IntListList canDealLimit = 116;//是否可交易#客户端#C  开服天数#开服天数#道具产出量#道具产出量#是否可元宝交易#是否可钻石竞拍#是否可钻石交易#是否可元宝竞拍（1可以 0不可以）
+	//required int64 WarDamageValue = 117;//战损价值#客户端#C  战损价值
+	//required int32 weight = 118;//重量#客户端#C  重量#客户端
+	//optional IntListJingHao itemValue = 119;//道具价值#客户端#C  装备赎回时计算赎回价格用，道具id#num
+	//required int32 itemLevel = 120;//道具等级#客户端#C  用于判断人为规定的道具等级，比如1级的赤焰灯，5级的勋章（公告用）
+	//optional IntListJingHao highRecycle = 121;//收藏家出售固定转化#客户端#C  收藏家出售价格itemid#count&itemid#count
+	//optional IntListList smelt = 122;//熔炼必定获得#客户端#C  道具id#数量下限#数量上限&道具id#数量下限#数量上限
+	//optional IntListList smeltExtra = 123;//熔炼概率获得#客户端#C  道具id#道具数量#概率&道具id#道具数量#概率（十万分数）
+	//optional IntListJingHao smeltBuyPrice = 124;//熔炼回购价格#客户端#C  道具id#价格下限#价格上限
+	//required int32 faceToFaceDeal = 125;//是否可直接交易#客户端#C  是否可直接交易  不填或0可以 1则不可以
+	//required int32 divineId = 126;//神力装备类型#客户端#C  索引到divineSuit表id，以读取道具归属的神力类型及等级
+	//required int32 delAtk = 127;//威慑伤害#客户端#C  百分比
+	//required int32 addDropTreasure = 128;//掉宝概率#客户端#C  掉宝概率 十万分比
+	//required int32 lightBeam = 129;//道具光柱显示#客户端#C  索引到global表22867内填映射id
+	//optional IntListJingHao lightBeamCondition = 130;//道具光柱显示限制#客户端#C  光柱显示的condition限制 不满足不显示
+	//required int32 appearanceId = 131;//外观id#客户端#C  该道具对应的外观id  索引appearance表  如果是限时外观 配置的是对应的永久外观的道具id
+	//required int32 pickUpType = 132;//拾取类型#客户端#C  拾取类型，索引到pickup 中id字段
+    //@3#4 type#6 subType#20
+	//required uint32 type6_subType20 = 133;//合并字段#道具类型_C#子类型_C type#6 subType#20
+    //@6#7#8#9#10#15#18 useLv#10 reinLv#5 useCondition#3 career#2 sex#2 quality#5 bind#3
+	//required uint32 useLv10_reinLv5_useCondition3_career2_sex2_quality5_bind3 = 134;//合并字段#使用等级_C#转生等级_C#道具使用限制_C#道具使用职业限制_C#性别_C#道具品质_C#是否绑定_C useLv#10 reinLv#5 useCondition#3 career#2 sex#2 quality#5 bind#3
+    //@26#27#28 resetTime#17 useLimit#10 isDelete#2
+	//required uint32 resetTime17_useLimit10_isDelete2 = 135;//合并字段#物品冷却_C#使用次数限制_C#是否可以摧毁_C resetTime#17 useLimit#10 isDelete#2
+    //@29#31#32 batchusage#3 index#14 only#7
+	//required uint32 batchusage3_index14_only7 = 136;//合并字段#是否批量使用_C#排序_C#唯一性字段_C batchusage#3 index#14 only#7
+    //@33#34 nbValue#20 isDonate#2
+	//required uint32 nbValue20_isDonate2 = 137;//合并字段#战斗力/价值_C#是否可捐献_C nbValue#20 isDonate#2
+    //@35#37#38 gongXian#21 activitySell#1 activityPast#1
+	//required uint32 gongXian21_activitySell1_activityPast1 = 138;//合并字段#公会捐装备获得元宝_C#活动过期后可以出售活动的道具_C#活动配置，活动过期后可以出售_C gongXian#21 activitySell#1 activityPast#1
+    //@50#52#53 magicDefenceMin#17 accurate#7 dodge#7
+	//required uint32 magicDefenceMin17_accurate7_dodge7 = 139;//合并字段#最小魔法防御_C#精准_C#闪避_C magicDefenceMin#17 accurate#7 dodge#7
+    //@57#58 cutDamage#14 sacredDefense#14
+	//required uint32 cutDamage14_sacredDefense14 = 140;//合并字段#切割伤害继承万分比_C#神圣防御继承万分比_C cutDamage#14 sacredDefense#14
+    //@63#64#66#67#68 hsmagicDefenceMin#17 hpRecover#1 attackSpeed#10 mpRecover#1 luck#1
+	//required uint32 hsmagicDefenceMin17_hpRecover1_attackSpeed10_mpRecover1_luck1 = 141;//合并字段#灵兽最小魔法防御_C#hp恢复_C#攻击速度_C#魔法恢复_C#幸运_C hsmagicDefenceMin#17 hpRecover#1 attackSpeed#10 mpRecover#1 luck#1
+    //@70#71 criticalHurtAdd#17 innerPowerMax#10
+	//required uint32 criticalHurtAdd17_innerPowerMax10 = 142;//合并字段#暴击倍率_C#内力_C criticalHurtAdd#17 innerPowerMax#10
+    //@73#74 maxMp#17 critical#14
+	//required uint32 maxMp17_critical14 = 143;//合并字段#魔法值_C#暴击率_C maxMp#17 critical#14
+    //@79#80#81 holyDefenceMax#18 penetrationAttributes#1 resistanceCrit#1
+	//required uint32 holyDefenceMax18_penetrationAttributes1_resistanceCrit1 = 144;//合并字段#最大神圣防御_C#穿透属性_C#抗暴百分比_C holyDefenceMax#18 penetrationAttributes#1 resistanceCrit#1
+    //@82#83#84#85 pkAtt#14 pkDef#14 resistance#1 bagSign#2
+	//required uint32 pkAtt14_pkDef14_resistance1_bagSign2 = 145;//合并字段#pk伤害加成_C#pk伤害消减_C#抗性_C#红点_C pkAtt#14 pkDef#14 resistance#1 bagSign#2
+    //@86#89#93#94 skill#20 star#5 arrangeUse#2 isModelPreview#2
+	//required uint32 skill20_star5_arrangeUse2_isModelPreview2 = 146;//合并字段#物品技能（装备）_C#强化星级_C#整理时自动使用_C#是否有模型预览_C skill#20 star#5 arrangeUse#2 isModelPreview#2
+    //@98#101#106#108 order#19 reuseAmount#7 canAuction#2 propertyTendency#3
+	//required uint32 order19_reuseAmount7_canAuction2_propertyTendency3 = 147;//合并字段#背包排序_C#道具重复使用次数_C#是否能够拍卖_C#属性加成职业偏向_C order#19 reuseAmount#7 canAuction#2 propertyTendency#3
+    //@109#110#111#112#113 notChoosePrice#2 save#1 MonsterDieAddExpBei#4 recoverShop#7 recoverShopRemove#9
+	//required uint32 notChoosePrice2_save1_MonsterDieAddExpBei4_recoverShop7_recoverShopRemove9 = 148;//合并字段#上架时，不可选择价格，直接以当前市场上限上架_C#是否可存入仓库_C#双倍经验效果_C#道具回收后放入哪些npc_C#回收到npc商店后多久消失_C notChoosePrice#2 save#1 MonsterDieAddExpBei#4 recoverShop#7 recoverShopRemove#9
+    //@114#120 recoverShopOrder#17 itemLevel#8
+	//required uint32 recoverShopOrder17_itemLevel8 = 149;//合并字段#回收后的道具放入npc商店内的排序_由低到高排序_C#道具等级_C recoverShopOrder#17 itemLevel#8
+    //@127#129 delAtk#14 lightBeam#8
+	//required uint32 delAtk14_lightBeam8 = 150;//合并字段#威慑伤害_C#道具光柱显示_C delAtk#14 lightBeam#8
+	required uint32 suitBelong = 151;//所属套装#客户端  关联suit表中的suitId字段，填相同id代表属于同一套套装，可用来激活套装属性
+	optional IntListJingHao insertLv = 152;//镶嵌所需目标等级#客户端  等级#转生等级#道具等级（itemlevel），不填表示不可用于镶嵌
+	optional IntListJingHao buffers = 153;//buffid#客户端  填buffid关联到buff表
+	required uint32 bossDamage = 154;//对BOSS伤害增加#客户端  对boss造成伤害增加，万分比
+	required uint32 lampHurtAdd = 155;//增伤属性#客户端  战斗中，造成的伤害增加，万分比
+	required uint32 soulAttackReduce = 156;//减伤属性#客户端  战斗中，受到的伤害降低，万分比
+	required int32 divineExp = 157;//神力经验#客户端  消耗此道具可增加的神力经验
+	optional IntListJingHao conditions = 158;//道具使用限制#客户端  道具使用限制
+	required int32 getLimitType = 159;//获得道具时限类型#客户端  使用后获得的道具限时限制类型  1 限时外观
+	required int32 getLimitTime = 160;//获得道具时限#客户端  使用后获得的时限时间  单位 分钟
+	required int32 extraMonEffect = 161;//道具额外属性#客户端  道具穿戴时额外属性，索引到extramoneffect表中id，穿戴时
+	required int32 extraMonEffectInlay = 162;//道具镶嵌效果#客户端  道具镶嵌时候额外效果，索引到cfg_inlay_effect
+	required int32 recoverType = 163;//回收类型#客户端  
+	required int32 vipMemberAutoUse = 164;//会员功能#客户端  到达会员等级可自动使用
+	required int32 jianDing = 165;//是否可鉴定#客户端  1为可鉴定装备
+	optional IntListJingHao differentInlay = 166;//仙装镶嵌不同槽位互斥#客户端  仙装镶嵌同部位里3孔槽不可镶嵌同种类仙装；比如A孔装备S，B孔不可再装SS
+	optional IntListJingHao insure = 167;//是否可投保#客户端  投保金额#弃保金额
+	//optional string remarks = 168;//策划备注#策划  备注
+	//required uint32 xiYou = 169;//获取提示#服务器  不提示道具消息：0：获得、失去道具时都提示；1：获得、失去道具时都不提示；2：只提示获得道具；3：只提示失去道具
+	//optional string from = 170;//物品来源#服务器  服务器是否记录该道具的获取途径发给客户端  1是记录 0或不填则不发送
+	//required uint32 log = 171;//是否记录日志#服务器  0不记录；1记录
+	//required int32 dropTime = 172;//掉落在地面的存在时间#服务器  单位：秒
+	//required int32 ownerProtectedTime = 173;//归属者掉落的保护时间#服务器  单位：秒
+	//optional IntListList phyDefenceMaxByCareer = 174;//最大物理防御#服务器  穿戴时候根据职业区分  1战士  2法师 3道士
+	//optional IntListList phyDefenceMinByCareer = 175;//最小物理防御#服务器  
+	//optional IntListList magicDefenceMaxByCareer = 176;//最大魔法防御#服务器  
+	//optional IntListList magicDefenceMinByCareer = 177;//最小魔法防御#服务器  
+	//required uint32 dropBanned = 178;//非绑定物品是否掉落#服务器  0死亡不掉落；1死亡掉落
+	//required uint32 equipmentProtectRate = 179;//物品掉落保护概率#服务器  百分比
+	//optional IntListJingHao recommend = 180;//交易推荐价格#服务器  拍卖、交易推荐价格显示
+	//required int32 showType = 181;//道具拍卖行分类#服务器  类型挂载global表20191条目
+	//required int32 showSubType = 182;//道具拍卖行子分类#服务器  类型挂载global表20191条目
+	//required uint32 serverType = 183;//服务器类型#服务器  0:  通用；1： 游戏服务器；2:  共享服
+	//required uint32 itemSexChange = 184;//性别变更对应装备#服务器  配置对应itemid
+	//optional IntListJingHao initialLasting = 185;//装备初始持久#服务器  不填则没有持久
+	//required uint32 attackWastageLasting = 186;//攻击掉落持久#服务器  每攻击命中N次掉落1点
+	//required uint32 defenseWastageLasting = 187;//防御掉落持久#服务器  被击中N次掉落1点
+	//optional string tips3 = 188;//道具描述2#策划  道具tips底部的描述，配置不再生效。道具tips中该位置现在仅服务于可回收可捐献道具
+	//required int32 isAnnounce = 189;//掉落是否公告#服务器  掉落是否公告0不公告1公告 不填默认0
+	//required int32 canDrop = 190;//pk死亡是否掉落#服务器  0不掉1掉落
+	//optional IntListList auctionId = 191;//索引到系统拍卖行表#服务器  4个一组 开服天数#开服天数#auction表id#刷新时刷几组
+	//optional IntListList auctionNumber = 192;//系统上架的每组数量区间#服务器  开服天数#开服天数#随机数量下限#随机数量上限&开服天数#开服天数#随机数量下限#随机数量上限
+	//optional IntListJingHao recoverShopCost = 193;//回收到商店中再次购买的价格#服务器  回收到商店中再次购买的价格 货币id#正常购买价格#管辖城市购买价格
+	//optional IntListList recoverShopShow = 194;//回收后多久放入相应NPC商店中  开服天数#开服天数#随机时间下限#随机时间上限  单位 分钟  回收后多久放入相应NPC商店中
+	//optional IntListList sellDelay = 195;//上架后延迟时间#服务器  单位 秒     元宝上架延迟时间下限#元宝上架延迟时间上限&竞拍延迟下限#竞拍延迟上限&求购延迟下限#求购延迟上限
+	//optional IntListList yuanBaoPriceLimit = 196;//元宝价值限制#服务器  开服天数#开服天数#道具产出量#道具产出量#元宝价值下限#元宝价值上限
+	//optional IntListList auctionPriceLimit = 197;//竞拍价值限制#服务器  开服天数#开服天数#道具产出量#道具产出量#竞拍下限#竞拍上限#一口价倍数
+	//optional IntListList diamondPriceLimit = 198;//钻石价值限制#服务器  开服天数#开服天数#道具产出量#道具产出量#钻石下限#钻石上限
+	//optional IntListList yuanBaoAucPriceLimit = 199;//元宝竞拍价值限制#服务器  开服天数#开服天数#道具产出量#道具产出量#元宝竞拍下限#元宝竞拍上限#一口价倍数
+	//optional IntListList secondDealCd = 200;//二次交易cd限制#服务器  开服天数#开服天数#道具产出量#道具产出量#cd(秒)
+	//optional IntListList unionAucLimit = 201;//行会拍卖形式限制#服务器  开服天数#开服天数#行会竞拍上架形式（1 钻石 2 元宝）
+	//required uint32 unsaleable = 202;//NPC商店出售道具替换标识#服务器  配置能匹配itemid即为NPC商店的替换id，1为不可回购道具
+	//required uint32 stockUpperLimit = 203;//NPC商店库存数量上限#服务器  一个道具对应一个数量，不填的默认为0
+	//optional IntListList floatPriceTop = 204;//浮动属性价格#服务器  根据道具浮动属性，调整道具价格上限  浮动属性数值#价格上限&浮动属性数值#价格上限
+	//required int32 smeltKeepTime = 205;//熔炼保留时间#服务器  时间  单位（秒）
+	//optional IntListJingHao recoverUpLimit = 206;//回收或熔炼进入交易行或熔炼行（装备行）上限  此道具（前提是回收获得元宝）每日通过回收，系统将其上架的交易行的上限   开服天数#开服天数#上限
+	//required int32 appearanceType = 207;//时装l类型  此道具属于那种类型的时装  type 具体类型配置在appearance表
+	//optional IntListList blessingOil = 208;//祝福诅咒成功率加成比例#服务器   
+	//optional IntListJingHao announce = 209;//使用公告  类型#公告id#参数，类型1道具品质，类型2道具id，类型3纯使用
+}
+
+message CFG_ITEMSARRAY
+{
+	repeated CFG_ITEMS rows = 1;
+}

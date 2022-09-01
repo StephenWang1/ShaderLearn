@@ -1,0 +1,20 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_VIDEO
+{
+	required int32 id = 1;//id#客户端  被item表索引
+	optional string parameter = 2;//参数#客户端  视频资源
+	optional string source = 3;//指定来源#客户端  客户端说配啥配啥
+	required int32 x = 4;//x轴位置偏移#客户端  万分比
+	required int32 y = 5;//y轴位置偏移#客户端  万分比
+	required int32 scale = 6;//窗口比例#客户端  比例
+	required int32 wh = 7;//窗口像素#客户端  像素
+	required int32 loop = 8;//循环播放#客户端  播完自动循环，或播完后暂停，点击视频重新播放 0不重复 1重复 默认0
+	required int32 suspend = 9;//可暂停#客户端  点击视频暂停
+}
+
+message CFG_VIDEOARRAY
+{
+	repeated CFG_VIDEO rows = 1;
+}

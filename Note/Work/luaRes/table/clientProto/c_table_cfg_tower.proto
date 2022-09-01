@@ -1,0 +1,18 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_TOWER
+{
+	required uint32 storey = 1;//层数#客户端  层数（只能按照顺序排序，不可跳跃id，导致崩溃，直接嫩死）
+	required uint32 duplicateId = 2;//副本id#客户端  对应副本id
+	optional IntListJingHao totalLv = 3;//关卡限制#客户端  取cfg_conditions
+	optional string totalDes = 4;//关卡限制描述#客户端  用于主界面条件文字描述
+	optional IntListList conditions = 5;//通关条件#客户端  通关的条件需求
+	optional IntListList normalReward = 6;//保底奖励#客户端  结算界面、左侧面板显示的保底道具，道具id#数量&道具id#数量
+	required int32 specialBox = 7;//随机库奖励道具#客户端  对应cfg_tower_special_box表id，最终只取服务器随机到的道具id作为展示
+}
+
+message CFG_TOWERARRAY
+{
+	repeated CFG_TOWER rows = 1;
+}

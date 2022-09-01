@@ -1,0 +1,37 @@
+package junxianV2;
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "JunxianProto";
+
+
+//获取军衔当前等级
+message ReqJunXianLevel{
+}
+
+//军衔当前等级响应
+message ResJunXianLevel{
+	optional int32 thisJunXianId = 1;//当前军衔ID
+	optional int32 nextJunXianId = 2;//下级军衔ID
+	optional int32 thisNbValue = 3;//现在战斗力
+}
+
+
+//军衔升级请求
+message ReqJunXianUp{
+	optional int32 thisJunXianId = 1;//当前军衔ID
+	optional int32 nextJunXianId = 2;//下级军衔ID
+	optional int32 thisNbValue = 3;//现在战斗力
+}
+
+//军衔升级响应
+message ResJunXianUp{
+	optional int32 thisJunXianId = 1;//当前军衔ID
+	optional int32 nextJunXianId = 2;//下级军衔ID
+	optional int32 maxNbValue = 3;//最大战斗力
+}
+
+//升级向周围玩家发送消息
+message ResRoundJunXianUp{
+	optional int64 rid = 1;//玩家ID
+	optional int32 thisJunXianId = 2;//当前军衔ID
+}

@@ -1,0 +1,230 @@
+package groupV2;
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "GroupProto";
+
+message GroupInfo{
+   required int64 id = 1;
+   optional PlayerInfo leader = 2;
+   required int32 size = 3;
+   optional int32 status = 4;
+   optional string manifesto = 5;
+   optional int32 captainAllowMode = 6; //队长的允许组队模式
+}
+
+message PlayerInfo{
+   optional string roleName = 1;
+   optional int64 roleId = 2;
+   optional int32 career = 3;
+   optional int32 sex = 4;
+   optional int32 level = 5;
+   optional string unionName = 6;
+   optional bool isCaptain = 7;
+}
+
+//返回组队里所有成员的血量
+message ResTeamAllMemHpInfo{
+	optional int64 teamId = 1;
+	repeated TeamPlayerHpInfo playerHps = 2;
+}
+
+//实时同步组队玩家血量
+message TeamPlayerHpInfo{
+	optional int64 roleId = 1; //玩家Id
+	optional int64 teamId = 2; //组队Id
+	optional int64 hp = 3; //玩家的血量
+	optional int64 maxHp = 4; //玩家的最大血量
+}
+
+message InvitationPlayerInfo{
+   optional int64 groupId = 1;//队伍id
+   optional string playerName = 2;//邀请玩家名称
+   optional int64 targetId = 3;//目标id
+   optional int64 acceptEndTime = 4;//接受结束时间，时间戳
+   optional int32 career = 5;
+   optional int64 level = 6;
+   optional int32 sex = 7; //性别
+   optional string unionName = 8; //行会的名称
+}
+
+message BasicPlayerInfo{
+   optional int64 rid = 1;//玩家rid
+   optional string playerName = 2;//玩家名称
+   optional int32 career = 3;//职业
+   optional int32 level = 4;//玩家等级
+   optional string unionName = 5;//行会
+   optional int64 groupId = 6; //队伍id
+   optional int32 sex = 7; //性别
+}
+
+//请求改变队伍目标
+message ReqChangeTarget{
+   optional int32 targetId = 1;//目标id
+}
+
+//请求转移队伍队长
+message ReqChangeCaptain{
+   optional int64 captainId = 1;//新的队长rid
+}
+
+//请求队伍踢出玩家
+message ReqKickMember{
+   optional int64 rid = 1;//被踢出玩家id
+}
+
+//玩家请求离开队伍
+message ReqExitGroup{
+   optional int64 targetId = 1;//退出队伍的玩家id
+}
+
+//接受组队申请
+message AcceptTeam{
+   optional int32 state = 1;//接受或拒绝组队申请，1为接受，2为拒绝
+   optional int64 rid = 2;//接受申请玩家id
+}
+
+//返回组队面板信息
+message ResGroupDetailedInfo{
+   repeated PlayerInfo players = 1;//队伍内玩家详细信息
+   optional GroupInfo groupInfo = 2;//本队伍信息
+}
+
+//请求加入队伍
+message ReqJoinGroup{
+   optional int64 groupId = 1;//队伍id
+   optional int32 type = 2;//1：自动组队 2：手动 3：拒绝
+}
+
+//返回组队申请列表
+message ApplyList{
+   repeated PlayerInfo players = 1;//离开的队伍id
+   repeated CaptainTwoAgree twoAgree = 2; //类型为3的二次批复信息
+}
+
+//队长二次批复的信息
+message CaptainTwoAgree{
+	optional int64 memberId = 1; //邀请者的id
+	optional string nameMember = 2; //邀请玩家名称
+	optional int32 careerMember = 3;
+	optional int32 sexMember = 4;
+	optional int32 levelMember = 5;
+	optional string unionNameMember = 6;
+	optional int64 willMemberId = 7; //被邀请的id
+	optional string nameWillMember = 8; //被邀请玩家名字
+	optional int32 willCareerMember = 9;
+	optional int32 willSexMember = 10;
+	optional int32 WillLevelMember = 11;
+	optional string WillUnionNameMember = 12;
+	optional int64 endTime = 13; //过期时间
+}
+
+//返回玩家请求附近可以申请队伍列表
+message NearbyGroup{
+   repeated GroupInfo groups = 1;//队伍列表
+}
+
+//请求邀请玩家
+message ReqInvitationPlayer{
+   optional int64 rid = 1;//被邀请玩家id
+}
+
+//玩家接受邀请
+message ReqAcceptInvitation{
+   optional int32 state = 1;//接受或拒绝组队邀请，1为接受，2为拒绝
+   optional int64 groupId = 2;//接受队伍id
+   optional int64 targetId = 3;
+}
+
+//队长二次批复邀请
+message ReqCaptainAcceptInvitation {
+	optional int32 state = 1;//接受或拒绝组队邀请，1为接受，2为拒绝
+  	optional int64 willMemberId = 2; //邀请的成员
+    optional int64 memberId = 3; //谁第一次邀请的
+}
+
+
+//返回玩家受到邀请列表
+message ResInvitationList{
+   repeated InvitationPlayerInfo players = 1;//邀请玩家列表
+}
+
+//返回队伍请求邀请附近的人列表
+message ResGroupInvitationNearbyList{
+   repeated BasicPlayerInfo players = 1;//邀请附近的人的列表
+}
+
+//返回队伍请求邀请好友列表
+message ResGroupInvitationFriendList{
+   repeated BasicPlayerInfo players = 1;//邀请好友列表
+}
+
+//返回队伍请求邀请行会列表
+message ResGroupInvitationUnionList{
+   repeated BasicPlayerInfo players = 1;//邀请行会列表
+}
+
+//请求清空列表
+message ReqClearList{
+   optional int32 state = 1;//清空列表，1清空组队申请列表，2清空组队邀请列表
+}
+
+message MsgPrompt {
+	required int32 type = 1;//1:队长接收申请提示 2:玩家受邀提示 3:玩家邀请，队长批复
+	optional string willMember = 2; //被邀请的名字，只有3有效
+	optional string member = 3; //邀请者的名字，只有3有效
+	optional int64 willMemberId = 4; //被邀请的id，只有3有效
+	optional int64 memberId = 5; //邀请者的id，只有3有效
+	optional int64 endTime = 6; //过期时间
+}
+
+
+//设置组队模式
+message SetTeamModeRequest {
+	required int32 teamMode = 1;//1自动 2手动 3拒绝
+}
+
+message Shielding {
+	required int64 targetId = 1;
+}
+
+message TeamCallBack {
+	required int64 roleId = 1;
+	required string name = 2;
+	optional int32 mapId = 3;
+	optional int32 line = 4;
+	optional int32 type = 5; // 1队伍 2行会
+	optional int64 time = 6;//有效时间 到期时间
+	optional int64 startTime = 7;//开始时间
+	optional int32 monsterId = 8;//发起请求时正在打的怪物id
+	repeated string paramStrs = 9;//参数集合（string类型）
+	optional int32 isinfire = 10;//在火堆范围内（0不在，1在）
+	optional int32 firetype = 11;//火堆类型（0无类型，1大火堆，2小火堆）
+}
+
+//召唤令确定结果
+message ResCallBack {
+	optional int32 type = 1; // 1队伍 2行会 5联盟
+	optional bool  isSuccess= 2;//是否成功 true 成功 false 不成功
+}
+
+message CheckCallBack {
+	required bool isAgreed = 1;
+	required int64 sendRoleId = 2;
+	optional int32 type = 3;
+}
+
+//请求玩家是否在线及其部分消息
+message ReqHasPlayerSomeInfo{
+	required int64 roleId = 1; //要查询的ID
+}
+
+message ResHasPlayerSomeInfo{
+	optional int64 roleId = 1;
+	optional bool isOnline = 2;//是否在线
+	optional int64 teamId = 3;//队伍ID
+	optional int64 unionId = 4;//行会ID
+	optional int32 level = 5;
+	optional int32 unionPosition = 6; //帮会职位
+   optional int32 mapId = 7;
+   optional int32 hostId = 8; //目标的hostId
+}

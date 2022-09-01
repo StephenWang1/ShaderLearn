@@ -1,0 +1,26 @@
+package wingV2;
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "WingProto";
+
+message WingInfo{
+   optional int32 wingId = 1;//光翼id
+   optional int32 blessingValue = 2;//当前祝福值
+}
+
+//发送光翼信息
+message ResWingInfo{
+   optional int32 fightValue = 1;//战斗力
+   optional WingInfo wingInfo = 2;//光翼
+}
+
+//请求升级光翼
+message ReqLevelUpWing {
+	optional int32 autoUseMoney = 1;//是否自动使用元宝购买羽毛 1自动/ 0不
+}
+
+//返回升级光翼
+message ResLevelUpWing{
+    optional int32 fightValue = 1;//战斗力
+    optional WingInfo wingInfo = 2;//光翼
+}

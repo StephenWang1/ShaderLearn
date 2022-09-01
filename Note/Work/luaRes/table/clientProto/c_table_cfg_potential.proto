@@ -1,0 +1,31 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_POTENTIAL
+{
+	required uint32 id = 1;//id#客户端#C#不存在共同参与合并的字段  编号
+	optional string name = 2;//潜能名称#客户端  对应的潜能名称
+	optional IntListJingHao linkItemId = 3;//关联道具id#客户端  和潜能关联的道具id，格式：道具id#道具id 关联cfg_items
+	required uint32 linkBuffId = 4;//buffid#客户端  关联的潜能buffid，关联配表cfg_buff
+	optional string potentialType = 5;//潜能类型#客户端  潜能类型1石化 2诅咒 3疾速
+	required int32 stage = 6;//潜能星级#客户端  潜能星级 0-10星
+	optional IntListJingHao conditions = 7;//可升级条件#客户端  可升级条件，关联cfg_conditions表
+	optional IntListList cost = 8;//升级消耗#客户端  升级所需消耗，道具items#数量
+	required uint32 att = 9;//最小攻击#客户端  最小攻击
+	required uint32 attMax = 10;//最大攻击#客户端  最大攻击
+	optional IntListList maxHp = 11;//血量#客户端  属性（1表示战士2表示法师3表示道士）1#100&2#200&3#300  &表示隔开 #代表对应职业血量
+	required int32 phyDefenceMin = 12;//最小物理防御#客户端#不存在共同参与合并的字段  属性
+	required int32 phyDefenceMax = 13;//最大物理防御#客户端#不存在共同参与合并的字段  属性
+	required int32 magicDefenceMin = 14;//最小魔法防御#客户端#不存在共同参与合并的字段  属性
+	required int32 magicDefenceMax = 15;//最大魔法防御#客户端#不存在共同参与合并的字段  属性
+	required int32 speed = 16;//攻击速度#客户端  (仅客户端显示用)
+	required int32 paralysisRate = 17;//石化概率#客户端  (仅客户端显示用)
+	required int32 paralysisLevel = 18;//石化怪物等级上限#客户端  (仅客户端显示用)
+	required int32 DamnationRate = 19;//降低回血效果#客户端  (仅客户端显示用)
+	required int32 DamnationLevel = 20;//诅咒怪物等级上限#客户端  (仅客户端显示用)
+}
+
+message CFG_POTENTIALARRAY
+{
+	repeated CFG_POTENTIAL rows = 1;
+}

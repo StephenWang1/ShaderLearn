@@ -1,0 +1,18 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_JUMP
+{
+	required int32 id = 1;//跳转ID#客户端#C#不存在共同参与合并的字段  id说明(100~200： 技能预留, 200~300: 神炉预留 , 300~40: 设置预留 , 400~500 锻造预留),500~600(帮会预留)，600~700（人物预留），700~800（灵兽预留），800~900（背包预留），900~1000（挑战BOSS预留）,1400~1500(社交)
+	//optional string panels = 2;//界面#客户端#C  界面名称
+	//required uint32 openSystem = 3;//系统ID#客户端#C  对应notice表(如果途径不是直接打开(channel = 1)的话，系统开启交于途径判断)   特殊处理：UIShopPanel填1的时候，对应指向商会商城指定参数storeID的商品
+	//optional string remarks = 4;//跳转说明#客户端#C  策划用
+	//required int32 channel = 5;//途径#客户端#C#不存在共同参与合并的字段  1.直接打开2.导航栏打开3.主界面下方4.秘籍打开
+	//optional string params = 6;//参数#客户端#C  跟途径有关,是途径所需参数, 没有则不填(例：如果是导航栏途径的话则填导航栏id)
+	required int32 specialType = 7;//特殊类型跳转#客户端  填1代表跳转商会商城指定param的storeid的商品并特效框选（1快捷商店2钻石商城3元宝商城4周末商城 (现促销商城)5宝石系统商店6转生商店7金币商店8杂货铺16商会钻石商店17商会积分商店18钻石限时商店20限时礼包21循环钻石限时商店）
+}
+
+message CFG_JUMPARRAY
+{
+	repeated CFG_JUMP rows = 1;
+}

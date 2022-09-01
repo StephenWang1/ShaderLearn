@@ -1,0 +1,20 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_BOSS_TASK
+{
+	required uint32 id = 1;//id#客户端#C  
+	required int32 levelCondition = 2;//转生等级限制#客户端  根据对应转生等级进行配置关联cfg_conditions
+	optional IntListList bossMap = 3;//怪物地图库ID#客户端  对应怪物地图库ID关联cfg_boss_map
+	required uint32 time = 4;//任务目标次数#客户端  完成击杀目标的任务次数
+	optional string rewards = 5;//任务目标奖励#客户端  任务完成后的奖励 conditionid_物品id#数量&下一个condition
+	optional string remark = 6;//策划备注#客户端  
+	required uint32 completion = 7;//是否可进行扫荡#客户端  p判断是否可进行扫荡默认为0 可扫荡为1
+	optional IntListJingHao completionItem = 8;//扫荡消耗道具#客户端  道具id#数量
+	optional string consume = 9;//双倍奖励钻石消耗#客户端  双倍奖励消耗天数以及数量conditionid_物品id#数量&下一个condition
+}
+
+message CFG_BOSS_TASKARRAY
+{
+	repeated CFG_BOSS_TASK rows = 1;
+}

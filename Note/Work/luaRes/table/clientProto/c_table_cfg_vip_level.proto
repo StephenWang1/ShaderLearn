@@ -1,0 +1,23 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_VIP_LEVEL
+{
+	required uint32 vipLevel = 1;//VIP等级#客户端#不存在共同参与合并的字段  等级,0级开始
+	required uint32 needExp = 2;//升到下级所需vip经验总值#客户端  升到下级所需vip经验总值,vip经验来源于消耗钻石
+	optional string privilege = 3;//特权描述#客户端  对应等级vip特权,多条#分隔
+	required int32 paodianOfflineExp = 4;//离线泡点经验增加#客户端  增加的万分比
+	required int32 dailyTaskPurchase = 5;//任务兑换卷可使用次数#客户端  每日每个任务兑换卷可使用的次数
+	optional IntListList boxUseTime = 6;//宝箱每日使用次数#客户端  每日可使用白银宝箱、赤金宝箱的次数,宝箱id#次数&宝箱id#次数....,0代表无限
+	required int32 repairCost = 7;//铁匠铺维修价格下降万分比#客户端  铁匠铺维修价格
+	required int32 recycleUp = 8;//回收获得元宝增加万分比#客户端  回收获得元宝
+	required int32 dailyTaskjuanzhou = 9;//日常任务卷轴可使用次数#客户端  每日每个任务兑换卷可使用卷轴的次数
+	required int32 gatherSoulNum = 10;//聚灵每日可积攒灵力数#客户端  每天0点能积攒的灵力数量
+	optional string manaLevel = 11;//聚灵等级#客户端  对应聚灵不同等级的文字展示
+	optional string IconId = 12;//vip图标#客户端  vip小图标#大图标
+}
+
+message CFG_VIP_LEVELARRAY
+{
+	repeated CFG_VIP_LEVEL rows = 1;
+}

@@ -1,0 +1,60 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_SYNTHESIS
+{
+	required uint32 id = 1;//合成ID#客户端#不存在共同参与合并的字段  合成物品排序按等级排序，等级相同按id排序
+	optional IntListJingHao itemid = 2;//物品ID#客户端  参与合成主要物品ID
+	optional IntListJingHao replaceItemid = 3;//道具id#客户端  可替代的物品id
+	required uint32 type = 4;//道具类型#客户端  1.灵兽碎片2 婚戒 3花朵 4.门票5.转生凭证 6.装备 7.魂继8技能书9印记10元素
+	optional string name = 5;//道具名称#客户端  参与合成物品名称
+	required uint32 auxiliaryitemid = 6;//物品ID#客户端#不存在共同参与合并的字段  参与合成辅助物品ID
+	optional string auxiliaryname = 7;//辅助道具名称#客户端  参与合成物品名称
+	optional string auxiliarynumber = 8;//辅助道具数量#客户端  合成消耗辅助道具
+	optional IntListJingHao number = 9;//合成数量#客户端  合成物品所需数量
+	optional string weight = 10;//合成权重#客户端  合成物品产出权重  根据合成物品数量配置相应数量个权重
+	optional IntListJingHao outputgoods = 11;//合成物品ID#客户端  
+	optional IntListJingHao outputReplace = 12;//合成物品ID#客户端  使用可替代的物品时，生成的物品取这个
+	optional string outputquantity = 13;//被合成数量#客户端  
+	optional string syntheticgoods = 14;//合成物品名称#客户端  
+	optional string probability = 15;//合成几率#客户端  物品成功几率 百分比
+	optional IntListJingHao currency = 16;//货币消耗#客户端  合成消耗货币  货币ID#数量
+	required int32 synthesisType = 17;//合成逻辑类型#客户端  1为随机合成 0为固定合成 不填默认为0 2分解
+	required uint32 tabType = 18;//页签主类型#客户端  页签主类型1#等级装备&10#转生装备&20灵兽&30#配饰&40#物品&50#技能 60人物法宝 70元素  在杂项表内配置对应22610
+	required uint32 tabSubType = 19;//页签子类型#客户端  在杂项表内配置对应 22611
+	required uint32 conditionRelation = 20;//显示类型关系#客户端  1表示多个显示类型为或的关系2表示多个显示类型为并的关系
+	optional IntListList conditionType = 21;//显示类型#客户端  类型#参数 无参数则填0 类型1：检测玩家等级是否处于等级区间段，类型2：检测玩家转生等级是否处于区间段，类型3：任意一只灵兽等级处于该区间 类型4：任意一只灵兽转生等级处于该区间 5：是否有可合成的主材料6：是否检测开服天数7偏职业显示 类型8 玩家性别 1男2女0通用 类型9：检测是否开启第一位灵兽 类型10：检测是否开启第二位灵兽 类型11：检测是否开启第三位灵兽 类型12：是否检测优先级显示，优先级高的则不显示优先级低的13：合成物品之后不再继续显示
+	required uint32 tab1 = 22;//标记#客户端  是否有可合成的主材料 1是 0否
+	required uint32 roleLevelMin = 23;//人物最低等级#客户端  人物最低等级
+	required uint32 roleLevelMax = 24;//人物最高等级#客户端  人物最高等级
+	required uint32 roleReinMin = 25;//人物最低转生#客户端  人物最低转生
+	required uint32 roleReinMax = 26;//人物最高转生#客户端  人物最高转生
+	required uint32 servantLevelMin = 27;//灵兽最低等级#客户端  灵兽最低等级
+	required uint32 servantLevelMax = 28;//灵兽最高等级#客户端  灵兽最高等级
+	required uint32 servantReinMin = 29;//灵兽最低转生#客户端  灵兽最低转生
+	required uint32 servantReinMax = 30;//灵兽最高转生#客户端  灵兽最高转生端
+	required uint32 career = 31;//职业显示#客户端  职业显示
+	required int32 sex = 32;//性别显示#客户端  性别显示
+	required int32 compare = 33;//是否于身上装备进行比较#客户端  是否于身上装备进行比较 1 是 2 否
+	required int32 compel = 34;//是否需要显示身上穿戴的装备#客户端  检测存在哪个位置上 1主材料是否人物装备着 2主材料是否为身上灵兽3主材料是否为灵兽身上装备 4检测人物和灵兽装备  检测存在哪个位置上,如果存在,强制显示
+	optional IntListJingHao equipItem = 35;//检测身上物品id#客户端  检测身上物品id，如果身上穿戴了这个ID的装备,强制显示该合成
+	optional IntListJingHao bagItem = 36;//检车背包物品id#客户端  背包中检测ID  如果需要检测类型5(是否有合成的主材料) 如果有这个ID 返回条件true
+	optional string replaceName = 37;//列表名字内容显示#客户端  列表名字内容显示，如果填了此列则显示此名字，未填则显示道具名字
+	optional IntListJingHao showPriority = 38;//显示优先级#客户端  显示优先级 类型#优先级 前面数字代表同一页签下的类型，后面数字代表优先级，需要在conditionType内配置类型12，同页签下，同优先级可以共存，只显示最高优先级的物品 
+	required uint32 numberChoose = 39;//可选择数量#客户端  是否需要可选择合成数量，1需要 0不需要 默认0不需要
+	required uint32 openDay = 40;//开服天数#客户端  开服天数显示判断
+	required uint32 redPoint = 41;//是否需要红点#客户端  是否需要红点，1需要0不需要默认不需要, 偏职业 合成之后可使用 材料足够显示红点
+	optional IntListJingHao conditionId = 42;//限制条件#客户端  合成限制条件，未满足不可合成
+	required uint32 show = 43;//是否合成之后不再显示#客户端  0显示1不再显示
+	required uint32 redPointCompare = 44;//红点是否需要对比身上的装备#客户端  0需要1不需要
+	required uint32 numberLimit = 45;//合成次数限制#客户端  合成每日最多合成几次
+	required uint32 equipExamine = 46;//是否需要检测身上的的装备#客户端  是否需要检测身上的的装备，1不检测0检测
+	//required uint32 bind = 47;//是否绑定#服务器  合成出的物品是否为绑定，0默认1绑定2不绑定
+	//required uint32 announce = 48;//是否公告#服务器  合成出的物品是否需要公告0不需要1需要
+	//required uint32 pkDrop = 49;//合成的物品是否会被PK爆出#服务器  0默认1不会被爆出
+}
+
+message CFG_SYNTHESISARRAY
+{
+	repeated CFG_SYNTHESIS rows = 1;
+}

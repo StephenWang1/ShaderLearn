@@ -1,0 +1,15 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_BLOODSUIT_LEVEL
+{
+	required int32 level = 1;//等级#客户端  等级
+	required int32 cost = 2;//升到该级需求经验#客户端  升到该级需求经验
+	required int32 smeltExp = 3;//熔炼可获得经验#客户端  熔炼可获得经验
+	required int32 params = 4;//属性加成比例#客户端  万分比
+}
+
+message CFG_BLOODSUIT_LEVELARRAY
+{
+	repeated CFG_BLOODSUIT_LEVEL rows = 1;
+}

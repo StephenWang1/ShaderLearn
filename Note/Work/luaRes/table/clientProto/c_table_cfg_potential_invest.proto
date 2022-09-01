@@ -1,0 +1,16 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_POTENTIAL_INVEST
+{
+	required int32 id = 1;//id#客户端  递增
+	required int32 type = 2;//投资类型#客户端  1=石化，2=诅咒，3=极速
+	required int32 condition = 3;//奖励条件#客户端  索引condition
+	optional string reward = 4;//奖励内容#客户端  itemId#数量#职业#性别&
+	optional string description = 5;//奖励说明#客户端  
+}
+
+message CFG_POTENTIAL_INVESTARRAY
+{
+	repeated CFG_POTENTIAL_INVEST rows = 1;
+}

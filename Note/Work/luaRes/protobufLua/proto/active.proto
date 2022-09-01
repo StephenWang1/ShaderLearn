@@ -1,0 +1,29 @@
+package activeV2;
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "ActiveProtos";
+
+message ActiveInfo {
+	optional int32 activeNumber = 1;//活跃度
+	repeated ActiveItem activeProgress = 2;//活跃度各项进度,高32位为活跃度id,低32位为当前count
+	optional int64 reward = 3;//已领取的奖励
+	repeated int32 firstRandomIndex = 4; //第一次随机排序的序号
+}
+
+//每项活跃度信息
+message ActiveItem {
+	optional int32 id = 1;  //配置id
+	optional int32 completeCount = 2;  //完成次数
+	optional bool hasCompleteItem = 3; //是否完成这次
+	optional int32 clientActiveNum = 4; //客户端能领取自动完成的次数
+}
+
+message GetActiveRewardRequest {
+	optional int32 id = 1;
+}
+
+//完成某项活跃度
+message GetActiveCompleteRequest {
+	optional int32 id = 1;  //配置id
+}
+

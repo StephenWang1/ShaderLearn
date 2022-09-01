@@ -1,0 +1,44 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_BOSS
+{
+	required uint32 id = 1;//bossid#客户端#C#不存在共同参与合并的字段  id有用到，不允许修改，所以每个id最好别连续，让以后可以中间插入
+	//required uint32 confId = 2;//怪物id#客户端#C#不存在共同参与合并的字段  怪物id#客户端
+	//optional string name = 3;//怪物名称#客户端#C  怪物名称
+	//required uint32 type = 4;//boss类型#客户端#C  2野外 3精英 4终极BOSS 5BOSS积分 6游荡  7 暗之BOSS8 魔之BOSS 9生肖BOSS 10个人boss 2 3 6都为野外boss页签
+	//required int32 order = 5;//排序#客户端#C  排序
+	//required int32 mapId = 6;//所在地图#客户端#C#不存在共同参与合并的字段  地图编号，远古BOSS地图服务器发
+	//required int32 deliverId = 7;//传送id#客户端#C  连接cfg_deliver表id
+	//optional string mapName = 8;//地图名字#客户端#C  地图显示名字 #后面为怪物死亡之后的颜色，再#后面为未满足进入条件的颜色
+	//optional IntListJingHao level = 9;//限制条件#客户端#C  关联condition表id
+	//required uint32 time = 10;//挑战次数#客户端#C  每日次数
+	//optional IntListJingHao dropShow = 11;//掉落物品展示#客户端#C  连接到cfg_boss_drop_show id
+	//optional string dropTips = 12;//掉落tips#客户端#C  掉落tips#客户端
+	//optional string monsterTips = 13;//怪物描述#客户端#C  怪物描述#客户端
+	//optional IntListJingHao limit = 14;//推荐限制#客户端#C  推荐限制
+	//required uint32 series = 15;//推荐类型#客户端#C#不存在共同参与合并的字段  表示同个等级段，同一系列
+    //@4#5 type#5 order#13
+	//required uint32 type5_order13 = 16;//合并字段#boss类型_C#排序_C type#5 order#13
+    //@7#10 deliverId#24 time#5
+	//required uint32 deliverId24_time5 = 17;//合并字段#传送id_C#挑战次数_C deliverId#24 time#5
+	//required uint32 subType = 18;//boss子页签#客户端  Boss子页签  野外BOSS魔之BOSS 1 比奇 2 土城 3玛法 4 白日门 5 失乐园   终极BOSS：1.远古   2.神力
+	optional string eventParameters = 19;//按钮点击操作#客户端  满足条件类型#参数&不满足条件类型#参数  1如果为副本则寻找对应npc，非副本正常寻路deliverid（之前特殊处理    副本后添加副本id 在打开面板时可选中指定层）   2气泡 2#气泡id 3跳转界面 3#jumpid 4  直接传送 走deliverid 5 读取传送id  传送后打开面板选中某个页签添加特效6直接寻路到对应deliverid点 7副本传送对应duplicateid
+	//required uint32 modelScale = 20;//怪物模型大小#客户端  怪物模型大小根据怪物表内模型再乘以此百分比
+	required int32 offsetX = 21;//模型左右位置偏移量#客户端  对模型旋转中心轴进行左右（同时反向调整模型的X坐标位置），偏移量为0时则显示原位置
+	required int32 offsetY = 22;//模型界面展示高度调整#客户端  对界面中模型展示的高度进行调整
+	optional string parameter = 23;//额外参数#客户端  1.神力BOSS剪影图片
+	optional IntListJingHao condition = 24;//限制条件#客户端  关联condition表id，显示用condition
+	required uint32 completion = 25;//是否可进行扫荡#客户端  p判断是否可进行扫荡默认为0 可扫荡为1
+	optional IntListJingHao completionItem = 26;//扫荡消耗道具#客户端  道具id#数量
+    //@18#20 subType#20 modelScale#7
+	required uint32 subType20_modelScale7 = 27;//合并字段#boss子页签#怪物模型大小 subType#20 modelScale#7
+	//optional string tipsname = 28;//策划用内容#客户端未使用#C  配置怪物的详细信息
+	//optional IntListJingHao trueMonsterId = 29;//怪物实际存活  配置此字段的话，怪物实际存活状态读取这里的怪物id  返还给客户端confid   monsterid#monsterid
+	//required int32 ifMapid = 30;//联服之后地图id#服务器  
+}
+
+message CFG_BOSSARRAY
+{
+	repeated CFG_BOSS rows = 1;
+}

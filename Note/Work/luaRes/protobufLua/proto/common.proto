@@ -1,0 +1,24 @@
+package commonV2;
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "CommonProto";
+
+message IntIntStruct{
+	required int32 key = 1;
+	required int32 value = 2;
+}
+
+message LongLongStruct{
+	required int64 key = 1;
+	required int64 value = 2;
+}
+
+message IntStringStruct{
+	required int32 key = 1;
+	required string value = 2;
+	
+}
+
+message PlayerPropertyG2S {
+	optional int32 emperorTokenId = 1;//虎符ID
+	optional int32 tarotTonkenNum = 2;//塔罗暗殿凭证次数.
+}

@@ -1,0 +1,191 @@
+package lingshouV2;
+
+import "task.proto";
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "LingshouProto";
+
+message LingShouInfo{
+    optional int32 type = 1;//1.灵兽
+	optional int32 level = 2;
+	optional int32 xlevel = 3;//星级
+	optional int32 exp = 4;
+	optional int32 nowSkin = 5;//当前皮肤
+	optional int32 tianfuId = 6;//天赋id
+	optional int32 fightPower = 7;//战力
+	repeated TalentInfo talentList = 8;//资质和飞升
+	repeated LSEquipInfo lsEquipList = 9;//灵兽装备
+}
+
+message HuanXingInfo{
+    optional int32 type = 1;//幻形类型
+	optional int32 level = 2;
+	optional int32 xlevel = 3;//星级
+	optional int32 exp = 4;
+	optional int32 tianfuId = 5;//天赋id
+	optional int32 timeout = 6;//到期时间 0永久
+	optional int32 fightPower = 7;//战力
+}
+
+message TalentInfo{
+    optional int32 cls = 1;//类型 1.资质 2.飞升
+	optional int32 level = 2;
+	optional int32 fightPower = 3;//战力
+}
+
+message LSEquipInfo{
+    optional int32 index = 1;//装备位置
+	optional int64 lid = 2;//唯一id
+	optional int32 itemId = 3;//道具id
+	optional int32 shengLingLv = 4;//圣灵等级
+}
+
+//发送灵兽信息
+message ResLingShouInfo{
+    optional LingShouInfo lingShou = 1;//灵兽
+	optional HuanXingInfo huanXingList = 2;//已获得的幻形
+}
+
+//请求升级灵兽
+message ReqLevelUpLingShou{
+    optional int32 type = 1;//类型 1.灵兽 其他幻形
+	optional int32 useType = 2;//1.使用元宝
+}
+
+//返回升级灵兽
+message ResLevelUpLingShou{
+    optional int32 type = 1;//类型 1.灵兽 其他幻形
+	optional int32 level = 2;
+	optional int32 xlevel = 3;//星级
+	optional int32 exp = 4;
+	optional int32 tianfuId = 5;//天赋id
+	optional int32 timeout = 6;//到期时间 0永久
+	optional int32 fightPower = 7;//战力
+}
+
+//请求升级资质
+message ReqLevelUpLingShouTalent{
+    optional int32 cls = 1;//资质类型
+}
+
+
+//返回升级资质
+message ResLevelUpLingShouTalent{
+    optional int32 cls = 1;//资质类型
+	optional int32 level = 2;//等级
+	optional int32 fightPower = 3;//战力
+}
+
+//请求穿戴灵兽装备
+message ReqPutOnLingShouEquip{
+    optional int32 index = 1;//装备位置
+	optional int64 uniqueId = 2;//装备唯一id
+}
+
+//返回灵兽装备改变
+message ResLingShouEquipChange{
+    optional int32 index = 1;//装备位置
+	optional LSEquipInfo lsEquip = 2;//装备
+	optional int32 fightPower = 3;//战力
+}
+
+//请求脱下灵兽装备
+message ReqPutOffLingShouEquip{
+    optional int32 index = 1;//装备位置
+}
+
+//请求换肤
+message ReqPutOnSkin{
+    optional int32 type = 1;//类型
+}
+
+//返回皮肤改变
+message ResSkinChange{
+    optional int32 type = 1;//类型
+	optional int32 fightPower = 2;//战力
+}
+
+//请求脱下皮肤
+message ReqPutOffLingSkin{
+    optional int32 type = 1;//类型
+}
+
+//请求激活灵兽
+message ReqActivateLingShou{
+    optional int32 type = 1;//类型 1.灵兽 其他幻形
+}
+
+//请求升级天赋
+message ReqLevelUpTianFu{
+    optional int32 type = 1;//类型 1.灵兽 其他幻形
+}
+
+//返回升级天赋
+message ResLevelUpTianFu{
+    optional int32 type = 1;//类型 1.灵兽 其他幻形
+	optional int32 tianfuId = 2;//天赋id
+	optional int32 fightPower = 3;//战力
+}
+
+//发送移除皮肤消息
+message ResRemoveSkin{
+    optional int32 type = 1;//类型
+}
+
+//请求圣灵
+message ReqShengLing{
+    optional int32 index = 1;//位置
+}
+
+//灵兽任务面板
+message ResLingShouTaskPanel{
+   repeated LinshouTaskInfo taskInfo = 1;
+   repeated LinshouSectionInfo secInfo = 2;
+   optional int32 finishCount = 3;
+   optional int32 maxCount = 4;
+   optional int32 allComplete = 5;//1 : 全部完成
+}
+
+//任务信息
+message LinshouTaskInfo{
+   optional int32 id = 1;
+   optional int32 state = 2; //1.完成 2.未完成 3.已领取
+   optional taskV2.TaskGoalInfo goalInfo = 3;//目标数据
+   optional int32 section = 4;//所属章节
+}
+
+//灵兽章节信息
+message LinshouSectionInfo{
+   optional int32 sec = 1; //章节
+   optional int32 state = 2; //1.完成 2.未完成 3.已领取
+   optional int32 lockState = 3;//解锁状态 0.未解锁 1.解锁 2.可领取 3.已领取
+}
+
+//更新灵兽任务信息
+message ResLingShouTaskInfo{
+   repeated LinshouTaskInfo taskInfo = 1;
+}
+
+
+//更新灵兽章节信息
+message ResLinshouSectionInfo{
+   optional LinshouSectionInfo secInfo = 1;
+}
+
+//领取任务奖励
+message ReqGetRewards{
+   required int32 id = 1;
+}
+
+//领取章节奖励
+message ReqGetSecRewards{
+   required int32 sec = 1;
+}
+
+//立即开启
+message UnlockLingShouTask{
+   optional int32 sec = 1;//灵兽位置
+}
+
+message UnlockSecEffect{
+    optional int32 sec = 1;//灵兽位置
+}

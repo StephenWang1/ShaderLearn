@@ -1,0 +1,21 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_DROP_SHOW_GROUP
+{
+	required uint32 id = 1;//唯一id#客户端#C  唯一标识id
+	//required uint32 groupId = 2;//怪物箱id#客户端#C  boxid
+	//required uint32 itemId = 3;//道具id#客户端#C  道具id item表（配错将不掉落物品注意）
+	//optional string itemName = 4;//道具名#客户端#C  道具名称
+	//required uint32 sex = 5;//性别#客户端#C  0无限制；1男；2女
+	//required uint32 career = 6;//职业#客户端#C  0无限制；1战士；2法师；3道士
+	//optional IntListJingHao itemConditionId = 7;//道具的conditionid#客户端#C  连接conditionid 显示
+	//optional IntListJingHao groupConditionId = 8;//道具组的conditionid#客户端#C  连接conditionid 显示，只需填第一个
+	optional string tag = 9;//特殊标记#客户端  展示面板，icon上的特殊标记  配置为图片名 不配置则不显示
+	//optional string mBoxName = 10;//名字#客户端未使用#C  物品类型名字
+}
+
+message CFG_DROP_SHOW_GROUPARRAY
+{
+	repeated CFG_DROP_SHOW_GROUP rows = 1;
+}

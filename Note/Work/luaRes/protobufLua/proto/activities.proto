@@ -1,0 +1,122 @@
+package activitiesV2;
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "ActivitiesProto";
+
+//所有活动开启信息
+message AllActivitiesOpenInfo {
+	repeated int32 allOpenTypeStauts = 1;  //所有打开活动配置类型
+	repeated int32 allRedId = 2; //所有有小红点的活动类型
+}
+
+//请求活动信息状态
+message ReqOneActivitiesInfo {
+	optional int32 configId = 1;  //配置id
+}
+
+//  int HUNT = 1;  //塔罗牌
+//  int MONSTER_ATTCK_CITY = 2; //怪物攻城
+//  int LIMIT_BUY_BOX = 3; //限购礼包
+//  int RECHARGE_GIFT = 4; //充值有礼
+//  int COMBINE_ITEM = 5;//集字逛欢
+//返回信息活动状态
+message ResOneActivitiesInfo {
+	optional int32 type = 1; //类型
+	optional int32 leftTime = 2;
+	repeated OneActivitiesInfo oneActivitiesInfo = 3;  //配置id 
+	optional ServerConsumRankInfo consumRanks = 4;//全服消费排行
+	optional ActivitiesPartInfo extInfo =5; //抽出一个结构,这样当额外的信息结构变动的时候只同步部分结构即可.
+	repeated TheRecharge recharges = 6;//累积充值活动数据
+}
+
+//构建活动的部分信息,暂时只有热血狂欢.
+message ActivitiesPartInfo {
+	optional int32 type = 1; //活动的类型
+	optional int32 bloodOrgyPoint = 2; //狂欢点.	
+	optional int32 bloodOrgyRechargeUnlock = 3; //狂欢任务的直充是否解锁.
+	repeated int32 bloodOrgyReceivedIds = 4; //已经领取的普通奖励id
+	repeated int32 bloodOrgyRechargeIds = 5; //已经领取的高级奖励id.
+	optional int32 tarotHuntNum = 6; //当前抽取的塔罗牌的数量
+	optional int32 tarotTokenNum = 7; //从塔罗牌转换过来的token数量,这个值会增减.
+}
+
+message ConsumRankInfo {
+    optional int64 rid = 1;
+	optional int32 count = 2;//消费金额
+	optional int32 rank = 3;//排行
+	optional int32 shId = 4;//商会id
+	optional int32 configId = 5;//配置id
+	optional string roleName = 6;//玩家名称
+}
+
+message ServerConsumRankInfo {
+    repeated ConsumRankInfo infos = 1;
+	optional int32 myRank = 2;//我的排名
+	optional int32 myCousumCount = 3;//我的消费金额
+}
+
+//单个活动开启状态
+message OneActivitiesInfo {
+	optional int32 configId = 1;  //配置id
+	optional int32 openStatus = 2;  //活动打开或者关闭 0：关闭 1： 打开
+	optional int32 finish = 3; //是否已经完成，可以领奖 1：已经领过，0: 不可领取 2 ：可以领取
+	optional int32 canAwardCount = 4; //可以领奖的次数
+	optional int32 dataParam = 5; //32位参数
+	optional int64 date64Param = 6; //64位参数
+	optional string strParam = 7; //字符串参数	
+	optional GoalInfo goalInfo = 8; //任务类的活动数据。
+}
+
+message GoalInfo {
+	required int32  goalId = 1; //对应新增的goal表的ID
+	required int32  count = 2; //当前进度
+	required int32  receivedCount = 3;//已经领奖的个数
+	required int32  finishCount = 4; //已经完成的个数.
+}
+
+//请求领取活动奖励
+message ReqAwardActivitiesInfo {
+	optional int32 configId = 1;  //配置id
+	optional int32 dataParam = 2; //32位参数
+}
+
+//请求领取活动奖励
+message ResAwardActivitiesInfo {
+	optional int32 ret = 1; //1:成功 2:失败
+	optional int32 configId = 2;  //配置id
+	optional int32 dataParam = 3; //32位参数
+	optional int64 date64Param = 4; //64位参数
+	optional string strParam = 5; //字符串参数
+}
+
+message ReqSunActivitiesPanel {
+	optional int32 activityId = 1;//活动Id
+}
+
+message ResSunActivitiesPanel {
+	optional int32 activityId = 1;//活动Id
+	repeated SunActivitiesGoalInfo info = 2;//目标信息集合
+	repeated int32 availNum = 3;//可用次数集合
+	optional int32 dayDoorPhysical = 4;//体力值
+}
+
+message SunActivitiesGoalInfo {
+	optional int32 targetId = 1;//目标id
+	optional int32 mapId = 2;//地图Id
+	optional int32 remindNum = 3;//剩余数量
+}
+
+//塔罗暗殿踢人
+message ResKickOutTime {
+	optional int32 moduleType = 1; //模块.
+	optional int32 endTime = 2; //踢人的时间.
+}
+
+//累计充值数据
+message TheRecharge{
+	optional int32 id = 1;//表ID
+	optional int32 eventType = 2;//活动类型，开服合服联服
+	optional int32 eventId = 3;//活动Id
+	optional int32 rewardType = 4;//0 不可领取 1已领取 2可领取 3时间未到
+	optional int32 theGear = 5;//档位
+}

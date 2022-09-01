@@ -1,0 +1,32 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_PREFIX_TITLE
+{
+	required uint32 id = 1;//id#客户端#C  id#客户端
+	//required uint32 classNumber = 2;//品级#客户端#C  军衔展示当前阶段
+	//required uint32 group = 3;//分组#客户端#C  当前大段
+	//required float gap = 4;//icon间隔#客户端#C  小数乘100
+    //@2#3 classNumber#4 group#4
+	//required uint32 classNumber4_group4 = 5;//合并字段#品级_C#分组_C classNumber#4 group#4
+	optional string name = 6;//前缀称号名称#客户端  战#法#道
+	required uint32 nextId = 7;//下阶id#客户端  
+	optional IntListJingHao costItem = 8;//消耗道具#客户端  升级消耗的道具，conditionID#conditionID
+	optional IntListList hp = 9;//生命值#客户端  1#n&2#n&3#n   1战士2法师3道士   N为属性值
+	optional IntListList ceLower = 10;//战力下限加值#客户端  1#n&2#n&3#n  1战士2法师3道士   N为属性值
+	optional IntListList ceUpper = 11;//战力上限加值#客户端  1#n&2#n&3#n   1战士2法师3道士   N为属性值
+	optional IntListList defLower = 12;//物理防御下限加值#客户端  1#n&2#n&3#n   1战士2法师3道士   N为属性值
+	optional IntListList defUpper = 13;//物防上限加值#客户端  1#n&2#n&3#n   1战士2法师3道士   N为属性值
+	optional IntListList mDefLower = 14;//魔法防御下限加值#客户端  1#n&2#n&3#n   1战士2法师3道士   N为属性值
+	optional IntListList mDefUpper = 15;//魔防上限加值#客户端  1#n&2#n&3#n   1战士2法师3道士   N为属性值
+	optional string color = 16;//品质色#客户端  
+	required int32 attributeShow = 17;//属性点#客户端  给客户端用面板中显示的天赋点数量
+	required int32 attributeItemShow = 18;//属性丹使用上限#客户端  给客户端用面板中显示的天赋丹使用数量上限
+	//required int32 attribute = 19;//属性点#服务器  每级获得的天赋点数量
+	//required int32 attributeItem = 20;//属性丹使用上限#服务器  天赋丹使用数量上限，配-1代表无限制
+}
+
+message CFG_PREFIX_TITLEARRAY
+{
+	repeated CFG_PREFIX_TITLE rows = 1;
+}

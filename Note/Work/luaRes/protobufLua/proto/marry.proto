@@ -1,0 +1,147 @@
+package marryV2;
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "Marryproto";
+
+
+
+//弹出誓言面板
+message ResMatchmakerPanel{
+	required MarriedPeople man = 1; //男方
+	required MarriedPeople woman = 2; //女方
+	required int32 ringItemId = 3; //戒指的ItemId
+}
+
+//结婚人信息
+message MarriedPeople{
+	optional int64 rid = 1;//玩家ID
+	optional string name = 2;//玩家姓名
+	optional int32 level = 3;//等级
+	optional int32 career = 4;//职业
+	optional int32 sex = 5;//性别
+}
+
+//确认誓言
+message ReqMatchmaker{
+	optional string matchmaker = 1;//誓言
+}
+
+//返回确认的誓言
+message ResMatchmaker{
+	optional string checkingMatchmaker = 1;//验证后的誓言
+}
+
+//请求离婚
+message ReqDivorce{
+	optional int32 divorceType = 1 ; //离婚类型 0正常申请离婚 1强制离婚
+}
+
+//在线离婚面板
+message ResDivorce{
+	optional int32 type = 1 ; //发送类型 0申请离婚的人 1收到申请的人
+	optional MarriedPeople spouse = 2; //对象的信息
+}
+
+//强制离婚面板
+message ResConfirmDivorce{
+	optional int32 confirmDivorceType = 1 ; //强制类型  0免费离婚  1收费离婚
+	optional MarriedPeople spouse = 2; //对象的信息
+}
+
+//请求执行离婚
+message ReqImplementDivorce{
+	optional int32 type = 1 ; //离婚类型 0普通强制  1收费强制  2在线离婚
+}
+
+//在线离婚条件不足消息
+message ResOnlineDivorceCondition{
+	optional int32 type = 1 ; //类型 1次数超过 2对方不在线 3对方正在处理
+	optional MarriedPeople spouse = 2; //对象的信息
+}
+
+//结婚改变消息
+message ResChangeMarry{
+	optional int32 type = 1 ; //类型 0添加结婚人 1删除结婚人
+	optional MarriedPeople spouse = 2; //对象的信息
+}
+
+//获取当前对象信息
+message ResGetSpouse{
+	optional MarriedPeople spouse = 1; //对象的信息
+	optional int32 isCanRemarry = 2;//是否可以复婚 0是可以，1是不可以（可以的意思是处于离婚状态下，是可以的）
+	optional int64 divorceTime = 3;//离婚时间
+	optional MarryRingInfo marryRing = 4;//戒指信息
+}
+
+message MarryRingInfo{
+	optional int32 itemId = 1;//戒指的ItemId
+	optional int32 needCount = 2;//需要的数量
+}
+
+//返回缺少的戒指ID
+message ResLackRings{
+	optional int32 itemId = 1; //戒指的ItemId
+}
+
+//返回升级婚戒
+message ResUpdateRing{
+	required int32 ringItemId = 1; //戒指的ItemId
+}
+
+//查看玩家婚姻信息
+message ResPlayerMarriageInformation{
+	optional MarriedPeople man = 1; //男方
+	optional MarriedPeople woman = 2; //女方
+	optional int32 ringItemId = 3; //戒指的ItemId
+	optional int64 marryTime = 4;//结婚的时间
+	optional int32 number = 5 ;//本服第几对夫妻
+	optional int32 intimacyValue = 6;//当前亲密度
+	optional int32 serverId = 7; //服务器ID
+	optional string manOath = 8;//男方誓言
+	optional string womanOath = 9; //女方誓言
+}
+
+//返回誓言
+message ResSeeOath{
+	optional string matchmaker = 1;//誓言
+}
+
+//请求修改誓言
+message ReqUpdateOath{
+	optional string matchmaker = 1;//誓言
+}
+
+//返回刻字
+message ResSeeLettering{
+	optional string lettering = 1;//刻字
+}
+
+//请求修改刻字
+message ReqUpdateLettering{
+	optional string lettering = 1;//刻字
+}
+
+//输入完成誓言判断屏蔽字
+message ReqVerificationOath{
+	optional string matchmaker = 1;//誓言
+}
+
+//请求判断刻字屏蔽字
+message ReqVerificationLettering{
+    optional string lettering = 1;//刻字
+}
+
+//请求赠送钻石
+message ReqGiveJewel{
+	optional int32 count = 1;//赠送的钻石数量
+}
+
+//请求查看其他玩家婚姻信息
+message ReqSeeOthersMarriageInfo{
+	optional int64 rid = 1;//要查看的玩家ID
+}
+
+//查看其他玩家婚姻信息
+message ResSeeOthersMarriageInfo{
+	optional ResPlayerMarriageInformation marriageInfo = 1;//婚姻信息
+}

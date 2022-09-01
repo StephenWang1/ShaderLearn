@@ -1,0 +1,12 @@
+package sealmarkV2;
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "SealmarkProto";
+
+
+//返回当前封号等级
+message ResSealMarkInfo{
+	optional int32 sealMarkId = 1;//当前封号等级Id
+	optional int32 nextSealMarkId = 2;//下级封号等级
+}
+

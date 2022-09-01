@@ -1,0 +1,19 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_PROMPTFRAME
+{
+	required uint32 id = 1;//id#客户端  唯一ID
+	//optional string content = 2;//内容#客户端#C  气泡框显示内容
+	//optional string panels = 3;//界面#客户端#C  界面名称（填，则传指定传参；不填，则读取功能程序的默认传参）
+	//optional string button = 4;//组件路径#客户端#C  界面内组件路径（填，则传指定传参；不填，则读取功能程序的默认传参）
+	//optional string direction = 5;//朝向#客户端#C  1.上 2.下 3.左 4.右
+	//required int32 distance = 6;//Y轴#客户端#C  距离中心点距离（像素）：正数为向上，负数为向下，0为居中
+	//required int32 displacement = 7;//X轴#客户端#C  距离中心点距离（像素）：正数为向右，负数为向左，0为居中
+	//optional string dec = 8;//备注#策划  给策划备注什么功能用
+}
+
+message CFG_PROMPTFRAMEARRAY
+{
+	repeated CFG_PROMPTFRAME rows = 1;
+}

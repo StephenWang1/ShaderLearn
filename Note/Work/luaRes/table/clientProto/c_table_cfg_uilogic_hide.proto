@@ -1,0 +1,15 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_UILOGIC_HIDE
+{
+	required uint32 id = 1;//id#客户端#不存在共同参与合并的字段  纯ID
+	required uint32 hideType = 2;//隐藏类型#客户端  1:隐藏列表为avoidSets的所有界面加上avoidPanelList所标识的界面;2:隐藏列表为从avoidSets界面中排除avoidPanelList所标识的界面后的所有界面
+	required uint32 uisetsID = 3;//隐藏界面集合#客户端#不存在共同参与合并的字段  表示隐藏界面在哪些界面集合的基础上处理,关联到cfg_uisets表
+	optional StringList avoidPanelList = 4;//隐藏界面列表#客户端  表示在隐藏界面集合的基础上加上或减去哪些界面列表
+}
+
+message CFG_UILOGIC_HIDEARRAY
+{
+	repeated CFG_UILOGIC_HIDE rows = 1;
+}

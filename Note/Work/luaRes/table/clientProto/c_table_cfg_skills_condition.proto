@@ -1,0 +1,53 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_SKILLS_CONDITION
+{
+	required int32 id = 1;//唯一id#客户端#C  唯一id#客户端
+	//required int32 skillId = 2;//skillId#客户端#C  对应skill表里的id；可重复
+	//required uint32 level = 3;//技能等级#客户端#C  
+	//required int32 sid = 4;//唯一ID#客户端#C#不存在共同参与合并的字段  定位用
+	//optional string cost = 5;//技能升级消耗#客户端#C  道具id#道具数量(多个道具用&分隔)(升到下级所需)
+	//required int32 condition = 6;//升级限制#客户端#C#不存在共同参与合并的字段  关联sfg_conditions表中ID ；&与 |或
+	//required int32 rate = 7;//攻击倍率#客户端#C#不存在共同参与合并的字段  万分比
+	//optional IntListJingHao buffers = 8;//技能BUFF状态#客户端#C  buffid#buffid#buffid
+	//optional string show = 9;//描述#客户端#C  技能学习条件描述1、&&代表固定颜色，当前等级黄色下一等级绿色2、正常颜色配置则按配置显示颜色
+	//required int32 holyAttack = 10;//切割伤害#客户端#C#不存在共同参与合并的字段  数值
+	//optional IntListJingHao passiveDamagePercent = 11;//秘籍抵御技能的伤害万分比#客户端#C  万分比
+	//required uint32 cdTime = 12;//冷却时间#客户端#C#不存在共同参与合并的字段  单位：毫秒
+	//optional IntListJingHao zsResist = 13;//抵御战士职业（计算伤害时增加防御）#客户端#C  具体防御值（先算随机防御值，在计算该数值）
+	//optional IntListJingHao fsResist = 14;//抵御法师职业（计算伤害时增加防御）#客户端#C  具体防御值（先算随机防御值，在计算该数值）
+	//optional IntListJingHao dsResist = 15;//抵御道士职业（计算伤害时增加防御）#客户端#C  具体防御值（先算随机防御值，在计算该数值）
+	//required int32 costMp = 16;//技能耗魔#客户端#C  技能耗魔
+	//optional IntListJingHao costBook = 17;//升级消耗对应的技能书id#客户端#C  升级消耗对应的技能书id
+    //@2#3 skillId#20 level#7
+	//required uint32 skillId20_level7 = 18;//合并字段#skillId_C#技能等级_C skillId#20 level#7
+	optional IntListList addedParam = 19;//额外参数#客户端  1、召唤神兽骷髅：强化技能id#monsterid&强化技能id#monsterid
+	optional IntListJingHao tameTime = 20;//元宝驯服次数和消耗#客户端  货币id#花费数量#总共次数
+	//required int32 extraHurt = 21;//技能额外伤害#客户端未使用#C  数值
+	//required int32 nbValue = 22;//战斗力#服务器  数值；计算战斗力用
+	//required int32 hurtAdd = 23;//对玩家伤害加成#服务器  万分比
+	//required int32 hurt = 24;//对玩家伤害#服务器  数值（仅在怪打玩家时使用）
+	//required int32 monHurtAdd = 25;//对怪物伤害加成#服务器  万分比
+	//required int32 monHurt = 26;//对怪物伤害#服务器  数值
+	//required uint32 critParam = 27;//暴击伤害加成百分比，在暴击伤害基础上额外增加暴击伤害#客户端未使用#C  暴击伤害=暴击伤害属性*技能爆伤系数(万分比)
+	//optional IntListJingHao passiveGroupId = 28;//秘籍抵御技能id#服务器  对应skill表里的id
+	//required uint32 probability = 29;//触发概率#客户端未使用#C  万分比
+	//required int32 noDefenseProbability = 30;//破防率#服务器  万分比
+	//required int32 noEqsecureProbability = 31;//无视魔法盾概率#服务器  万分比
+	//optional IntListJingHao extraParam = 32;//技能参数#服务器  特殊技能有不同用处（1、召唤技能：cfg_monsters表id；2、复活灵兽：复活回血万分比；3、灭天火：扣除目标最大魔法值万分比；4、刺杀剑法：第二格的攻击倍率;5、施毒术：持续伤害的攻击倍率;6、基本剑术、精神力战法、火球术：属性type#数值#属性type2#数值2。7、通灵技能：属性type#万分比#属性type2#万分比；8、怒焰斩：伤害倍率#固定神圣伤害；9、多段伤害：伤害次数#间隔时间；10、召唤群兽：怪物id#召唤数量#持续时间；11、暴风雪：给玩家自己的定身buff；12阴阳术士通灵技能：附加伤害万分比13地狱雷光：外圈伤害系数
+	//optional string tips = 33;//备注#策划  备注
+	//required int32 hsHurtAdd = 34;//对灵兽伤害加成#服务器  万分比
+	//required int32 hsHurt = 35;//对灵兽伤害#服务器  数值(仅在怪打灵兽时使用)
+	//required int32 monsterTargetValue = 36;//怪物目标切换神兽仇恨对比值#服务器  用于灵兽、神兽、骷髅吸引怪物攻击时判断用
+	//required int32 isExperience = 37;//释放技能是否增加熟练度#服务器  指定等级释放技能是否增加熟练度（0增加1不增加;如果增加则不区分低级还是高级熟练度）
+	//optional IntListList monsterDamageLimit = 38;//怪物伤害保底#服务器  怪物攻击玩家、灵兽、神兽的伤害保底
+	//optional IntListJingHao rageHurt = 39;//boss狂暴伤害倍率#服务器  加狂暴bufftype#减狂暴bufftype#对人伤害万分比#对灵兽伤害万分比#对召唤物伤害万分比
+	//required int32 fangZhuiMa = 40;//落马抵抗#服务器  万分比
+	//required int32 fixHurt = 41;//固定伤害#服务器  固定伤害
+}
+
+message CFG_SKILLS_CONDITIONARRAY
+{
+	repeated CFG_SKILLS_CONDITION rows = 1;
+}

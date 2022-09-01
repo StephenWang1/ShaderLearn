@@ -1,0 +1,176 @@
+package bossV2;
+import "map.proto";
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "BossProto";
+
+message PersonalBossInfo {
+  optional int32 instanceId = 1;//副本id
+  optional int32 type = 2;//类型
+  optional int32 surplusNum = 3;//剩余次数
+  optional int64 freshTime = 4;//下次刷新时间, 时间戳毫秒
+}
+
+message InstanceInfo {
+  optional int32 type = 1;//类型
+  optional int32 count = 2;//总次数
+  optional int32 surplusNum = 3;//剩余次数
+  optional int64 freshTime = 4;//下次增加次数时间
+}
+
+message BossKillerInfo{
+  optional int32 killTime = 1;//击杀时间
+  optional string killerName = 2;//击杀者名字
+  optional int32 killerPower = 3;//击杀者战斗力
+}
+
+//请求副本面板信息(通用)
+message ReqInstancePanelInfo {
+  optional int32 insType = 1;//副本类型
+}
+
+//BOSS面板信息
+message ResPersonalBossInfo {
+  repeated PersonalBossInfo bossInfo = 1;//boss列表信息
+}
+
+//请求扫荡个人副本
+message ReqSwapPersonalBoss{
+  optional int32 instanceId = 1;//副本id
+}
+
+//发送boss活动开启信息
+message ResBossActivityOpen{
+  optional int32 type = 1;//类型（前后端一致的枚举）
+  optional int32 instanceId = 2;//副本id（instance表id或者duplicate表id）
+  optional int32 params = 3;//参数
+}
+
+//请求野外面板信息
+message ReqFieldBossInfo {
+  optional int32 type = 1;//怪物类型
+  optional int32 subType = 2;
+}
+
+//野外boss列表
+message FieldBossInfo {
+  optional int32 type = 1; //boss类型
+  optional int64 id = 2; //唯一ID
+  optional int32 configId = 3;  //配置id
+  optional int64 freshTime = 4;//下次刷新时间, 时间戳毫秒，0表示还活着, -1 表示未刷新(远古 boss)
+  optional int32 killCount = 5; //远古 boss 当前进度
+  optional int32 mapId = 6; //远古 boss 所在地图
+  optional int32 count = 7;//所在地图的数量
+  optional int32 bossId = 8;
+  optional int32 peopleCount = 9;//神之boss人数
+  optional int32 totalCount =10;// 个人boss可以击杀的总数
+  optional int32 sign = 11;//标记
+}
+
+//发送野外面板信息
+message ResFieldBossInfo {
+  optional int32 type = 1;
+  repeated FieldBossInfo boss = 2;//野外boss列表
+  optional int32 subType = 3;
+}
+
+// boss 刷新提示
+message ResBossRefresh {
+  required int32 bossId = 1;
+  optional int32 bossType = 2;
+  optional int32 mapId = 3;
+}
+// boss 死亡提示
+message ResBossDie {
+  required int32 bossId = 1;
+  optional int32 bossType = 2;
+  optional int32 mapId = 3;
+  optional int64 id = 4;
+}
+
+//小地图boss列表
+message MinMapBossInfo {
+  optional int32 type = 1; //boss类型
+  optional int32 configId = 2;  //bossId
+  optional int64 freshTime = 3;//下次刷新时间, 时间戳毫秒，0表示还活着
+  optional int32 x = 4;  //怪物的实际位置x
+  optional int32 y = 5;  //怪物的实际位置y
+}
+
+//小地图
+message ResMinMapInfo {
+  optional int32 updateType = 1; //0: 全部 1：boss 2:传送
+  repeated MinMapBossInfo boss = 2; //小地图boss列表
+  repeated mapV2.RoundEventInfo addEvents = 3;    //传送
+}
+
+//请求 boss 信息, 发 cfg_boss 表的 id
+message ReqGetBossInfo {
+  repeated int32 id = 1;
+}
+
+message GetBossInfo {
+  required int32 id = 1;
+  optional int32 mid = 2;
+  optional int32 mapId = 3;
+  optional bool isAlive = 5;
+}
+
+// boss info 响应
+message ResGetBossInfo {
+  repeated GetBossInfo bosses = 1;
+}
+
+
+message ReqAncientBossDamageRank {
+  required int64 bossId = 1;
+}
+
+message AncientBossDamageRank {
+  required int64 roleId = 1;
+  optional string roleName = 2;
+  optional int32 career = 3;
+  optional int32 sex = 4;
+  optional int32 level = 5;
+  optional int32 rein = 6;
+  optional int64 hurt = 7;
+  optional int32 rank = 8;
+  optional int64 unionId = 9;
+  optional string unionName = 10;
+  optional int32 unionRank = 11;
+}
+
+message ResAncientBossDamageRank {
+  required int64 bossId = 1;
+  repeated AncientBossDamageRank damageRank = 3;
+}
+
+// 是否有远古 boss 存活
+message ResHasAncientBossAlive {
+  required bool hasAlive = 1;
+}
+
+//boss面板魔之boss红点
+message RefreshDemonBossInfo{
+	optional FieldBossInfo bossInfo = 1;
+	optional int32 type = 2;
+}
+
+//天魔boss信息
+message ResOmenComeBossInfo{
+	repeated OmenComeBoss boss = 1;//天魔boss信息
+}
+
+message OmenComeBoss{
+	optional int32 mapId = 1;//地图ID
+	optional int32 hasCount = 2;//当前存活数量
+	optional int32 deliver = 3;//deliver表传送ID
+}
+
+//请求使用扫荡券
+message ReqUseMonsterCleanUpCoupons{
+	optional int32 type = 1;//类型
+	optional int32 theId = 2;//对应逻辑的ID
+	optional int32 monsterId = 3;//宗师任务要完成的怪物ID
+}
+

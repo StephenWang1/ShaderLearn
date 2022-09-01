@@ -1,0 +1,20 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_INVEST
+{
+	required int32 id = 1;//id#客户端  递增
+	required int32 turn = 2;//投资期数#客户端  
+	optional string name = 3;//按钮名称#客户端  1期投资
+	required int32 order = 4;//奖励排序#客户端  奖励排序
+	required int32 rewardType = 5;//奖励类型#客户端  1=开服天数；2=开服天数#等级
+	optional string rewardCondition = 6;//奖励领取条件#客户端  数值，具体含义根据类型判断
+	optional string reward = 7;//奖励内容#客户端  itemId#数量#职业#性别
+	optional string description = 8;//奖励说明#客户端  
+	required int32 link = 9;//关联id#客户端  关联id
+}
+
+message CFG_INVESTARRAY
+{
+	repeated CFG_INVEST rows = 1;
+}

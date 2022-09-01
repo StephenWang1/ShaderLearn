@@ -1,0 +1,101 @@
+package rankV2;
+
+import "bag.proto";
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "RankProto";
+
+message RoleRankInfo {
+  optional int64 uid = 1;//目标id
+  optional string name = 2;//名字
+  optional int32 vipLevel = 3;//vip等级
+  optional int32 rein = 4;//转生
+  optional int32 level = 5;//等级
+  optional int64 fightPower = 6;//战力
+  optional string unionName = 7;
+  optional int32 career = 8;
+  optional int32 sex = 9;//性别
+  optional bool isOnline = 10;//是否在线
+  optional int64 teamId = 11;//队伍ID
+  optional int64 unionId = 12;//行会ID
+  optional int64 param = 13;//排行榜参数（根据排行榜类型不同显示不同）
+  optional int32 sid = 14; // 服务器 id
+  optional int32 towerHigh = 15;//闯天关高度
+  optional int32 monthCard = 16;//月卡类型 0-无，1-比奇，2-盟重
+  optional int64 extraParam = 17;//排行榜额外参数
+  optional int32 vipMemberLevel = 18; //会员等级.
+  optional int32 zhenfaLevel = 19; //阵法等级
+  optional int64 zhenfaExp = 20; //阵法经验
+  optional int32 zhenfaId = 21;//阵法ID
+}
+
+//请求查看排行榜
+message ReqLookRank {
+  optional int32 rankId = 1; //rankConfig id
+}
+
+//排行榜数据
+message ResLookRank {
+  repeated RoleRankDataInfo roleRankDataInfos = 1; //玩家排行数据信息
+  optional int32 ranking = 2;//自己的排名
+  optional int32 rankId = 3;//rankConfig id
+  optional int64 refreshTime = 4;//剩余刷新时间
+}
+
+message RoleRankDataInfo {
+  optional RoleRankInfo roleRankInfo = 1;//自己的排名信息（恩爱榜是男方的信息）
+  optional RoleRankInfo wifeRankInfo = 2;//妻子的排名信息
+  optional ServantRankInfo servantRankInfo = 3;//灵兽排行信息
+  optional DamageItemRankInfo damageItemRankInfo = 4;//损失的物品信息
+}
+
+//请求排行奖励信息
+message ReqRankRewardInfo {
+  optional int32 rankId = 1;//rankConfig id
+}
+
+//发送排行奖励信息
+message ResRankRewardInfo {
+  optional int32 rankId = 1;//rankConfig id
+  optional int64 refreshTime = 2;//剩余刷新时间
+  optional int32 yesterdayRank = 3;//昨日排名
+  optional bool isReceive = 4;//是否已领取 true已领取
+  optional int32 todayRank = 5;//今天的排名
+}
+
+//领取排行奖励
+message ReqReceiveReward {
+  optional int32 rankId = 1;//rankConfig id
+}
+
+//未领取奖励排行列表
+message ResUnRewardRankTypes {
+  repeated int32 rankId = 1;//rankConfig id列表
+}
+
+message SingleServantRankInfo {
+  required int32 servantCfgId = 1;
+  optional int32 level = 2;
+  optional int32 type = 3; // 灵兽位
+}
+
+//灵兽排行信息
+message ServantRankInfo {
+  required int64 roleId = 1;
+  repeated SingleServantRankInfo servants = 2;//灵兽信息
+}
+
+//损失的物品信息
+message DamageItemRankInfo {
+  optional ItemsInfo infos = 1;//物品信息集合
+}
+
+//物品信息集合
+message ItemsInfo {
+  repeated bagV2.BagItemInfo infos = 1;//物品信息
+}
+
+//请求排行榜详情信息
+message ReqRankDetail{
+    optional int32 rankId = 1; //rankConfig id
+	optional int64 rid = 2;//玩家唯一id
+}

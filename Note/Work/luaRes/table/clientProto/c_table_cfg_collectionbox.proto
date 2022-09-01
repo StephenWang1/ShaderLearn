@@ -1,0 +1,15 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_COLLECTIONBOX
+{
+	required uint32 level = 1;//藏品阁等级#客户端  当前藏品阁等级
+	required int32 required = 2;//升级所需经验#客户端  藏品阁升级所需经验
+	required int32 openBox = 3;//开启格子#客户端  藏品阁升级后开启格子的数量
+	required int32 hp = 4;//基础生命#客户端  基础生命属性（万分比）
+}
+
+message CFG_COLLECTIONBOXARRAY
+{
+	repeated CFG_COLLECTIONBOX rows = 1;
+}

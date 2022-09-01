@@ -1,0 +1,92 @@
+package uniteunionV2;
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "UniteUnionProto";
+
+
+
+
+
+//同盟成员信息
+message UniteUnionMember {
+	optional int64 unionId = 1; //帮会Id
+	optional string unionName = 2; //帮会名称
+	optional int32 hostId = 3; // serverId * 1000 + platId
+	optional int32 unionLeaderPosition = 4; //帮会会长的职位 1:盟主 2：副盟主
+	optional RoleMemberInfo unionLeader = 5; //帮会会长
+	repeated RoleMemberInfo leaderSecond = 6; //副会长
+	optional int32 unionActive = 7; //帮会活跃度，繁荣度
+}
+
+//玩家的信息
+message RoleMemberInfo {
+	optional string name = 1; //帮会会长的名称
+	optional int64  id = 2;  //帮会会长的id
+	optional int32 unitePosition = 3;//1-盟主，2-副盟主，3-成员
+}
+
+//同盟信息
+message UniteUnionInfo {
+	optional int64 id = 1;  //id
+	optional int32 type = 2; //同盟类型
+	repeated UniteUnionMember members = 3; //同盟成员
+	optional int64 leaderOfUniteUnionId = 4; //盟主所属的联盟类型
+	optional int32 selfUnionExitTimeS = 5; //请求者退出同盟的时间（s）	
+	optional int32 canJoin = 6; //请求者是否可以加入此联盟
+	optional int32 rank = 7; //排名
+}
+
+//所有的同盟信息
+message AllUniteUnion {
+	repeated UniteUnionInfo allUniteUnion = 1; 
+}
+
+//加入或删除的同盟类型
+message UniteUnionType {
+	optional int32 type = 1;  //同盟类型 1,2,3,4
+}
+
+//返回封印塔联盟排行
+message ResUniteUnionSealTowerRank{
+	optional int64 lastTime = 1;//下次刷新怪物时间
+	optional int32 isOpen = 2;//活动是否开启
+	optional int32 hasCount = 3;//剩余怪物数量
+	repeated SealTower tower = 4;
+	optional int64 myTowerValue = 5;//我自己的积分
+	optional int32 myUniteUnionType = 6;//我自己的联盟type
+}
+
+message SealTower{
+	optional int64 id = 1;  //id
+	optional int32 type = 2; //同盟类型
+	optional int32 rank = 3;//封印塔排名
+	optional int64 sealTowerValue = 4;//联盟积分
+}
+
+message ReqUniteUnionSealTowerRank{
+	optional int32 uniteUnionType = 1;//同盟类型
+}
+
+//请求封印塔捐献
+message ReqSealTowerDonation{
+	optional int32 type = 1;//捐献type
+	optional int32 count = 2;//捐献次数
+}
+
+message ResSealTowerDonation{
+	optional int32 isSuccess = 1;//是否成功 0为失败1为成功
+	optional int64 addSealTowerValue = 2;//添加的积分
+}
+
+//返回前往击杀封印塔怪物
+message ResGetSealTowerMonsterPoint{
+	optional int64 monsterLid = 1;//怪物的唯一ID
+	optional int32 mapId = 2;//地图ID
+	optional int32 x = 3;
+	optional int32 y = 4;
+}
+//角色联盟信息
+message ResRoleUniteType{
+	optional int64 roleId = 1;//角色ID
+	optional int32 uniteType = 2;//联盟类型 
+}

@@ -1,0 +1,103 @@
+package skillV2;
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "SkillProto";
+
+message SkillBean {
+  required int32 skillId = 1;//技能id
+  required int32 level = 2;//等级
+  optional int32 exp = 3; //经验值
+  optional int32 oldExp = 4;
+}
+
+//返回角色技能数据
+message ResSkill {
+  repeated SkillBean skillList = 1;//技能列表
+  optional int32 fightValue = 2;//战斗力
+  repeated int64 skillShortcut = 3; //技能快捷键
+  optional int32 xpSkillEnergy = 4; // xp 技能经验
+}
+
+//返回单个技能变化数据
+message ResOneSkillChange {
+  required SkillBean skillBean = 1;//改变的技能
+  optional int32 fightValue = 2;//战斗力
+  optional int32 exp = 3;//变化的经验值
+}
+
+//返回多个技能变化数据
+message ResMultiSkillChange {
+  repeated SkillBean skillList = 1;//改变的技能列表
+  optional int32 fightValue = 2;//战斗力
+}
+
+message SkillIdInfo {
+  required int32 skillId = 1;
+}
+
+message ReqSetSkillShortcut {
+  repeated int64 skillShortcut = 1;
+}
+
+//秘技保存
+message SecretSkillUpdate {
+  optional int32 skillId = 1;//保存技能设置时技能id
+  optional int32 site = 2;//位置 1-6
+}
+//卸下心法
+message ReqTakeOffSecret{
+  optional int32 skillId = 1;
+}
+//秘技信息
+message SecretSkillInfo{
+  repeated SecretSkill secretSkill = 1;
+  optional int32 form = 2;//当前使用的心阵
+  repeated OldForm oldForms = 3;//已有的方案 对应formation表
+  optional int32 level = 4;//心阵等级
+  repeated SecretSkill lastDefaultForm = 5;//上次默认心阵
+}
+message OldForm {
+  optional int32 formId = 1;
+  optional int32 level = 2;
+}
+
+message SecretSkill{
+  optional int32 key = 1;//种类
+  optional int32 skillId = 2;//技能id
+}
+
+//切换心阵
+message ReqSwitchFormation{
+  optional int32 form = 1;//心阵id
+}
+
+//上下阵心法回调
+message ResSecretBack {
+  optional int32 upOrDown = 1;//0下 1上
+  optional int32 skillId = 2;
+  optional int32 type = 3;//位置
+  optional int32 form = 4;//激活的心阵信息
+}
+
+
+message ResXpSkillEnergyChange {
+  required int32 xpSkillEnergy = 1;
+}
+
+//升级装备专精
+message UpEquipProficient {
+   optional int32 type = 1;//升级专精的位置，配置表里的type
+}
+
+//装备专精全部信息
+message AllEquipProficientInfo{
+   repeated EquipProficientInfo infos = 1;
+}
+
+message EquipProficientInfo {
+   optional int32 id = 1;//配置表id
+}
+
+message ReqStudySpecialSkill {
+	optional int32 skillId = 1; //特殊技能学习
+}

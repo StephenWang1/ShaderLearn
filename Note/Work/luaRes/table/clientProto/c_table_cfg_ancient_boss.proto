@@ -1,0 +1,22 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_ANCIENT_BOSS
+{
+	required uint32 id = 1;//远古boss怪物id#客户端#C  远古boss怪物id
+	//optional IntListJingHao need = 2;//前置怪物id#客户端#C  需要击杀的前置怪物id，多个用#隔开
+	//required uint32 num = 3;//击杀数量#客户端#C  需要击杀多少只召唤，总数
+	//optional IntListJingHao mapId = 4;//地图id#客户端#C  远古boss刷新地图id，多个用#隔开
+	//required uint32 damageLimit = 5;//最低伤害#客户端#C  邮件声望奖励，最低伤害限制
+	//optional string tips = 6;//策划备注#客户端#C  备注用
+	//required uint32 type = 7;//怪物类型#客户端#C  1.远古boss  2.非远古boss
+	required int32 shareNum = 8;//远古boss联服地图id#客户端  远古boss第几次联服加入
+	//required uint32 bossId = 9;//连接到cfg_boss表格数据#服务器  远古boss连接到boss表格数据
+	//required int32 lfMapid = 10;//对应联服地图id#服务器  
+	//required int32 toMail = 11;//对应发送的邮件id#服务端  对应发送的cfg_mail表的邮件id
+}
+
+message CFG_ANCIENT_BOSSARRAY
+{
+	repeated CFG_ANCIENT_BOSS rows = 1;
+}

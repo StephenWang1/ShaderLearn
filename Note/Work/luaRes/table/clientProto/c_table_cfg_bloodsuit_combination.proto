@@ -1,0 +1,19 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_BLOODSUIT_COMBINATION
+{
+	required int32 id = 1;//编号#客户端  编号
+	required int32 type = 2;//页签类型#客户端  页签类型
+	optional string name = 3;//页签名称#客户端  页签名称
+	optional IntListJingHao conditions = 4;//页签开启条件#客户端  页签开启条件
+	required int32 qualityLevel = 5;//品级#客户端  0无品级要求(与bloodsuit表qualityLevel对应)
+	optional IntListJingHao groupSkill = 6;//套装技能#客户端  skill表id
+	optional string groupName = 7;//套装名称#客户端  套装名称
+	optional string tips = 8;//页签开启提示#客户端  页签开启提示
+}
+
+message CFG_BLOODSUIT_COMBINATIONARRAY
+{
+	repeated CFG_BLOODSUIT_COMBINATION rows = 1;
+}

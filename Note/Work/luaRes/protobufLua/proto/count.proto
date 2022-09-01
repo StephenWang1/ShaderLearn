@@ -1,0 +1,119 @@
+package countV2;
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "CountProto";
+
+message CountInfo {
+	optional int32 countType = 1;  //计数类型
+	optional int32 countNum = 2;   //数量
+	optional int64 key = 3;    //组的id(如果是副本.则是instance表的groupId)
+}
+
+//返回数量的列表
+message ResCountData {
+	repeated CountInfo countList = 1; //数量列表
+}
+
+//返回数量变化
+message ResCountChange {
+	optional int32 countType = 1; //计数类型
+	optional int32 countNum = 2; //数量
+	optional int64 key = 3; //组的id(如果是副本.则是instance表的groupId)
+}
+
+//请求副本道具使用次数
+message ReqGetInstanceItemUseCount {
+	optional int32 mapId = 1; //副本id
+	repeated int32 globalId = 2; //global配置id
+}
+
+
+enum CountTypeEnum {
+	BAG_ADD_COUNT = 1; // 背包扩容次数
+	DAY_PERSON_UNION_CON = 2; // 每日获得的行会资金
+	PERSONAL_BOSS_SWEEP_NUM = 3; // 个人BOSS每日扫荡次数
+	EXCHANGE_REIN_COUNT = 4; // 每日已兑换修为的次数
+	STORE_DAY_BUY_COUNT = 5; // 商城个人每日购买
+	STORE_LIFE_BUY_COUNT = 6; // 商城个人终生购买
+	STORE_SERVER_DAY_BUY_COUNT = 7; // 商城全服每日购买
+	STORE_SERVER_LIFE_BUY_COUNT = 8; // 商城全服终生购买
+	INSTANCE_DAY = 9; // 副本每日次数
+	INSTANCE_LITE = 10; // 副本终身次数
+	TREASURE_HUNT_PERSONAL_LIFE_NUM = 11; // 寻宝个人总次数
+	TREASURE_HUNT_SERVER_LIFE_NUM = 12; // 寻宝全服总次数
+	UNION_BOSS_CALL_PERSONAL_NUM = 13; // 行会boss召唤次数
+	TREASURE_HUNT_MAX_TRIGGER = 14; // 寻宝的触发次数
+	ITEM_USE_NUM = 15; // 道具使用次数
+	PERSONAL_BOSS_NUM = 16; // 个人BOSS每日挑战次数
+	TREASURE_HUNT_SERVER_MAX_TRIGGER = 17; // 寻宝的全服触发次数
+	STORE_LIFE_REFRESH_COUNT = 18; // 商城个人终生刷新
+	SECRET_BOSS = 19; // 秘境boss次数
+	RECYCLE_BOSS = 20; // 轮回boss次数
+	UNION_BOSS_COUNT = 21; // 参与行会boss次数
+	CALL_UNION_BOSS_COUNT = 22; // 召唤行会boss的次数
+	MATERIAL_INSTANCE_ENTER_NUM = 23; // 材料副本挑战次数
+	MATERIAL_INSTANCE_SWEEP_NUM = 24; // 材料副本扫荡次数
+	MONTH_CARD_REWARD_NUM = 25; // 月卡每日福利领奖次数
+	FIRE_PIG_ENTER_NUM = 26; // 烧猪副本次数
+	FAKE_OUT_BOSS_NUM = 27; // 通关假的野外boss副本次数
+	WEIWANG_RECYCLE_NUM = 28; // 威望每周回收次数
+	ARENA_CHALLENGE_NUM = 29; // 竞技场每日挑战次数
+	REPEAT_ACHIEVEMENT = 30; // 每日可重复做的成就
+	ARENA_IMPROVE_REWARD_NUM = 31; // 竞技场名次提升领奖次数
+	ARENA_CHALLENGE_DAY_NUM = 32; // 竞技场每日购买挑战次数
+	ACTIVITY_LEVEL = 34; // 等级竞技活动计数
+	CDKEY_REWARD_BY_GROUP = 35; // 指定group的激活码兑换计数
+	DAY_GET_ACHIEVEMENT_COUNT = 36; //
+	WING_DAY_LEVEL_COUNT = 37; // 金币升级光冀的次数
+	UNION_CHALLENGE_RESET = 38; // 行會挑戰重置次數
+	ROLE_RECHARGE_LIFE_TOTAL_COUNT = 39; // 玩家总充值rmb
+	ROLE_RECHARGE_DAY_TOTAL_COUNT = 40; // 玩家每日充值活动的元宝总数（不包括赠送和首充的1000元宝）
+	ROLE_RECHARGE_WEEK_TOTAL_COUNT = 41; // 玩家每周充值元宝总数（不包括赠送）
+	ACTIVITY_GET_COUNT = 42; // 活动领奖励
+	LADDER_DAY_COUNT = 43; // 每天打天梯的次数
+	DAY_WORSHIP_COUNT = 44; // 行会每日膜拜领取次数
+	ROLE_RECHARGE_MONEY_COUNT = 45; // 玩家总充值人民币
+	ROLE_NON_RECHARGE_MONEY_COUNT = 46; // 玩家活动赠送的元宝总数
+	ROLE_SEARCH_SYSTEM_EVENT_COMPLETE_COUNT = 47; // 玩家系统事件完成次数
+	TODAY_UNION_RED_PACK_COUNT = 48; // 今日抢到的红包个数
+	TODAY_UNION_RED_PACK_MONEY_COUNT = 49; // 今日抢到的红包总元宝数
+	INSTANCE_ITEM_USE_ADD_COUNT = 50; // 使用道具增加副本的次数
+	DAY_HUNT_COUNT = 51; // 每日寻宝上限
+	DAY_RECHARGE_COUNT = 52; // 每日充值次数
+	LEIJI_RECHARGE_ACTIVITY_DAYS = 53; // 累计充值活动天数
+	INSTANCE_BUY_NUM = 54; // 副本购买次数
+	AI_WEI_YOU_SHARE_COUNT = 56; // 爱微游分享计数
+	KING_FORBIDDEN_RESET_COUNT = 57; // 王者禁地手动重置次数
+	UNION_BOSS_AID_KILL_COUNT = 58; // 行会boss协助击杀次数限制
+	COMB_RECHARGE_RETURN = 59; // 累计充值活动天数
+	COMB_DAY_RECHARGE_COUNT = 60; // 每日充值次数
+	BUY_ENERGY_COUNT = 61; // 精力购买次数
+	TOTAL_HUNT_CREDITS_COUNT = 62; // 累计获得寻宝积分
+	SEARCH_REWARD_LIMIT_NUM = 63; // 探索基本奖励次数
+	WEIWANG_GLOBE_VALUE = 64; // 威望球值
+	HEART_FIGHT_POWER_TOP = 66; // 玩家心法总战力最高记录
+	SEARCH_GET_BY_LEVEL = 67; // 探索按等级推送事件数记录
+	UNION_CHALLENGE_BARRIER = 68; // 行会试炼挑战关卡数
+	ROLE_RECHARGE_DAY_COUNT = 69; // 玩家每日充值活动的元宝总数（不包括赠送的，包括首充的1000元宝）
+	GOD_DRAGON_DAILY_CHALLENGE_COUNT = 70; // 神龙副本挑战次数
+	BOSS_OPEN_REMIND_COUNT = 71; // boss活动开启提醒次数
+	EXCHANGE_YE_LI_COUNT = 72; // 每日已兑换业力次数
+	ACTIVITY_BOSS_EXTRA_DROP = 73; // 活动期间boss额外掉落
+	REN_HUANG_DAY_BUY_NUM = 74; // 人皇每日购买挑战次数
+	WEEK_GOD_EQUIP_HUNT_COUNT = 173; // 神装寻宝次数
+	DAY_GOD_EQUIP_HUNT_COST_FREE_COUNT = 174; // 神装寻宝消耗免费次数
+	BOSS_FIRST_KILL_REWARD_GET_NUM = 175; // boss首杀活动奖励领取数（全服）
+	LUO_SHEN_CHALLENGE_BUY_COUNT = 176; // 洛神副本购买次数
+	BOSS_COUNT_HAS_BUY_COUNT = 177; // 购买次数
+	SUMMARY_CONSUME = 178; // 累计消费总数
+	RED_ENVELOP_ACTIVITY_TIME_SUMMARY_RECHARGE = 179; // 红包活动期间累计充值
+	ELEMENT_BOSS_CHALLENGE_COUNT_BUY = 180; // 元素boss挑战次数购买
+	STORAGE_EXTEND_TIMES = 181; // 仓库扩容次数
+	RECYCLE_COUNT = 182; // 回收次数
+	DIE_COUNT = 183; // 死亡次数
+}
+
+//道具共享使用上限(已使用次数)
+message ResCountShareUsed {
+	repeated int64 useCount = 1; //高32位-类别,低32位-已使用次数
+}

@@ -1,0 +1,73 @@
+package npcstoreV2;
+import "bag.proto";
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "NpcStoreProto";
+
+//NPC物品信息
+message NpcStoreItem{
+	optional bagV2.BagItemInfo item = 1;//物品 物品里面的count没用，需要用下面的count
+	optional int32 type = 2;//NPC物品类型
+	optional int32 count = 3;//数量
+	optional int32 priceItemId = 4;//价格id
+	optional int32 priceCount = 5;//价格数量
+	optional int32 npcShopId = 6;//npcShop表的id
+}
+
+//NPC格子信息
+message NpcStoreGrid{
+	optional int32 id = 1;//NPC格子id
+	optional NpcStoreItem npcStoreItem = 2;//NPC物品信息
+	optional int32 type = 3;//NPC物品类型
+	optional int32 count = 4;//数量
+}
+
+message NpcStoreGridList{
+	repeated NpcStoreGrid npcStoreGrids = 1;//NPC物品信息
+}
+
+message ReqGetNpcStoreInfo {
+	optional int32 type = 1;//NPC物品类型
+	optional int32 page = 2; //页码（从多少页）
+	optional int32 countPerPage = 3; //每页条数
+	optional int32 pageNumber = 4;//页数（总共要多少页）
+}
+
+message ResNpcStoreInfo {
+	optional int32 type = 1;//NPC物品类型
+	optional int32 totalPage = 2; //总页数
+	optional int32 page = 3; //页码
+	optional int32 countPerPage = 4; //每页条数
+	optional int32 pageNumber = 5;//页数
+	optional NpcStoreGridList npcStoreGridList = 6;//NPC物品
+}
+
+//请求出售列表
+message ReqSellList{
+	optional int32 type = 1;//NPC物品类型
+}
+
+//上架
+message ReqPutOnNpcStoreItem{
+	optional int32 itemId = 1;//物品的ItemId
+	optional int32 count = 2;//购买数量
+	optional int32 type = 3;///NPC物品类型
+}
+
+//上架返回
+message ResPutOnNpcStoreItem{
+	optional int32 success = 1;//1 成功 2 失败
+}
+
+//购买
+message ReqBuyNpcStore{
+	optional int32 npcStoreGridId = 1;//NPC格子id
+	optional int64 lid = 2;//物品的唯一id
+	optional int32 type = 3;//NPC物品类型
+	optional int32 count = 4;//购买数量
+}
+
+//购买返回
+message ResBuyNpcStore{
+	optional int32 success = 1;//1 成功 2 失败
+}

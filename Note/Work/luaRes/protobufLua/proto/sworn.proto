@@ -1,0 +1,102 @@
+package swornV2;
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "Swornproto";
+
+
+
+//返回结义状态
+message ResHasSworn{
+    optional int32 isSworn = 1;//1为正在结义 2为没有结义
+}
+
+//向队员发送结拜面板
+message SendSwornInfo{
+	repeated StartBrotherInfo swornInfo = 1;//结义面板信息
+	optional int64 leaderId = 2;//队长ID
+	optional int64 longTime = 3;//时间
+}
+
+//开始结义面板信息
+message StartBrotherInfo{
+	optional int64 rid = 1;//玩家ID
+	optional string name = 2;//玩家姓名
+	optional int32 level = 3;//等级
+	optional int32 isAgree = 4;//是否同意（1为同意，2为不同意）
+	optional int32 career = 5;//职业
+	optional int32 sex = 6;//性别
+}
+
+
+//兄弟信息
+message BrotherInfo{
+	optional int64 rid = 1;//玩家ID
+	optional string name = 2;//玩家姓名
+	optional int32 intimacy = 3;//与此玩家的亲密度
+	optional int32 level = 4;//等级
+	optional int32 isDissolution = 5; //正在解散（1为正在解散，2为没有解散）
+	optional int64 disTime = 6;//时间
+	optional int32 career = 7;//职业
+	optional int32 sex = 8;//性别
+}
+
+//返回兄弟信息
+message ResYourBrother{
+	repeated BrotherInfo brothers = 1;//你的兄弟信息
+}
+
+//请求同意或不同意结义消息
+message ReqAgreeSworn{
+	optional int32 agree = 1;//1同意 2不同意
+}
+
+//返回同意结义消息
+message ResAgreeSworn{
+	optional int64 rid = 1;//玩家ID
+	optional int32 isAgree = 2;//是否同意（0是未知,1为同意，2为不同意）
+}
+
+//返回结义是否成功
+message ResSwornSuccess{
+	optional int32 isSuccess = 1;//1为成功，2为失败
+}
+
+//请求解散兄弟关系
+message ReqDissolutionBrother{
+	optional int64 brotherId = 1;//要解散的兄弟Id
+}
+
+//撤回解散兄弟关系
+message ReqRegretsDissolution{
+	optional int64 brotherId = 1;//要撤回的兄弟Id
+}
+
+//添加成功后返回新添加的兄弟信息
+message ResAddBrother{
+	repeated BrotherInfo addBrothers = 1;//添加的兄弟信息
+}
+
+//成功移除的兄弟信息
+message ResRemoveBrother{
+	optional BrotherInfo removeBrothers = 1;//移除的兄弟信息
+}
+
+//更新单个兄弟信息
+message ResOneBrother{
+	optional BrotherInfo theBrothers = 1;//更新兄弟信息
+}
+
+//请求断义列表
+message ResBreakOffRelations{
+	repeated BrotherInfo addBrothers = 1;//断义的关系列表
+}
+
+//正在结义的人的特效
+message ResSpecialEffects{
+	repeated int64 idList = 1;//正在结义的人的ID
+}
+
+//中断结义
+message ResInterruptSworn{
+	repeated int64 idList = 1;//正在结义的人的ID
+}

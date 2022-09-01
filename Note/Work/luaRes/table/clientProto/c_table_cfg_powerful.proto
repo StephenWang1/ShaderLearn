@@ -1,0 +1,22 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_POWERFUL
+{
+	required int32 id = 1;//id#客户端  
+	required string type = 2;//类型#客户端  1.我要升级 2.我要装备 3.装备提升 4.技能获取 5.转生凭证 6.资源获取
+	optional string name = 3;//名称#客户端  
+	optional string describe = 4;//描述#客户端  
+	required int32 order = 5;//排序#客户端#不存在共同参与合并的字段  
+	required int32 star = 6;//星级#客户端  
+	required int32 level = 7;//等级#客户端  
+	optional string jumpType = 8;//跳转类型#客户端  1.打开界面 2.寻路到NPC 3.商城购买物品 4.地图挂机
+	optional string parameter = 9;//参数#客户端  1.jump表ID 2. map_npc表ID 4.挂机参数：第1位固定deliverID#第2位固定门票conditionsID（没有填0）#第三位conditionID条件…#第N位conditionID
+	optional string openPanel = 10;//额外参数#客户端  传送对应读取mapid#deliverID
+	optional IntListJingHao condition = 11;//显示条件#客户端  显示条目的条件，满足条件需求才显示，conditionID#conditionID
+}
+
+message CFG_POWERFULARRAY
+{
+	repeated CFG_POWERFUL rows = 1;
+}

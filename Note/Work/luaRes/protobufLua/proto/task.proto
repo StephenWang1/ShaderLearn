@@ -1,0 +1,264 @@
+package taskV2;
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "TaskProto";
+
+message TaskDataInfo{
+  optional int32 taskId = 1;//任务id
+  optional int32 state = 2;//任务状态
+  repeated TaskGoalInfo goalInfo = 3;//目标数据
+  optional int32 npcId = 4;
+  optional int32 daily = 5; //日常任务奖励id
+  optional int64 submitTime = 6; //提交时间
+  optional int64 acceptTime = 7; //接受时间
+  optional int32 param = 8;//扩展参数
+}
+
+message TaskGoalInfo{
+  optional int32 goalId   = 1; //目标Id
+  optional int32 curCount = 2;//当前完成数量
+  optional int32 maxCount = 3; //最大数量
+  optional int32 param  = 4; //参数
+  optional int32 taskTips = 5; //任务获取参数
+  repeated TaskItems items = 6; //日常任务物品
+}
+
+message TaskItems{
+  required int32 item  = 1; //日常任务物品
+  optional int32 count   = 2;
+  optional int32 maxCount = 3;
+  optional int32 groupId = 4;
+}
+
+message OtherTaskDataInfo{
+  required int32 taskType = 1;//任务类型
+  required TaskDataInfo info = 2;
+}
+
+//返回任务进度消息
+message ResTaskProcess{
+  required TaskDataInfo info = 1;
+}
+
+//请求提交任务消息
+message SubmitTaskRequest{
+  required int32 taskId = 1;
+  optional int32 taskValue = 2;//参数值
+  optional int32 monsterTask = 3;// 不传或者0 其他任务， 1：怪物悬赏
+}
+
+//返回任务列表
+message ResTaskData{
+  optional TaskDataInfo info = 1;//任务数据
+  repeated OtherTaskDataInfo otherInfo = 2;//非主线任务列表
+}
+
+//返回支线任务状态 可接
+message ResOtherTaskState{
+  repeated OtherTaskStateInfo info = 1;
+}
+
+
+message OtherTaskStateInfo{
+  required int32 taskId = 1;
+  optional int32 count  = 2;
+}
+
+//请求打开面板
+message OpenPanelInfoRequest{
+  required int32 type = 1;//任务类型
+}
+
+
+//请求接受任务
+message AcceptTaskRequest{
+  required int32 taskId = 1;//任务id
+  optional int32 npcId = 2;
+}
+
+
+//请求立即完成指定任务
+message CompleteTaskQuicklyRequest{
+  required int32 taskId = 1;
+}
+
+//返回循环任务面板
+message ResRecycleTaskInfo{
+  optional TaskDataInfo info = 1;//任务信息列表
+  optional int32 acceptCount = 2;//剩余接受次数
+}
+
+
+//返回雇佣兵任务面板信息
+message ResMercenaryTaskInfo{
+  optional TaskDataInfo info = 1;//任务信息列表
+  optional int32 buyTimes = 2; //剩余购买次数
+  optional int32 accepCount = 3; //已经接受次数
+}
+
+//一键完成任务
+message AutoFinishTaskRequest{
+  optional int32 taskId = 1;//任务
+  optional int32 count = 2;//次数
+}
+
+//购买雇佣兵次数
+message BuyMercenaryTaskTimesRequest{
+    optional int32 times = 1; //次数
+}
+
+//返回日常任务面板信息
+message ResDailyTaskInfo{
+  repeated DailyTaskInfo info = 1;//任务信息列表
+}
+
+message DailyTaskInfo{
+  optional TaskDataInfo info = 1;//任务信息
+  required int32 accepCount = 2;
+  required int32 type  = 3; //任务类型
+  required int32 buyCount = 4;//购买次数
+  repeated TaskDataInfo histroy = 5; //历史记录
+  optional int32 freeCount = 6;
+}
+
+//购买日常任务次数
+message BuyDailyTaskTimesRequest{
+    required int32 type  = 1; //类型
+    optional int32 times = 2; //次数
+}
+
+//返回主线任务面板
+message ResMainTaskInfo{
+  optional TaskDataInfo info = 1;//任务信息列表
+}
+
+//请求日常材料列表
+message ReqMaterialList{
+  optional int32 profession = 1;// 1铁匠  2屠夫  3药商
+}
+
+//返回日常材料列表
+message ResMaterialList{
+  optional int32 profession = 1;// 1铁匠  2屠夫  3药商
+  repeated MaterialInfo info = 2;//信息
+
+}
+//材料详情
+message MaterialInfo{
+  optional int32 itemId = 1;//itemId
+  optional int32 count = 2;//目前NPC库存多少
+  optional int32 hasCount = 3;//玩家身上有多少
+  optional int32 price = 4;//价格
+  optional int32 storeId = 5;//价格所对应的商店ID
+}
+
+//请求购买或者出售日常材料
+message ReqBuyMaterial{
+  optional int32 buyOrSell = 1;// 1是购买  2是出售
+  optional int32 itemId = 2;//itemId
+  optional int32 count = 3;//目前只能单个购买
+  optional int32 profession = 4;// 1铁匠  2屠夫  3药商
+}
+
+
+//返回支线任务信息
+message ResMainOtherTaskInfoPanel{
+  repeated TaskDataInfo info = 1;//任务信息
+}
+
+//提交日常任务物品
+message ReqSubmitDailyItem{
+  required int32 type = 1; // 日常任务类型
+}
+
+//提交日常任务物品
+message ResSubmitDailyItem{
+  required int32 bool = 1; //成功or失败
+}
+
+//攻略
+message ResTaskStrategy{
+  required int32 task = 1;
+}
+
+//返回精英任务
+message ResEliteTaskInfoPanel{
+  optional TaskDataInfo info = 1;//任务信息
+  optional bool canBuy = 2; //是否可买
+  optional int32 accepCount = 3; //已经接受次数
+  repeated TaskDataInfo histroy = 4; //历史记录
+  optional int32 buyCount = 5; //买次数
+  optional int32 canBuyCount = 6; //可买次数
+}
+
+message TaskSetting{
+  repeated int64 tips = 1;
+}
+
+message ResEliteBuyPrice{
+  optional int32 itemid = 1;
+  optional int32 count = 2;
+}
+
+//返回精英任务
+message ResBossTaskInfoPanel{
+  optional TaskDataInfo info = 1;//任务信息
+  optional int32 accepCount = 2; //已经接受次数
+  repeated TaskDataInfo histroy = 3; //历史记录
+}
+
+//返回怪物悬赏
+message ResMonsterRewardTaskInfoPanel{
+  repeated TaskDataInfo info = 1;//任务信息
+}
+
+
+message TaskReward{
+	optional int32 itemId = 1;//物品的itemId
+	optional int32 count = 2;//获取到的数量
+}
+
+message TheTaskHasRewarded{
+   repeated TaskReward reward = 1; //奖励
+   optional int32 per = 2; //百分比
+   optional int32 group = 3;
+}
+
+//请求领取每日任务
+message ReqAccepNewDailyTask{
+   optional int32 monsterId = 1;
+}
+
+//请求提交每日任务
+message ReqSubmitNewDailyTask {
+   optional int32 monsterId = 1;
+   optional bool double = 2;
+}
+
+//全部日常任务信息
+message ResAllNewDailyTaskInfo {
+   optional int32 tadayCount = 1;//今日已完成个数
+   repeated NewDailyTaskState state = 2;
+   optional int32 taskId = 3;
+}
+
+message NewDailyTaskState {
+   optional int32 monsterId =1;
+   optional int32 state = 2;//1：未接取 2：已接取 3: 已完成 4：已领取
+   optional int32 bossId = 3;
+   optional int32 curKillCount = 4;
+}
+
+message SubmitSoulTaskItem{
+   optional int32 taskId = 1;
+}
+
+message SoulTaskInfo{
+   optional int32 completeCount = 1;//当天已完成次数
+   repeated SoulTaskState state = 2;
+}
+
+message SoulTaskState{
+   optional int32 taskId = 1;
+   optional int32 state = 2;//1:未完成  2 已完成
+}

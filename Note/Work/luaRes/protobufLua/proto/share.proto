@@ -1,0 +1,15 @@
+package shareV2;
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "ShareProto";
+
+
+//玩家进入联服的信息
+message EnterShareMapInfo {
+	optional int32 uniteUnionType = 1; 	//同盟类型 1,2,3,4
+	optional int32 unitePosition = 2;	//盟会职位 1-会长，2-副会长，3-成员
+	optional int32 shareNum = 3; //联服的次数
+	optional int32 uniteUnionRank = 4; //联盟排名
+}
+
+

@@ -1,0 +1,37 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_CUILIAN
+{
+	required uint32 id = 1;//淬炼ID#客户端#不存在共同参与合并的字段  不能变动淬炼物品排序按等级排序，等级相同按id排序
+	required int32 itemid = 2;//装备ID#客户端  参与淬炼主要物品ID 格式：物品id#数量
+	optional IntListJingHao itemid2 = 3;//道具id#客户端  参与淬炼的消耗物品id 格式：物品id#物品id
+	optional IntListJingHao replaceItemid = 4;//道具id#客户端  可替代的物品id 格式：物品id#物品id
+	optional IntListJingHao number = 5;//合成数量#客户端  合成物品所需数量
+	optional string name = 6;//道具名称#客户端  参与淬炼物品名称
+	optional IntListJingHao outputgoods = 7;//淬炼物品ID#客户端  目标装备 需要淬炼成的装备id
+	optional string outputquantity = 8;//被淬炼数量#客户端  
+	required uint32 syntheticgoods = 9;//淬炼物品名称#客户端  
+	optional IntListJingHao currency = 10;//货币消耗#客户端  淬炼消耗货币  货币ID#数量
+	required int32 synthesisType = 11;//淬炼逻辑类型#客户端  1为随机淬炼 0为固定淬炼 不填默认为0
+	required uint32 tabType = 12;//页签类型#客户端  页签类型1武器 2衣服 3头盔 4项链 5手镯 6戒指 7腰带 8鞋子
+	required int32 compare = 13;//是否于身上装备进行比较#客户端  是否于身上装备进行比较 1 是 2 否
+	required int32 compel = 14;//是否需要显示身上穿戴的装备#客户端  检测存在哪个位置上 1主材料是否人物装备着 2主材料是否为身上灵兽3主材料是否为灵兽身上装备 4检测人物和灵兽装备  检测存在哪个位置上,如果存在,强制显示
+	optional IntListJingHao equipItem = 15;//检测身上物品id#客户端  检测身上物品id和装备位   格式  装备ID#装备位（武器 1 头盔2  衣服 3 项链4 左手5 右手51 左戒6  右戒61 腰带7 鞋子8 灯13 魂玉15
+	optional IntListJingHao bagItem = 16;//检车背包物品id#客户端  背包中检测ID  如果需要检测类型5(是否有淬炼的主材料) 如果有这个ID 返回条件true
+	optional string replaceName = 17;//列表名字内容显示#客户端  列表名字内容显示，如果填了此列则显示此名字，未填则显示道具名字
+	required uint32 condition = 18;//开服天数#客户端  开服天数显示判断
+	required uint32 redPoint = 19;//是否需要红点#客户端  是否需要红点，1需要0不需要默认不需要, 偏职业 淬炼之后可使用 材料足够显示红点
+	required uint32 redPointCompare = 20;//红点是否需要对比身上的装备#客户端  0需要1不需要
+	optional string desc = 21;//淬炼提示文本#客户端  必定成功提示文本
+	required uint32 order = 22;//排序#客户端  根据页签内排序显示
+	//optional string probability = 23;//淬炼几率#服务器  物品成功初始几率 万分比
+	//optional string failureCom = 24;//失败补偿几率#服务器  物品失败概率补偿 万分比
+	//optional string failProbability = 25;//必定失败几率#服务器  低于该几率则直接为失败 万分比
+	//required uint32 announce = 26;//是否公告#服务器  淬炼出的物品是否需要公告0不需要1需要
+}
+
+message CFG_CUILIANARRAY
+{
+	repeated CFG_CUILIAN rows = 1;
+}

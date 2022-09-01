@@ -1,0 +1,14 @@
+package rageV2;
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "RageProto";
+
+// 激活/取消狂暴之力
+message ActivateOrCancelRage {
+  optional int32 type = 1; //type 1:激活 2:取消
+}
+
+// 狂暴之力状态
+message RageState {
+  optional int32 state = 1; //0:不满足条件未激活 1:满足条件未激活 2:满足条件已激活 3:已激活后不满足条件
+}

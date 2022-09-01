@@ -1,0 +1,43 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_VIP
+{
+	required uint32 vipLevel = 1;//VIP等级#客户端#C#不存在共同参与合并的字段  等级，0级开始
+	//required uint32 needExp = 2;//升到下级所需vip经验#客户端#C  升到下级所需vip经验
+	//optional string tips = 3;//vip特权说明#客户端#C  特权描述说明
+	//required uint32 levelGift = 4;//等级礼包id#客户端#C  预留
+	//required uint32 buffId = 5;//经验buffid#客户端#C  预留
+	//required uint32 atkAdd = 6;//攻击加成#客户端#C  预留
+	//required uint32 reborn = 7;//原地复活次数#客户端#C  预留
+	//required uint32 wishTime = 8;//每日祈祷上限#客户端#C  预留
+	//required uint32 eatExpTime = 9;//经验丹使用次数#客户端#C  预留
+	//required uint32 expBallReward = 10;//聚魂珠免费多倍领取次数#客户端#C  预留
+	//required uint32 expBallSpeed = 11;//聚魂珠经验存储速度#客户端#C  预留
+	//required uint32 moreTaskTime = 12;//更多降妖伏魔次数#客户端#C  预留
+	//optional IntListJingHao auctionCount = 13;//拍卖行上架道具最大数量#客户端#C  元宝物品上架#拍品上架#求购上架
+	//required uint32 recycleTimes = 14;//vip回收次数#客户端#C  预留
+	//required uint32 goldBar = 15;//金条使用次数#客户端#C  预留
+	//required uint32 voice = 16;//每天可发语音次数#客户端#C  预留
+	//required uint32 addBagGrid = 17;//背包格子增加#客户端#C  预留
+	//required uint32 expUp = 18;//挂机经验#客户端#C  预留
+	//required uint32 coinUp = 19;//挂机金币#客户端#C  预留
+	//required uint32 reUnionBos = 20;//重置帮会挑战次数#客户端#C  预留
+	//required uint32 sweepBos = 21;//一键扫荡个人boss#客户端#C  预留
+	//required uint32 addUnionBossNum = 22;//帮派boos召唤次数增加#客户端#C  预留
+	//required uint32 addMaterialNum = 23;//材料副本次数#客户端#C  预留
+    //@4#5#6#7#8#9#10 levelGift#2 buffId#10 atkAdd#5 reborn#5 wishTime#2 eatExpTime#2 expBallReward#2
+	//required uint32 levelGift2_buffId10_atkAdd5_reborn5_wishTime2_eatExpTime2_expBallReward2 = 24;//合并字段#等级礼包id_C#经验buffid_C#攻击加成_C#原地复活次数_C#每日祈祷上限_C#经验丹使用次数_C#聚魂珠免费多倍领取次数_C levelGift#2 buffId#10 atkAdd#5 reborn#5 wishTime#2 eatExpTime#2 expBallReward#2
+    //@11#12#14#15#16#17#18 expBallSpeed#4 moreTaskTime#2 recycleTimes#2 goldBar#2 voice#2 addBagGrid#3 expUp#10
+	//required uint32 expBallSpeed4_moreTaskTime2_recycleTimes2_goldBar2_voice2_addBagGrid3_expUp10 = 25;//合并字段#聚魂珠经验存储速度_C#更多降妖伏魔次数_C#vip回收次数_C#金条使用次数_C#每天可发语音次数_C#背包格子增加_C#挂机经验_C expBallSpeed#4 moreTaskTime#2 recycleTimes#2 goldBar#2 voice#2 addBagGrid#3 expUp#10
+    //@19#20#21#22#23 coinUp#10 reUnionBos#2 sweepBos#2 addUnionBossNum#2 addMaterialNum#2
+	//required uint32 coinUp10_reUnionBos2_sweepBos2_addUnionBossNum2_addMaterialNum2 = 26;//合并字段#挂机金币_C#重置帮会挑战次数_C#一键扫荡个人boss_C#帮派boos召唤次数增加_C#材料副本次数_C coinUp#10 reUnionBos#2 sweepBos#2 addUnionBossNum#2 addMaterialNum#2
+	required int32 servantMana = 27;//灵兽聚灵数#客户端  对应等级每天能领取的灵力
+	optional string manaLevel = 28;//聚灵等级#客户端  对应聚灵不同等级的文字展示
+	//optional string expShow = 29;//经验buff效果#客户端未使用#C  预留
+}
+
+message CFG_VIPARRAY
+{
+	repeated CFG_VIP rows = 1;
+}

@@ -1,0 +1,66 @@
+package tradeV2;
+
+import "bag.proto";
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "TradeProto";
+
+//请求进行交易
+message ReqTrade{
+    optional int64 uid = 1;//玩家ID
+}
+
+//返回交易请求
+message ResTrade{
+    optional int64 uid = 1;//玩家ID
+    optional string name = 2;//玩家名
+    optional int64 endTime = 3;//倒计时结束时间戳
+}
+
+//同意交易
+message ReqAgreeTrade{
+    optional int64 uid = 1;//玩家ID
+    optional int32 agree = 2; // 0.拒绝1.同意 
+}
+
+//设置交易进度
+message ReqSetTradeProgress{
+   optional int32 operation = 1;//锁定，1锁定，2取消锁定，3确认交易，4取消交易
+}
+
+//返回交易状态变化
+message ResTradeStateChange{
+   optional int64 uid = 1;
+   optional int32 state = 2;//状态，1交易成功状态，2交易取消状态
+}
+
+
+message TradePartyInfo {
+	required int64 roleId = 1;
+	required string name = 2;
+	repeated bagV2.BagItemInfo items = 3;
+	required int32 locked = 4;//是否锁定 1是 0 否
+	required int32 submit = 5;//确认交易 1是 0 否
+	optional int32 maxCount = 6; //最大交易数量
+}
+
+message TradeInfo {
+	repeated TradePartyInfo parties = 1;
+}
+
+//添加物品
+message AddItemToTradeRequest {
+	required int64 itemId = 1;
+	required int32 count = 2;
+}
+
+//删除物品
+message RemoveItemFromTradeRequest {
+	required int64 lid = 1;
+}
+
+//设置交易金额
+message SetTradeMoneyRequest {
+	required int32 gold = 1;
+	required int32 yuanbao = 2;
+}

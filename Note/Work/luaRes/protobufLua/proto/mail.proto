@@ -1,0 +1,26 @@
+package mailV2;
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "MailProto";
+
+message MailInfo {
+	required int64 mailId = 1;
+	optional string title = 2;//标题
+	optional string content = 3;//内容
+	required string from = 4;//发件人
+	required int64 sendTime = 5;//发件时间戳
+	optional string items = 6;//物品,格式 configId#count#id#限时(秒数)#强化等级#祝福值#注灵等级#最大星级#当前耐久值#印记浮动属性#属性（没有是null）#掉落浮动属性（没有是null）
+	required int32 state = 7;//0未读 1已读 2已提取物品
+}
+
+message MailList {
+	repeated MailInfo mails = 1;
+}
+
+message MailIdMsg {
+	repeated int64 mailIds = 1;
+}
+
+message MsgRemind {
+	required int32 type = 1;// 1：邮件 2：社交
+}

@@ -1,0 +1,16 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_SOUL_REWARD
+{
+	required int32 id = 1;//id#客户端#C  编号
+	optional IntListList itemId = 2;//奖励道具ID#客户端  道具ID
+	required int32 rewardIcon = 3;//概率角标判定#客户端  需要道具显示角标的判定（默认0不显示 1显示）
+	//required int32 weight = 4;//随机权值#服务器  任务的权重比
+	//optional string mark = 5;//策划备注  道具备注
+}
+
+message CFG_SOUL_REWARDARRAY
+{
+	repeated CFG_SOUL_REWARD rows = 1;
+}

@@ -1,0 +1,28 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_INTENSIFY
+{
+	required uint32 lv = 1;//等级#客户端#C#不存在共同参与合并的字段  强化等级
+	//optional IntListList consume = 2;//普通道具种类及对应的数量#客户端#C  强化消耗物品#数量#概率&物品#数量#概率，可消耗各种黑铁矿不同概率 &分割不同的物品
+	//required uint32 type = 3;//装备类型#客户端#C  1为普通装备2为法宝装备
+	//required uint32 attAdd = 4;//攻击力上限数值#客户端#C  等级提升后该装备的攻击力上限属性值
+	//optional IntListList attTaoMin = 5;//攻击下限#客户端#C  套装属性，123表示战士法师道士
+	//optional IntListList attTaoMax = 6;//攻击上限#客户端#C  套装属性，高级套装直接覆盖低级套装
+	//optional IntListList maxHp = 7;//生命#客户端#C  套装属性
+	//optional IntListList phyDefenceMin = 8;//物防下限#客户端#C  套装属性
+	//optional IntListList phyDefenceMax = 9;//物防上限#客户端#C  套装属性
+	//optional IntListList magicDefenceMin = 10;//魔防下线#客户端#C  套装属性
+	//optional IntListList magicDefenceMax = 11;//魔防上限#客户端#C  套装属性
+	//optional IntListJingHao transferResource = 12;//装备强化等级转移需要消耗的道具种类及数量#客户端#C  消耗的道具种类及对应的数量
+	//optional IntListJingHao effectColor = 13;//升星发光特效RGB#客户端#C  R#G#B#A
+	//required int32 effectLuminance = 14;//升星发光特效亮度#客户端#C  升星发光特效亮度0-10
+	//optional string effectSpeed = 15;//升星发光特效速度#客户端#C  X#Y#Z#W
+    //@3#4#14 type#2 attAdd#10 effectLuminance#10
+	//required uint32 type2_attAdd10_effectLuminance10 = 16;//合并字段#装备类型_C#攻击力上限数值_C#升星发光特效亮度_C type#2 attAdd#10 effectLuminance#10
+}
+
+message CFG_INTENSIFYARRAY
+{
+	repeated CFG_INTENSIFY rows = 1;
+}

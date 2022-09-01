@@ -1,0 +1,78 @@
+package appearanceV2;
+
+import "bag.proto";
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "AppearanceProto";
+
+
+//返回启用的时装列表
+message ResGetWearFashion{
+	optional int64  rid = 1; //返回的玩家ID
+	repeated wearPosition wearIds = 2;//已穿戴的时装
+}
+
+
+//返回拥有的时装列表
+message ResGetHasFashion{
+	repeated FashionType FashionInfo = 1; //
+}
+
+//穿戴的消息
+message wearPosition{
+	optional int32 index = 1;//位置
+	optional int32 id = 2;//id
+}
+
+message FashionType{
+	optional int32 subType = 1;//子类
+	repeated bagV2.BagItemInfo itemList = 2; //道具列表
+}
+
+//请求起用关闭这件时装
+message ReqEnableFashion{
+	optional int32 itemId = 1 ;//itemId
+	optional int32 close = 2; // 1是启用  2是关闭
+}
+
+//返回所有称谓
+message ResGetHasAppellation{
+	repeated TitleInfo titleInfo = 2;//所有的称谓
+}
+
+
+//称谓信息
+message TitleInfo{
+	optional int32 titleId =1 ;//称谓id
+	optional string titleDes =2;//称谓描述
+}
+
+
+//请求起用关闭称谓
+message ReqEnableTitle{
+	optional int32 titleId = 1 ;//titleId
+	optional int32 close = 2; // 1是启用  2是关闭
+}
+
+//请求修改称谓
+message ReqModifyTitle{
+	optional int32 titleId = 1 ;//titleId
+	optional string modifyTitle = 2; //
+}
+
+//返回修改称谓
+message ResModifyTitle{
+	optional int32 titleId = 1 ;//titleId
+	optional string modifyTitle = 2; //
+	optional int64 rid = 3;
+}
+
+//返回启用的称谓
+message ResEnableAppellation{
+	optional TitleInfo titleInfo = 1;//启用的称谓
+}
+
+//外观红点（新添加的外观ID）
+message ResAppearanceRedPoint{
+	optional int32 id = 1;//外观的itenmId
+}

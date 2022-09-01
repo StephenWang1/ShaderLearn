@@ -1,0 +1,51 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_TITLE
+{
+	required uint32 id = 1;//ID#客户端#C  ID#客户端
+	//optional string titleName = 2;//称号名称#客户端#C  
+	//required uint32 index = 3;//界面排序#客户端#C  
+	//required int32 icon = 4;//图标显示#客户端#C  
+	//optional string model = 5;//图片与模型#客户端#C  
+	//required uint32 group = 6;//同组称号#客户端#C  保留ID最大
+	//required int32 magicAttackMin = 7;//法术最小攻击#客户端#C  
+	//required int32 magicAttackMax = 8;//法术最大攻击#客户端#C  
+	//required int32 taoAttackMin = 9;//道术最小攻击#客户端#C  
+	//required int32 taoAttackMax = 10;//道术最大攻击#客户端#C  
+	//required int32 phyAttackMin = 11;//物理最小攻击#客户端#C  
+	//required int32 phyAttackMax = 12;//物理最大攻击#客户端#C  
+	//required int32 def = 13;//物防#客户端#C  
+	//required int32 mdef = 14;//魔防#客户端#C  
+	//required int32 hp = 15;//生命#客户端#C  
+	//required uint32 pkAtt = 16;//对玩家造成伤害增加#客户端#C#不存在共同参与合并的字段  
+	//required uint32 pkDef = 17;//受到玩家伤害减少#客户端#C#不存在共同参与合并的字段  
+	//optional string des = 18;//描述#客户端#C  
+	//optional string career = 19;//职业条件#客户端#C  
+	//optional string lastTime = 20;//持续时间#客户端#C  单位：分钟
+	//optional string timeRemark = 21;//时间描述#客户端#C  用于特殊情况（时效不确定）的称号，如果填了此列，则不显示剩余时间，显示这里的内容
+	//optional string priority = 22;//客户端显示#客户端#C  
+	//required int32 quality = 23;//品质#客户端#C  和背包quality意义相同，用于显示品质色
+	//required int32 itemId = 24;//称号对应的itemid#客户端#C  主要实现在界面中的称号点击显示tips，配置相对应的道具id
+    //@4#7 icon#15 magicAttackMin#15
+	//required uint32 icon15_magicAttackMin15 = 25;//合并字段#图标显示_C#法术最小攻击_C icon#15 magicAttackMin#15
+    //@8#9 magicAttackMax#15 taoAttackMin#15
+	//required uint32 magicAttackMax15_taoAttackMin15 = 26;//合并字段#法术最大攻击_C#道术最小攻击_C magicAttackMax#15 taoAttackMin#15
+    //@10#11 taoAttackMax#15 phyAttackMin#15
+	//required uint32 taoAttackMax15_phyAttackMin15 = 27;//合并字段#道术最大攻击_C#物理最小攻击_C taoAttackMax#15 phyAttackMin#15
+    //@12#13 phyAttackMax#15 def#15
+	//required uint32 phyAttackMax15_def15 = 28;//合并字段#物理最大攻击_C#物防_C phyAttackMax#15 def#15
+    //@14#15 mdef#15 hp#15
+	//required uint32 mdef15_hp15 = 29;//合并字段#魔防_C#生命_C mdef#15 hp#15
+	required uint32 bossDamageAdd = 30;//BOSS伤害#客户端  对BOSS伤害增加属性（万分比
+	required uint32 dropRate = 31;//掉率#客户端  增加掉宝概率（十万分比
+	//optional string termType = 32;//条件类型#客户端未使用#C  
+	//optional string term = 33;//获得条件#客户端未使用#C  
+	//optional string eventTime = 34;//获得时间#客户端未使用#C  
+	//required int32 mailId = 35;//是否发邮件#服务器  持续时间结束是否发邮件默认0 0不发 填其他的则发对应邮件id
+}
+
+message CFG_TITLEARRAY
+{
+	repeated CFG_TITLE rows = 1;
+}

@@ -1,0 +1,189 @@
+package treasureHuntV2;
+import "bag.proto";
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "TreasureHuntProtos";
+
+//寻宝仓库信息
+message TreasureHuntInfo{
+	repeated bagV2.BagItemInfo itemInfo= 1;//寻宝仓库物品
+	optional int32 maxGrid = 2; //最大格子数量
+}
+
+
+//寻宝仓库更新变化
+message StorageUpdateInfo{
+    optional bagV2.BagItemInfo item = 1;//道具 如果是取出，只穿道具的唯一id
+	optional int32 operate = 2;//操作 1=加入 2=取出
+}
+
+//请求所有牌的信息
+message	PrivateCardOverRequest{
+	optional bool privateOver = 1; //是否私有牌面结束
+}
+
+//寻宝请求
+message TreasureRequest{
+	optional int32 type = 1; //1为一次，2为10次，3为50次; 
+	optional bool treasurePrivate = 2; //是否私有牌面
+	optional int32 cardPage = 3; //页数
+	optional bool buttonMax = 4; //是否按下了最大按钮
+}
+
+//请求翻开某一张牌
+message TurnCardRequset{
+	optional int32 page = 1; //页数
+	optional int32 index = 2; //卡牌的位置，从0开始
+}
+
+//返回翻牌等失败原因
+message TurnCardFailInfo{
+	optional int32 ret = 1; //1: 指定的牌已经翻了 2: 所有的牌已经全翻了
+}
+
+//返回卡牌的私有信息
+message TurnCardPrivateInfo{
+	optional bool cardPrivate = 1; //true: 私有
+}
+
+
+//寻宝一张卡牌信息
+message CardInfo{
+	optional int32 index = 1;  //卡牌的位置，从0开始
+	optional bool front = 2; //是否正面
+	optional int64 roleId = 3; //翻牌的玩家Id
+	repeated TreasureHuntItemInfo HuntItemList = 4; //开的奖励的物品Id
+}
+
+//寻宝的
+message TreasureHuntItemInfo{
+	optional bagV2.BagItemInfo item = 1;
+	optional bool effect = 2;
+}
+
+//整个卡牌的信息
+message AllCardInfo{
+	repeated CardInfo cards = 1;
+	optional int32 page = 2; //页数
+	optional int32 countDownBeginS = 3; //开始的时间(秒数)
+	optional int32 countDownS = 4; //倒计时秒数
+	optional bool privateCard = 5; //私有牌
+} 
+
+
+//仓库物品变动
+message TreasureItemChangeList {
+	repeated bagV2.BagItemInfo changeList = 1;//物品列表
+}
+
+//拿去某个物品请求
+message GetTreasureItemRequest{
+	required int64 itemId = 1;//物品的唯一id
+}
+
+//寻宝历史记录
+message HuntHistory{
+	optional int32 type = 1; // 1：全部信息，2：新加的
+	repeated HuntHistoryInfo serverHistory = 2;//服务器信息记录
+	repeated HuntHistoryInfo rolehistory = 3;//个人寻宝记录
+}
+
+//一条寻宝历史记录
+message HuntHistoryInfo{
+	optional string history = 1;  //字符串
+	optional bagV2.BagItemInfo itemInfo = 2; //物品信息
+	
+}
+
+//积分兑换请求
+message ExchangePointRequest{
+	required int32 id = 1;//物品id
+}
+
+//经验丹使用请求
+message ExpUseRequest{
+	repeated int64 idList = 1;//id集合
+}
+
+//响应寻宝界面id
+message TreasureIdResponse{
+	required int32 id = 1;//寻宝id
+}
+
+//寻宝仓库中回收物品请求
+message HuntCallbackRequest {
+    repeated int64 idList = 1; //物品的仓库id列表
+}
+
+//寻宝仓库中回收物品响应
+message HuntCallbackResponse {
+    repeated int64 indexs = 1 [packed = true]; //被回收的物品物品Id
+    optional int64 exp = 2; //增加的经验
+}
+
+//寻宝新特戒今日是否显示提示
+message NewRingDisplay{
+	optional bool todatDisplay = 1;
+}
+
+//查看限时寻宝池响应
+message LimitTimeTreasureHuntPool{
+	repeated int64 itemInfo = 1;//高32位是configId，低32位是否显示new图标（0不显示， 1显示）
+}
+
+
+//请求查看转生人数
+message ReinNumRequest {
+	repeated int32 rein = 1;
+}
+
+//转生人数信息
+message ReinNumInfo {
+	optional int32 rein = 1;
+	optional int32 num = 2; 
+}
+
+//返回转生人数信息
+message ReinNumResponse {
+	repeated ReinNumInfo reinNumInfo = 1;
+}
+
+message ReqDigTreasure{
+    optional int32 type = 1;//type=1黄金挖宝 else 普通挖宝
+}
+
+//请求一键回收
+message ReqOneKeyCallBack{
+    repeated int64 itemIds = 1;
+}
+
+//请求一键使用提取
+message ReqOneKeyOperation {
+    optional int32 type = 1;//1 :使用 2：提取
+	optional int64 lid = 2;//type==2时 该字段传值就是单个提取
+}
+
+message DigTreasureWareHouse{
+    repeated bagV2.BagItemInfo itemInfo = 1; //挖宝仓库信息
+}
+
+//玩家挖宝次数
+message RoleDigTreasureCount {
+   optional int32 count = 1;
+}
+
+message DigTreasureState{
+   optional int64 rid = 1;
+   optional int32 state = 2;//1：挖掘 0：未挖掘
+}
+
+//当前挖出的所有道具信息 
+message DigTreasureItems {
+   repeated bagV2.BagItemInfo item = 1;
+}
+
+message GoldDigActiveState{
+   optional int32 state = 1;//1 开启  0关闭
+}
+
+

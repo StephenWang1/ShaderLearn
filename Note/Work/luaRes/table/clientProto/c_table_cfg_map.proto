@@ -1,0 +1,87 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_MAP
+{
+	required uint32 id = 1;//地图ID#客户端#C#不存在共同参与合并的字段  1位（1主城地图、中转地图，野外公共地图，3单人副本地图）；23地图位置；4地图编号 10室内地图
+	//required uint32 map = 2;//地图切换目录#客户端#C#不存在共同参与合并的字段  关联ScenesRes
+	//required uint32 miniMap = 3;//小地图#客户端#C#不存在共同参与合并的字段  关联MiniMap
+	//required uint32 data = 4;//阻挡配置（可共用）#客户端#C#不存在共同参与合并的字段  关联SceneEditorCacheMapByte
+	//optional string fgmap = 5;//复古地图数据名#客户端#C  复古地图的数据名，用于复古地图绘制替换，不填则不替换为复古地图
+	//optional string name = 6;//地图名称(服务端之前就是用这个公告的)#客户端#C  
+	//required uint32 width = 7;//地图宽度#客户端#C#不存在共同参与合并的字段  
+	//required uint32 height = 8;//地图高度#客户端#C#不存在共同参与合并的字段  
+	//optional IntListJingHao miniscaling = 9;//小地图尺寸#客户端#C  小地图尺寸x#小地图尺寸y#原地图缩放对照尺寸x#原地图缩放对照尺寸y#原地图缩放对照中心偏移量x#原地图缩放对照中心偏移量y
+	//required uint32 fuhuo = 10;//复活倒计时#客户端#C  无用字段
+	//required uint32 cls = 11;//类型#客户端#C  1主城；2公共副本；3个人副本；4多人副本（目前并没有用到这个字段，需要自添）；5新手期分线地图
+	//optional IntListJingHao conditionId = 12;//地图进入等级限制#客户端#C  关联cfg_conditions
+	//required uint32 rpg = 13;//是否是即时战斗地图#客户端#C  
+	//optional string finding = 14;//开启自动寻路#客户端#C  是否开启自动寻路 默认开启 1不开启
+	//required uint32 duplicate = 15;//是否是副本#客户端#C  
+	//optional string exit = 16;//是否有出口#客户端#C  不填为有出口 填1为没出口 无出口的地图 寻路未发现路线后，会提示是否直接离开
+	//required uint32 cancross = 17;//是否可以无条件穿人#客户端#C  0不可穿，1可穿（不配默认0，服务器用，不可穿时玩家重叠，服务器会拉回）
+	//required uint32 safe = 18;//是否是安全地图#客户端#C  0不是，1是
+	//required uint32 playerAI = 19;//玩家ai配置表#客户端#C  0不是，1是
+	//required int32 mapType = 20;//地图类型#客户端#C  新增type需要让服务器先加，不然会导致服务器起不来0 普通，1 野外boss，
+	//required uint32 canHereRelive = 21;//买活类型#客户端#C  0、不能买活，1、原地买活
+	//optional IntListJingHao hereReliveCost = 22;//买活消耗道具#客户端#C  道具id#基础消耗数量#每次复活增加消耗数量#最高消耗数量
+	//optional IntListJingHao autoRelive = 23;//自动复活的类型和时间#客户端#C  配置方式：类型#时间（秒）1、回城复活，2、原地复活，3、出生点复活；4、随机坐标复活；5、回到挂机；6、退出地图
+	//required uint32 fightModel = 24;//进入地图默认的攻击模式#客户端#C  0全体1行会2善恶
+	//required uint32 viewRange = 25;//视野范围#客户端#C  
+	//required uint32 serverType = 26;//服务器类型#客户端#C  1普通2跨服
+	//required int32 homeMapId = 27;//从地图回城回的地方#客户端#C#不存在共同参与合并的字段  从地图回城回的地方
+	//required int32 homeX = 28;//坐标点x#客户端#C  坐标点x
+	//required int32 homeY = 29;//坐标点y#客户端#C  坐标点y
+	//required int32 huanshou = 30;//幻兽出战#客户端#C  1是不出 不填是出 2是自动合体，但可以出战
+	//required int32 automatic = 31;//自动战斗#客户端#C  进入地图是否自动战斗1是自动 不填不是自动
+	//required uint32 banRandomTransfer = 32;//是否禁止随机传送石#客户端#C  0不禁止1禁止
+	//required uint32 banHomeTransfer = 33;//是否禁止回城相关功能#客户端#C  0不禁止1禁止
+	//required uint32 onlineLimit = 34;//地图人数限制#客户端#C  
+	//optional IntListJingHao innerCondition = 35;//灵兽出战等级限制#客户端#C  等级#转生等级
+	//optional IntListList monster = 36;//当前地图怪点#客户端#C  怪物点
+	//optional IntListList patrol = 37;//巡逻怪点#客户端#C  自动战斗
+	//required int32 soundID = 38;//音效#客户端#C#不存在共同参与合并的字段  bgm
+	//required int32 announceDeliver = 39;//同一区域deliverid#客户端#C#不存在共同参与合并的字段  相同的deliverid表示同一区域，寻路用，如果目标地图与目前地图为同一区域则不寻路且提示
+	//optional IntListJingHao walkingSounds = 40;//走路音效#客户端#C  默认音效#特殊格子
+	//required uint32 directionShow = 41;//是否开启精英和boss距离方位显示功能#客户端#C  1开启0不开启
+	//required int32 cancrossClient = 42;//是否叠加#客户端#C  0不可叠加，1可叠加（不配默认0，客户端用，不可叠加时，出现重叠后客户端自动移开位置）
+	//required int32 canNoDropOfDie = 43;//死亡后是否掉落#客户端#C#不存在共同参与合并的字段  0掉落1不掉落
+	//required int32 isCancross = 44;//是否穿人#客户端#C  0不可穿人，1可穿人（不配默认0，客户端用，不可穿人时，客户端会绕开玩家）
+	//required int32 isTransmit = 45;//是否直接传送#客户端#C  是否可以通过小飞鞋传送到分享坐标（聊天坐标分享）：1、传坐标；2、传deliver
+	//optional IntListJingHao costCondition = 46;//进入地图消耗条件#客户端#C  关联condition   conditionid#conditionid
+	//required uint32 realMapId = 47;//真实地图id#客户端#C#不存在共同参与合并的字段  分线地图对应真实地图id，无分线填原来id，用于地图寻路
+	//required int32 smallMapIconMode = 48;//小地图标识模式#客户端#C  用于判断当前地图是否需要小地图标识切换模式的选项，填0或不填则不显示选项（按照视野范围显示），填1则显示选项
+	//optional string smallMapPoint = 49;//小地图标识显示#客户端#C  仅在小地图模式填1的时候触发，在选择小地图BOSS出生点模式下的BOSS位置（也可以用于其他特殊点的显示，但仅限BOSS出生点模式），格式：[FF0000]点名字#点图片#x#y&[FF0000] 点名字#点图片#x#y&[FF0000]点名字#点图片#x#y
+    //@10#11#13#15#17#18#19 fuhuo#10 cls#4 rpg#3 duplicate#3 cancross#3 safe#3 playerAI#3
+	//required uint32 fuhuo10_cls4_rpg3_duplicate3_cancross3_safe3_playerAI3 = 50;//合并字段#复活倒计时_C#类型_C#是否是即时战斗地图_C#是否是副本_C#是否可以无条件穿人_C#是否是安全地图_C#玩家ai配置表_C fuhuo#10 cls#4 rpg#3 duplicate#3 cancross#3 safe#3 playerAI#3
+    //@20#21#24#25#26 mapType#3 canHereRelive#3 fightModel#3 viewRange#10 serverType#3
+	//required uint32 mapType3_canHereRelive3_fightModel3_viewRange10_serverType3 = 51;//合并字段#地图类型_C#买活类型_C#进入地图默认的攻击模式_C#视野范围_C#服务器类型_C mapType#3 canHereRelive#3 fightModel#3 viewRange#10 serverType#3
+    //@28#29#30#31#32 homeX#10 homeY#10 huanshou#3 automatic#3 banRandomTransfer#3
+	//required uint32 homeX10_homeY10_huanshou3_automatic3_banRandomTransfer3 = 52;//合并字段#坐标点x_C#坐标点y_C#幻兽出战_C#自动战斗_C#是否禁止随机传送石_C homeX#10 homeY#10 huanshou#3 automatic#3 banRandomTransfer#3
+    //@33#34 banHomeTransfer#3 onlineLimit#25
+	//required uint32 banHomeTransfer3_onlineLimit25 = 53;//合并字段#是否禁止回城相关功能_C#地图人数限制_C banHomeTransfer#3 onlineLimit#25
+	required int32 shareNum = 54;//联服开启#客户端  第几次联服开启的联服地图，开启后，下次联服会继续开启
+	required int32 minMapDeliverType = 55;//小地图右侧按钮显示类型#客户端  与map_npc表的deliverType自动对应：0上次到达的主城；1比奇；2盟重；3分线比奇；4白日门
+	required int32 minMapBackFirst = 56;//小地图回城优先显示#客户端  0上次到达的主城；1比奇；2盟重；3白日门
+	required int32 xp = 57;//XP技能#客户端  填0或不填为可用，1为不可用
+	//optional string beizhu_cehua = 58;//策划用地图备注#策划  
+	//optional string beizhu = 59;//备注#客户端未使用#C  
+	//optional string forbidden = 60;//屏蔽#客户端未使用#C  不启用的地图先屏蔽
+	//optional string homeXY = 61;//回城卷轴#客户端未使用#C  坐标点x#y
+	//required int32 deviation = 62;//回城点偏移#服务器  偏移半径，不填为不偏移(0由近到远选取无范围限制)
+	//optional IntListJingHao isSummon = 63;//是否禁止召唤道具#客户端未使用#C  boss召唤令#队伍召唤#帮会召唤#夫妻召唤#联盟召唤（0禁止1允许）
+	//optional IntListList mapLinPerson = 64;//分线人数#服务器  根据开服天数调整分线数量和人数 天数1#本地图最大分线数1#地图最大承载人数1&
+	//optional IntListJingHao areaRefresh = 65;//区域刷新#服务器  如果区域刷新则需要用到此列：范围半径#死亡秒数#刷新比例
+	//required uint32 mapLv = 66;//地图等级#服务器  用于经验系数控制，高等级玩家在低等级地图打怪经验衰减
+	//required int32 deathBadge = 67;//死亡徽记传送#服务器  0不可传送1可传送
+	//required int32 activityId = 68;//活动id#服务器  活动进入地图切换模式（相同活动id只切换一次）
+	//required int32 petModeBack = 69;//灵兽模式回溯#服务器  配置1，则进入此地图时记录灵兽的出战或合体状态，离开后返回到此状态 ； 配置2，则进入此地图时灵兽强制出战，离开后返回到进入前状态；不填则不处理   
+	//required int32 isSkillDelivery = 70;//记忆技能传送#服务器  0可传送1不可传送
+	//required int32 canNoDropOfDieDiamond = 71;//死亡后是否掉落钻石#服务器  针对狂暴之力激活后的判定 0掉落1不掉落
+	//required int32 unuse = 72;//地图不再使用#服务器  地图配置1则不再使用，服务器不再加载
+}
+
+message CFG_MAPARRAY
+{
+	repeated CFG_MAP rows = 1;
+}

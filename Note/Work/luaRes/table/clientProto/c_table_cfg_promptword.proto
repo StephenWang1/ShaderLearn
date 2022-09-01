@@ -1,0 +1,25 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_PROMPTWORD
+{
+	required uint32 id = 1;//id#客户端#C  弹窗id
+	//required uint32 type = 2;//弹窗类型#客户端#C  不填或为0为普通弹窗 1弹窗后倒计时
+	//optional string des = 3;//弹窗文本内容#客户端#C  文本内容，%s为文字，%d为数字,\n为换行
+	//optional string remark = 4;//备注#策划用#C  仅备注
+	//optional string title = 5;//标题#客户端#C  弹窗标题
+	//optional string leftButton = 6;//左按钮文字#客户端#C  按钮文字
+	//optional string rightButton = 7;//右按钮文字#客户端#C  按钮文字
+	//required int32 countDown = 8;//倒计时时间#客户端#C  类型1的弹窗使用，单位秒，倒计时结束后自动调用对应按钮
+	//required int32 callButton = 9;//调用的按钮#客户端#C  类型1用，0左按钮1右按钮
+	//optional string leftButtonSprite = 10;//左按钮图集#客户端#C  按钮图片资源路径
+	//optional string rightButtonSprite = 11;//右按钮图集#客户端#C  按钮图片资源路径
+	//optional string downButton = 12;//下按钮文字#客户端#C  按钮文字
+	//optional string downButtonSprite = 13;//下按钮图集#客户端#C  按钮图片资源路径
+	optional string note = 14;//勾选框#客户端  勾选框文本不需要勾选框就不用配
+}
+
+message CFG_PROMPTWORDARRAY
+{
+	repeated CFG_PROMPTWORD rows = 1;
+}

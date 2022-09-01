@@ -1,0 +1,19 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_MYSTERIOUSOLDMAN
+{
+	required uint32 id = 1;//id#客户端#C  
+	optional IntListJingHao showLevel = 2;//显示条目等级#客户端  每条材料条目的显示等级，填conditionID
+	optional IntListJingHao needLevel = 3;//可兑换等级#客户端  每条材料条目的可兑换等级，填conditionID
+	optional IntListJingHao getItem = 4;//兑换材料#客户端  兑换的物品，道具ID#数量
+	optional IntListJingHao costItem = 5;//所需道具#客户端  兑换消耗道具，conditionID#conditionID
+	required int32 exchangeNum = 6;//每日兑换次数#客户端  每日可兑换的次数限制
+	required int32 group = 7;//同组类型#客户端  
+	required int32 index = 8;//同组排序#客户端  同组类型下的排序顺序
+}
+
+message CFG_MYSTERIOUSOLDMANARRAY
+{
+	repeated CFG_MYSTERIOUSOLDMAN rows = 1;
+}

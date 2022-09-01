@@ -1,0 +1,37 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_LINKEFFECT
+{
+	required uint32 id = 1;//id#客户端#C  
+	required uint32 subType = 2;//子类型#客户端  1.青铜器 2.陶器 3.瓷器 4.玉器 5.金银器 6.法器
+	optional string icon = 3;//小图标#客户端  在藏品阁里显示的图标名称
+	optional string tipIcon = 4;//大图标#客户端  用于tips里显示的图标名称
+	optional string tipName = 5;//类型名称#客户端  
+	optional IntListJingHao linkItem = 6;//连锁道具#客户端  连锁属性的道具ID，道具id#道具id#道具id
+	optional string description = 7;//连锁名称#客户端  连锁属性的名字
+	required int32 phyAttMin = 8;//最小物攻#客户端  属性
+	required int32 phyAttMax = 9;//最大物攻#客户端  属性
+	required int32 magicAttMin = 10;//最小魔攻#客户端  属性
+	required int32 magicAttMax = 11;//最大魔攻#客户端  属性
+	required int32 taoAttMin = 12;//最小道攻#客户端  属性
+	required int32 taoAttMax = 13;//最大道攻#客户端  属性
+	required int32 phyDefMin = 14;//最小物防#客户端  属性
+	required int32 phyDefMax = 15;//最大物防#客户端  属性
+	required int32 magicDefMin = 16;//最小魔防#客户端  属性
+	required int32 magicDefMax = 17;//最大魔法防御#客户端  属性
+	optional IntListList hp = 18;//生命值#客户端  属性，1战士&2法师&3道士
+	required int32 mp = 19;//魔法值#客户端  属性
+	required int32 dodge = 20;//闪避#客户端  属性
+	required int32 accurate = 21;//精准#客户端  属性
+	required int32 critical = 22;//暴击率#客户端  属性（万分比）
+	required int32 resistanceCrit = 23;//抗暴#客户端  属性（万分比）
+	required int32 holyAttackMin = 24;//最小切割伤害#客户端  属性
+	required int32 holyAttackMax = 25;//最大切割伤害#客户端  属性
+	required float showCritical = 26;//展示暴击#客户端  显示暴击数值（假数值万分比）
+}
+
+message CFG_LINKEFFECTARRAY
+{
+	repeated CFG_LINKEFFECT rows = 1;
+}

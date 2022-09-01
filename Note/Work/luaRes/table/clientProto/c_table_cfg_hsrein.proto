@@ -1,0 +1,43 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_HSREIN
+{
+	required uint32 id = 1;//id#客户端#C  id不能动，动需要跟服务器说
+	//required int32 level = 2;//转生等级#客户端#C  等级
+	//required int32 needLevel = 3;//转生所需灵兽等级#客户端#C  转生所需灵兽等级
+	//required int32 needSoul = 4;//需要灵力#客户端#C#不存在共同参与合并的字段  转生所需灵力
+	//optional IntListJingHao needStone = 5;//需要灵石#客户端#C  转生所需神石
+	//required int32 maxHp = 6;//生命#客户端#C#不存在共同参与合并的字段  属性值
+	//required int32 phyAttackMin = 7;//最小攻击#客户端#C#不存在共同参与合并的字段  属性值
+	//required int32 phyAttackMax = 8;//最大攻击#客户端#C#不存在共同参与合并的字段  属性值
+	//required int32 magicAttackMin = 9;//最小魔法攻击#客户端#C#不存在共同参与合并的字段  属性值
+	//required int32 magicAttackMax = 10;//最大魔法攻击#客户端#C#不存在共同参与合并的字段  属性值
+	//required int32 phyDefenceMin = 11;//最小物防#客户端#C#不存在共同参与合并的字段  属性值
+	//required int32 phyDefenceMax = 12;//最大物防#客户端#C#不存在共同参与合并的字段  属性值
+	//required int32 magicDefenceMin = 13;//最小魔防#客户端#C#不存在共同参与合并的字段  属性值
+	//required int32 magicDefenceMax = 14;//最大魔防#客户端#C#不存在共同参与合并的字段  属性值
+	//required int32 holyAttackMin = 15;//神圣攻击下限#客户端#C#不存在共同参与合并的字段  属性值
+	//required int32 holyAttackMax = 16;//神圣攻击上限#客户端#C#不存在共同参与合并的字段  属性值
+	//required int32 holyDefenceMin = 17;//神圣防御下限#客户端#C#不存在共同参与合并的字段  属性值
+	//required int32 holyDefenceMax = 18;//神圣防御上限#客户端#C#不存在共同参与合并的字段  属性值
+	//required int32 hpRecover = 19;//生命恢复#客户端#C#不存在共同参与合并的字段  属性值
+	//required int32 mb = 20;//麻痹概率#客户端#C  万分比
+	//required int32 dodge = 21;//闪避#客户端#C  属性值
+	//required int32 accurate = 22;//准确#客户端#C  属性值
+	//required int32 weight = 23;//基础重量#客户端#C  属性值
+    //@2#3 level#4 needLevel#8
+	//required uint32 level4_needLevel8 = 24;//合并字段#转生等级_C#转生所需灵兽等级_C level#4 needLevel#8
+    //@20#21 mb#14 dodge#14
+	//required uint32 mb14_dodge14 = 25;//合并字段#麻痹概率_C#闪避_C mb#14 dodge#14
+    //@22#23 accurate#14 weight#4
+	//required uint32 accurate14_weight4 = 26;//合并字段#准确_C#基础重量_C accurate#14 weight#4
+	required uint32 eightDoor = 27;//转生八门#客户端  
+	//required int32 taoAttackMin = 28;//最小道术攻击#服务器  属性值
+	//required int32 taoAttackMax = 29;//最大道术攻击#服务器  属性值
+}
+
+message CFG_HSREINARRAY
+{
+	repeated CFG_HSREIN rows = 1;
+}

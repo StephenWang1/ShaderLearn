@@ -1,0 +1,19 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_UILOGIC_CLOSE
+{
+	required uint32 id = 1;//id#客户端  纯ID
+	//required uint32 closeType = 2;//关闭类型#客户端  1:关联关闭(UI界面被关闭时,关闭目标界面)  2:互斥关闭(UI界面被打开时,关闭目标界面)
+	//required uint32 targetSelectType = 3;//关闭目标选择方式#客户端  当关闭类型为1时:   1:关闭前置界面(若该界面是由某界面开启的,则关闭该界面)   2:关闭目标界面(关闭目标界面列表中所列的界面  |||  当关闭类型为2时:  1:关闭某界面集合中除指定界面外其他界面  2:关闭某界面集合中的指定界面
+	//required uint32 uisetID = 4;//目标界面集合ID#客户端  需要关闭的目标界面集合的ID,关联到cfg_uisets表,0或不填表示所有UI界面组成的集合
+	optional StringList targetPanelList = 5;//目标界面列表#客户端  填入需要关闭的界面名列表,或者需要规避关闭的界面名列表,具体情况依据前面的关闭类型和目标选择方式而定
+    //@2#3#4 closeType#2 targetSelectType#2 uisetID#4
+	required uint32 closeType2_targetSelectType2_uisetID4 = 6;//合并字段#关闭类型#关闭目标选择方式#目标界面集合ID closeType#2 targetSelectType#2 uisetID#4
+	//optional string beizhu = 7;//备注#策划  备注
+}
+
+message CFG_UILOGIC_CLOSEARRAY
+{
+	repeated CFG_UILOGIC_CLOSE rows = 1;
+}

@@ -1,0 +1,34 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_NOTICE
+{
+	required uint32 id = 1;//id#客户端#C  固定id，不可修改
+	//required uint32 iconId = 2;//icon的id#客户端#C  icon的id
+	//required int32 conceal = 3;//未开启时隐藏#客户端#C  1隐藏0不隐藏
+	//required int32 notice = 4;//系统预告#客户端#C  1显示预告2不显示预告
+	//required int32 mail = 5;//邮件提醒#客户端#C  1邮件提醒2不需要邮件提醒
+	//optional IntListJingHao sendmail = 6;//邮件#客户端#C  对应cfg_mail
+	//required uint32 masterSwitch = 7;//总开关#客户端#C  0关，1开，如果改成0则会在服务器数据更新之后将已开启的系统强行关闭
+	//required int32 openType = 8;//开启方式#客户端#C  0条件开启（右侧条件一旦不满足，关闭），1永久开启（条件满足一次后永久开启）；【填1的情况下，如果单纯进行不重启的线上热更表，需先将1条件改成0，热更线一次表后，再改回1热更一次表，修改的openCondition字段才会生效】
+	//optional IntListJingHao openCondition = 9;//开放条件#客户端#C  读取conditions表 多条件用#分隔
+	//optional IntListJingHao equallyCondition = 10;//同等条件#客户端#C  和openCondition字段填写形式，意义相同，两个字段为或逻辑
+	//required int32 startUp = 11;//开放条件是否开启#客户端#C  0是不开启,1是开启,默认0
+	//optional string time = 12;//具体时间#客户端#C  具体时间参数:2001#08#01
+	//optional string yushe = 13;//预设名字#客户端#C  对应的面板预设名字（程序管理用）后期补上
+	//required int32 jumpId = 14;//跳转id#客户端#C  cfg_jump表id，如果填了此列则跳转
+	//optional string remarks = 15;//策划备注#客户端#C  系统
+	//required uint32 position = 16;//位置#客户端#C  数字1即为第一排，2为第二排以此类推（程序按照顺序读取，要按顺序填写，第一排填完再填第二排）（归属配置为2，则此字段无用）
+	//required uint32 ascription = 17;//归属#客户端#C  1.右上活动栏内功能2.为导航栏内功能
+	//required uint32 order = 18;//排序#客户端#C  不填默认为0，为最右侧
+	//required uint32 isReminder = 19;//是否需要感叹号提醒#客户端#C  1是、不填或填0否；填1代表每次登陆，对应的系统都会有感叹号提示，必须点击一次后才会消失 2：背包里有塔罗牌时出现感叹号 3：默认有感叹号，点击一次后消失不会再次出现
+	//required int32 outShow = 20;//是否在外部常显#客户端#C  右上栏图标是否在外部进行常显，1常显，不填则不常显
+	optional IntListJingHao param = 21;//参数#客户端  活动入口填写用于对应activity_current的不同group
+	required uint32 outPosition = 22;//外部图标位置#客户端  数字1即为第一排，2为第二排以此类推（程序按照顺序读取，要按顺序填写，第一排填完再填第二排）（归属配置为2，则此字段无用）
+	required uint32 outOrder = 23;//外部图标排序#客户端  不填默认为0，为最右侧
+}
+
+message CFG_NOTICEARRAY
+{
+	repeated CFG_NOTICE rows = 1;
+}

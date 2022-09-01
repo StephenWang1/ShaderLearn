@@ -1,0 +1,22 @@
+package TABLE;
+import "table_common.proto";
+
+message CFG_ANIMALS_BOSS
+{
+	required int32 monsterId = 1;//怪物id#客户端#C#不存在共同参与合并的字段  十二生肖小怪怪物id
+	//required int32 bossId = 2;//boss怪物id#客户端#C#不存在共同参与合并的字段  十二生肖boss怪物id
+	//required int32 numberLimit = 3;//进入人数限制#客户端#C  进入人数限制
+	//required int32 npcId = 4;//怪物死亡出现npcid#客户端#C  怪物死亡出现传送门eventid
+	//required int32 dropShowId = 5;//掉落展示#客户端#C#不存在共同参与合并的字段  掉落展示，连接到drop_show表格 id
+	//optional string description = 6;//怪物描述#客户端#C  怪物描述#客户端
+	//optional string level = 7;//需求灵兽等级描述#客户端#C  需求灵兽等级描述
+	//optional IntListJingHao conditionLevel = 8;//灵兽攻击限制#客户端#C  等级#转生等级
+    //@3#4 numberLimit#7 npcId#24
+	//required uint32 numberLimit7_npcId24 = 9;//合并字段#进入人数限制_C#怪物死亡出现npcid_C numberLimit#7 npcId#24
+	optional IntListJingHao conditionRoleLevel = 10;//人物攻击限制#客户端  人物伤害根据满足对应灵兽等级只数调整对应万分比伤害 人物最终伤害=满足只数比例*人物原本伤害 0只满足#1只满足#2只满足#3只满足，填0的时候表示扣1血
+}
+
+message CFG_ANIMALS_BOSSARRAY
+{
+	repeated CFG_ANIMALS_BOSS rows = 1;
+}
